@@ -1,20 +1,35 @@
 <template>
   <header>
-    <v-app-bar app color="white" style="color: #00ACC1">
-      <v-app-bar-nav-icon color="#00ACC1" @click="drawer = true"></v-app-bar-nav-icon>
-      <v-toolbar-title>Cleaner</v-toolbar-title>
-      <v-tabs color="#EF6C00">
-        <v-tab v-for="(menuItem, index) in menuItems" :key="index">
-          {{ menuItem.name }}
-        </v-tab>
-      </v-tabs>
-      <v-spacer></v-spacer>
-      <v-btn rounded color="#1A237E" dark>ゲストログイン</v-btn>
-      <v-spacer></v-spacer>
-      <v-btn rounded outlined color="#00ACC1" dark>ログイン</v-btn>
-      <v-spacer></v-spacer>
-      <v-btn rounded color="#00ACC1" dark>新規登録</v-btn>
-    </v-app-bar>
+    <v-container>
+      <v-row>
+        <v-app-bar app color="white" style="color: #00ACC1" class="font-weight-bold font-size-2rem">
+            <v-app-bar-nav-icon color="#00ACC1" @click="drawer = true"></v-app-bar-nav-icon>
+          <v-col cols="1">
+            <v-toolbar-title class="font-size-2rem">Cleaner</v-toolbar-title>
+          </v-col>
+          <v-col cols="6">
+            <v-tabs color="#EF6C00">
+              <v-tab v-for="(menuItem, index) in menuItems" :key="index">
+                {{ menuItem.name }}
+              </v-tab>
+            </v-tabs>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="1.5">
+            <v-btn rounded color="#1A237E" dark class="orange-text">ゲストログイン</v-btn>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="1.5">
+            <v-btn rounded outlined color="#00ACC1" dark>ログイン</v-btn>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="1.5">
+            <v-btn rounded color="#00ACC1" dark>新規登録</v-btn>
+          </v-col>
+        </v-app-bar>
+      </v-row>
+    </v-container>
+
     <v-navigation-drawer
       v-model="drawer"
       fixed
