@@ -1,10 +1,4 @@
 <template>
-  <div>
-    <h1>Hello World!!</h1>
-  </div>
+  <v-app>
+  </v-app>
 </template>
-
-<script>
-export default {
-}
-</script>
