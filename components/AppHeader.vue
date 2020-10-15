@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-app-bar app color="white" style="color: #00ACC1" class="font-weight-bold font-size-2rem">
-            <v-app-bar-nav-icon color="#00ACC1" @click="drawer = true"></v-app-bar-nav-icon>
+          <v-app-bar-nav-icon color="#00ACC1" @click="drawer = true"></v-app-bar-nav-icon>
           <v-col cols="1">
             <v-toolbar-title class="font-size-2rem">Cleaner</v-toolbar-title>
           </v-col>
@@ -29,7 +29,6 @@
         </v-app-bar>
       </v-row>
     </v-container>
-
     <v-navigation-drawer
       v-model="drawer"
       fixed

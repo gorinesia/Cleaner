@@ -3,8 +3,7 @@
     <v-container fluid fill-height class="home-hero__content">
       <v-row>
         <v-col class="home-hero__content-text">
-          <p>地球を綺麗にしよう</p>
-          <p>みんなの力で！</p>
+          <p>世界を綺麗にしよう</p>
         </v-col>
       </v-row>
     </v-container>
