@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <v-system-bar height="30" color="#00ACC1" style="text-align: center;" dark><span>まずは気軽に新規登録から！綺麗な世界は自分たちの手で創り上げていこう！</span></v-system-bar>
     <v-container class="container">
       <v-row>
         <v-col cols="6">
@@ -15,7 +16,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <div style="text-align: center; color: navy; font-size: 30px">
+    <div style="text-align: center; color: #0D47A1; font-size: 30px">
       Cleanerでできること
     </div>
     <v-container>
@@ -44,6 +45,9 @@
         </v-col>
       </v-row>
     </v-container>
+    <h2 style="text-align: center; color: #00ACC1;">クリーナーをみる</h2>
+    <p style="text-align: center;">クリーナーとは、お掃除屋さん(＝ゴミを拾う人)のことです。<br>
+    あなたも地球を綺麗にするための清掃員になりませんか？</p>
     <v-card class="container">
       <div class="row">
         <div class="col-md-4 my-3">
@@ -59,6 +63,118 @@
         </div>
       </div>
     </v-card>
+    <h2 style="text-align: center; color: #00ACC1;">プロジェクトをみる</h2>
+    <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
+    あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
+    <v-card class="container">
+      <div class="row">
+        <div class="col-md-4 my-3">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">test article1</h4>
+              <h6 class="card-subtitle mb-2 text-muted">test articke1</h6>
+              <p class="card-text">
+                test article1, test article1, test article1, test article1, test article1
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </v-card>
+    <h2 style="text-align: center; color: #00ACC1;">イベントをみる</h2>
+    <p style="text-align: center;">イベントとは、みんなでゴミ拾いをするための企画のことです。<br>
+    イベントを立ち上げて、みんなでゴミ拾いをしてみませんか？</p>
+    <v-card class="container">
+      <div class="row">
+        <div class="col-md-4 my-3">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">test article1</h4>
+              <h6 class="card-subtitle mb-2 text-muted">test articke1</h6>
+              <p class="card-text">
+                test article1, test article1, test article1, test article1, test article1
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </v-card>
+    <v-card
+      :loading="loading"
+      class="mx-auto my-12"
+      max-width="374"
+    >
+      <template slot="progress">
+        <v-progress-linear
+          color="deep-purple"
+          height="10"
+          indeterminate
+        ></v-progress-linear>
+      </template>
+
+      <v-img
+        height="250"
+        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+      ></v-img>
+
+      <v-card-title>Cafe Badilico</v-card-title>
+
+      <v-card-text>
+        <v-row
+          align="center"
+          class="mx-0"
+        >
+          <v-rating
+            :value="4"
+            color="amber"
+            dense
+            half-increments
+            readonly
+            size="14"
+          ></v-rating>
+
+          <div class="grey--text ml-4">
+            4.5 (413)
+          </div>
+        </v-row>
+
+        <div class="my-4 subtitle-1">
+          $ • Italian, Cafe
+        </div>
+
+        <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
+      </v-card-text>
+
+      <v-divider class="mx-4"></v-divider>
+
+      <!-- <v-card-title>Tonight's availability</v-card-title> -->
+
+      <!-- <v-card-text>
+        <v-chip-group
+          v-model="selection"
+          active-class="deep-purple accent-4 white--text"
+          column
+        >
+          <v-chip>5:30PM</v-chip>
+
+          <v-chip>7:30PM</v-chip>
+
+          <v-chip>8:00PM</v-chip>
+
+          <v-chip>9:00PM</v-chip>
+        </v-chip-group>
+      </v-card-text> -->
+
+      <v-card-actions>
+        <v-btn
+          color="deep-purple lighten-2"
+          text
+          @click="reserve"
+        >
+          Reserve
+        </v-btn>
+      </v-card-actions>
+    </v-card>
   </v-app>
 </template>
 
@@ -68,7 +184,19 @@ import HomeHero from './HomeHero.vue'
 export default {
   components: {
     HomeHero
-  }
+  },
+  data: () => ({
+    loading: false,
+    selection: 1,
+  }),
+
+  methods: {
+    reserve () {
+      this.loading = true
+
+      setTimeout(() => (this.loading = false), 2000)
+    },
+  },
 }
 </script>
 
