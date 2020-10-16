@@ -9,6 +9,7 @@
           </v-col>
           <v-col cols="6">
             <v-tabs color="#EF6C00">
+              <v-icon>mdi-account</v-icon>
               <v-tab v-for="(menuItem, index) in menuItems" :key="index">
                 {{ menuItem.name }}
               </v-tab>
