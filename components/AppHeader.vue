@@ -21,7 +21,7 @@
           </v-col>
           <v-spacer></v-spacer>
           <v-col cols="1.5">
-            <v-btn rounded color="#1A237E" dark class="orange-text">ゲストログイン</v-btn>
+            <v-btn rounded color="#1A237E" dark class="orange-text" to="/dashboard">ゲストログイン</v-btn>
           </v-col>
           <v-spacer></v-spacer>
           <v-col cols="1.5">
