@@ -2,10 +2,14 @@
   <header>
     <v-container>
       <v-row>
-        <v-app-bar app color="white" style="color: #00ACC1" class="font-weight-bold font-size-2rem">
+        <v-app-bar app color="white" style="color: #00ACC1" class="font-weight-bold">
           <v-app-bar-nav-icon color="#00ACC1" @click="drawer = true"></v-app-bar-nav-icon>
           <v-col cols="1">
-            <v-toolbar-title class="font-size-2rem">Cleaner</v-toolbar-title>
+            <!-- <nuxt-link to='/'> -->
+              <v-toolbar-title class="font-size-2rem" @click="$router.push('/')">
+                Cleaner
+              </v-toolbar-title>
+            <!-- </nuxt-link> -->
           </v-col>
           <v-col cols="6">
             <v-tabs color="#EF6C00">
@@ -21,11 +25,11 @@
           </v-col>
           <v-spacer></v-spacer>
           <v-col cols="1.5">
-            <v-btn rounded outlined color="#00ACC1" dark>ログイン</v-btn>
+            <v-btn rounded outlined color="#00ACC1" dark to="/auth/login">ログイン</v-btn>
           </v-col>
           <v-spacer></v-spacer>
           <v-col cols="1.5">
-            <v-btn rounded color="#00ACC1" dark>新規登録</v-btn>
+            <v-btn rounded color="#00ACC1" dark to="/auth/signup">新規登録</v-btn>
           </v-col>
         </v-app-bar>
       </v-row>
@@ -55,7 +59,7 @@
 import constants from '../common/constants';
 
 export default {
-  name: 'AppHeader',
+  name: 'app-header',
   data() {
     return {
       drawer: false,

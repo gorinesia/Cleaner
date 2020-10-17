@@ -4,11 +4,11 @@
     <v-container class="container">
       <v-row>
         <v-col cols="6">
-          <h1 class+display-3 style="color: navy">地球の未来のために<br>今目の前のゴミを拾おう</h1>
+          <h1 style="color: navy">地球の未来のために<br>今目の前のゴミを拾おう</h1>
           <p>Cleanerは「地球の未来を考えて行動する<br>
           人々に対価を」をコンセプトとしたゴミ拾い<br>
           情報コミュニティです。</p>
-          <v-btn rounded outlined color="cyan darken-1" large>いますぐはじめる</v-btn>
+          <v-btn rounded outlined color="cyan darken-1" large to="/Auth/Signup">いますぐはじめる</v-btn>
           <v-btn rounded color="primary" large dark>Cleanerについて</v-btn>
         </v-col>
         <v-col cols="6">

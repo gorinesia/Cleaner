@@ -1,23 +1,24 @@
 <template>
   <v-app>
-    <AppHeader />
-    <v-content>
+    <!-- <AppHeader /> -->
+    <!-- <v-content> -->
       <Home />
-    </v-content>
-    <AppFooter />
+    <!-- </v-content> -->
+    <!-- <AppFooter /> -->
   </v-app>
 </template>
 
 <script>
-import AppHeader from '../components/AppHeader.vue'
+// import AppHeader from '../components/AppHeader.vue'
 import Home from '../components/Home.vue'
-import AppFooter from '../components/AppFooter.vue'
+// import AppFooter from '../components/AppFooter.vue'
 
 export default {
+  name: 'home',
   components: {
-    AppHeader,
+    // AppHeader,
     Home,
-    AppFooter,
+    // AppFooter,
   }
 }
 </script>

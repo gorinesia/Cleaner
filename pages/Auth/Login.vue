@@ -2,16 +2,15 @@
   <v-app>
     <v-card width="400px" class="mx-auto mt-5">
       <v-card-title>
-        <h1 class="display-1" style="color: #00ACC1">SIGN UP!</h1>
+        <h1 class="display-1" style="color: #00ACC1">LOGIN</h1>
       </v-card-title>
       <p>メールアドレスもしくはSNSアカウントで登録</p>
       <v-card-text>
         <v-form>
-          <v-text-field prepend-icon="mdi-account-circle" label="ユーザー名" outlined filled></v-text-field>
           <v-text-field prepend-icon="mdi-account-circle" label="email" outlined filled></v-text-field>
           <v-text-field :type="showPassword ? 'text' : 'password'" prepend-icon="mdi-lock" append-icon="mdi-eye-off" label="パスワード" @click:append="showPassword = !showPassword" outlined filled></v-text-field>
           <!-- <v-card-action> -->
-            <v-btn color="#00ACC1" rounded block large dark>登録する</v-btn>
+            <v-btn color="#00ACC1" rounded block large dark>ログイン</v-btn>
           <!-- </v-card-action> -->
         </v-form>
       </v-card-text>
@@ -25,7 +24,7 @@
 
 <script>
 export default {
-  name: 'signup',
+  name: 'login',
   data: () => ({
     showPassword: false
   })
