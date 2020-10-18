@@ -2,37 +2,321 @@
   <v-app>
     <v-container>
       <v-row>
-        <v-col cols="2">
+        <v-col cols="3">
           <v-navigation-drawer>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="title grey--text text--darken-2">
-                  Navigation lists
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
+            <v-system-bar></v-system-bar>
+            <v-list>
+              <v-list-item>
+                <v-list-item-avatar>
+                  <v-img :src="image_src"></v-img>
+                </v-list-item-avatar>
+              </v-list-item>
 
+              <v-list-item link>
+                <v-list-item-content>
+                  <v-list-item-title class="title grey--text text--darken-2">
+                    Akinori
+                  </v-list-item-title>
+                  <v-list-item-subtitle>john@vuetifyjs.com</v-list-item-subtitle>
+                </v-list-item-content>
+
+                <v-list-item-action>
+                  <v-icon>mdi-menu-down</v-icon>
+                </v-list-item-action>
+              </v-list-item>
+            </v-list>
             <v-divider></v-divider>
 
-            <v-list dense nav>
-              <v-list-group v-for="nav_list in nav_lists" :key="nav_list.name" :prepend-icon="nav_list.icon" no-action :append-icon="nav_list.lists ? undefined : ''">
-                <template v-slot:activator>
+            <v-list nav dense></v-list>
+              <v-list-item-group v-model="item" color="primary">
+                <v-list-item v-for="(item, i) in items" :key="i">
+                  <v-list-item-icon>
+                    <v-icon v-text="item.icon"></v-icon>
+                  </v-list-item-icon>
+
                   <v-list-item-content>
-                    <v-list-item-title>{{ nav_list.name }}</v-list-item-title>
-                  </v-list-item-content>
-                </template>
-                <v-list-item v-for="list in nav_list.lists" :key="list">
-                  <v-list-item-content>
-                    <v-list-item-title>{{ list }}</v-list-item-title>
+                    <v-list-item-title v-text="item.text"></v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
-              </v-list-group>
+              </v-list-item-group>
             </v-list>
           </v-navigation-drawer>
         </v-col>
-        <v-col cols="10">
+
+        <v-col cols="9">
           <v-main app>
-            <Home />
+            <h2 style="; color: #00ACC1;">クリーナーをみる</h2>
+            <v-container class="spacing-playground mb-10">
+              <v-row>
+                <v-col cols="4">
+                  <v-card
+                    class="mx-auto"
+                    max-width="275"
+                  >
+                    <v-img
+                      height="200"
+                      :src="image_src"
+                    ></v-img>
+
+                    <v-card-title color="cyan darken-2">John</v-card-title>
+
+                    <v-card-text>
+                      <v-row
+                        align="center"
+                        class="mx-0"
+                      >
+                      </v-row>
+
+                      <div>London</div>
+                    </v-card-text>
+
+                    <v-divider class="mx-4"></v-divider>
+
+                    <v-card-title>最近の活動</v-card-title>
+
+                    <v-card-text>
+                      <v-chip-group
+                        active-class="deep-purple accent-4 white--text"
+                        column
+                      >
+                        <v-chip>10月12日</v-chip>
+                        <v-chip>10月5日</v-chip>
+                      </v-chip-group>
+                    </v-card-text>
+
+                    <v-card-actions>
+                      <v-btn
+                        color="cyan darken-2"
+                        text
+                      >
+                        もっとみる
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-col>
+
+                <v-col cols="4">
+                  <v-card
+                    class="mx-auto"
+                    max-width="275"
+                  >
+                    <template slot="progress">
+                      <v-progress-linear
+                        color="deep-purple"
+                        height="10"
+                        indeterminate
+                      ></v-progress-linear>
+                    </template>
+
+                    <v-img
+                      height="200"
+                      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                    ></v-img>
+
+                    <v-card-title color="cyan darken-2">John</v-card-title>
+
+                    <v-card-text>
+                      <v-row
+                        align="center"
+                        class="mx-0"
+                      >
+                      </v-row>
+
+                      <div>London</div>
+                    </v-card-text>
+
+                    <v-divider class="mx-4"></v-divider>
+
+                    <v-card-title>最近の活動</v-card-title>
+
+                    <v-card-text>
+                      <v-chip-group
+                        active-class="deep-purple accent-4 white--text"
+                        column
+                      >
+                        <v-chip>10月12日</v-chip>
+                        <br>
+                        <v-chip>10月5日</v-chip>
+                      </v-chip-group>
+                    </v-card-text>
+
+                    <v-card-actions>
+                      <v-btn
+                        color="cyan darken-2"
+                        text
+                      >
+                        もっとみる
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-col>
+                <v-col cols="4">
+                  <v-card
+                    class="mx-auto"
+                    max-width="275"
+                  >
+                    <template slot="progress">
+                      <v-progress-linear
+                        color="deep-purple"
+                        height="10"
+                        indeterminate
+                      ></v-progress-linear>
+                    </template>
+
+                    <v-img
+                      height="200"
+                      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                    ></v-img>
+
+                    <v-card-title color="cyan darken-2">John</v-card-title>
+
+                    <v-card-text>
+                      <v-row
+                        align="center"
+                        class="mx-0"
+                      >
+                      </v-row>
+
+                      <div>London</div>
+                    </v-card-text>
+
+                    <v-divider class="mx-4"></v-divider>
+
+                    <v-card-title>最近の活動</v-card-title>
+
+                    <v-card-text>
+                      <v-chip-group
+                        active-class="deep-purple accent-4 white--text"
+                        column
+                      >
+                        <v-chip>10月12日</v-chip>
+                        <br>
+                        <v-chip>10月5日</v-chip>
+                      </v-chip-group>
+                    </v-card-text>
+
+                    <v-card-actions>
+                      <v-btn
+                        color="cyan darken-2"
+                        text
+                      >
+                        もっとみる
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+            <h2 style="; color: #00ACC1;">プロジェクトをみる</h2>
+            <v-card class="container">
+              <div class="row">
+                <div class="">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">test article1</h4>
+                      <h6 class="card-subtitle mb-2 text-muted">test articke1</h6>
+                      <p class="card-text">
+                        test article1, test article1, test article1, test article1, test article1
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </v-card>
+            <v-container class="spacing-playground mb-10">
+              <v-card>
+                <div class="row">
+                  <div class="col-md-4 my-3">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">test article1</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">test articke1</h6>
+                        <p class="card-text">
+                          test article1, test article1, test article1, test article1, test article1
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </v-card>
+            </v-container>
+            <h2 style=" color: #00ACC1;">イベントをみる</h2>
+            <v-container>
+              <v-row>
+                <v-col cols="6">
+                  <v-card class="container">
+                    <div class="row">
+                      <div class="col-md-4 my-3">
+                        <div class="card">
+                          <div class="card-body">
+                            <h4 class="card-title">東京を綺麗にしましょう</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">test articke1</h6>
+                            <p class="card-text">
+                              test article1, test article1, test article1, test article1, test article1
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </v-card>
+                </v-col>
+                <v-col cols="6">
+                  <v-card class="container">
+                    <div class="row">
+                      <div class="col-md-4 my-3">
+                        <div class="card">
+                          <div class="card-body">
+                            <h4 class="card-title">渋谷を片付けましょう</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">test articke1</h6>
+                            <p class="card-text">
+                              test article1, test article1, test article1, test article1, test article1
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </v-card>
+                </v-col>
+                <v-col cols="6">
+                  <v-card class="mx-auto" outlined>
+                    <v-list-item three-line>
+                      <v-list-item-content>
+                        <div class="overline mb-1">10月18日</div>
+                        <div class="headline mb-3" style="color: #00ACC1;">東京を綺麗にしましょう。</div>
+                        <p class="mb-5">僕たちにできることを。人もゴミも多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
+                        <p class="font-weight-bold">日時： 10月3日  9:00~12:00</p>
+                        <p class="font-weight-bold">場所： 東京都渋谷区</p>
+                      </v-list-item-content>
+
+                      <v-avatar tile size="150" color="cyan" :src="image_src" class="ml-5">
+                        <img :src="image_src" alt="">
+                      </v-avatar>
+                    </v-list-item>
+
+                    <v-container fluid>
+                      <v-row justify="center">
+                        <v-subheader>Today</v-subheader>
+
+                        <v-expansion-panels popout>
+                          <v-expansion-panel v-for="(message, i) in messages" :key="i" hide-actions>
+                            <v-expansion-panel-header>
+                              <v-row align="center" class="spacer" no-gutters>
+                                <v-col cols="4" sm="2" md="1">
+                                  <v-avatar size="36px">
+                                    <img v-if="message.avatar" :src="image_src" alt="">
+                                    <v-icon v-else :color="message.color" v-text="message.icon"></v-icon>
+                                  </v-avatar>
+                                </v-col>
+                              </v-row>
+                            </v-expansion-panel-header>
+                          </v-expansion-panel>
+                        </v-expansion-panels>
+                      </v-row>
+                    </v-container>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
           </v-main>
         </v-col>
       </v-row>
@@ -41,37 +325,42 @@
 </template>
 
 <script>
-import Home from '../components/Home';
-
 export default {
   name: 'dashboard',
-  components: {
-    Home
-  },
   data() {
     return {
-      nav_lists: [
+      image_src: require('@/assets/img/everyone.jpg'),
+      item: 0,
+      items: [
         {
-          name: 'Getting started',
-          icon: 'mdi-speedometer',
+          text: 'My Files',
+          icon: 'mdi-folder',
           lists: ['Quick Start', 'Pre-made layouts']
         },
         {
-          name: 'Customization',
-          icon: 'mdi-cogs'
+          text: 'Shared with me',
+          icon: 'mdi-account-multiple'
         },
         {
-          name: 'Styles & animations',
-          icon: 'mdi-palette',
+          text: 'Starred',
+          icon: 'mdi-star',
           lists: ['Colors', 'Content', 'Display']
         },
         {
-          name: 'UI Components',
-          icon: 'mdi-view-dashboard',
+          text: 'Recent',
+          icon: 'mdi-history',
           lists: ['API explorer', 'Alerts']
         },
-        { name: 'Directives', icon: 'mdi-function' },
-        { name: 'Premium themes', icon: 'mdi-vuetify' },
+        { text: 'Uploads', icon: 'mdi-upload' },
+        { text: 'Backups', icon: 'mdi-cloud-upload' },
+      ],
+      messages: [
+        {
+          avatar: 'image_src',
+          name: 'John Leider',
+          title: 'Welcome to Vuetify!',
+          excerpt: 'Thank you for joining our comminity...',
+        }
       ]
     }
   }
