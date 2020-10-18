@@ -4,12 +4,10 @@
       <v-row>
         <v-app-bar app color="white" style="color: #00ACC1" class="font-weight-bold">
           <v-app-bar-nav-icon color="#00ACC1" @click="drawer = true"></v-app-bar-nav-icon>
-          <v-col cols="1">
-            <!-- <nuxt-link to='/'> -->
-              <v-toolbar-title class="font-size-2rem" @click="$router.push('/')">
+          <v-col cols="1" class="mr-10">
+              <h1 class="font-size-2rem" @click="$router.push('/')">
                 Cleaner
-              </v-toolbar-title>
-            <!-- </nuxt-link> -->
+              </h1>
           </v-col>
           <v-col cols="6">
             <v-tabs color="#EF6C00">

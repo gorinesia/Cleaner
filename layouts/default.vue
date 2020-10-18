@@ -10,13 +10,11 @@
 
 <script>
 import AppHeader from '../components/AppHeader.vue'
-// import Home from '../components/Home.vue'
 import AppFooter from '../components/AppFooter.vue'
 
 export default {
   components: {
     AppHeader,
-    // Home,
     AppFooter,
   }
 }
