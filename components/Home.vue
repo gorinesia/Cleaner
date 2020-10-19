@@ -53,7 +53,7 @@
         <v-col cols="4">
           <v-card
             :loading="loading"
-            class="mx-auto my-12"
+            class="mx-auto"
             max-width="275"
           >
             <!-- <template slot="progress">
@@ -111,7 +111,7 @@
         <v-col cols="4">
           <v-card
             :loading="loading"
-            class="mx-auto my-12"
+            class="mx-auto"
             max-width="275"
           >
             <template slot="progress">
@@ -185,7 +185,7 @@
         <v-col cols="4">
           <v-card
             :loading="loading"
-            class="mx-auto my-12"
+            class="mx-auto"
             max-width="275"
           >
             <template slot="progress">
