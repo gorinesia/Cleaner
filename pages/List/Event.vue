@@ -24,7 +24,7 @@
           </v-card>
         </v-col>
         <v-col cols="10">
-          <h2 style="color: #00ACC1; margin-bottom: 10px">クリーナーをみる</h2>
+          <h2 style="color: #00ACC1; margin-bottom: 10px">イベントをみる</h2>
           <v-card class="mb-5">
             <v-row>
               <v-col cols="2">

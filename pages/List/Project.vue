@@ -89,7 +89,7 @@
                     </v-expansion-panel-header>
                     <v-expansion-panel-content>
                       <v-divider></v-divider>
-                      <v-card-text v-text="lorem"></v-card-text>
+                      <v-card-text></v-card-text>
                     </v-expansion-panel-content>
                   </v-expansion-panel>
                 </v-expansion-panels>
@@ -104,7 +104,19 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      image_src: require('@/assets/img/everyone.jpg'),
+      messages: [
+        {
+          avatar: 'image_src',
+          name: 'John Leider',
+          title: 'Welcome to Vuetify!',
+          excerpt: 'Thank you for joining our comminity...',
+        }
+      ]
+    }
+  }
 }
 </script>
 
