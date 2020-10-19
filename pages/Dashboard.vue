@@ -46,6 +46,7 @@
         <v-col cols="9">
           <v-main app>
             <h2 style="; color: #00ACC1;">クリーナーをみる</h2>
+            <v-btn to="/list/cleaner">Cleaner</v-btn>
             <v-container class="spacing-playground mb-10">
               <v-row>
                 <v-col cols="4">

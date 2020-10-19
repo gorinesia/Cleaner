@@ -20,7 +20,7 @@
         </v-col>
       </v-row>
     </v-card>
-    <h2 class="mb-5" style="color: navy">Johnさんの発案中のイベント</h2>
+    <h2 class="mb-5" style="color: navy" @click="$router.push('/personal/personalEvent')">Johnさんの発案中のイベント</h2>
     <v-card class="mb-10" outlined>
       <v-list-item three-line>
         <v-list-item-content>
@@ -83,21 +83,22 @@
     <v-card class="mb-10">
       <v-col cols="10">
         <v-list-item three-line>
-          <v-list-item-content>
+          <!-- <v-list-item-content> -->
             <v-row>
               <v-col cols="2">
-                <div class="overline mb-1">10月12日</div>
+                <div class="overline">10月12日</div>
               </v-col>
-              <v-col cols="7">
+              <v-col cols="8">
                 <p class="mb-5 font-weight-bold" style="color: orange">会社近くの神社です。</p>
+                <p>今日はいつも通る会社近くの神社のゴミ拾いをしました。あまりゴミ自体は多くなかったですが、綺麗になったので気持ちいいです。</p>
               </v-col>
-              <v-col cols="3">
-                <v-avatar tile size="100" color="cyan" :src="image_src" class="ml-5">
+              <v-col cols="2">
+                <v-avatar tile size="150" width="300px" :src="image_src">
                   <img :src="image_src" alt="">
                 </v-avatar>
               </v-col>
             </v-row>
-          </v-list-item-content>
+          <!-- </v-list-item-content> -->
         </v-list-item>
       </v-col>
     </v-card>
