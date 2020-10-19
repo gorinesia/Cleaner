@@ -27,7 +27,7 @@
             </v-list>
             <v-divider></v-divider>
 
-            <v-list nav dense></v-list>
+            <v-list nav dense>
               <v-list-item-group v-model="item" color="primary">
                 <v-list-item v-for="(item, i) in items" :key="i">
                   <v-list-item-icon>
@@ -47,257 +47,219 @@
           <v-main app>
             <h2 style="; color: #00ACC1;">クリーナーをみる</h2>
             <v-btn to="/list/cleaner">Cleaner</v-btn>
-            <v-container class="spacing-playground mb-10">
+            <v-container>
               <v-row>
-                <v-col cols="4">
-                  <v-card
-                    class="mx-auto"
-                    max-width="275"
-                  >
-                    <v-img
-                      height="200"
-                      :src="image_src"
-                    ></v-img>
+                <v-col cols="6">
+                  <v-card class="mb-5">
+                    <v-row>
+                      <v-col cols="2">
+                        <v-col align-self="start"  cols="12">
+                          <v-avatar class="profile" color="grey" size="60">
+                            <v-img :src="image_src"></v-img>
+                          </v-avatar>
+                        </v-col>
+                      </v-col>
+                      <v-col cols="10">
+                        <v-list-item three-line>
+                          <v-list-item-content>
+                            <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</div>
+                            <div class="overline mb-1">10月18日</div>
+                            <p class="mb-5 font-weight-bold">ロンドンを綺麗にしましょう。</p>
+                          </v-list-item-content>
 
-                    <v-card-title color="cyan darken-2">John</v-card-title>
-
-                    <v-card-text>
-                      <v-row
-                        align="center"
-                        class="mx-0"
-                      >
-                      </v-row>
-
-                      <div>London</div>
-                    </v-card-text>
-
-                    <v-divider class="mx-4"></v-divider>
-
-                    <v-card-title>最近の活動</v-card-title>
-
-                    <v-card-text>
-                      <v-chip-group
-                        active-class="deep-purple accent-4 white--text"
-                        column
-                      >
-                        <v-chip>10月12日</v-chip>
-                        <v-chip>10月5日</v-chip>
-                      </v-chip-group>
-                    </v-card-text>
-
-                    <v-card-actions>
-                      <v-btn
-                        color="cyan darken-2"
-                        text
-                      >
-                        もっとみる
-                      </v-btn>
-                    </v-card-actions>
+                          <v-avatar tile size="100" color="cyan" :src="image_src" class="ml-5">
+                            <img :src="image_src" alt="">
+                          </v-avatar>
+                        </v-list-item>
+                      </v-col>
+                    </v-row>
                   </v-card>
                 </v-col>
+                <v-col cols="6">
+                  <v-card class="mb-5">
+                    <v-row>
+                      <v-col cols="2">
+                        <v-col align-self="start"  cols="12">
+                          <v-avatar class="profile" color="grey" size="60">
+                            <v-img :src="image_src"></v-img>
+                          </v-avatar>
+                        </v-col>
+                      </v-col>
+                      <v-col cols="10">
+                        <v-list-item three-line>
+                          <v-list-item-content>
+                            <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</div>
+                            <div class="overline mb-1">10月18日</div>
+                            <p class="mb-5 font-weight-bold">ロンドンを綺麗にしましょう。</p>
+                          </v-list-item-content>
 
-                <v-col cols="4">
-                  <v-card
-                    class="mx-auto"
-                    max-width="275"
-                  >
-                    <template slot="progress">
-                      <v-progress-linear
-                        color="deep-purple"
-                        height="10"
-                        indeterminate
-                      ></v-progress-linear>
-                    </template>
-
-                    <v-img
-                      height="200"
-                      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-                    ></v-img>
-
-                    <v-card-title color="cyan darken-2">John</v-card-title>
-
-                    <v-card-text>
-                      <v-row
-                        align="center"
-                        class="mx-0"
-                      >
-                      </v-row>
-
-                      <div>London</div>
-                    </v-card-text>
-
-                    <v-divider class="mx-4"></v-divider>
-
-                    <v-card-title>最近の活動</v-card-title>
-
-                    <v-card-text>
-                      <v-chip-group
-                        active-class="deep-purple accent-4 white--text"
-                        column
-                      >
-                        <v-chip>10月12日</v-chip>
-                        <br>
-                        <v-chip>10月5日</v-chip>
-                      </v-chip-group>
-                    </v-card-text>
-
-                    <v-card-actions>
-                      <v-btn
-                        color="cyan darken-2"
-                        text
-                      >
-                        もっとみる
-                      </v-btn>
-                    </v-card-actions>
+                          <v-avatar tile size="100" color="cyan" :src="image_src" class="ml-5">
+                            <img :src="image_src" alt="">
+                          </v-avatar>
+                        </v-list-item>
+                      </v-col>
+                    </v-row>
                   </v-card>
                 </v-col>
-                <v-col cols="4">
-                  <v-card
-                    class="mx-auto"
-                    max-width="275"
-                  >
-                    <template slot="progress">
-                      <v-progress-linear
-                        color="deep-purple"
-                        height="10"
-                        indeterminate
-                      ></v-progress-linear>
-                    </template>
+                <v-col cols="6">
+                  <v-card class="mb-5">
+                    <v-row>
+                      <v-col cols="2">
+                        <v-col align-self="start"  cols="12">
+                          <v-avatar class="profile" color="grey" size="60">
+                            <v-img :src="image_src"></v-img>
+                          </v-avatar>
+                        </v-col>
+                      </v-col>
+                      <v-col cols="10">
+                        <v-list-item three-line>
+                          <v-list-item-content>
+                            <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</div>
+                            <div class="overline mb-1">10月18日</div>
+                            <p class="mb-5 font-weight-bold">ロンドンを綺麗にしましょう。</p>
+                          </v-list-item-content>
 
-                    <v-img
-                      height="200"
-                      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-                    ></v-img>
+                          <v-avatar tile size="100" color="cyan" :src="image_src" class="ml-5">
+                            <img :src="image_src" alt="">
+                          </v-avatar>
+                        </v-list-item>
+                      </v-col>
+                    </v-row>
+                  </v-card>
+                </v-col>
+                <v-col cols="6">
+                  <v-card class="mb-5">
+                    <v-row>
+                      <v-col cols="2">
+                        <v-col align-self="start"  cols="12">
+                          <v-avatar class="profile" color="grey" size="60">
+                            <v-img :src="image_src"></v-img>
+                          </v-avatar>
+                        </v-col>
+                      </v-col>
+                      <v-col cols="10">
+                        <v-list-item three-line>
+                          <v-list-item-content>
+                            <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</div>
+                            <div class="overline mb-1">10月18日</div>
+                            <p class="mb-5 font-weight-bold">ロンドンを綺麗にしましょう。</p>
+                          </v-list-item-content>
 
-                    <v-card-title color="cyan darken-2">John</v-card-title>
-
-                    <v-card-text>
-                      <v-row
-                        align="center"
-                        class="mx-0"
-                      >
-                      </v-row>
-
-                      <div>London</div>
-                    </v-card-text>
-
-                    <v-divider class="mx-4"></v-divider>
-
-                    <v-card-title>最近の活動</v-card-title>
-
-                    <v-card-text>
-                      <v-chip-group
-                        active-class="deep-purple accent-4 white--text"
-                        column
-                      >
-                        <v-chip>10月12日</v-chip>
-                        <br>
-                        <v-chip>10月5日</v-chip>
-                      </v-chip-group>
-                    </v-card-text>
-
-                    <v-card-actions>
-                      <v-btn
-                        color="cyan darken-2"
-                        text
-                      >
-                        もっとみる
-                      </v-btn>
-                    </v-card-actions>
+                          <v-avatar tile size="100" color="cyan" :src="image_src" class="ml-5">
+                            <img :src="image_src" alt="">
+                          </v-avatar>
+                        </v-list-item>
+                      </v-col>
+                    </v-row>
                   </v-card>
                 </v-col>
               </v-row>
             </v-container>
-            <h2 style="; color: #00ACC1;">プロジェクトをみる</h2>
-            <v-card class="container">
-              <div class="row">
-                <div class="">
-                  <div class="card">
-                    <div class="card-body">
-                      <h4 class="card-title">test article1</h4>
-                      <h6 class="card-subtitle mb-2 text-muted">test articke1</h6>
-                      <p class="card-text">
-                        test article1, test article1, test article1, test article1, test article1
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="float-right font-weight-bold mb-10">もっとみる</div>
+            <h2 class="cyan--text text--darken-1 mb-5" color="#00ACC1">プロジェクトをみる</h2>
+            <v-card class="mb-5">
+              <v-row>
+                <v-col cols="3">
+                  <v-avatar tile size="130" color="cyan" :src="image_src" class="ml-5">
+                      <img :src="image_src" alt="">
+                    </v-avatar>
+
+                </v-col>
+                <v-col cols="9">
+                  <v-col>
+                    <v-avatar class="profile" color="grey" size="60">
+                      <v-img :src="image_src"></v-img>
+                    </v-avatar>
+                    <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</span>
+                    <p class="my-5 font-weight-bold">会社の近くの神社です。</p>
+                    <span class="grey--text float-right">10分前</span>
+                  </v-col>
+                </v-col>
+              </v-row>
             </v-card>
-            <v-container class="spacing-playground mb-10">
-              <v-card>
-                <div class="row">
-                  <div class="col-md-4 my-3">
-                    <div class="card">
-                      <div class="card-body">
-                        <h4 class="card-title">test article1</h4>
-                        <h6 class="card-subtitle mb-2 text-muted">test articke1</h6>
-                        <p class="card-text">
-                          test article1, test article1, test article1, test article1, test article1
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </v-card>
-            </v-container>
+            <v-card class="mb-5">
+              <v-row>
+                <v-col cols="3">
+                  <v-avatar tile size="130" color="cyan" :src="image_src" class="ml-5">
+                      <img :src="image_src" alt="">
+                    </v-avatar>
+
+                </v-col>
+                <v-col cols="9">
+                  <v-col>
+                    <v-avatar class="profile" color="grey" size="60">
+                      <v-img :src="image_src"></v-img>
+                    </v-avatar>
+                    <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</span>
+                    <p class="my-5 font-weight-bold">会社の近くの神社です。</p>
+                    <span class="grey--text float-right">10分前</span>
+                  </v-col>
+                </v-col>
+              </v-row>
+            </v-card>
+            <v-card class="mb-5">
+              <v-row>
+                <v-col cols="3">
+                  <v-avatar tile size="130" color="cyan" :src="image_src" class="ml-5">
+                      <img :src="image_src" alt="">
+                    </v-avatar>
+
+                </v-col>
+                <v-col cols="9">
+                  <v-col>
+                    <v-avatar class="profile" color="grey" size="60">
+                      <v-img :src="image_src"></v-img>
+                    </v-avatar>
+                    <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</span>
+                    <p class="my-5 font-weight-bold">会社の近くの神社です。</p>
+                    <span class="grey--text float-right">10分前</span>
+                  </v-col>
+                </v-col>
+              </v-row>
+            </v-card>
+            <v-card class="mb-5">
+              <v-row>
+                <v-col cols="3">
+                  <v-avatar tile size="130" color="cyan" :src="image_src" class="ml-5">
+                      <img :src="image_src" alt="">
+                    </v-avatar>
+
+                </v-col>
+                <v-col cols="9">
+                  <v-col>
+                    <v-avatar class="profile" color="grey" size="60">
+                      <v-img :src="image_src"></v-img>
+                    </v-avatar>
+                    <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</span>
+                    <p class="my-5 font-weight-bold">会社の近くの神社です。</p>
+                    <span class="grey--text float-right">10分前</span>
+                  </v-col>
+                </v-col>
+              </v-row>
+            </v-card>
+            <span class="float-right font-weight-bold">もっとみる</span>
             <h2 style=" color: #00ACC1;">イベントをみる</h2>
             <v-btn to="/list/event">Event</v-btn>
             <v-container to="/list/event">
               <v-row>
                 <v-col cols="6">
-                  <v-card class="container">
-                    <div class="row">
-                      <div class="col-md-4 my-3">
-                        <div class="card">
-                          <div class="card-body">
-                            <h4 class="card-title">東京を綺麗にしましょう</h4>
-                            <h6 class="card-subtitle mb-2 text-muted">test articke1</h6>
-                            <p class="card-text">
-                              test article1, test article1, test article1, test article1, test article1
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </v-card>
-                </v-col>
-                <v-col cols="6">
-                  <v-card class="container">
-                    <div class="row">
-                      <div class="col-md-4 my-3">
-                        <div class="card">
-                          <div class="card-body">
-                            <h4 class="card-title">渋谷を片付けましょう</h4>
-                            <h6 class="card-subtitle mb-2 text-muted">test articke1</h6>
-                            <p class="card-text">
-                              test article1, test article1, test article1, test article1, test article1
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </v-card>
-                </v-col>
-                <v-col cols="12">
                   <v-card class="mx-auto" outlined>
                     <v-list-item three-line>
                       <v-list-item-content>
                         <div class="overline mb-1">10月18日</div>
-                        <div class="headline mb-3" style="color: #00ACC1;">東京を綺麗にしましょう。</div>
+                        <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;">東京を綺麗にしましょう。</div>
                         <p class="mb-5">僕たちにできることを。人もゴミも多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
                         <p class="font-weight-bold">日時： 10月3日  9:00~12:00</p>
                         <p class="font-weight-bold">場所： 東京都渋谷区</p>
                       </v-list-item-content>
 
-                      <v-avatar tile size="200" color="cyan" :src="image_src" class="ml-5">
+                      <v-avatar tile size="150" color="cyan" :src="image_src" class="ml-5">
                         <img :src="image_src" alt="">
                       </v-avatar>
                     </v-list-item>
 
                     <v-container fluid>
                       <v-row justify="center">
-
                         <v-expansion-panels popout>
                           <v-expansion-panel v-for="(message, i) in messages" :key="i" hide-actions>
                             <v-expansion-panel-header>
@@ -315,17 +277,146 @@
                                     &nbsp;({{ message.total }})
                                   </span>
                                 </v-col>
+                              </v-row>
+                            </v-expansion-panel-header>
+                            <v-expansion-panel-content>
+                              <v-divider></v-divider>
+                              <v-card-text></v-card-text>
+                            </v-expansion-panel-content>
+                          </v-expansion-panel>
+                        </v-expansion-panels>
+                      </v-row>
+                    </v-container>
+                  </v-card>
+                </v-col>
+                <v-col cols="6">
+                  <v-card class="mx-auto" outlined>
+                    <v-list-item three-line>
+                      <v-list-item-content>
+                        <div class="overline mb-1">10月18日</div>
+                        <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;">東京を綺麗にしましょう。</div>
+                        <p class="mb-5">僕たちにできることを。人もゴミも多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
+                        <p class="font-weight-bold">日時： 10月3日  9:00~12:00</p>
+                        <p class="font-weight-bold">場所： 東京都渋谷区</p>
+                      </v-list-item-content>
 
-                                <v-col class="text-no-wrap" cols="5" sm="3">
-                                  <v-chip v-if="message.new" :color="`${message.color} lighten-4`" class="ml-0 mr-2 black--text" label small>
-                                    {{ message.new }} new
-                                  </v-chip>
-                                  <strong v-html="message.title"></strong>
+                      <v-avatar tile size="150" color="cyan" :src="image_src" class="ml-5">
+                        <img :src="image_src" alt="">
+                      </v-avatar>
+                    </v-list-item>
+
+                    <v-container fluid>
+                      <v-row justify="center">
+                        <v-expansion-panels popout>
+                          <v-expansion-panel v-for="(message, i) in messages" :key="i" hide-actions>
+                            <v-expansion-panel-header>
+                              <v-row align="center" class="spacer" no-gutters>
+                                <v-col cols="4" sm="2" md="1">
+                                  <v-avatar size="36px">
+                                    <img v-if="message.avatar" :src="image_src" alt="">
+                                    <v-icon v-else :color="message.color" v-text="message.icon"></v-icon>
+                                  </v-avatar>
                                 </v-col>
 
-                                <v-col v-if="message.excerpt" class="grey--text text-truncate hidden-sm-and-down">
-                                  &mdash;
-                                  {{ message.excerpt }}
+                                <v-col class="hidden-xs-only" sm="5" md="3">
+                                  <strong v-html="message.name"></strong>
+                                  <span v-if="message.total" class="grey--text">
+                                    &nbsp;({{ message.total }})
+                                  </span>
+                                </v-col>
+                              </v-row>
+                            </v-expansion-panel-header>
+                            <v-expansion-panel-content>
+                              <v-divider></v-divider>
+                              <v-card-text></v-card-text>
+                            </v-expansion-panel-content>
+                          </v-expansion-panel>
+                        </v-expansion-panels>
+                      </v-row>
+                    </v-container>
+                  </v-card>
+                </v-col>
+                <v-col cols="6">
+                  <v-card class="mx-auto" outlined>
+                    <v-list-item three-line>
+                      <v-list-item-content>
+                        <div class="overline mb-1">10月18日</div>
+                        <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;">東京を綺麗にしましょう。</div>
+                        <p class="mb-5">僕たちにできることを。人もゴミも多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
+                        <p class="font-weight-bold">日時： 10月3日  9:00~12:00</p>
+                        <p class="font-weight-bold">場所： 東京都渋谷区</p>
+                      </v-list-item-content>
+
+                      <v-avatar tile size="150" color="cyan" :src="image_src" class="ml-5">
+                        <img :src="image_src" alt="">
+                      </v-avatar>
+                    </v-list-item>
+
+                    <v-container fluid>
+                      <v-row justify="center">
+                        <v-expansion-panels popout>
+                          <v-expansion-panel v-for="(message, i) in messages" :key="i" hide-actions>
+                            <v-expansion-panel-header>
+                              <v-row align="center" class="spacer" no-gutters>
+                                <v-col cols="4" sm="2" md="1">
+                                  <v-avatar size="36px">
+                                    <img v-if="message.avatar" :src="image_src" alt="">
+                                    <v-icon v-else :color="message.color" v-text="message.icon"></v-icon>
+                                  </v-avatar>
+                                </v-col>
+
+                                <v-col class="hidden-xs-only" sm="5" md="3">
+                                  <strong v-html="message.name"></strong>
+                                  <span v-if="message.total" class="grey--text">
+                                    &nbsp;({{ message.total }})
+                                  </span>
+                                </v-col>
+                              </v-row>
+                            </v-expansion-panel-header>
+                            <v-expansion-panel-content>
+                              <v-divider></v-divider>
+                              <v-card-text></v-card-text>
+                            </v-expansion-panel-content>
+                          </v-expansion-panel>
+                        </v-expansion-panels>
+                      </v-row>
+                    </v-container>
+                  </v-card>
+                </v-col>
+                <v-col cols="6">
+                  <v-card class="mx-auto" outlined>
+                    <v-list-item three-line>
+                      <v-list-item-content>
+                        <div class="overline mb-1">10月18日</div>
+                        <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;">東京を綺麗にしましょう。</div>
+                        <p class="mb-5">僕たちにできることを。人もゴミも多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
+                        <p class="font-weight-bold">日時： 10月3日  9:00~12:00</p>
+                        <p class="font-weight-bold">場所： 東京都渋谷区</p>
+                      </v-list-item-content>
+
+                      <v-avatar tile size="150" color="cyan" :src="image_src" class="ml-5">
+                        <img :src="image_src" alt="">
+                      </v-avatar>
+                    </v-list-item>
+
+                    <v-container fluid>
+                      <v-row justify="center">
+                        <v-expansion-panels popout>
+                          <v-expansion-panel v-for="(message, i) in messages" :key="i" hide-actions>
+                            <v-expansion-panel-header>
+                              <v-row align="center" class="spacer" no-gutters>
+                                <v-col cols="4" sm="2" md="1">
+                                  <v-avatar size="36px">
+                                    <img v-if="message.avatar" :src="image_src" alt="">
+                                    <v-icon v-else :color="message.color" v-text="message.icon"></v-icon>
+                                  </v-avatar>
+                                </v-col>
+
+                                <v-col class="hidden-xs-only" sm="5" md="3">
+                                  <strong v-html="message.name"></strong>
+                                  <span v-if="message.total" class="grey--text">
+                                    &nbsp;({{ message.total }})
+                                  </span>
                                 </v-col>
                               </v-row>
                             </v-expansion-panel-header>
@@ -341,6 +432,7 @@
                 </v-col>
               </v-row>
             </v-container>
+            <span class="float-right font-weight-bold">もっとみる</span>
           </v-main>
         </v-col>
       </v-row>
@@ -357,26 +449,26 @@ export default {
       item: 0,
       items: [
         {
-          text: 'My Files',
+          text: 'マイページ',
           icon: 'mdi-folder',
           lists: ['Quick Start', 'Pre-made layouts']
         },
         {
-          text: 'Shared with me',
+          text: 'プロジェクトを投稿',
           icon: 'mdi-account-multiple'
         },
         {
-          text: 'Starred',
+          text: 'プロジェクトを編集',
           icon: 'mdi-star',
           lists: ['Colors', 'Content', 'Display']
         },
         {
-          text: 'Recent',
+          text: 'イベントを投稿',
           icon: 'mdi-history',
           lists: ['API explorer', 'Alerts']
         },
-        { text: 'Uploads', icon: 'mdi-upload' },
-        { text: 'Backups', icon: 'mdi-cloud-upload' },
+        { text: 'イベントを編集', icon: 'mdi-upload' },
+        { text: 'ログアウト', icon: 'mdi-cloud-upload' },
       ],
       messages: [
         {

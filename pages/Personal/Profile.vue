@@ -79,7 +79,7 @@
         </v-row>
       </v-container>
     </v-card>
-    <h2 class="mb-5" style="color: navy">Johnさんのこれまでのプロジェクト</h2>
+    <h2 class="mb-5" style="color: navy" @click="$router.push('/personal/personalProject')">Johnさんのこれまでのプロジェクト</h2>
     <v-card class="mb-10">
       <v-col cols="10">
         <v-list-item three-line>
