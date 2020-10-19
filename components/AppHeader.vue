@@ -12,7 +12,7 @@
           <v-col cols="6">
             <v-tabs color="#EF6C00">
               <v-icon>mdi-account</v-icon>
-              <v-tab v-for="(menuItem, index) in menuItems" :key="index">
+              <v-tab v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
                 {{ menuItem.name }}
               </v-tab>
             </v-tabs>

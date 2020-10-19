@@ -2,15 +2,18 @@ export default {
   menuItems: [
     {
       name: 'クリーナーをみる',
-      url: '#'
+      url: '#',
+      to: '/list/cleaner'
     },
     {
       name: 'プロジェクトをみる',
-      url: '#'
+      url: '#',
+      to: '/list/project'
     },
     {
       name: 'イベントをみる',
-      url: '#'
+      url: '#',
+      to: '/list/event'
     },
   ]
 }

@@ -4,7 +4,7 @@
       <v-row>
         <v-col cols="3">
           <v-navigation-drawer>
-            <v-system-bar></v-system-bar>
+            <!-- <v-system-bar></v-system-bar> -->
             <v-list>
               <v-list-item>
                 <v-list-item-avatar>
