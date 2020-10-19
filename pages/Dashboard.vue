@@ -241,7 +241,8 @@
               </v-card>
             </v-container>
             <h2 style=" color: #00ACC1;">イベントをみる</h2>
-            <v-container>
+            <v-btn to="/list/event">Event</v-btn>
+            <v-container to="/list/event">
               <v-row>
                 <v-col cols="6">
                   <v-card class="container">
@@ -277,7 +278,7 @@
                     </div>
                   </v-card>
                 </v-col>
-                <v-col cols="6">
+                <v-col cols="12">
                   <v-card class="mx-auto" outlined>
                     <v-list-item three-line>
                       <v-list-item-content>
@@ -288,14 +289,13 @@
                         <p class="font-weight-bold">場所： 東京都渋谷区</p>
                       </v-list-item-content>
 
-                      <v-avatar tile size="150" color="cyan" :src="image_src" class="ml-5">
+                      <v-avatar tile size="200" color="cyan" :src="image_src" class="ml-5">
                         <img :src="image_src" alt="">
                       </v-avatar>
                     </v-list-item>
 
                     <v-container fluid>
                       <v-row justify="center">
-                        <v-subheader>Today</v-subheader>
 
                         <v-expansion-panels popout>
                           <v-expansion-panel v-for="(message, i) in messages" :key="i" hide-actions>
@@ -307,8 +307,31 @@
                                     <v-icon v-else :color="message.color" v-text="message.icon"></v-icon>
                                   </v-avatar>
                                 </v-col>
+
+                                <v-col class="hidden-xs-only" sm="5" md="3">
+                                  <strong v-html="message.name"></strong>
+                                  <span v-if="message.total" class="grey--text">
+                                    &nbsp;({{ message.total }})
+                                  </span>
+                                </v-col>
+
+                                <v-col class="text-no-wrap" cols="5" sm="3">
+                                  <v-chip v-if="message.new" :color="`${message.color} lighten-4`" class="ml-0 mr-2 black--text" label small>
+                                    {{ message.new }} new
+                                  </v-chip>
+                                  <strong v-html="message.title"></strong>
+                                </v-col>
+
+                                <v-col v-if="message.excerpt" class="grey--text text-truncate hidden-sm-and-down">
+                                  &mdash;
+                                  {{ message.excerpt }}
+                                </v-col>
                               </v-row>
                             </v-expansion-panel-header>
+                            <v-expansion-panel-content>
+                              <v-divider></v-divider>
+                              <v-card-text></v-card-text>
+                            </v-expansion-panel-content>
                           </v-expansion-panel>
                         </v-expansion-panels>
                       </v-row>
