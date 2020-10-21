@@ -46,6 +46,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    '@/plugins/firebase'
   ],
   /*
   ** Auto import components
@@ -56,7 +57,8 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    '@nuxtjs/vuetify',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/vuetify'
   ],
   /*
   ** Nuxt.js modules
