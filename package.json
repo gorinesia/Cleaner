@@ -9,7 +9,9 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "nuxt": "^2.14.0"
+    "firebase": "^7.24.0",
+    "nuxt": "^2.14.0",
+    "vuexfire": "^3.2.4"
   },
   "devDependencies": {
     "@nuxtjs/style-resources": "^1.0.0",
