@@ -343,6 +343,7 @@
 
 <script>
 import HomeHero from './HomeHero.vue'
+import firebase from 'firebase'
 
 export default {
   components: {
@@ -361,7 +362,13 @@ export default {
       }
     ]
   }),
-
+  created: () => {
+    const db = firebase.firestore();
+    db.collection('users').doc('fyZZahf3us16onw9rA9J').get()
+      .then((doc) => {
+        console.log(doc.data())
+      })
+  },
   methods: {
     reserve () {
       this.loading = true
