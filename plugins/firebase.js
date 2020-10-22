@@ -1,29 +1,16 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/firestore'
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
-    apiKey: "AIzaSyAwCJl7jA_yHzUd7CkMoZwAifRMSxWmDGs",
-    authDomain: "cleaner-caffc.firebaseapp.com",
-    databaseURL: "https://cleaner-caffc.firebaseio.com",
-    projectId: "cleaner-caffc",
-    storageBucket: "cleaner-caffc.appspot.com",
-    messagingSenderId: "639829768377",
-    appId: "1:639829768377:web:20e16362831873cbadc368",
-    measurementId: "G-QQ0FFYZ3V3"
+    apiKey: process.env.FB_API_KEY,
+    authDomain: process.env.FB_AUTH_DOMAIN,
+    databaseURL: process.env.FB_DATABASE_URL,
+    projectId: process.env.FB_PROJECTID,
+    storageBucket: process.env.FB_STORAGE_BUCKET,
+    messagingSenderId: process.env.FB_MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID
   })
 }
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyAwCJl7jA_yHzUd7CkMoZwAifRMSxWmDGs",
-//   authDomain: "cleaner-caffc.firebaseapp.com",
-//   databaseURL: "https://cleaner-caffc.firebaseio.com",
-//   projectId: "cleaner-caffc",
-//   storageBucket: "cleaner-caffc.appspot.com",
-//   messagingSenderId: "639829768377",
-//   appId: "1:639829768377:web:20e16362831873cbadc368",
-//   measurementId: "G-QQ0FFYZ3V3"
-// };
-// Initialize Firebase
-// firebase.initializeApp(firebaseConfig);
 
 export default firebase;
