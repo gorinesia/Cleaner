@@ -2,7 +2,7 @@
   <v-app>
     <AppHeader />
     <v-content>
-      <Nuxt />
+      <Nuxt class="blue-grey lighten-5" />
     </v-content>
     <AppFooter />
   </v-app>

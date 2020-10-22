@@ -1,5 +1,5 @@
 <template>
-  <v-footer>
+  <v-footer class="white">
     <v-row justify="center">
       <v-btn v-for="link in links" :key="link" color="black" text rounded class="my-2">{{ link }}</v-btn>
       <v-col class=" py-2 text-center black--text" cols="12">
