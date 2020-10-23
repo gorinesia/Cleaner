@@ -171,7 +171,7 @@ export default {
           allUsers.push({
             name: doc.data().name,
             place: doc.data().place,
-            date: doc.data().date,
+            date: new Date(),
             comment: doc.data().comment
           })
         })
