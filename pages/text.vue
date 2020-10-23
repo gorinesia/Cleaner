@@ -1,19 +1,21 @@
 <template>
-  <section class="container">
-    <v-row>
-      <v-col>
-        <v-text-field v-model="messageComment"></v-text-field>
-      </v-col>
-      <v-col>
-        <v-btn @click="addMessage">投稿</v-btn>
-      </v-col>
-    </v-row>
-    <v-row v-for="(message, key, index) in messages" :key="index">
-      <v-col>
-        <p>{{ message.messageComment }}</p>
-      </v-col>
-    </v-row>
-  </section>
+  <v-app>
+    <v-container>
+      <label for="garbage">名前</label>
+      <v-text-field v-model="name" class="white"></v-text-field>
+      <label for="garbage">場所</label>
+      <v-text-field v-model="place" class="white"></v-text-field>
+      <v-textarea v-model="messageComment" class="white" placeholder="コメントを入力"></v-textarea>
+      <v-btn @click="addMessage" class="float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
+      <v-row v-for="(message, key, index) in messages" :key="index">
+        <v-card class="ma-1">
+            <p>{{ message.name }}</p>
+            <p>{{ message.place }}</p>
+            <p>{{ message.messageComment }}</p>
+        </v-card>
+      </v-row>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -23,6 +25,8 @@ const db = firebase.firestore();
 export default {
   data() {
     return {
+      name: '',
+      place: '',
       messages: [],
       messageComment: ''
     }
@@ -34,11 +38,14 @@ export default {
     getMessage() {
       const db = firebase.firestore();
       db.collection('users')
+        .orderBy('name')
         .get()
         .then((querySnapshot) => {
           const messages = [];
           querySnapshot.forEach((doc) => {
             messages.push({
+              name: doc.data().name,
+              place: doc.data().place,
               messageComment: doc.data().comment
             })
           })
@@ -48,6 +55,8 @@ export default {
     addMessage() {
       const db = firebase.firestore();
       db.collection('users').add({
+        name: this.name,
+        place: this.place,
         comment: this.messageComment
       })
       console.log(this.messageComment);
