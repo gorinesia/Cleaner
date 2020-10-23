@@ -23,11 +23,11 @@
           </v-col>
           <v-spacer></v-spacer>
           <v-col cols="1.5">
-            <v-btn rounded outlined color="#00ACC1" dark to="/auth/login">ログイン</v-btn>
+            <v-btn rounded outlined color="#00ACC1" class="font-weight-bold" dark to="/auth/login">ログイン</v-btn>
           </v-col>
           <v-spacer></v-spacer>
           <v-col cols="1.5">
-            <v-btn rounded color="#00ACC1" dark to="/auth/signup">新規登録</v-btn>
+            <v-btn rounded color="#00ACC1" class="font-weight-bold" dark to="/auth/signup">新規登録</v-btn>
           </v-col>
         </v-app-bar>
       </v-row>
