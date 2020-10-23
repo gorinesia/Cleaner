@@ -6,8 +6,9 @@
       <label for="garbage">場所</label>
       <v-text-field v-model="place" class="white"></v-text-field>
       <v-textarea v-model="messageComment" class="white" placeholder="コメントを入力"></v-textarea>
-      <v-btn @click="addMessage" class="float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
-      <v-row v-for="(message, key, index) in messages" :key="index">
+      <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
+      <v-divider></v-divider>
+      <v-row v-for="(message, key, index) in messages" :key="index" class="ma-1">
         <v-card class="ma-1">
             <p>{{ message.name }}</p>
             <p>{{ message.place }}</p>
@@ -60,6 +61,8 @@ export default {
         comment: this.messageComment
       })
       console.log(this.messageComment);
+      this.name = ''
+      this.place = ''
       this.messageComment = ''
       this.getMessage();
     },
