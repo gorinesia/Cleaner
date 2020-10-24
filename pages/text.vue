@@ -18,6 +18,21 @@
             <p>{{ message.place }}</p>
             <p>{{ message.messageComment }}</p>
             <div>
+              <v-btn @click="overlay2 = !overlay2">編集</v-btn>
+              <v-overlay :value="overlay2">
+                <label class="postImage-appendBtn">
+                <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付">
+                </label>
+                <label for="garbage">名前</label>
+                <v-text-field v-model="name"></v-text-field>
+                <label for="garbage">場所</label>
+                <v-text-field v-model="place"></v-text-field>
+                <v-textarea v-model="messageComment" placeholder="コメントを入力"></v-textarea>
+                <v-btn @click="editArticles(message.id)">編集</v-btn>
+                <v-btn @click="overlay2 = false">閉じる</v-btn>
+              </v-overlay>
+            </div>
+            <div>
               <v-btn @click="overlay = !overlay">削除</v-btn>
               <v-overlay :value="overlay">
                 <p>本当に記事を削除しますか？</p>
@@ -45,6 +60,7 @@ export default {
       messages: [],
       messageComment: '',
       overlay: false,
+      overlay2: false,
     }
   },
   mounted() {
@@ -111,7 +127,27 @@ export default {
           console.log('deleted!!');
           this.getMessage();
         })
-    }
+    },
+    editArticles(id) {
+      console.log(id)
+      const db = firebase.firestore();
+      db.collection('users')
+        .doc(id)
+        .update({
+          name: this.name,
+          place: this.place,
+          comment: this.messageComment,
+          image: this.image
+        })
+        .then(() => {
+          console.log('updated!!');
+          this.getMessage();
+          this.name = ''
+          this.place = ''
+          this.messageComment = ''
+          this.image = ''
+        })
+    },
   }
 };
 </script>
