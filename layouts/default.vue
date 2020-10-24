@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <AppHeader />
-    <v-content>
+    <v-main>
       <Nuxt class="blue-grey lighten-5" />
-    </v-content>
+    </v-main>
     <AppFooter />
   </v-app>
 </template>

@@ -31,6 +31,7 @@ export default {
   },
   methods: {
     btnUploadChange(ev) {
+      console.log(ev)
       const storage = firebase.storage();
       const storageRef = storage.ref();
       const uploadRef = storageRef.child('images/doind2.jpg');
