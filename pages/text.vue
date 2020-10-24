@@ -11,13 +11,20 @@
       <v-textarea v-model="messageComment" class="white" placeholder="コメントを入力"></v-textarea>
       <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
       <v-divider></v-divider>
-      <v-row v-for="(message, key, index) in messages" :key="index" class="ma-1">
+      <v-row v-for="message in messages" :key="message.id" class="ma-1">
         <v-card class="ma-1">
-            <!-- <v-img :src="image_update" max-height="100" max-width="200"></v-img> -->
             <v-img :src="message.image" max-height="100" max-width="200"></v-img>
             <p>{{ message.name }}</p>
             <p>{{ message.place }}</p>
             <p>{{ message.messageComment }}</p>
+            <div>
+              <v-btn @click="overlay = !overlay">削除</v-btn>
+              <v-overlay :value="overlay">
+                <p>本当に記事を削除しますか？</p>
+                <v-btn @click="deleteArticles(message.id)">削除</v-btn>
+                <v-btn @click="overlay = false">閉じる</v-btn>
+              </v-overlay>
+            </div>
         </v-card>
       </v-row>
     </v-container>
@@ -36,7 +43,8 @@ export default {
       place: '',
       image: null,
       messages: [],
-      messageComment: ''
+      messageComment: '',
+      overlay: false,
     }
   },
   mounted() {
@@ -54,20 +62,10 @@ export default {
       })
       uploadRef.getDownloadURL().then((url) => {
         console.log('imgSample' + url);
-        // this.image_update = url;
         this.image = url;
       })
     },
-    // uploadImages() {
-    //   const storage = firebase.storage();
-    //   const storageRef = storage.ref();
-    //   const uploadRef = storageRef.child('images/doind2.jpg');
-    //   uploadRef.getDownloadURL().then((url) => {
-    //     console.log('imgSample' + url);
-    //     this.image = url;
-    //   })
-    // },
-    getMessage(ev) {
+    getMessage() {
       const db = firebase.firestore();
       db.collection('users')
         .orderBy('name')
@@ -79,14 +77,16 @@ export default {
               name: doc.data().name,
               place: doc.data().place,
               messageComment: doc.data().comment,
-              image: doc.data().image
+              image: doc.data().image,
+              id: doc.id
             })
-            console.log(doc.data())
+            console.log(doc.data());
+            console.log(doc.id);
           })
           this.messages = messages;
       })
     },
-    addMessage(ev) {
+    addMessage() {
       const db = firebase.firestore();
       db.collection('users').add({
         name: this.name,
@@ -99,13 +99,19 @@ export default {
       this.place = ''
       this.messageComment = ''
       this.image = ''
-      this.getMessage(ev);
-      // this.uploadImages();
+      this.getMessage();
     },
+    deleteArticles(id) {
+      console.log(id)
+      const db = firebase.firestore();
+      db.collection('users')
+        .doc(id)
+        .delete()
+        .then(() => {
+          console.log('deleted!!');
+          this.getMessage();
+        })
+    }
   }
 };
 </script>
-
-<style>
-
-</style>
