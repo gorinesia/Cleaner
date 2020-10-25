@@ -1,24 +1,30 @@
 <template>
   <v-app>
     <v-container>
-      <label class="postImage-appendBtn">
-        <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付">
-      </label>
-      <label for="garbage">名前</label>
+      <label class="postImage-appendBtn"></label>
+      <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
+      <label>名前</label>
       <v-text-field v-model="name" class="white"></v-text-field>
-      <label for="garbage">場所</label>
+      <label>場所</label>
       <v-text-field v-model="place" class="white"></v-text-field>
       <v-textarea v-model="messageComment" class="white" placeholder="コメントを入力"></v-textarea>
       <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
-      <v-divider></v-divider>
+    </v-container>
+    <v-divider inset></v-divider>
+    <v-container>
       <v-row v-for="message in messages" :key="message.id" class="ma-1">
-        <v-card class="ma-1">
-            <v-img :src="message.image" max-height="100" max-width="200"></v-img>
-            <p>{{ message.name }}</p>
-            <p>{{ message.place }}</p>
-            <p>{{ message.messageComment }}</p>
-            <div>
-              <v-btn @click="overlay2 = !overlay2">編集</v-btn>
+        <v-card width="100%">
+          <v-row>
+            <v-col cols="3">
+              <v-img :src="message.image" max-height="100" max-width="200" class="ml-1"></v-img>
+            </v-col>
+            <v-col cols="7">
+              <v-card-title class="cyan--text text--darken-1">{{ message.name }}</v-card-title>
+              <p>{{ message.place }}</p>
+              <p>{{ message.messageComment }}</p>
+            </v-col>
+            <v-col cols="1">
+              <v-btn @click="overlay2 = !overlay2" class="float-right">編集</v-btn>
               <v-overlay :value="overlay2">
                 <label class="postImage-appendBtn">
                 <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付">
@@ -31,15 +37,16 @@
                 <v-btn @click="editArticles(message.id)">編集</v-btn>
                 <v-btn @click="overlay2 = false">閉じる</v-btn>
               </v-overlay>
-            </div>
-            <div>
-              <v-btn @click="overlay = !overlay">削除</v-btn>
+            </v-col>
+            <v-col cols="1">
+              <v-btn @click="overlay = !overlay" class="float-right">削除</v-btn>
               <v-overlay :value="overlay">
                 <p>本当に記事を削除しますか？</p>
                 <v-btn @click="deleteArticles(message.id)">削除</v-btn>
                 <v-btn @click="overlay = false">閉じる</v-btn>
               </v-overlay>
-            </div>
+            </v-col>
+          </v-row>
         </v-card>
       </v-row>
     </v-container>
