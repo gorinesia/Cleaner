@@ -18,13 +18,16 @@
             <v-col cols="3">
               <v-img :src="message.image" max-height="100" max-width="200" class="ml-1"></v-img>
             </v-col>
-            <v-col cols="7">
+            <v-col cols="3">
               <v-card-title class="cyan--text text--darken-1">{{ message.name }}</v-card-title>
               <p>{{ message.place }}</p>
               <p>{{ message.messageComment }}</p>
             </v-col>
+            <v-col cols="4">
+              <span>{{ message.date }}</span>
+            </v-col>
             <v-col cols="1">
-              <v-btn @click="overlay2 = !overlay2" class="float-right">編集</v-btn>
+              <v-btn @click="openModalForEdit(message.id)" class="float-right">編集</v-btn>
               <v-overlay :value="overlay2">
                 <label class="postImage-appendBtn">
                 <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付">
@@ -34,7 +37,7 @@
                 <label for="garbage">場所</label>
                 <v-text-field v-model="place"></v-text-field>
                 <v-textarea v-model="messageComment" placeholder="コメントを入力"></v-textarea>
-                <v-btn @click="editArticles(message.id)">編集</v-btn>
+                <v-btn @click="editArticles(article.id)">編集</v-btn>
                 <v-btn @click="overlay2 = false">閉じる</v-btn>
               </v-overlay>
             </v-col>
@@ -64,7 +67,11 @@ export default {
       name: '',
       place: '',
       image: null,
+      date: '',
       messages: [],
+      article: {
+        id: ''
+      },
       messageComment: '',
       overlay: false,
       overlay2: false,
@@ -91,7 +98,7 @@ export default {
     getMessage() {
       const db = firebase.firestore();
       db.collection('users')
-        .orderBy('name')
+        // .orderBy('name')
         .get()
         .then((querySnapshot) => {
           const messages = [];
@@ -101,7 +108,8 @@ export default {
               place: doc.data().place,
               messageComment: doc.data().comment,
               image: doc.data().image,
-              id: doc.id
+              id: doc.id,
+              date: new Date().toLocaleString(),
             })
             console.log(doc.data());
             console.log(doc.id);
@@ -115,13 +123,15 @@ export default {
         name: this.name,
         place: this.place,
         comment: this.messageComment,
-        image: this.image
+        image: this.image,
+        date: this.date
       })
       console.log(this.messageComment);
       this.name = ''
       this.place = ''
       this.messageComment = ''
       this.image = ''
+      this.date = ''
       this.getMessage();
     },
     deleteArticles(id) {
@@ -135,6 +145,12 @@ export default {
           this.getMessage();
         })
     },
+    openModalForEdit(id) {
+      console.log(id);
+      this.overlay2 = true;
+      this.article.id = id;
+      // return id;
+    },
     editArticles(id) {
       console.log(id)
       const db = firebase.firestore();
@@ -144,15 +160,17 @@ export default {
           name: this.name,
           place: this.place,
           comment: this.messageComment,
-          image: this.image
+          image: this.image,
+          date: this.date
         })
         .then(() => {
           console.log('updated!!');
-          this.getMessage();
           this.name = ''
           this.place = ''
           this.messageComment = ''
           this.image = ''
+          this.date = ''
+          this.getMessage();
         })
     },
   }
