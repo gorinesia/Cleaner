@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="4">
+      <v-col cols="3.5">
         <div>誰でもできる</div>
         <img src="~/assets/img/lonly.jpg">
         <p>あなた自身がクリーナー(掃除屋)となり、ゴミ<br>拾いを「プロジェクト」として、はじめること<br>
@@ -9,13 +9,15 @@
         マイページで日々のプロジェクトを気軽に投稿<br>
         できます。</p>
       </v-col>
-      <v-col cols="4">
+      <v-divider vertical></v-divider>
+      <v-col cols="3.5">
         <div>みんなでできる</div>
         <img src="~/assets/img/everyone.jpg">
         <p>イベントを企画して、自分のプロジェクトに仲間を<br>募ったり、誰かのプロジェクトに参加することもで<br>
         きます。</p>
       </v-col>
-      <v-col cols="4">
+      <v-divider vertical></v-divider>
+      <v-col cols="3.5">
         <div>誰かをサポートできる</div>
         <img src="~/assets/img/support.jpg">
         <p>あなたのプロフィールページやあなたの企画したプロ<br>ジェクトに対して、<br>
