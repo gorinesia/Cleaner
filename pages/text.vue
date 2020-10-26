@@ -46,7 +46,7 @@
               <v-overlay :value="overlay">
                 <p>本当に記事を削除しますか？</p>
                 <v-btn @click="deleteArticles(article.id)">削除</v-btn>
-                <v-btn @click="overlay = false">閉じる</v-btn>
+                <!-- <v-btn @click="overlay = false">閉じる</v-btn> -->
               </v-overlay>
             </v-col>
           </v-row>
@@ -92,9 +92,28 @@ export default {
       const storageRef = storage.ref('images');
       const uploadRef = storageRef.child(file.name);
       console.log(file)
-      uploadRef.put(file).then((snapshot) => {
-        console.log('Uploaded a blob or file');
-      })
+      uploadRef.put(file)
+        .then((snapshot) => {
+          console.log('Uploaded a blob or file');
+          this.getUrl(ev)
+        })
+        // .then((url) => {
+        //   console.log('imgSample' + url);
+        //   this.image = url;
+        // })
+        .catch((error) => {
+          console.log(error);
+        })
+      // uploadRef.getDownloadURL().then((url) => {
+      //   console.log('imgSample' + url);
+      //   this.image = url;
+      // })
+    },
+    getUrl(ev) {
+      const file = ev.target.files[0];
+      const storage = firebase.storage();
+      const storageRef = storage.ref('images');
+      const uploadRef = storageRef.child(file.name);
       uploadRef.getDownloadURL().then((url) => {
         console.log('imgSample' + url);
         this.image = url;
@@ -144,6 +163,9 @@ export default {
       this.overlay = true;
       this.article.id = id;
     },
+    closeModalForDelete() {
+      this.overlay = false;
+    },
     deleteArticles(id) {
       console.log(id)
       const db = firebase.firestore();
@@ -153,6 +175,7 @@ export default {
         .then(() => {
           console.log('deleted!!');
           this.getMessage();
+          this.closeModalForDelete()
         })
     },
     openModalForEdit(id) {
