@@ -12,7 +12,7 @@
     </v-container>
     <v-divider inset></v-divider>
     <v-container>
-      <v-row v-for="message in messages" :key="message.id" class="ma-1">
+      <v-row v-for="message in messages" :key="message.id" class="ma-1" :messages="reversedMessages">
         <v-card width="100%">
           <v-row>
             <v-col cols="3">
@@ -77,17 +77,22 @@ export default {
       overlay2: false,
     }
   },
+  computed: {
+    reversedMessages() {
+      return this.messages.slice().reverse();
+    }
+  },
   mounted() {
     this.getMessage();
   },
   methods: {
     btnUploadChange(ev) {
+      const file = ev.target.files[0];
       const storage = firebase.storage();
-      const storageRef = storage.ref();
-      const uploadRef = storageRef.child('images/doind2.jpg');
-      const f = ev.target.files[0];
-      console.log(f)
-      uploadRef.put(f).then((snapshot) => {
+      const storageRef = storage.ref('images');
+      const uploadRef = storageRef.child(file.name);
+      console.log(file)
+      uploadRef.put(file).then((snapshot) => {
         console.log('Uploaded a blob or file');
       })
       uploadRef.getDownloadURL().then((url) => {
@@ -98,7 +103,7 @@ export default {
     getMessage() {
       const db = firebase.firestore();
       db.collection('users')
-        // .orderBy('name')
+        .orderBy('date')
         .get()
         .then((querySnapshot) => {
           const messages = [];
@@ -109,7 +114,7 @@ export default {
               messageComment: doc.data().comment,
               image: doc.data().image,
               id: doc.id,
-              date: new Date().toLocaleString(),
+              date: doc.data().date,
             })
             console.log(doc.data());
             console.log(doc.id);
@@ -124,7 +129,7 @@ export default {
         place: this.place,
         comment: this.messageComment,
         image: this.image,
-        date: this.date
+        date: new Date().toLocaleString()
       })
       console.log(this.messageComment);
       this.name = ''
@@ -161,7 +166,7 @@ export default {
           place: this.place,
           comment: this.messageComment,
           image: this.image,
-          date: this.date
+          // date: new Date().toLocaleString()
         })
         .then(() => {
           console.log('updated!!');
@@ -169,8 +174,10 @@ export default {
           this.place = ''
           this.messageComment = ''
           this.image = ''
-          this.date = ''
+          console.log(this.image)
+          // this.date = ''
           this.getMessage();
+          console.log(this.image)
         })
     },
   }
