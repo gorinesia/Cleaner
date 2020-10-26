@@ -14,7 +14,7 @@
     <v-container>
       <v-row v-for="message in messages" :key="message.id" class="ma-1">
         <v-card width="100%">
-          <v-row :messages="reversedMessages">
+          <v-row>
             <v-col cols="3">
               <v-img :src="message.image" max-height="100" max-width="200" class="ml-1"></v-img>
             </v-col>
@@ -46,7 +46,6 @@
               <v-overlay :value="overlay">
                 <p>本当に記事を削除しますか？</p>
                 <v-btn @click="deleteArticles(article.id)">削除</v-btn>
-                <!-- <v-btn @click="overlay = false">閉じる</v-btn> -->
               </v-overlay>
             </v-col>
           </v-row>
@@ -77,11 +76,6 @@ export default {
       overlay2: false,
     }
   },
-  computed: {
-    reversedMessages() {
-      return this.messages.slice().reverse();
-    }
-  },
   mounted() {
     this.getMessage();
   },
@@ -91,33 +85,25 @@ export default {
       const storage = firebase.storage();
       const storageRef = storage.ref('images');
       const uploadRef = storageRef.child(file.name);
-      console.log(file)
       uploadRef.put(file)
         .then((snapshot) => {
           console.log('Uploaded a blob or file');
           this.getUrl(ev)
         })
-        // .then((url) => {
-        //   console.log('imgSample' + url);
-        //   this.image = url;
-        // })
         .catch((error) => {
           console.log(error);
         })
-      // uploadRef.getDownloadURL().then((url) => {
-      //   console.log('imgSample' + url);
-      //   this.image = url;
-      // })
     },
     getUrl(ev) {
       const file = ev.target.files[0];
       const storage = firebase.storage();
       const storageRef = storage.ref('images');
       const uploadRef = storageRef.child(file.name);
-      uploadRef.getDownloadURL().then((url) => {
-        console.log('imgSample' + url);
-        this.image = url;
-      })
+      uploadRef.getDownloadURL()
+        .then((url) => {
+          console.log('imgSample' + url);
+          this.image = url;
+        })
     },
     getMessage() {
       const db = firebase.firestore();
