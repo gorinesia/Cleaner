@@ -42,10 +42,10 @@
               </v-overlay>
             </v-col>
             <v-col cols="1">
-              <v-btn @click="overlay = !overlay" class="float-right">削除</v-btn>
+              <v-btn @click="openModalForDelete(message.id)" class="float-right">削除</v-btn>
               <v-overlay :value="overlay">
                 <p>本当に記事を削除しますか？</p>
-                <v-btn @click="deleteArticles(message.id)">削除</v-btn>
+                <v-btn @click="deleteArticles(article.id)">削除</v-btn>
                 <v-btn @click="overlay = false">閉じる</v-btn>
               </v-overlay>
             </v-col>
@@ -139,6 +139,11 @@ export default {
       this.date = ''
       this.getMessage();
     },
+    openModalForDelete(id) {
+      console.log(id);
+      this.overlay = true;
+      this.article.id = id;
+    },
     deleteArticles(id) {
       console.log(id)
       const db = firebase.firestore();
@@ -154,7 +159,6 @@ export default {
       console.log(id);
       this.overlay2 = true;
       this.article.id = id;
-      // return id;
     },
     editArticles(id) {
       console.log(id)
