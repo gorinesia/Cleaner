@@ -12,7 +12,7 @@
     </v-container>
     <v-divider inset></v-divider>
     <v-container>
-      <v-row v-for="message in messages" :key="message.id" class="ma-1" :messages="reversedMessages">
+      <v-row v-for="message in messages" :key="message.id" class="ma-1">
         <v-card width="100%">
           <v-row>
             <v-col cols="3">
@@ -42,11 +42,10 @@
               </v-overlay>
             </v-col>
             <v-col cols="1">
-              <v-btn @click="overlay = !overlay" class="float-right">削除</v-btn>
+              <v-btn @click="openModalForDelete(message.id)" class="float-right">削除</v-btn>
               <v-overlay :value="overlay">
                 <p>本当に記事を削除しますか？</p>
-                <v-btn @click="deleteArticles(message.id)">削除</v-btn>
-                <v-btn @click="overlay = false">閉じる</v-btn>
+                <v-btn @click="deleteArticles(article.id)">削除</v-btn>
               </v-overlay>
             </v-col>
           </v-row>
@@ -77,11 +76,6 @@ export default {
       overlay2: false,
     }
   },
-  computed: {
-    reversedMessages() {
-      return this.messages.slice().reverse();
-    }
-  },
   mounted() {
     this.getMessage();
   },
@@ -91,19 +85,30 @@ export default {
       const storage = firebase.storage();
       const storageRef = storage.ref('images');
       const uploadRef = storageRef.child(file.name);
-      console.log(file)
-      uploadRef.put(file).then((snapshot) => {
-        console.log('Uploaded a blob or file');
-      })
-      uploadRef.getDownloadURL().then((url) => {
-        console.log('imgSample' + url);
-        this.image = url;
-      })
+      uploadRef.put(file)
+        .then((snapshot) => {
+          console.log('Uploaded a blob or file');
+          this.getUrl(ev)
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
+    getUrl(ev) {
+      const file = ev.target.files[0];
+      const storage = firebase.storage();
+      const storageRef = storage.ref('images');
+      const uploadRef = storageRef.child(file.name);
+      uploadRef.getDownloadURL()
+        .then((url) => {
+          console.log('imgSample' + url);
+          this.image = url;
+        })
     },
     getMessage() {
       const db = firebase.firestore();
       db.collection('users')
-        .orderBy('date')
+        .orderBy('date', 'desc')
         .get()
         .then((querySnapshot) => {
           const messages = [];
@@ -139,6 +144,14 @@ export default {
       this.date = ''
       this.getMessage();
     },
+    openModalForDelete(id) {
+      console.log(id);
+      this.overlay = true;
+      this.article.id = id;
+    },
+    closeModalForDelete() {
+      this.overlay = false;
+    },
     deleteArticles(id) {
       console.log(id)
       const db = firebase.firestore();
@@ -148,13 +161,13 @@ export default {
         .then(() => {
           console.log('deleted!!');
           this.getMessage();
+          this.closeModalForDelete()
         })
     },
     openModalForEdit(id) {
       console.log(id);
       this.overlay2 = true;
       this.article.id = id;
-      // return id;
     },
     editArticles(id) {
       console.log(id)
@@ -166,7 +179,6 @@ export default {
           place: this.place,
           comment: this.messageComment,
           image: this.image,
-          // date: new Date().toLocaleString()
         })
         .then(() => {
           console.log('updated!!');
@@ -175,7 +187,6 @@ export default {
           this.messageComment = ''
           this.image = ''
           console.log(this.image)
-          // this.date = ''
           this.getMessage();
           console.log(this.image)
         })
