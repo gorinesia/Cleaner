@@ -12,9 +12,9 @@
     </v-container>
     <v-divider inset></v-divider>
     <v-container>
-      <v-row v-for="message in messages" :key="message.id" class="ma-1" :messages="reversedMessages">
+      <v-row v-for="message in messages" :key="message.id" class="ma-1">
         <v-card width="100%">
-          <v-row>
+          <v-row :messages="reversedMessages">
             <v-col cols="3">
               <v-img :src="message.image" max-height="100" max-width="200" class="ml-1"></v-img>
             </v-col>
@@ -122,7 +122,7 @@ export default {
     getMessage() {
       const db = firebase.firestore();
       db.collection('users')
-        .orderBy('date')
+        .orderBy('date', 'desc')
         .get()
         .then((querySnapshot) => {
           const messages = [];
@@ -193,7 +193,6 @@ export default {
           place: this.place,
           comment: this.messageComment,
           image: this.image,
-          // date: new Date().toLocaleString()
         })
         .then(() => {
           console.log('updated!!');
@@ -202,7 +201,6 @@ export default {
           this.messageComment = ''
           this.image = ''
           console.log(this.image)
-          // this.date = ''
           this.getMessage();
           console.log(this.image)
         })
