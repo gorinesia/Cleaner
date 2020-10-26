@@ -107,7 +107,7 @@ export default {
     },
     getMessage() {
       const db = firebase.firestore();
-      db.collection('users')
+      db.collection('projects')
         .orderBy('date', 'desc')
         .get()
         .then((querySnapshot) => {
@@ -129,7 +129,7 @@ export default {
     },
     addMessage() {
       const db = firebase.firestore();
-      db.collection('users').add({
+      db.collection('projects').add({
         name: this.name,
         place: this.place,
         comment: this.messageComment,
@@ -155,7 +155,7 @@ export default {
     deleteArticles(id) {
       console.log(id)
       const db = firebase.firestore();
-      db.collection('users')
+      db.collection('projects')
         .doc(id)
         .delete()
         .then(() => {
@@ -172,7 +172,7 @@ export default {
     editArticles(id) {
       console.log(id)
       const db = firebase.firestore();
-      db.collection('users')
+      db.collection('projects')
         .doc(id)
         .update({
           name: this.name,
