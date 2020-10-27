@@ -9,8 +9,7 @@
 
         <v-col cols="9">
           <v-main app>
-            <h2 style="; color: #00ACC1;">クリーナーをみる</h2>
-            <v-btn to="/list/cleaner">Cleaner</v-btn>
+            <nuxt-link class="text-h5 cyan--text text-darken-1 font-weight-bold text-decoration-none" to="personal/profile">クリーナーをみる</nuxt-link>
             <v-container>
               <v-row>
                 <v-col cols="6">
@@ -26,7 +25,7 @@
                       <v-col cols="10">
                         <v-list-item three-line>
                           <v-list-item-content>
-                            <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</div>
+                            <v-list-item-title class="headline mb-3 font-weight-bold" style="color: #00ACC1;" to="/personal/profile">John</v-list-item-title>
                             <div class="overline mb-1">10月18日</div>
                             <p class="mb-5 font-weight-bold">ロンドンを綺麗にしましょう。</p>
                           </v-list-item-content>
@@ -120,7 +119,7 @@
               </v-row>
             </v-container>
             <div class="float-right font-weight-bold mb-10">もっとみる</div>
-            <h2 class="cyan--text text--darken-1 mb-5" color="#00ACC1">プロジェクトをみる</h2>
+            <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/list/project">プロジェクトをみる</nuxt-link>
             <v-card class="mb-5">
               <v-row>
                 <v-col cols="3">
@@ -202,8 +201,7 @@
               </v-row>
             </v-card>
             <span class="float-right font-weight-bold">もっとみる</span>
-            <h2 style=" color: #00ACC1;">イベントをみる</h2>
-            <v-btn to="/list/event">Event</v-btn>
+            <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/list/event">イベントをみる</nuxt-link>
             <v-container to="/list/event">
               <v-row>
                 <v-col cols="6">
@@ -265,7 +263,7 @@
                       </v-list-item-content>
 
                       <v-avatar tile size="150" color="cyan" :src="image_src" class="ml-5">
-                        <img :src="image_src" alt="">
+                        <img :src="image_src">
                       </v-avatar>
                     </v-list-item>
 

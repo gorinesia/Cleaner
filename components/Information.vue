@@ -1,29 +1,26 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="3.5">
-        <div>誰でもできる</div>
+      <v-col cols="3.5" align="center" justify="center">
+        <div class="font-weight-bold">誰でもできる</div>
         <img src="~/assets/img/lonly.jpg">
-        <p>あなた自身がクリーナー(掃除屋)となり、ゴミ<br>拾いを「プロジェクト」として、はじめること<br>
-        ができます。<br>
-        マイページで日々のプロジェクトを気軽に投稿<br>
+        <p>あなた自身がクリーナー(掃除屋)となり、ゴミ拾いを「プロジェクト」として、はじめることができます。<br>
+        マイページで日々のプロジェクトを気軽に投稿
         できます。</p>
       </v-col>
       <v-divider vertical></v-divider>
-      <v-col cols="3.5">
-        <div>みんなでできる</div>
+      <v-col cols="3.5" align="center" justify="center">
+        <div class="font-weight-bold">みんなでできる</div>
         <img src="~/assets/img/everyone.jpg">
-        <p>イベントを企画して、自分のプロジェクトに仲間を<br>募ったり、誰かのプロジェクトに参加することもで<br>
-        きます。</p>
+        <p>イベントを企画して、自分のプロジェクトに仲間を募ったり、誰かのプロジェクトに参加することもできます。</p>
       </v-col>
       <v-divider vertical></v-divider>
-      <v-col cols="3.5">
-        <div>誰かをサポートできる</div>
+      <v-col cols="3.5" align="center" justify="center">
+        <div class="font-weight-bold">誰かをサポートできる</div>
         <img src="~/assets/img/support.jpg">
-        <p>あなたのプロフィールページやあなたの企画したプロ<br>ジェクトに対して、<br>
-        ”あなたのその行動には価値がある。”<br>
-        そう思ってくれた人は、あなたに対して金銭的なサポ<br>
-        ートを渡すことができます。</p>
+        <p>あなたのプロフィールページやあなたの企画したプロジェクトに対して、
+        ”あなたのその行動には価値がある。”
+        そう思ってくれた人は、あなたに対して金銭的なサポートを施すことができます。</p>
       </v-col>
     </v-row>
   </v-container>
