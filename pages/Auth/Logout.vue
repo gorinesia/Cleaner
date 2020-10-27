@@ -2,7 +2,7 @@
   <v-app>
     <v-card width="400px" class="mx-auto mt-5">
       <p style="color: #00ACC1">ログアウトしました</p>
-      <p>ログインはこちら</p>
+      <p @click="$router.push('/auth/login')">ログインはこちら</p>
     </v-card>
   </v-app>
 </template>

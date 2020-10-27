@@ -443,6 +443,7 @@
 <script>
 export default {
   name: 'dashboard',
+  layout: 'loggedIn',
   data() {
     return {
       image_src: require('@/assets/img/everyone.jpg'),
