@@ -1,6 +1,6 @@
 <template>
   <v-app class="blue-grey lighten-5">
-    <v-system-bar height="30" color="#00ACC1" dark class="white--text" align="center"><span>まずは気軽に新規登録から！綺麗な世界は自分たちの手で創り上げていこう！</span></v-system-bar>
+    <v-system-bar height="30" color="#00ACC1" dark class="white--text font-weight-bold justify-center"><span>まずは気軽に新規登録から！綺麗な世界は自分たちの手で創り上げていこう！</span></v-system-bar>
     <v-container class="container">
       <v-row>
         <v-col cols="6">
@@ -9,14 +9,14 @@
           人々に対価を」をコンセプトとしたゴミ拾い<br>
           情報コミュニティです。</p>
           <v-btn class="mb-5" rounded outlined color="cyan darken-1" x-large to="/Auth/Signup">いますぐはじめる</v-btn><br>
-          <v-btn rounded color="primary" x-large dark>Cleanerについて</v-btn>
+          <v-btn class="text-capitalize" rounded color="primary" x-large dark>Cleanerについて</v-btn>
         </v-col>
         <v-col cols="6">
           <HomeHero />
         </v-col>
       </v-row>
     </v-container>
-    <div style="text-align: center; color: #0D47A1;" class="text-h4 font-weight-bold">
+    <div style="color: #0D47A1;" class="text-h4 font-weight-bold" align="center" justify="center">
       Cleanerでできること
     </div>
     <Information />

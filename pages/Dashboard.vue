@@ -1,46 +1,10 @@
 <template>
   <v-app>
-    <v-container>
-      <v-row>
+    <v-system-bar height="30" color="#00ACC1" dark class="white--text  font-weight-bold justify-center"><span>まずは気軽に新規登録から！綺麗な世界は自分たちの手で創り上げていこう！</span></v-system-bar>
+    <v-container fluid>
+      <v-row v-for="user in users" :key="user.id">
         <v-col cols="3">
-          <v-navigation-drawer>
-            <!-- <v-system-bar></v-system-bar> -->
-            <v-list>
-              <v-list-item>
-                <v-list-item-avatar>
-                  <v-img :src="image_src"></v-img>
-                </v-list-item-avatar>
-              </v-list-item>
-
-              <v-list-item link>
-                <v-list-item-content>
-                  <v-list-item-title class="title grey--text text--darken-2">
-                    Akinori
-                  </v-list-item-title>
-                  <v-list-item-subtitle>john@vuetifyjs.com</v-list-item-subtitle>
-                </v-list-item-content>
-
-                <v-list-item-action>
-                  <v-icon>mdi-menu-down</v-icon>
-                </v-list-item-action>
-              </v-list-item>
-            </v-list>
-            <v-divider></v-divider>
-
-            <v-list nav dense>
-              <v-list-item-group v-model="item" color="primary">
-                <v-list-item v-for="(item, i) in items" :key="i">
-                  <v-list-item-icon>
-                    <v-icon v-text="item.icon"></v-icon>
-                  </v-list-item-icon>
-
-                  <v-list-item-content>
-                    <v-list-item-title v-text="item.text"></v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list-item-group>
-            </v-list>
-          </v-navigation-drawer>
+          <Navbar :user="user" />
         </v-col>
 
         <v-col cols="9">
@@ -441,35 +405,20 @@
 </template>
 
 <script>
+import Navbar from '../components/Navbar';
+import firebase from 'firebase';
+
 export default {
+  components: {
+    Navbar
+  },
   name: 'dashboard',
+  layout: 'loggedIn',
   data() {
     return {
+      users: [],
       image_src: require('@/assets/img/everyone.jpg'),
       item: 0,
-      items: [
-        {
-          text: 'マイページ',
-          icon: 'mdi-folder',
-          lists: ['Quick Start', 'Pre-made layouts']
-        },
-        {
-          text: 'プロジェクトを投稿',
-          icon: 'mdi-account-multiple'
-        },
-        {
-          text: 'プロジェクトを編集',
-          icon: 'mdi-star',
-          lists: ['Colors', 'Content', 'Display']
-        },
-        {
-          text: 'イベントを投稿',
-          icon: 'mdi-history',
-          lists: ['API explorer', 'Alerts']
-        },
-        { text: 'イベントを編集', icon: 'mdi-upload' },
-        { text: 'ログアウト', icon: 'mdi-cloud-upload' },
-      ],
       messages: [
         {
           avatar: 'image_src',
@@ -479,6 +428,21 @@ export default {
         }
       ]
     }
+  },
+  created() {
+    const db = firebase.firestore();
+    db.collection('users')
+      .get()
+      .then((querySnapshot) => {
+        const users = [];
+        querySnapshot.forEach((doc) => {
+          users.push({
+            displayName: doc.data().displayName
+          })
+          console.log(doc.data())
+        })
+        this.users = users;
+      })
   }
 }
 </script>

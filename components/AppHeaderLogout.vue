@@ -5,9 +5,9 @@
         <v-app-bar app color="white" style="color: #00ACC1" class="font-weight-bold">
           <v-app-bar-nav-icon color="#00ACC1" @click="drawer = true"></v-app-bar-nav-icon>
           <v-col cols="1" class="mr-10">
-              <nuxt-link class="font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/">
+              <h1 class="font-size-2rem" @click="$router.push('/')">
                 Cleaner
-              </nuxt-link>
+              </h1>
           </v-col>
           <v-col cols="6">
             <v-tabs color="#EF6C00">
@@ -18,7 +18,7 @@
             </v-tabs>
           </v-col>
           <v-spacer></v-spacer>
-          <TheNavigation />
+            <TheLogout />
         </v-app-bar>
       </v-row>
     </v-container>
@@ -45,10 +45,13 @@
 
 <script>
 import constants from '../common/constants';
-import TheNavigation from './TheNavigation';
+import TheLogout from './TheLogout'
 
 export default {
   name: 'app-header',
+  components: {
+    TheLogout
+  },
   data() {
     return {
       drawer: false,

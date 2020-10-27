@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <AppHeader class="mb-10" />
+    <AppHeaderLogout class="mb-10" />
     <!-- <v-main> -->
       <Nuxt class="blue-grey lighten-5" />
     <!-- </v-main> -->
@@ -9,12 +9,12 @@
 </template>
 
 <script>
-import AppHeader from '../components/AppHeader.vue'
+import AppHeaderLogout from '../components/AppHeaderLogout.vue'
 import AppFooter from '../components/AppFooter.vue'
 
 export default {
   components: {
-    AppHeader,
+    AppHeaderLogout,
     AppFooter,
   }
 }
