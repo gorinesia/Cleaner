@@ -9,9 +9,7 @@
         <v-form>
           <v-text-field prepend-icon="mdi-account-circle" label="email" outlined filled v-model="email"></v-text-field>
           <v-text-field :type="showPassword ? 'text' : 'password'" prepend-icon="mdi-lock" append-icon="mdi-eye-off" label="パスワード" @click:append="showPassword = !showPassword" outlined filled v-model="password"></v-text-field>
-          <!-- <v-card-action> -->
             <v-btn color="#00ACC1" rounded block large dark @click="logIn">ログイン</v-btn>
-          <!-- </v-card-action> -->
         </v-form>
       </v-card-text>
       <p>- Signup with -</p>
