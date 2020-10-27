@@ -1,6 +1,6 @@
 <template>
   <v-app class="blue-grey lighten-5">
-    <v-system-bar height="30" color="#00ACC1" dark class="white--text font-weight-bold justify-center"><span>まずは気軽に新規登録から！綺麗な世界は自分たちの手で創り上げていこう！</span></v-system-bar>
+    <v-system-bar height="30" color="#00ACC1" dark class="white--text font-weight-bold justify-center"><nuxt-link class="white--text text-decoration-none" to="auth/signup">まずは気軽に新規登録から！綺麗な世界は自分たちの手で創り上げていこう！</nuxt-link></v-system-bar>
     <v-container class="container">
       <v-row>
         <v-col cols="6">
@@ -20,7 +20,7 @@
       Cleanerでできること
     </div>
     <Information />
-    <h2 style="text-align: center; color: #00ACC1;" class="mb-5">クリーナーをみる</h2>
+    <h2 class="mb-5 cy cyan--text text--darken-1" align="center" justify="center">クリーナーをみる</h2>
     <p style="text-align: center;">クリーナーとは、お掃除屋さん(＝ゴミを拾う人)のことです。<br>
     あなたも地球を綺麗にするための清掃員になりませんか？</p>
     <v-container>
