@@ -1,9 +1,10 @@
 <template>
   <v-app>
-    <!-- <v-container> -->
-      <v-row>
+    <v-system-bar height="30" color="#00ACC1" dark class="white--text  font-weight-bold justify-center"><span>まずは気軽に新規登録から！綺麗な世界は自分たちの手で創り上げていこう！</span></v-system-bar>
+    <v-container fluid>
+      <v-row v-for="user in users" :key="user.id">
         <v-col cols="3">
-          <Navbar />
+          <Navbar :user="user" />
         </v-col>
 
         <v-col cols="9">
@@ -399,12 +400,13 @@
           </v-main>
         </v-col>
       </v-row>
-    <!-- </v-container> -->
+    </v-container>
   </v-app>
 </template>
 
 <script>
 import Navbar from '../components/Navbar';
+import firebase from 'firebase';
 
 export default {
   components: {
@@ -414,6 +416,7 @@ export default {
   layout: 'loggedIn',
   data() {
     return {
+      users: [],
       image_src: require('@/assets/img/everyone.jpg'),
       item: 0,
       messages: [
@@ -425,6 +428,21 @@ export default {
         }
       ]
     }
+  },
+  created() {
+    const db = firebase.firestore();
+    db.collection('users')
+      .get()
+      .then((querySnapshot) => {
+        const users = [];
+        querySnapshot.forEach((doc) => {
+          users.push({
+            displayName: doc.data().displayName
+          })
+          console.log(doc.data())
+        })
+        this.users = users;
+      })
   }
 }
 </script>

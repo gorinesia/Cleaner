@@ -8,7 +8,7 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title class="cyan--text text--darken-1 font-weight-bold text-h5">Akinori</v-list-item-title>
+            <v-list-item-title class="cyan--text text--darken-1 font-weight-bold text-h5">{{ user.displayName }}</v-list-item-title>
             <v-list-item-subtitle>ログイン中</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -33,6 +33,7 @@
 
 <script>
 export default {
+  props: ['user'],
   data() {
     return {
       image_src: require('@/assets/img/everyone.jpg'),

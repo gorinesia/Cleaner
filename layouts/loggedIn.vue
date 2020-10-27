@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <AppHeaderLogout />
-    <v-main>
+    <AppHeaderLogout class="mb-10" />
+    <!-- <v-main> -->
       <Nuxt class="blue-grey lighten-5" />
-    </v-main>
+    <!-- </v-main> -->
     <AppFooter />
   </v-app>
 </template>

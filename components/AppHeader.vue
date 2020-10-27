@@ -5,9 +5,9 @@
         <v-app-bar app color="white" style="color: #00ACC1" class="font-weight-bold">
           <v-app-bar-nav-icon color="#00ACC1" @click="drawer = true"></v-app-bar-nav-icon>
           <v-col cols="1" class="mr-10">
-              <h1 class="font-size-2rem" @click="$router.push('/')">
+              <nuxt-link class="font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/">
                 Cleaner
-              </h1>
+              </nuxt-link>
           </v-col>
           <v-col cols="6">
             <v-tabs color="#EF6C00">
@@ -19,17 +19,6 @@
           </v-col>
           <v-spacer></v-spacer>
           <TheNavigation />
-          <!-- <v-col cols="1.5">
-            <v-btn rounded color="#1A237E" dark to="/dashboard" class="font-weight-bold orange--text text--darken-1">ゲストログイン</v-btn>
-          </v-col>
-          <v-spacer></v-spacer> -->
-          <!-- <v-col cols="1.5">
-            <v-btn rounded outlined color="#00ACC1" class="font-weight-bold" dark to="/auth/login">ログイン</v-btn>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="1.5">
-            <v-btn rounded color="#00ACC1" class="font-weight-bold" dark to="/auth/signup">新規登録</v-btn>
-          </v-col> -->
         </v-app-bar>
       </v-row>
     </v-container>
