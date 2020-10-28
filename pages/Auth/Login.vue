@@ -28,11 +28,15 @@ export default {
   }),
   methods: {
     logIn() {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          console.log('loggedIn!!!');
-          this.$router.push('/dashboard')
-       })
+      this.$store.dispatch('user/logInAction', {
+        email: this.email,
+        password: this.password
+      })
+      // firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      //   .then(() => {
+      //     console.log('loggedIn!!!');
+      //     this.$router.push('/dashboard')
+      //  })
     }
   }
 };

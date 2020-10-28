@@ -31,21 +31,11 @@ export default {
   }),
   methods: {
     signUp() {
-      const db = firebase.firestore();
-      db.collection('users')
-        .add({
-          displayName: this.displayName,
-          email: this.email,
-          password: this.password,
-        })
-        .then((docRef) => {
-          console.log(docRef.id)
-        })
-        firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(() => {
-          console.log('signup!!!');
-          this.$router.push('/auth/login')
-        })
-
+      this.$store.dispatch('user/signUpAction', {
+        displayName: this.displayName,
+        email: this.email,
+        password: this.password,
+      })
     }
   }
 };
