@@ -2,9 +2,38 @@
   <v-app>
     <v-system-bar height="30" color="#00ACC1" dark class="white--text  font-weight-bold justify-center"><span>まずは気軽に新規登録から！綺麗な世界は自分たちの手で創り上げていこう！</span></v-system-bar>
     <v-container fluid>
-      <v-row v-for="user in users" :key="user.id">
+      <v-row v-for="currentUser in currentUser" :key="currentUser.id">
         <v-col cols="3">
-          <Navbar :user="user" />
+          <v-card height="350px" class="ml-7">
+            <v-navigation-drawer absolute permanent>
+              <template v-slot:prepend>
+                <v-list-item two-line>
+                  <v-list-item-avatar>
+                    <img :src="image_src">
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title class="cyan--text text--darken-1 font-weight-bold text-h5">{{ currentUser.displayName }}</v-list-item-title>
+                    <v-list-item-subtitle>ログイン中</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </template>
+
+              <v-divider></v-divider>
+
+              <v-list dense>
+                <v-list-item v-for="item  in items" :key="item.title">
+                  <v-list-item-icon>
+                    <v-icon>{{ item.icon }}</v-icon>
+                  </v-list-item-icon>
+
+                  <v-list-item-content>
+                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-navigation-drawer>
+          </v-card>
         </v-col>
 
         <v-col cols="9">
@@ -403,13 +432,9 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar';
 import firebase from 'firebase';
 
 export default {
-  components: {
-    Navbar
-  },
   name: 'dashboard',
   layout: 'loggedIn',
   data() {
@@ -417,6 +442,29 @@ export default {
       users: [],
       image_src: require('@/assets/img/everyone.jpg'),
       item: 0,
+      items: [
+        {
+          title: 'マイページ',
+          icon: 'mdi-folder',
+          lists: ['Quick Start', 'Pre-made layouts']
+        },
+        {
+          title: 'プロジェクトを投稿',
+          icon: 'mdi-account-multiple'
+        },
+        {
+          title: 'プロジェクトを編集',
+          icon: 'mdi-star',
+          lists: ['Colors', 'Content', 'Display']
+        },
+        {
+          title: 'イベントを投稿',
+          icon: 'mdi-history',
+          lists: ['API explorer', 'Alerts']
+        },
+        { title: 'イベントを編集', icon: 'mdi-upload' },
+        { title: 'ログアウト', icon: 'mdi-cloud-upload' },
+      ],
       messages: [
         {
           avatar: 'image_src',
@@ -427,20 +475,13 @@ export default {
       ]
     }
   },
-  created() {
-    const db = firebase.firestore();
-    db.collection('users')
-      .get()
-      .then((querySnapshot) => {
-        const users = [];
-        querySnapshot.forEach((doc) => {
-          users.push({
-            displayName: doc.data().displayName
-          })
-          console.log(doc.data())
-        })
-        this.users = users;
-      })
+  computed: {
+    currentUser() {
+      return this.$store.getters['user/currentUser']
+    }
+  },
+  mounted() {
+    this.$store.dispatch('user/logInUserDisplay');
   }
 }
 </script>
