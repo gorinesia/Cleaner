@@ -1,23 +1,16 @@
 import firebase from 'firebase';
 
 export const state = () => ({
-  // currentUser: null,
-  // displayName: '',
   currentUser: [],
   loginUsers: []
 })
 
 export const getters = {
-  // currentUser: state => state.currentUser,
-  // displayName: state => state.displayName,
   currentUser: state => state.currentUser,
   loginUsers: state => state.loginUsers,
 }
 
 export const mutations = {
-  // serCurrentUser: (state, payload) => {
-  //   state.currentUser = payload
-  // },
   setCurrentUser: (state, currentLoginUser) => {
     state.currentUser = currentLoginUser;
   },
