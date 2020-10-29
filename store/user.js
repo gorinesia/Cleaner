@@ -1,32 +1,22 @@
 import firebase from 'firebase';
 
 export const state = () => ({
-  // currentUser: null,
-  // displayName: '',
   currentUser: [],
-  // loginUsers: []
+  loginUsers: []
 })
 
 export const getters = {
-  // currentUser: state => state.currentUser,
-  // displayName: state => state.displayName,
   currentUser: state => state.currentUser,
-  // loginUsers: state => state.loginUsers,
+  loginUsers: state => state.loginUsers,
 }
 
 export const mutations = {
-  // serCurrentUser: (state, payload) => {
-  //   state.currentUser = payload
-  // },
-  // setDisplayName: (state, payload) => {
-  //   state.displayName = payload
-  // },
   setCurrentUser: (state, currentLoginUser) => {
     state.currentUser = currentLoginUser;
   },
-  // setLoginUser: (state, otherLoginUsers) => {
-  //   state.loginUsers = otherLoginUsers;
-  // }
+  setLoginUsers: (state, otherLoginUsers) => {
+    state.loginUsers = otherLoginUsers;
+  }
 }
 
 export const actions = {
@@ -73,14 +63,14 @@ export const actions = {
             displayName: doc.data().displayName
           })
           console.log(doc.data().displayName)
-          // const otherLoginUsers = allUsers.filter((otherUsers) => {
-          //   return otherUsers.displayName != getUser.displayName;
-          // })
+          const otherLoginUsers = allUsers.filter((otherUsers) => {
+            return otherUsers.displayName != getUser.displayName;
+          })
           const currentLoginUser = allUsers.filter((currentUser) => {
             return currentUser.displayName === getUser.displayName;
           })
           commit('setCurrentUser', currentLoginUser);
-          // commit('setLoginUsers', otherLoginUsers);
+          commit('setLoginUsers', otherLoginUsers);
         })
       })
   },

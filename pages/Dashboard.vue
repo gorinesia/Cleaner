@@ -37,7 +37,7 @@
         </v-col>
 
         <v-col cols="9">
-          <v-row justify="center">
+          <!-- <v-row justify="center">
             <v-dialog
               v-model="dialog"
               persistent
@@ -91,12 +91,12 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-          </v-row>
+          </v-row> -->
           <v-main app>
-            <nuxt-link class="text-h5 cyan--text text-darken-1 font-weight-bold text-decoration-none" to="personal/profile">クリーナーをみる</nuxt-link>
+            <nuxt-link class="text-h5 cyan--text text--darken-1 font-weight-bold text-decoration-none" to="personal/profile">クリーナーをみる</nuxt-link>
             <v-container>
-              <v-row>
-                <v-col cols="6">
+              <v-row v-for="loginUser in loginUsers" :key="loginUser.id" :justify="loginUser">
+                <v-col v-for="k in 2" :key="k" md="6">
                   <v-card class="mb-5">
                     <v-row>
                       <v-col cols="2">
@@ -109,85 +109,7 @@
                       <v-col cols="10">
                         <v-list-item three-line>
                           <v-list-item-content>
-                            <v-list-item-title class="headline mb-3 font-weight-bold" style="color: #00ACC1;" to="/personal/profile">John</v-list-item-title>
-                            <div class="overline mb-1">10月18日</div>
-                            <p class="mb-5 font-weight-bold">ロンドンを綺麗にしましょう。</p>
-                          </v-list-item-content>
-
-                          <v-avatar tile size="100" color="cyan" :src="image_src" class="ml-5">
-                            <img :src="image_src" alt="">
-                          </v-avatar>
-                        </v-list-item>
-                      </v-col>
-                    </v-row>
-                  </v-card>
-                </v-col>
-                <v-col cols="6">
-                  <v-card class="mb-5">
-                    <v-row>
-                      <v-col cols="2">
-                        <v-col align-self="start"  cols="12">
-                          <v-avatar class="profile" color="grey" size="60">
-                            <v-img :src="image_src"></v-img>
-                          </v-avatar>
-                        </v-col>
-                      </v-col>
-                      <v-col cols="10">
-                        <v-list-item three-line>
-                          <v-list-item-content>
-                            <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</div>
-                            <div class="overline mb-1">10月18日</div>
-                            <p class="mb-5 font-weight-bold">ロンドンを綺麗にしましょう。</p>
-                          </v-list-item-content>
-
-                          <v-avatar tile size="100" color="cyan" :src="image_src" class="ml-5">
-                            <img :src="image_src" alt="">
-                          </v-avatar>
-                        </v-list-item>
-                      </v-col>
-                    </v-row>
-                  </v-card>
-                </v-col>
-                <v-col cols="6">
-                  <v-card class="mb-5">
-                    <v-row>
-                      <v-col cols="2">
-                        <v-col align-self="start"  cols="12">
-                          <v-avatar class="profile" color="grey" size="60">
-                            <v-img :src="image_src"></v-img>
-                          </v-avatar>
-                        </v-col>
-                      </v-col>
-                      <v-col cols="10">
-                        <v-list-item three-line>
-                          <v-list-item-content>
-                            <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</div>
-                            <div class="overline mb-1">10月18日</div>
-                            <p class="mb-5 font-weight-bold">ロンドンを綺麗にしましょう。</p>
-                          </v-list-item-content>
-
-                          <v-avatar tile size="100" color="cyan" :src="image_src" class="ml-5">
-                            <img :src="image_src" alt="">
-                          </v-avatar>
-                        </v-list-item>
-                      </v-col>
-                    </v-row>
-                  </v-card>
-                </v-col>
-                <v-col cols="6">
-                  <v-card class="mb-5">
-                    <v-row>
-                      <v-col cols="2">
-                        <v-col align-self="start"  cols="12">
-                          <v-avatar class="profile" color="grey" size="60">
-                            <v-img :src="image_src"></v-img>
-                          </v-avatar>
-                        </v-col>
-                      </v-col>
-                      <v-col cols="10">
-                        <v-list-item three-line>
-                          <v-list-item-content>
-                            <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</div>
+                            <v-list-item-title class="headline mb-3 font-weight-bold" style="color: #00ACC1;" to="/personal/profile">{{ loginUser. displayName }}</v-list-item-title>
                             <div class="overline mb-1">10月18日</div>
                             <p class="mb-5 font-weight-bold">ロンドンを綺麗にしましょう。</p>
                           </v-list-item-content>
@@ -202,7 +124,7 @@
                 </v-col>
               </v-row>
             </v-container>
-            <div class="float-right font-weight-bold mb-10">もっとみる</div>
+            <nuxt-link class="float-right grey--text text--darken-1 font-weight-bold mb-10 text-decoration-none mr-5" to="/list/cleaner">もっとみる</nuxt-link>
             <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/list/project">プロジェクトをみる</nuxt-link>
             <v-card class="mb-5">
               <v-row>
@@ -303,36 +225,6 @@
                         <img :src="image_src" alt="">
                       </v-avatar>
                     </v-list-item>
-
-                    <v-container fluid>
-                      <v-row justify="center">
-                        <v-expansion-panels popout>
-                          <v-expansion-panel v-for="(message, i) in messages" :key="i" hide-actions>
-                            <v-expansion-panel-header>
-                              <v-row align="center" class="spacer" no-gutters>
-                                <v-col cols="4" sm="2" md="1">
-                                  <v-avatar size="36px">
-                                    <img v-if="message.avatar" :src="image_src" alt="">
-                                    <v-icon v-else :color="message.color" v-text="message.icon"></v-icon>
-                                  </v-avatar>
-                                </v-col>
-
-                                <v-col class="hidden-xs-only" sm="5" md="3">
-                                  <strong v-html="message.name"></strong>
-                                  <span v-if="message.total" class="grey--text">
-                                    &nbsp;({{ message.total }})
-                                  </span>
-                                </v-col>
-                              </v-row>
-                            </v-expansion-panel-header>
-                            <v-expansion-panel-content>
-                              <v-divider></v-divider>
-                              <v-card-text></v-card-text>
-                            </v-expansion-panel-content>
-                          </v-expansion-panel>
-                        </v-expansion-panels>
-                      </v-row>
-                    </v-container>
                   </v-card>
                 </v-col>
                 <v-col cols="6">
@@ -350,36 +242,6 @@
                         <img :src="image_src">
                       </v-avatar>
                     </v-list-item>
-
-                    <v-container fluid>
-                      <v-row justify="center">
-                        <v-expansion-panels popout>
-                          <v-expansion-panel v-for="(message, i) in messages" :key="i" hide-actions>
-                            <v-expansion-panel-header>
-                              <v-row align="center" class="spacer" no-gutters>
-                                <v-col cols="4" sm="2" md="1">
-                                  <v-avatar size="36px">
-                                    <img v-if="message.avatar" :src="image_src" alt="">
-                                    <v-icon v-else :color="message.color" v-text="message.icon"></v-icon>
-                                  </v-avatar>
-                                </v-col>
-
-                                <v-col class="hidden-xs-only" sm="5" md="3">
-                                  <strong v-html="message.name"></strong>
-                                  <span v-if="message.total" class="grey--text">
-                                    &nbsp;({{ message.total }})
-                                  </span>
-                                </v-col>
-                              </v-row>
-                            </v-expansion-panel-header>
-                            <v-expansion-panel-content>
-                              <v-divider></v-divider>
-                              <v-card-text></v-card-text>
-                            </v-expansion-panel-content>
-                          </v-expansion-panel>
-                        </v-expansion-panels>
-                      </v-row>
-                    </v-container>
                   </v-card>
                 </v-col>
                 <v-col cols="6">
@@ -397,36 +259,6 @@
                         <img :src="image_src" alt="">
                       </v-avatar>
                     </v-list-item>
-
-                    <v-container fluid>
-                      <v-row justify="center">
-                        <v-expansion-panels popout>
-                          <v-expansion-panel v-for="(message, i) in messages" :key="i" hide-actions>
-                            <v-expansion-panel-header>
-                              <v-row align="center" class="spacer" no-gutters>
-                                <v-col cols="4" sm="2" md="1">
-                                  <v-avatar size="36px">
-                                    <img v-if="message.avatar" :src="image_src" alt="">
-                                    <v-icon v-else :color="message.color" v-text="message.icon"></v-icon>
-                                  </v-avatar>
-                                </v-col>
-
-                                <v-col class="hidden-xs-only" sm="5" md="3">
-                                  <strong v-html="message.name"></strong>
-                                  <span v-if="message.total" class="grey--text">
-                                    &nbsp;({{ message.total }})
-                                  </span>
-                                </v-col>
-                              </v-row>
-                            </v-expansion-panel-header>
-                            <v-expansion-panel-content>
-                              <v-divider></v-divider>
-                              <v-card-text></v-card-text>
-                            </v-expansion-panel-content>
-                          </v-expansion-panel>
-                        </v-expansion-panels>
-                      </v-row>
-                    </v-container>
                   </v-card>
                 </v-col>
                 <v-col cols="6">
@@ -444,36 +276,6 @@
                         <img :src="image_src" alt="">
                       </v-avatar>
                     </v-list-item>
-
-                    <v-container fluid>
-                      <v-row justify="center">
-                        <v-expansion-panels popout>
-                          <v-expansion-panel v-for="(message, i) in messages" :key="i" hide-actions>
-                            <v-expansion-panel-header>
-                              <v-row align="center" class="spacer" no-gutters>
-                                <v-col cols="4" sm="2" md="1">
-                                  <v-avatar size="36px">
-                                    <img v-if="message.avatar" :src="image_src" alt="">
-                                    <v-icon v-else :color="message.color" v-text="message.icon"></v-icon>
-                                  </v-avatar>
-                                </v-col>
-
-                                <v-col class="hidden-xs-only" sm="5" md="3">
-                                  <strong v-html="message.name"></strong>
-                                  <span v-if="message.total" class="grey--text">
-                                    &nbsp;({{ message.total }})
-                                  </span>
-                                </v-col>
-                              </v-row>
-                            </v-expansion-panel-header>
-                            <v-expansion-panel-content>
-                              <v-divider></v-divider>
-                              <v-card-text></v-card-text>
-                            </v-expansion-panel-content>
-                          </v-expansion-panel>
-                        </v-expansion-panels>
-                      </v-row>
-                    </v-container>
                   </v-card>
                 </v-col>
               </v-row>
@@ -535,6 +337,9 @@ export default {
   computed: {
     currentUser() {
       return this.$store.getters['user/currentUser']
+    },
+    loginUsers() {
+      return this.$store.getters['user/loginUsers']
     }
   },
   mounted() {

@@ -28,7 +28,7 @@
             </v-col>
             <v-col cols="1">
               <v-btn @click="openModalForEdit(message.id)" class="float-right">編集</v-btn>
-              <v-overlay :value="overlay2">
+              <v-overlay :value="editOverlay">
                 <label class="postImage-appendBtn">
                 <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付">
                 </label>
@@ -37,15 +37,16 @@
                 <label for="garbage">場所</label>
                 <v-text-field v-model="place"></v-text-field>
                 <v-textarea v-model="messageComment" placeholder="コメントを入力"></v-textarea>
-                <v-btn @click="editArticles(article.id)">編集</v-btn>
-                <v-btn @click="overlay2 = false">閉じる</v-btn>
+                <v-btn @click="editArticles(articleId)">編集</v-btn>
+                <v-btn @click="closeModalForEdit">閉じる</v-btn>
               </v-overlay>
             </v-col>
             <v-col cols="1">
               <v-btn @click="openModalForDelete(message.id)" class="float-right">削除</v-btn>
-              <v-overlay :value="overlay">
+              <v-overlay :value="deleteOverlay">
                 <p>本当に記事を削除しますか？</p>
-                <v-btn @click="deleteArticles(article.id)">削除</v-btn>
+                <v-btn @click="deleteArticles(articleId)">削除</v-btn>
+                <v-btn @click="closeModalForDelete">閉じる</v-btn>
               </v-overlay>
             </v-col>
           </v-row>
@@ -62,134 +63,98 @@ const db = firebase.firestore();
 export default {
   data() {
     return {
-      image_update: null,
-      name: '',
-      place: '',
-      image: null,
-      date: '',
-      messages: [],
-      article: {
-        id: ''
-      },
-      messageComment: '',
-      overlay: false,
-      overlay2: false,
+      name: this.$store.state.project.name,
+      place: this.$store.state.project.place,
+      date: this.$store.state.project.date,
+      messageComment: this.$store.state.project.messageComment,
     }
   },
+  computed: {
+    messages() {
+      return this.$store.getters['project/messages']
+    },
+    image: {
+      get() {
+        return this.$store.getters['project/image']
+      },
+      set(value) {
+        this.$store.commit('project/setImage', value)
+      }
+    },
+    deleteOverlay() {
+      return this.$store.getters['project/deleteOverlay']
+    },
+    articleId() {
+      return this.$store.getters['project/articleId']
+    },
+    editOverlay() {
+      return this.$store.getters['project/editOverlay']
+    },
+  },
   mounted() {
-    this.getMessage();
+    this.$store.dispatch('project/getMessage');
   },
   methods: {
     btnUploadChange(ev) {
-      const file = ev.target.files[0];
-      const storage = firebase.storage();
-      const storageRef = storage.ref('images');
-      const uploadRef = storageRef.child(file.name);
-      uploadRef.put(file)
-        .then((snapshot) => {
-          console.log('Uploaded a blob or file');
-          this.getUrl(ev)
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+      this.$store.dispatch('project/btnUploadChange', {
+        ev
+      });
     },
     getUrl(ev) {
-      const file = ev.target.files[0];
-      const storage = firebase.storage();
-      const storageRef = storage.ref('images');
-      const uploadRef = storageRef.child(file.name);
-      uploadRef.getDownloadURL()
-        .then((url) => {
-          console.log('imgSample' + url);
-          this.image = url;
-        })
+      this.$store.dispatch('project/getUrl', {
+        ev
+      });
     },
     getMessage() {
-      const db = firebase.firestore();
-      db.collection('projects')
-        .orderBy('date', 'desc')
-        .get()
-        .then((querySnapshot) => {
-          const messages = [];
-          querySnapshot.forEach((doc) => {
-            messages.push({
-              name: doc.data().name,
-              place: doc.data().place,
-              messageComment: doc.data().comment,
-              image: doc.data().image,
-              id: doc.id,
-              date: doc.data().date,
-            })
-            console.log(doc.data());
-            console.log(doc.id);
-          })
-          this.messages = messages;
-      })
+      this.$store.dispatch('project/getMessage');
     },
     addMessage() {
-      const db = firebase.firestore();
-      db.collection('projects').add({
+      this.$store.dispatch('project/addMessage', {
         name: this.name,
         place: this.place,
         comment: this.messageComment,
         image: this.image,
         date: new Date().toLocaleString()
-      })
-      console.log(this.messageComment);
+      });
+      this.name = '';
+      this.place = '';
+      this.messageComment = '';
+      this.date = '';
+    },
+    openModalForDelete(id) {
+      this.$store.commit('project/openModalForDelete', {
+        id
+      });
+    },
+    closeModalForDelete() {
+      this.$store.commit('project/closeModalForDelete');
+    },
+    deleteArticles(id) {
+      console.log(id);
+      this.$store.dispatch('project/deleteArticles', {
+        id
+      });
+    },
+    openModalForEdit(id) {
+      this.$store.commit('project/openModalForEdit', {
+        id
+      });
+    },
+    closeModalForEdit() {
+      this.$store.commit('project/closeModalForEdit');
+    },
+    editArticles(id) {
+      this.$store.dispatch('project/editArticles', {
+        id,
+        name: this.name,
+        place: this.place,
+        comment: this.messageComment,
+        image: this.image,
+      });
       this.name = ''
       this.place = ''
       this.messageComment = ''
       this.image = ''
-      this.date = ''
-      this.getMessage();
-    },
-    openModalForDelete(id) {
-      console.log(id);
-      this.overlay = true;
-      this.article.id = id;
-    },
-    closeModalForDelete() {
-      this.overlay = false;
-    },
-    deleteArticles(id) {
-      console.log(id)
-      const db = firebase.firestore();
-      db.collection('projects')
-        .doc(id)
-        .delete()
-        .then(() => {
-          console.log('deleted!!');
-          this.getMessage();
-          this.closeModalForDelete()
-        })
-    },
-    openModalForEdit(id) {
-      console.log(id);
-      this.overlay2 = true;
-      this.article.id = id;
-    },
-    editArticles(id) {
-      console.log(id)
-      const db = firebase.firestore();
-      db.collection('projects')
-        .doc(id)
-        .update({
-          name: this.name,
-          place: this.place,
-          comment: this.messageComment,
-          image: this.image,
-        })
-        .then(() => {
-          console.log('updated!!');
-          this.name = ''
-          this.place = ''
-          this.messageComment = ''
-          this.image = ''
-          console.log(this.image)
-          this.getMessage();
-          console.log(this.image)
-        })
     },
   }
 };

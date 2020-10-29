@@ -44,42 +44,15 @@
         height="200"
         :src="image_src"
       ></v-img>
-      <p>僕たちにできることを。人もゴミを多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
-      <!-- <v-expansion-panels popout> -->
-        <v-expansion-panel v-for="(message, i) in messages" :key="i" hide-actions>
-          <v-expansion-panel-header>
-            <v-row align="center" class="spacer" no-gutters>
-              <v-col cols="4" sm="2" md="1">
-                <v-avatar size="36px">
-                  <img v-if="message.avatar" :src="image_src" alt="">
-                  <v-icon v-else :color="message.color" v-text="message.icon"></v-icon>
-                </v-avatar>
-              </v-col>
-
-              <v-col class="hidden-xs-only" sm="5" md="3">
-                <strong v-html="message.name"></strong>
-                <span v-if="message.total" class="grey--text">
-                  &nbsp;({{ message.total }})
-                </span>
-              </v-col>
-
-              <v-col class="text-no-wrap" cols="5" sm="3">
-                <v-chip v-if="message.new" :color="`${message.color} lighten-4`" class="ml-0 mr-2 black--text" label small>
-                  {{ message.new }} new
-                </v-chip>
-                <strong v-html="message.title"></strong>
-              </v-col>
-
-            </v-row>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <v-divider></v-divider>
-            <v-card-text></v-card-text>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      <!-- </v-expansion-panels> -->
-      <v-btn rounded class="orange" dark x-large>参加する</v-btn>
+      <p class="ma-2">僕たちにできることを。人もゴミを多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
+      <v-btn class="float-right ma-5" rounded color="orange" dark x-large>参加する</v-btn>
     </v-card>
+    <v-container clss="h-full flex flex-col ml-6">
+      <v-card class="border border-gray-900 rounded mb-4">
+        <v-textarea background-color="grey lighten-2" class="w-full pt-4 pl-8 outline-none" placeholder="XXXXへのメッセージ"></v-textarea>
+        <v-btn class="cyan text-sm white--text font-bold py-1 px-2 rouded">送信</v-btn>
+      </v-card>
+    </v-container>
     <v-card color="#E0F7FA" class="rounded-xl pa-5 mb-10" rounded>
       <h2 class="mx-10">クリーナーを応援しよう</h2>
       <v-row>
