@@ -53,16 +53,16 @@
         <v-container clss="h-full flex flex-col ml-6">
           <v-card class="h-full flex flex-col ml-6">
             <p>メッセージ一覧</p>
-            <template v-for="comment in comments">
-              <v-divider :key="comment.id" />
+            <template v-for="(comment, index) in comments">
+              <v-divider :key="index" v-if="index >= 1" />
                 <v-row class="flex-grow overflow-y-scroll mb-1" :key="comment.id">
-                  <v-col cols="3">
+                  <v-col cols="2">
                     <v-card-title class="cyan--text text--darken-1">{{ message.name }}</v-card-title>
                   </v-col>
-                  <v-col cols="3">
+                  <v-col cols="1">
                     <p>{{ message.place }}</p>
                   </v-col>
-                  <v-col cols="3">
+                  <v-col cols="6">
                     <p>{{ comment.comment }}</p>
                   </v-col>
                   <v-col cols="3">
