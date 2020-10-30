@@ -2,38 +2,9 @@
   <v-app>
     <v-system-bar height="30" color="#00ACC1" dark class="white--text  font-weight-bold justify-center"><span>まずは気軽に新規登録から！綺麗な世界は自分たちの手で創り上げていこう！</span></v-system-bar>
     <v-container fluid>
-      <v-row v-for="currentUser in currentUser" :key="currentUser.id">
+      <v-row>
         <v-col cols="3">
-          <v-card height="350px" class="ml-7">
-            <v-navigation-drawer absolute permanent>
-              <template v-slot:prepend>
-                <v-list-item two-line>
-                  <v-list-item-avatar>
-                    <img :src="image_src">
-                  </v-list-item-avatar>
-
-                  <v-list-item-content>
-                    <v-list-item-title class="cyan--text text--darken-1 font-weight-bold text-h5">{{ currentUser.displayName }}</v-list-item-title>
-                    <v-list-item-subtitle>ログイン中</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </template>
-
-              <v-divider></v-divider>
-
-              <v-list dense>
-                <v-list-item v-for="item  in items" :key="item.title" :to="item.link">
-                  <v-list-item-icon>
-                    <v-icon>{{ item.icon }}</v-icon>
-                  </v-list-item-icon>
-
-                  <v-list-item-content>
-                    <v-list-item-title>{{ item.title }}</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-navigation-drawer>
-          </v-card>
+          <Sidebar />
         </v-col>
 
         <v-col cols="9">
@@ -126,159 +97,62 @@
             </v-container>
             <nuxt-link class="float-right grey--text text--darken-1 font-weight-bold mb-10 text-decoration-none mr-5" to="/list/cleaner">もっとみる</nuxt-link>
             <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/list/project">プロジェクトをみる</nuxt-link>
-            <v-card class="mb-5">
-              <v-row>
-                <v-col cols="3">
-                  <v-avatar tile size="130" color="cyan" :src="image_src" class="ml-5">
-                      <img :src="image_src" alt="">
-                    </v-avatar>
-
-                </v-col>
-                <v-col cols="9">
-                  <v-col>
-                    <v-avatar class="profile" color="grey" size="60">
-                      <v-img :src="image_src"></v-img>
-                    </v-avatar>
-                    <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</span>
-                    <p class="my-5 font-weight-bold">会社の近くの神社です。</p>
-                    <span class="grey--text float-right">10分前</span>
-                  </v-col>
-                </v-col>
-              </v-row>
-            </v-card>
-            <v-card class="mb-5">
-              <v-row>
-                <v-col cols="3">
-                  <v-avatar tile size="130" color="cyan" :src="image_src" class="ml-5">
-                      <img :src="image_src" alt="">
-                    </v-avatar>
-
-                </v-col>
-                <v-col cols="9">
-                  <v-col>
-                    <v-avatar class="profile" color="grey" size="60">
-                      <v-img :src="image_src"></v-img>
-                    </v-avatar>
-                    <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</span>
-                    <p class="my-5 font-weight-bold">会社の近くの神社です。</p>
-                    <span class="grey--text float-right">10分前</span>
-                  </v-col>
-                </v-col>
-              </v-row>
-            </v-card>
-            <v-card class="mb-5">
-              <v-row>
-                <v-col cols="3">
-                  <v-avatar tile size="130" color="cyan" :src="image_src" class="ml-5">
-                      <img :src="image_src" alt="">
-                    </v-avatar>
-
-                </v-col>
-                <v-col cols="9">
-                  <v-col>
-                    <v-avatar class="profile" color="grey" size="60">
-                      <v-img :src="image_src"></v-img>
-                    </v-avatar>
-                    <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</span>
-                    <p class="my-5 font-weight-bold">会社の近くの神社です。</p>
-                    <span class="grey--text float-right">10分前</span>
-                  </v-col>
-                </v-col>
-              </v-row>
-            </v-card>
-            <v-card class="mb-5">
-              <v-row>
-                <v-col cols="3">
-                  <v-avatar tile size="130" color="cyan" :src="image_src" class="ml-5">
-                      <img :src="image_src" alt="">
-                    </v-avatar>
-
-                </v-col>
-                <v-col cols="9">
-                  <v-col>
-                    <v-avatar class="profile" color="grey" size="60">
-                      <v-img :src="image_src"></v-img>
-                    </v-avatar>
-                    <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">John</span>
-                    <p class="my-5 font-weight-bold">会社の近くの神社です。</p>
-                    <span class="grey--text float-right">10分前</span>
-                  </v-col>
-                </v-col>
-              </v-row>
-            </v-card>
+            <v-container>
+              <v-card class="mb-5">
+                <template v-for="(article, index) in articles">
+                  <v-divider :key="index" />
+                  <v-hover v-slot="{ hover }">
+                    <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(article.id)">
+                      <v-row  :key="article.id">
+                        <v-col cols="3">
+                          <v-avatar tile size="130" class="ml-5">
+                            <v-img :src="article.image"></v-img>
+                          </v-avatar>
+                        </v-col>
+                        <v-col cols="9">
+                          <v-col>
+                            <v-avatar class="profile" color="grey" size="60">
+                              <v-img :src="article.image"></v-img>
+                            </v-avatar>
+                            <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ article.name }}</span>
+                            <p class="my-5 font-weight-bold">{{ article.messageComment }}</p>
+                            <span class="grey--text float-right">{{article.date }}</span>
+                          </v-col>
+                        </v-col>
+                      </v-row>
+                    </v-card>
+                  </v-hover>
+                </template>
+              </v-card>
+            </v-container>
             <span class="float-right font-weight-bold">もっとみる</span>
             <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/list/event">イベントをみる</nuxt-link>
-            <v-container to="/list/event">
-              <v-row>
-                <v-col cols="6">
-                  <v-card class="mx-auto" outlined>
-                    <v-list-item three-line>
-                      <v-list-item-content>
-                        <div class="overline mb-1">10月18日</div>
-                        <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;">東京を綺麗にしましょう。</div>
-                        <p class="mb-5">僕たちにできることを。人もゴミも多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
-                        <p class="font-weight-bold">日時： 10月3日  9:00~12:00</p>
-                        <p class="font-weight-bold">場所： 東京都渋谷区</p>
-                      </v-list-item-content>
-
-                      <v-avatar tile size="150" color="cyan" :src="image_src" class="ml-5">
-                        <img :src="image_src" alt="">
-                      </v-avatar>
-                    </v-list-item>
+            <v-container>
+              <template v-for="(article, index) in articles">
+                <v-divider :key="index" />
+                <v-hover v-slot="{ hover }">
+                  <v-card :class="{ 'on-hover': hover }">
+                    <v-row :key="article.id" >
+                      <v-col cols="9">
+                        <v-col>
+                          <v-avatar class="profile" color="grey" size="60">
+                            <v-img :src="article.image"></v-img>
+                          </v-avatar>
+                          <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ article.name }}</span>
+                          <p class="my-5 font-weight-bold">{{ article.messageComment }}</p>
+                          <span class="grey--text float-right">日時： {{ article.date }}</span>
+                          <span class="grey--text float-right">場所： {{ article.place}}</span>
+                        </v-col>
+                      </v-col>
+                      <v-col cols="3">
+                        <v-avatar tile size="130" class="ml-5">
+                          <v-img :src="article.image"></v-img>
+                        </v-avatar>
+                      </v-col>
+                    </v-row>
                   </v-card>
-                </v-col>
-                <v-col cols="6">
-                  <v-card class="mx-auto" outlined>
-                    <v-list-item three-line>
-                      <v-list-item-content>
-                        <div class="overline mb-1">10月18日</div>
-                        <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;">東京を綺麗にしましょう。</div>
-                        <p class="mb-5">僕たちにできることを。人もゴミも多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
-                        <p class="font-weight-bold">日時： 10月3日  9:00~12:00</p>
-                        <p class="font-weight-bold">場所： 東京都渋谷区</p>
-                      </v-list-item-content>
-
-                      <v-avatar tile size="150" color="cyan" :src="image_src" class="ml-5">
-                        <img :src="image_src">
-                      </v-avatar>
-                    </v-list-item>
-                  </v-card>
-                </v-col>
-                <v-col cols="6">
-                  <v-card class="mx-auto" outlined>
-                    <v-list-item three-line>
-                      <v-list-item-content>
-                        <div class="overline mb-1">10月18日</div>
-                        <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;">東京を綺麗にしましょう。</div>
-                        <p class="mb-5">僕たちにできることを。人もゴミも多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
-                        <p class="font-weight-bold">日時： 10月3日  9:00~12:00</p>
-                        <p class="font-weight-bold">場所： 東京都渋谷区</p>
-                      </v-list-item-content>
-
-                      <v-avatar tile size="150" color="cyan" :src="image_src" class="ml-5">
-                        <img :src="image_src" alt="">
-                      </v-avatar>
-                    </v-list-item>
-                  </v-card>
-                </v-col>
-                <v-col cols="6">
-                  <v-card class="mx-auto" outlined>
-                    <v-list-item three-line>
-                      <v-list-item-content>
-                        <div class="overline mb-1">10月18日</div>
-                        <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;">東京を綺麗にしましょう。</div>
-                        <p class="mb-5">僕たちにできることを。人もゴミも多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
-                        <p class="font-weight-bold">日時： 10月3日  9:00~12:00</p>
-                        <p class="font-weight-bold">場所： 東京都渋谷区</p>
-                      </v-list-item-content>
-
-                      <v-avatar tile size="150" color="cyan" :src="image_src" class="ml-5">
-                        <img :src="image_src" alt="">
-                      </v-avatar>
-                    </v-list-item>
-                  </v-card>
-                </v-col>
-              </v-row>
+                </v-hover>
+              </template>
             </v-container>
             <span class="float-right font-weight-bold">もっとみる</span>
           </v-main>
@@ -290,47 +164,23 @@
 
 <script>
 import firebase from 'firebase';
+import Sidebar from '@/components/Sidebar';
 
 export default {
   name: 'dashboard',
   layout: 'loggedIn',
+  components: {
+    Sidebar
+  },
   data() {
     return {
+      name: this.$store.state.project.name,
+      place: this.$store.state.project.place,
+      date: this.$store.state.project.date,
+      messageComment: this.$store.state.project.messageComment,
       users: [],
       image_src: require('@/assets/img/everyone.jpg'),
       item: 0,
-      items: [
-        {
-          title: 'マイページ',
-          icon: 'mdi-folder',
-          lists: ['Quick Start', 'Pre-made layouts'],
-          link: '/text'
-        },
-        {
-          title: 'プロジェクトを投稿',
-          icon: 'mdi-account-multiple'
-        },
-        {
-          title: 'プロジェクトを編集',
-          icon: 'mdi-star',
-          lists: ['Colors', 'Content', 'Display']
-        },
-        {
-          title: 'イベントを投稿',
-          icon: 'mdi-history',
-          lists: ['API explorer', 'Alerts']
-        },
-        { title: 'イベントを編集', icon: 'mdi-upload' },
-        { title: 'ログアウト', icon: 'mdi-cloud-upload' },
-      ],
-      messages: [
-        {
-          avatar: 'image_src',
-          name: 'John Leider',
-          title: 'Welcome to Vuetify!',
-          excerpt: 'Thank you for joining our comminity...',
-        }
-      ],
       dialog: false
     }
   },
@@ -340,14 +190,42 @@ export default {
     },
     loginUsers() {
       return this.$store.getters['user/loginUsers']
-    }
+    },
+    articles() {
+      return this.$store.getters['project/articles']
+    },
+    image: {
+      get() {
+        return this.$store.getters['project/image']
+      },
+      set(value) {
+        this.$store.commit('project/setImage', value)
+      }
+    },
   },
   mounted() {
     this.$store.dispatch('user/logInUserDisplay');
+    this.$store.dispatch('project/getMessage');
+  },
+  methods: {
+    getPersonalId(id) {
+      this.$store.dispatch('project/getPersonalData', {
+        id
+      })
+      console.log(id)
+    }
   }
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.v-card.on-hover {
+  background-color: #FAFAFA;
+  // opacity: 0.6;
+ }
 </style>

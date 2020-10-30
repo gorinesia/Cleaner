@@ -57,49 +57,58 @@
     <h2 style="text-align: center; color: #00ACC1;">プロジェクトをみる</h2>
     <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
     あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
-    <v-card class="mb-5 container">
-      <v-row v-for="article in articles" :key="article.id">
-        <v-col cols="3">
-          <v-avatar tile size="130" color="cyan" :src="image_src" class="ml-5">
-            <img :src="image_src" alt="">
-          </v-avatar>
-        </v-col>
-        <v-col cols="9">
-          <v-col>
-            <v-avatar class="profile" color="grey" size="60">
-              <v-img :src="image_src"></v-img>
-            </v-avatar>
-            <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ article.name }}</span>
-            <p class="my-5 font-weight-bold">{{ article.messageComment }}</p>
-            <span class="grey--text float-right">{{article.date }}</span>
-          </v-col>
-        </v-col>
-      </v-row>
-    </v-card>
+    <v-container>
+      <v-card class="mb-5">
+        <template v-for="(article, index) in articles">
+          <v-divider :key="index" />
+          <v-row  :key="article.id">
+            <v-col cols="3">
+              <v-avatar tile size="130" class="ml-5">
+                <v-img :src="article.image"></v-img>
+              </v-avatar>
+            </v-col>
+            <v-col cols="9">
+              <v-col>
+                <v-avatar class="profile" color="grey" size="60">
+                  <v-img :src="article.image"></v-img>
+                </v-avatar>
+                <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ article.name }}</span>
+                <p class="my-5 font-weight-bold">{{ article.messageComment }}</p>
+                <span class="grey--text float-right">{{article.date }}</span>
+              </v-col>
+            </v-col>
+          </v-row>
+        </template>
+      </v-card>
+    </v-container>
     <h2 style="text-align: center; color: #00ACC1;" class="my-5">イベントをみる</h2>
     <p style="text-align: center;">イベントとは、みんなでゴミ拾いをするための企画のことです。<br>
     イベントを立ち上げて、みんなでゴミ拾いをしてみませんか？</p>
     <v-container>
       <!-- <nuxt-link to="/list/event"> -->
-        <v-row>
-          <v-col cols="4">
-            <v-card class="mx-auto" outlined>
-              <v-list-item three-line>
-                <v-list-item-content>
-                  <div class="overline mb-1">{{  }}</div>
-                  <div class="headline mb-3 font-weight-bold" color="#00ACC1">{{  }}</div>
-                  <p class="mb-5">僕たちにできることを。人もゴミも多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
-                  <p class="font-weight-bold">日時： 10月3日  9:00~12:00</p>
-                  <p class="font-weight-bold">場所： 東京都渋谷区</p>
-                </v-list-item-content>
-
-                <v-avatar tile size="150" color="cyan" :src="image_src" class="ml-5">
-                  <img :src="image_src">
+      <v-card>
+        <template v-for="(article, index) in articles">
+          <v-divider :key="index" />
+          <v-row  :key="article.id">
+            <v-col cols="9">
+              <v-col>
+                <v-avatar class="profile" color="grey" size="60">
+                  <v-img :src="article.image"></v-img>
                 </v-avatar>
-              </v-list-item>
-            </v-card>
-          </v-col>
-        </v-row>
+                <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ article.name }}</span>
+                <p class="my-5 font-weight-bold">{{ article.messageComment }}</p>
+                <span class="grey--text float-right">日時： {{ article.date }}</span>
+                <span class="grey--text float-right">場所： {{ article.place}}</span>
+              </v-col>
+            </v-col>
+            <v-col cols="3">
+              <v-avatar tile size="130" class="ml-5">
+                <v-img :src="article.image"></v-img>
+              </v-avatar>
+            </v-col>
+          </v-row>
+        </template>
+      </v-card>
       <!-- </nuxt-link> -->
     </v-container>
   </v-app>

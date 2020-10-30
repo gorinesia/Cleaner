@@ -1,10 +1,7 @@
 <template>
-  <v-app class="mx-10" style="color: navy">
-    <div  @click="$router.push('/')">Cleaner</div>
-    <div @click="$router.push('/list/cleaner')">クリーナーをみる</div>
-    <div @click="$router.push('/personal/profile')">John</div>
-    <v-card outlined class="cyan mb-10">
-      <v-row>
+  <v-app class="mx-10">
+    <v-card outlined class="cyan mb-5">
+      <v-row v-for="personalData in personalDatas" :key="personalData.id">
         <v-col align-self="start"  cols="2">
           <v-avatar class="profile" color="grey" size="100">
             <v-img :src="image_src"></v-img>
@@ -14,7 +11,7 @@
           <v-list-item color="rgba(0, 0, 0, .4)">
             <v-list-item-content>
               <v-list-item-title class="font-weight-bold title text-h4" dark>
-                John
+                {{ personalData.name }}
               </v-list-item-title>
               <v-list-item-subtitle class="mb-5">Network Engineer</v-list-item-subtitle>
               <p>世界が綺麗になればいいなと思って日々活動しています。よろしくお願いいたします。</p>
@@ -22,16 +19,16 @@
           </v-list-item>
         </v-col>
       </v-row>
-      <v-btn class="float-right" rounded color="#0D47A1" dark x-large>サポートする</v-btn>
     </v-card>
+    <v-btn class="font-weight-bold float-right" rounded color="#0D47A1" dark large>サポートする</v-btn>
     <h2 class="mb-5">Johnさんのプロジェクト</h2>
     <v-card align="center" class="mb-10">
-      <v-row>
+      <v-row v-for="personalData in personalDatas" :key="personalData.id">
         <v-col cols="2">
-          <p>10月12日</p>
+          <p>{{ personalData.date}}</p>
         </v-col>
         <v-col class="font-weight-bold text-h5" cols="6">
-          <p>会社の近くの神社です。</p>
+          <p>{{ personalData.place }}</p>
         </v-col>
       </v-row>
       <v-img
@@ -39,37 +36,6 @@
         :src="image_src"
       ></v-img>
       <p>今日はいつも通る会社近くの神社のゴミ拾いをしました。あまりゴミ自体は多くなかったですが、綺麗になったので気持ちいいです。</p>
-        <v-expansion-panel v-for="(message, i) in messages" :key="i" hide-actions>
-          <v-expansion-panel-header>
-            <v-row align="center" class="spacer" no-gutters>
-              <v-col cols="4" sm="2" md="1">
-                <v-avatar size="36px">
-                  <img v-if="message.avatar" :src="image_src" alt="">
-                  <v-icon v-else :color="message.color" v-text="message.icon"></v-icon>
-                </v-avatar>
-              </v-col>
-
-              <v-col class="hidden-xs-only" sm="5" md="3">
-                <strong v-html="message.name"></strong>
-                <span v-if="message.total" class="grey--text">
-                  &nbsp;({{ message.total }})
-                </span>
-              </v-col>
-
-              <v-col class="text-no-wrap" cols="5" sm="3">
-                <v-chip v-if="message.new" :color="`${message.color} lighten-4`" class="ml-0 mr-2 black--text" label small>
-                  {{ message.new }} new
-                </v-chip>
-                <strong v-html="message.title"></strong>
-              </v-col>
-
-            </v-row>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <v-divider></v-divider>
-            <v-card-text></v-card-text>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
     </v-card>
     <v-card color="#E0F7FA" class="rounded-xl pa-5 mb-10" rounded>
       <h2 class="mx-10">クリーナーを応援しよう</h2>
@@ -92,6 +58,8 @@
 </template>
 
 <script>
+import firebase from 'firebase';
+
 export default {
   data() {
     return {
@@ -104,7 +72,12 @@ export default {
         }
       ]
     }
-  }
+  },
+  computed: {
+    personalDatas() {
+      return this.$store.getters['project/personalDatas']
+    }
+  },
 }
 </script>
 
