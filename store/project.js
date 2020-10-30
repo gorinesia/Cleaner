@@ -9,7 +9,8 @@ export const state = () => ({
   articleId: '',
   messageComment: '',
   deleteOverlay: false,
-  editOverlay: false
+  editOverlay: false,
+  personalDatas: []
 })
 
 export const getters = {
@@ -17,7 +18,8 @@ export const getters = {
   image: state => state.image,
   deleteOverlay: state => state.deleteOverlay,
   articleId: state => state.articleId,
-  editOverlay: state => state.editOverlay
+  editOverlay: state => state.editOverlay,
+  personalDatas: state=> state.personalDatas
 }
 
 export const mutations = {
@@ -44,6 +46,10 @@ export const mutations = {
   closeModalForEdit: (state) => {
     state.editOverlay = false;
   },
+  setPersonalDatas: (state, personalDetails) => {
+    state.personalDatas = personalDetails
+    console.log(state.personalDatas);
+  }
 }
 
 export const actions = {
@@ -126,4 +132,24 @@ export const actions = {
         context.dispatch('getMessage');
       })
   },
+  getPersonalData({commit}, payload) {
+    const db = firebase.firestore();
+    const personalDetails = [];
+    db.collection('projects')
+      .doc(payload.id)
+      .get()
+      .then((doc) => {
+        personalDetails.push({
+          name: doc.data().name,
+          place: doc.data().place,
+          messageComment: doc.data().comment,
+          image: doc.data().image,
+          id: doc.id,
+          date: doc.data().date,
+        })
+          console.log(doc.data())
+          this.$router.push('personal/personalproject');
+          commit('setPersonalDatas', personalDetails);
+      })
+  }
 }

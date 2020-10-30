@@ -68,7 +68,7 @@
             <v-container>
               <v-row v-for="loginUser in loginUsers" :key="loginUser.id">
                 <v-col md="6">
-                  <v-card class="mb-5" max-height="100px">
+                  <v-card class="mb-5">
                     <v-row>
                       <v-col cols="2">
                         <v-col align-self="start"  cols="12">
@@ -208,8 +208,11 @@ export default {
     this.$store.dispatch('project/getMessage');
   },
   methods: {
-    getPersonalId() {
-      
+    getPersonalId(id) {
+      this.$store.dispatch('project/getPersonalData', {
+        id
+      })
+      console.log(id)
     }
   }
 }

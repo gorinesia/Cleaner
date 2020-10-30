@@ -67,7 +67,7 @@ export const actions = {
             displayName: doc.data().displayName
           })
           console.log(doc.data().displayName)
-          const allLoggedInUsers = allLogUsers.filter((displayName) => {
+          const allLoggedInUsers = allLogUsers.filter(() => {
             return  doc.data().displayName
           })
           commit('setAllUsers', allLoggedInUsers);
