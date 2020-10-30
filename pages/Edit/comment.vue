@@ -39,7 +39,7 @@
             </v-col>
           </v-row>
         </v-card>
-        <v-container clss="h-full flex flex-col ml-6">
+        <v-container class="h-full flex flex-col ml-6">
           <v-card class="h-full flex flex-col ml-6">
             <p>メッセージ一覧</p>
             <template v-for="(comment, index) in comments">
