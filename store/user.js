@@ -1,16 +1,21 @@
 import firebase from 'firebase';
 
 export const state = () => ({
+  allUsers: [],
   currentUser: [],
   loginUsers: []
 })
 
 export const getters = {
+  allUsers: state => state.allUsers,
   currentUser: state => state.currentUser,
   loginUsers: state => state.loginUsers,
 }
 
 export const mutations = {
+  setAllUsers: (state, allLoggedInUsers) => {
+    state.allUsers = allLoggedInUsers;
+  },
   setCurrentUser: (state, currentLoginUser) => {
     state.currentUser = currentLoginUser;
   },
@@ -52,21 +57,38 @@ export const actions = {
         console.log(error.message);
       })
   },
-  logInUserDisplay({commit}) {
-    const getUser = firebase.auth().currentUser;
-    const db =firebase.firestore();
+  openTheApplication({commit}) {
+    const db = firebase.firestore();
     db.collection('users')
       .onSnapshot((querySnapshot) => {
-        const allUsers = [];
+        const allLogUsers = [];
         querySnapshot.forEach((doc) => {
-          allUsers.push({
+          allLogUsers.push({
             displayName: doc.data().displayName
           })
           console.log(doc.data().displayName)
-          const otherLoginUsers = allUsers.filter((otherUsers) => {
+          const allLoggedInUsers = allLogUsers.filter((displayName) => {
+            return  doc.data().displayName
+          })
+          commit('setAllUsers', allLoggedInUsers);
+        })
+      })
+  },
+  logInUserDisplay({commit}) {
+    const getUser = firebase.auth().currentUser;
+    const db = firebase.firestore();
+    db.collection('users')
+      .onSnapshot((querySnapshot) => {
+        const allLoginUsers = [];
+        querySnapshot.forEach((doc) => {
+          allLoginUsers.push({
+            displayName: doc.data().displayName
+          })
+          console.log(doc.data().displayName)
+          const otherLoginUsers = allLoginUsers.filter((otherUsers) => {
             return otherUsers.displayName != getUser.displayName;
           })
-          const currentLoginUser = allUsers.filter((currentUser) => {
+          const currentLoginUser = allLoginUsers.filter((currentUser) => {
             return currentUser.displayName === getUser.displayName;
           })
           commit('setCurrentUser', currentLoginUser);
