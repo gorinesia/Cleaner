@@ -1,16 +1,5 @@
 <template>
   <v-app>
-    <!-- <v-container>
-      <label class="postImage-appendBtn"></label>
-      <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
-      <label>名前</label>
-      <v-text-field v-model="name" class="white"></v-text-field>
-      <label>場所</label>
-      <v-text-field v-model="place" class="white"></v-text-field>
-      <v-textarea v-model="messageComment" class="white" placeholder="コメントを入力"></v-textarea>
-      <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
-    </v-container> -->
-    <!-- <v-divider inset></v-divider> -->
     <v-container>
       <v-row v-for="message in messages" :key="message.id" class="ma-1">
         <v-card width="100%">
@@ -109,31 +98,6 @@ export default {
     this.getComment();
   },
   methods: {
-    btnUploadChange(ev) {
-      const file = ev.target.files[0];
-      const storage = firebase.storage();
-      const storageRef = storage.ref('images');
-      const uploadRef = storageRef.child(file.name);
-      uploadRef.put(file)
-        .then((snapshot) => {
-          console.log('Uploaded a blob or file');
-          this.getUrl(ev)
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-    },
-    getUrl(ev) {
-      const file = ev.target.files[0];
-      const storage = firebase.storage();
-      const storageRef = storage.ref('images');
-      const uploadRef = storageRef.child(file.name);
-      uploadRef.getDownloadURL()
-        .then((url) => {
-          console.log('imgSample' + url);
-          this.image = url;
-        })
-    },
     getMessage() {
       const db = firebase.firestore();
       db.collection('projects')

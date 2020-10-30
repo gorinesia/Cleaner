@@ -24,24 +24,24 @@
     <p style="text-align: center;">クリーナーとは、お掃除屋さん(＝ゴミを拾う人)のことです。<br>
     あなたも地球を綺麗にするための清掃員になりませんか？</p>
     <v-container>
-      <v-row>
-        <v-col cols="4" v-for="allUser in allUsers" :key="allUser.id">
+      <v-row v-for="allUser in allUsers" :key="allUser.id">
+        <v-col>
           <v-card class="mb-5">
             <v-row>
-              <v-col cols="2">
+              <v-col cols="3">
                 <v-col align-self="start"  cols="12">
                   <v-avatar class="profile" color="grey" size="60">
                     <v-img :src="image_src"></v-img>
                   </v-avatar>
                 </v-col>
               </v-col>
-              <v-col cols="10">
+              <v-col cols="9">
                 <v-list three-line>
                   <v-list-item-content>
-                    <v-list-item-subtitle class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ allUser.name }}</v-list-item-subtitle>
-                    <div class="overline mb-1">{{ allUser.date }}</div>
-                    <v-list-item-subtitle class="overline mb-1">{{ allUser.place }}</v-list-item-subtitle>
-                    <p class="mb-5 font-weight-bold">{{ allUser.comment }}</p>
+                    <v-list-item-title class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ allUser.displayName }}</v-list-item-title>
+                    <div class="overline mb-1">{{ }}</div>
+                    <v-list-item-subtitle class="overline mb-1">{{ }}</v-list-item-subtitle>
+                    <p class="mb-5 font-weight-bold">{{ }}</p>
                   </v-list-item-content>
 
                   <v-list-item-avatar tile size="100" color="cyan" :src="image_src" class="ml-5">
@@ -58,7 +58,7 @@
     <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
     あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
     <v-card class="mb-5 container">
-      <v-row v-for="allUser in allUsers" :key="allUser.id">
+      <v-row v-for="article in articles" :key="article.id">
         <v-col cols="3">
           <v-avatar tile size="130" color="cyan" :src="image_src" class="ml-5">
             <img :src="image_src" alt="">
@@ -69,9 +69,9 @@
             <v-avatar class="profile" color="grey" size="60">
               <v-img :src="image_src"></v-img>
             </v-avatar>
-            <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ allUser.name }}</span>
-            <p class="my-5 font-weight-bold">会社の近くの神社です。</p>
-            <span class="grey--text float-right">{{ allUser.date }}</span>
+            <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ article.name }}</span>
+            <p class="my-5 font-weight-bold">{{ article.messageComment }}</p>
+            <span class="grey--text float-right">{{article.date }}</span>
           </v-col>
         </v-col>
       </v-row>
@@ -80,57 +80,27 @@
     <p style="text-align: center;">イベントとは、みんなでゴミ拾いをするための企画のことです。<br>
     イベントを立ち上げて、みんなでゴミ拾いをしてみませんか？</p>
     <v-container>
-      <nuxt-link to="/list/event">
+      <!-- <nuxt-link to="/list/event"> -->
         <v-row>
-          <v-col cols="4" v-for="allUser in allUsers" :key="allUser.id">
+          <v-col cols="4">
             <v-card class="mx-auto" outlined>
               <v-list-item three-line>
                 <v-list-item-content>
-                  <div class="overline mb-1">{{ allUser.place }}</div>
-                  <div class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ allUser.comment }}</div>
+                  <div class="overline mb-1">{{  }}</div>
+                  <div class="headline mb-3 font-weight-bold" color="#00ACC1">{{  }}</div>
                   <p class="mb-5">僕たちにできることを。人もゴミも多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
                   <p class="font-weight-bold">日時： 10月3日  9:00~12:00</p>
                   <p class="font-weight-bold">場所： 東京都渋谷区</p>
                 </v-list-item-content>
 
                 <v-avatar tile size="150" color="cyan" :src="image_src" class="ml-5">
-                  <img :src="image_src" alt="">
+                  <img :src="image_src">
                 </v-avatar>
               </v-list-item>
-
-              <v-container fluid>
-                <v-row justify="center">
-                  <v-expansion-panels popout>
-                    <v-expansion-panel v-for="(message, i) in messages" :key="i" hide-actions>
-                      <v-expansion-panel-header>
-                        <v-row align="center" class="spacer" no-gutters>
-                          <v-col cols="4" sm="2" md="1">
-                            <v-avatar size="36px">
-                              <img v-if="message.avatar" :src="image_src" alt="">
-                              <v-icon v-else :color="message.color" v-text="message.icon"></v-icon>
-                            </v-avatar>
-                          </v-col>
-
-                          <v-col class="hidden-xs-only" sm="5" md="3">
-                            <strong v-html="message.name"></strong>
-                            <span v-if="message.total" class="grey--text">
-                              &nbsp;({{ message.total }})
-                            </span>
-                          </v-col>
-                        </v-row>
-                      </v-expansion-panel-header>
-                      <v-expansion-panel-content>
-                        <v-divider></v-divider>
-                        <v-card-text></v-card-text>
-                      </v-expansion-panel-content>
-                    </v-expansion-panel>
-                  </v-expansion-panels>
-                </v-row>
-              </v-container>
             </v-card>
           </v-col>
         </v-row>
-      </nuxt-link>
+      <!-- </nuxt-link> -->
     </v-container>
   </v-app>
 </template>
@@ -138,19 +108,24 @@
 <script>
 import HomeHero from './HomeHero.vue'
 import Information from './Information.vue'
-import firebase from '@/plugins/firebase'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 export default {
+  name: 'home',
   components: {
     HomeHero,
     Information
   },
   data() {
     return {
-      allUsers: [],
+      name: this.$store.state.project.name,
+      place: this.$store.state.project.place,
+      date: this.$store.state.project.date,
+      messageComment: this.$store.state.project.messageComment,
       loading: false,
       selection: 1,
-      image_src: require('@/assets/img/everyone.jpg'),
+      image_src: require('@/assets/img/doing3.jpg'),
       messages: [
         {
           avatar: 'image_src',
@@ -161,30 +136,25 @@ export default {
       ]
     }
   },
-  mounted () {
-    const db = firebase.firestore();
-    db.collection('users')
-      .get()
-      .then((querySnapShot) => {
-        const allUsers = [];
-        querySnapShot.forEach((doc) => {
-          allUsers.push({
-            name: doc.data().name,
-            place: doc.data().place,
-            date: new Date(),
-            comment: doc.data().comment
-          })
-        })
-        console.log(allUsers)
-        this.allUsers = allUsers
-      })
-  },
-  methods: {
-    reserve () {
-      this.loading = true
-
-      setTimeout(() => (this.loading = false), 2000)
+  computed: {
+    allUsers() {
+      return this.$store.getters['user/allUsers']
     },
+    articles() {
+      return this.$store.getters['project/articles']
+    },
+    image: {
+      get() {
+        return this.$store.getters['project/image']
+      },
+      set(value) {
+        this.$store.commit('project/setImage', value)
+      }
+    },
+  },
+  mounted() {
+    this.$store.dispatch('user/openTheApplication');
+    this.$store.dispatch('project/getMessage');
   },
 }
 </script>

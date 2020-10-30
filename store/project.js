@@ -5,7 +5,7 @@ export const state = () => ({
   place: '',
   image: null,
   date: '',
-  messages: [],
+  articles: [],
   articleId: '',
   messageComment: '',
   deleteOverlay: false,
@@ -13,7 +13,7 @@ export const state = () => ({
 })
 
 export const getters = {
-  messages: state => state.messages,
+  articles: state => state.articles,
   image: state => state.image,
   deleteOverlay: state => state.deleteOverlay,
   articleId: state => state.articleId,
@@ -21,8 +21,8 @@ export const getters = {
 }
 
 export const mutations = {
-  setMessages: (state, messages) => {
-    state.messages = messages;
+  setArticles: (state, articles) => {
+    state.articles = articles;
   },
   setImage: (state, url) => {
     state.image = url;
@@ -76,9 +76,9 @@ export const actions = {
       .orderBy('date', 'desc')
       .get()
       .then((querySnapshot) => {
-        const messages = [];
+        const articles = [];
         querySnapshot.forEach((doc) => {
-          messages.push({
+          articles.push({
             name: doc.data().name,
             place: doc.data().place,
             messageComment: doc.data().comment,
@@ -87,7 +87,7 @@ export const actions = {
             date: doc.data().date,
           })
         })
-        commit('setMessages', messages);
+        commit('setArticles', articles);
     })
   },
   addMessage(context, payload) {

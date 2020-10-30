@@ -12,7 +12,7 @@
 
 <style lang="scss" scoped>
 .home-hero__content {
-  background: url('../assets/img/top-background.jpg');
+  background: url('../assets/img/doing3.jpg');
   background-size: cover;
   background-position: center;
   width: 500px;

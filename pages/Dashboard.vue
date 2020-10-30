@@ -95,8 +95,8 @@
           <v-main app>
             <nuxt-link class="text-h5 cyan--text text--darken-1 font-weight-bold text-decoration-none" to="personal/profile">クリーナーをみる</nuxt-link>
             <v-container>
-              <v-row v-for="loginUser in loginUsers" :key="loginUser.id" :justify="loginUser">
-                <v-col v-for="k in 2" :key="k" md="6">
+              <v-row v-for="loginUser in loginUsers" :key="loginUser.id">
+                <v-col md="6">
                   <v-card class="mb-5">
                     <v-row>
                       <v-col cols="2">
