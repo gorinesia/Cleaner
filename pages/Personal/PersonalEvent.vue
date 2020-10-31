@@ -1,8 +1,5 @@
 <template>
   <v-app class="mx-10" style="color: navy">
-    <div  @click="$router.push('/')">Cleaner</div>
-    <div @click="$router.push('/list/cleaner')">クリーナーをみる</div>
-    <div @click="$router.push('/personal/profile')">John</div>
     <v-card outlined class="cyan mb-10">
       <v-row  class="fill-height">
         <v-col align-self="start"  cols="2">
@@ -75,16 +72,11 @@
 
 <script>
 export default {
+  name: 'personalEvent',
+  layout: 'loggedIn',
   data() {
     return {
       image_src: require('@/assets/img/everyone.jpg'),
-      messages: [
-        {
-          avatar: 'image_src',
-          name: 'John',
-          title: 'Welcome to Vuetify!',
-        }
-      ]
     }
   }
 }

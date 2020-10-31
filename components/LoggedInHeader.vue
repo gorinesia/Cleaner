@@ -5,20 +5,22 @@
         <v-app-bar app color="white" style="color: #00ACC1" class="font-weight-bold">
           <v-app-bar-nav-icon color="#00ACC1" @click="drawer = true"></v-app-bar-nav-icon>
           <v-col cols="1" class="mr-10">
-              <h1 class="font-size-2rem" @click="$router.push('/')">
-                Cleaner
-              </h1>
+            <nuxt-link class="font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/dashboard">
+              Cleaner
+            </nuxt-link>
           </v-col>
           <v-col cols="6">
             <v-tabs color="#EF6C00">
               <v-icon>mdi-account</v-icon>
-              <v-tab v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
+              <v-tab v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" :layout="menuItem.layout" router exact>
                 {{ menuItem.name }}
               </v-tab>
             </v-tabs>
           </v-col>
           <v-spacer></v-spacer>
-            <TheLogout />
+          <nav>
+            <v-btn rounded color="#00ACC1" class="font-weight-bold " dark @click="logOut">ログアウト</v-btn>
+          </nav>
         </v-app-bar>
       </v-row>
     </v-container>
@@ -44,18 +46,35 @@
 </template>
 
 <script>
-import constants from '../common/constants';
-import TheLogout from './TheLogout'
-
 export default {
   name: 'app-header',
-  components: {
-    TheLogout
-  },
   data() {
     return {
       drawer: false,
-      menuItems: constants.menuItems
+      menuItems: [
+        // {
+        //   name: 'クリーナーをみる',
+        //   url: '#',
+        //   to: '/list/cleaner'
+        // },
+        {
+          name: 'プロジェクトをみる',
+          url: '#',
+          to: '/list/project',
+          layout: 'loggedIn'
+        },
+        {
+          name: 'イベントをみる',
+          url: '#',
+          to: '/list/event',
+          layout: 'loggedIn'
+        },
+      ]
+    }
+  },
+  methods: {
+    logOut() {
+      this.$store.dispatch('user/logOutAction');
     }
   }
 }
