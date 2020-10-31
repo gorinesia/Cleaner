@@ -9,7 +9,11 @@
               <v-col cols="2">
                 <v-col align-self="start"  cols="12">
                 <v-avatar tile size="100" color="cyan" :src="image_src" class="ml-5">
-                  <img :src="image_src" alt="">
+                  <img :src="image_src" @click="showImage">
+                  <v-overlay :value="imageOverlay">
+                    <v-img :src="image_src" width="300" height="300"></v-img>
+                    <v-btn @click="closeModalForImage">閉じる</v-btn>
+                  </v-overlay>
                 </v-avatar>
                 </v-col>
               </v-col>
@@ -17,9 +21,9 @@
                 <v-avatar class="profile" color="grey" size="60">
                   <v-img :src="image_src"></v-img>
                 </v-avatar>
-                    <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/personalproject')">{{ article.name }}</span>
-                    <span class="overline mb-1 float-right grey--text">{{ article.date }}</span>
-                    <p class="ma-5">{{ article.comment }}</p>
+                  <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/personalproject')">{{ article.name }}</span>
+                  <span class="overline mb-1 float-right grey--text">{{ article.date }}</span>
+                  <p class="ma-5">{{ article.comment }}</p>
               </v-col>
             </v-row>
           </v-card>
@@ -40,6 +44,7 @@ export default {
       date: this.$store.state.project.date,
       messageComment: this.$store.state.project.messageComment,
       image_src: require('@/assets/img/doing3.jpg'),
+      imageOverlay: false
     }
   },
   computed: {
@@ -57,6 +62,14 @@ export default {
   },
   mounted() {
     this.$store.dispatch('project/getMessage');
+  },
+  methods: {
+    showImage() {
+      this.imageOverlay = true;
+    },
+    closeModalForImage() {
+      this.imageOverlay = false;
+    }
   }
 }
 </script>

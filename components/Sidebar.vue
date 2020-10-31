@@ -42,7 +42,7 @@ export default {
           title: 'プロフィール',
           icon: 'mdi-folder',
           lists: ['Quick Start', 'Pre-made layouts'],
-          link: '/text'
+          link: '/edit/profile'
         },
         {
           title: 'メッセージ',
@@ -53,7 +53,7 @@ export default {
           title: 'プロジェクト管理',
           icon: 'mdi-star',
           lists: ['Colors', 'Content', 'Display'],
-          link: '/text'
+          link: '/edit/project'
         },
         {
           title: 'イベント管理',
@@ -64,7 +64,7 @@ export default {
         {
           title: 'サポート管理',
           icon: 'mdi-upload',
-          link: '/text'
+          link: '/edit/project'
         }
       ],
     }

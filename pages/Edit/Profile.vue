@@ -1,5 +1,6 @@
 <template>
   <v-app class="mx-10">
+    <h2>プロフィール編集</h2>
     <v-alert dense text type="success" :value="alert">プロフィール情報を更新しました</v-alert>
     <v-container max-width="600px">
     <h2 class="grey--text">ユーザー情報</h2>
@@ -20,6 +21,7 @@
 import firebase from 'firebase';
 
 export default {
+  layout: 'loggedIn',
   data() {
     return {
       image_src: require('@/assets/img/everyone.jpg'),
