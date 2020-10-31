@@ -59,10 +59,10 @@ export default {
           title: 'イベント管理',
           icon: 'mdi-history',
           lists: ['API explorer', 'Alerts'],
-          link: '/text'
+          link: '/edit/event'
         },
         {
-          title: 'サポート',
+          title: 'サポート管理',
           icon: 'mdi-upload',
           link: '/text'
         }
