@@ -39,21 +39,25 @@ export default {
       image_src: require('@/assets/img/doing3.jpg'),
       items: [
         {
+          title: 'HOME',
+          icon: 'mdi-folder',
+          link: '/dashboard'
+        },
+        {
           title: 'プロフィール',
           icon: 'mdi-folder',
-          lists: ['Quick Start', 'Pre-made layouts'],
-          link: '/text'
+          link: '/edit/profile'
         },
         {
           title: 'メッセージ',
           icon: 'mdi-account-multiple',
-          link: '/edit/comment'
+          link: '/edit/message'
         },
         {
           title: 'プロジェクト管理',
           icon: 'mdi-star',
           lists: ['Colors', 'Content', 'Display'],
-          link: '/text'
+          link: '/edit/project'
         },
         {
           title: 'イベント管理',
@@ -64,7 +68,7 @@ export default {
         {
           title: 'サポート管理',
           icon: 'mdi-upload',
-          link: '/text'
+          link: '/edit/sapport'
         }
       ],
     }

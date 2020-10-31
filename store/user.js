@@ -74,8 +74,31 @@ export const actions = {
         })
       })
   },
-  logInUserDisplay({commit}) {
+  signInAnonymously({commit}) {
+    firebase.auth().signInAnonymously()
+      .catch((error) => {
+        console.log(error);
+      });
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        const uid = user.uid;
+        const currentLoginUser = [{displayName: 'ゲスト'}]
+        console.log(user);
+        console.log(user.uid);
+        console.log(currentLoginUser);
+        commit('setCurrentUser', currentLoginUser);
+        this.$router.push('/dashboard');
+      }
+    })
+  },
+  logInUserDisplay(context) {
     const getUser = firebase.auth().currentUser;
+    console.log(getUser);
+    if (!getUser.displayName) {
+      context.dispatch('signInAnonymously');
+      return;
+    }
     const db = firebase.firestore();
     db.collection('users')
       .onSnapshot((querySnapshot) => {
@@ -91,8 +114,8 @@ export const actions = {
           const currentLoginUser = allLoginUsers.filter((currentUser) => {
             return currentUser.displayName === getUser.displayName;
           })
-          commit('setCurrentUser', currentLoginUser);
-          commit('setLoginUsers', otherLoginUsers);
+          context.commit('setCurrentUser', currentLoginUser);
+          context.commit('setLoginUsers', otherLoginUsers);
         })
       })
   },

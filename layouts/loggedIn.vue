@@ -1,10 +1,11 @@
 <template>
+  <div>
   <v-app>
     <LoggedInHeader class="mb-5" />
-    <v-container>
+    <v-container class="blue-grey lighten-5">
       <v-row>
         <v-col cols="3">
-          <Sidebar />
+          <Sidebar class="blue-grey lighten-5" />
         </v-col>
         <v-col cols="9">
           <Nuxt class="blue-grey lighten-5" />
@@ -17,6 +18,7 @@
     <!-- </v-main> -->
     <AppFooter />
   </v-app>
+  </div>
 </template>
 
 <script>

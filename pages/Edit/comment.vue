@@ -75,6 +75,7 @@ import firebase from '@/plugins/firebase';
 const db = firebase.firestore();
 
 export default {
+  layout: 'loggedIn',
   data() {
     return {
       image_update: null,

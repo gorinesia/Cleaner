@@ -18,43 +18,8 @@
 </template>
 
 <script>
-import firebase from 'firebase';
-
 export default {
-  layout: 'loggedIn',
-  data() {
-    return {
-      image_src: require('@/assets/img/everyone.jpg'),
-      messages: [
-        {
-          avatar: 'image_src',
-          name: 'John Leider',
-          title: 'Welcome to Vuetify!',
-          excerpt: 'Thank you for joining our comminity...',
-        }
-      ],
-      alert: false
-    }
-  },
-  methods: {
-    btnUploadChange(ev) {
-      const file = ev.target.files[0];
-      const storage = firebase.storage();
-      const storageRef = storage.ref('profileImages');
-      const uploadRef = storageRef.child(file.name);
-      uploadRef.put(file)
-        .then((snapshot) => {
-          console.log('Uploaded a blob or file');
-          this.alert = true;
-          setTimeout(() => {
-            this.alert = false
-          }, 3000)
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-    },
-  }
+  layout: 'loggedIn'
 }
 </script>
 

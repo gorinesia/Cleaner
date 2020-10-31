@@ -4,6 +4,7 @@
     <v-container>
       <label class="postImage-appendBtn"></label>
       <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
+      <v-img :src="image" width="100" height="100"></v-img>
       <label>名前</label>
       <v-text-field v-model="name" class="white"></v-text-field>
       <label>場所</label>

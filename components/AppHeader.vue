@@ -20,7 +20,7 @@
           </v-col>
           <v-spacer></v-spacer>
           <nav>
-            <v-btn rounded color="#1A237E" dark to="/dashboard" class="font-weight-bold orange--text text--darken-1">ゲストログイン</v-btn>
+            <v-btn rounded color="#1A237E" dark class="font-weight-bold orange--text text--darken-1" @click="signInAnonymously">ゲストログイン</v-btn>
             <v-btn rounded outlined color="#00ACC1" class="font-weight-bold" dark to="/auth/login">ログイン</v-btn>
             <v-btn rounded color="#00ACC1" class="font-weight-bold" dark to="/auth/signup">新規登録</v-btn>
           </nav>
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import firebase from 'firebase';
 
 export default {
   name: 'app-header',
@@ -70,6 +71,25 @@ export default {
         },
       ]
     }
+  },
+  methods: {
+    signInAnonymously() {
+      this.$store.dispatch('user/signInAnonymously')
+    }
+    //   firebase.auth().signInAnonymously()
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+
+    //   firebase.auth().onAuthStateChanged((user) => {
+    //     if(user) {
+    //       const uid = user.uid;
+    //       console.log(user);
+    //       console.log(user.uid);
+    //       this.$router.push('/dashboard');
+    //     }
+    //   })
+    // }
   }
 }
 </script>
