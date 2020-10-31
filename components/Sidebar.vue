@@ -10,7 +10,6 @@
 
             <v-list-item-content>
               <v-list-item-title class="cyan--text text--darken-1 font-weight-bold text-h5">{{ currentUser.displayName }}</v-list-item-title>
-              <v-list-item-subtitle>ログイン中</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </template>
@@ -40,27 +39,33 @@ export default {
       image_src: require('@/assets/img/doing3.jpg'),
       items: [
         {
-          title: 'マイページ',
+          title: 'プロフィール',
           icon: 'mdi-folder',
           lists: ['Quick Start', 'Pre-made layouts'],
           link: '/text'
         },
         {
-          title: 'プロジェクトを投稿',
-          icon: 'mdi-account-multiple'
+          title: 'メッセージ',
+          icon: 'mdi-account-multiple',
+          link: '/edit/comment'
         },
         {
-          title: 'プロジェクトを編集',
+          title: 'プロジェクト管理',
           icon: 'mdi-star',
-          lists: ['Colors', 'Content', 'Display']
+          lists: ['Colors', 'Content', 'Display'],
+          link: '/text'
         },
         {
-          title: 'イベントを投稿',
+          title: 'イベント管理',
           icon: 'mdi-history',
-          lists: ['API explorer', 'Alerts']
+          lists: ['API explorer', 'Alerts'],
+          link: '/text'
         },
-        { title: 'イベントを編集', icon: 'mdi-upload' },
-        { title: 'ログアウト', icon: 'mdi-cloud-upload' },
+        {
+          title: 'サポート',
+          icon: 'mdi-upload',
+          link: '/text'
+        }
       ],
     }
   },

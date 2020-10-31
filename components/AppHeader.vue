@@ -9,16 +9,21 @@
                 Cleaner
               </nuxt-link>
           </v-col>
-          <v-col cols="6">
-            <v-tabs color="#EF6C00">
-              <v-icon>mdi-account</v-icon>
-              <v-tab v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
+          <v-col cols="6" class="ml-10">
+            <v-tabs color="#EF6C00" class="my-5">
+
+              <v-tab  v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
+                <v-icon>mdi-account</v-icon>
                 {{ menuItem.name }}
               </v-tab>
             </v-tabs>
           </v-col>
           <v-spacer></v-spacer>
-          <TheNavigation />
+          <nav>
+            <v-btn rounded color="#1A237E" dark to="/dashboard" class="font-weight-bold orange--text text--darken-1">ゲストログイン</v-btn>
+            <v-btn rounded outlined color="#00ACC1" class="font-weight-bold" dark to="/auth/login">ログイン</v-btn>
+            <v-btn rounded color="#00ACC1" class="font-weight-bold" dark to="/auth/signup">新規登録</v-btn>
+          </nav>
         </v-app-bar>
       </v-row>
     </v-container>
@@ -44,15 +49,26 @@
 </template>
 
 <script>
-import constants from '../common/constants';
-import TheNavigation from './TheNavigation';
 
 export default {
   name: 'app-header',
   data() {
     return {
       drawer: false,
-      menuItems: constants.menuItems
+      menuItems: [
+        {
+          name: 'プロジェクトをみる',
+          icon: 'mdi-account',
+          url: '#',
+          to: '/list/project'
+        },
+        {
+          name: 'イベントをみる',
+          icon: 'mdi-account',
+          url: '#',
+          to: '/list/event'
+        },
+      ]
     }
   }
 }

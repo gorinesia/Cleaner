@@ -100,7 +100,7 @@ export const actions = {
     firebase.auth().signOut()
       .then(() => {
         console.log('logout!!');
-        this.$router.push('/auth/login');
+        this.$router.push('/auth/logout');
       })
   }
 }

@@ -32,11 +32,6 @@ export default {
         email: this.email,
         password: this.password
       })
-      // firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-      //   .then(() => {
-      //     console.log('loggedIn!!!');
-      //     this.$router.push('/dashboard')
-      //  })
     }
   }
 };

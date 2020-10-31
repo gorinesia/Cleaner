@@ -13,7 +13,7 @@
       </v-card-text>
       <p>- Signup with -</p>
       <v-icon class="mb-5">mdi-twitter</v-icon><br>
-      <v-btn class="mb-5" outlined rounded color="#00ACC1">アカウントをお持ちの方はこちら</v-btn>
+      <v-btn class="mb-5" outlined rounded color="#00ACC1" to="/auth/login">アカウントをお持ちの方はこちら</v-btn>
     </v-card>
   </v-app>
 </template>
