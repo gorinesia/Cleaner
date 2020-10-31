@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <v-system-bar height="30" color="#00ACC1" dark class="white--text  font-weight-bold justify-center"><span>まずは気軽に新規登録から！綺麗な世界は自分たちの手で創り上げていこう！</span></v-system-bar>
     <v-container fluid>
       <v-main app>
         <!-- <nuxt-link class="text-h5 cyan--text text--darken-1 font-weight-bold text-decoration-none" to="personal/profile">クリーナーをみる</nuxt-link>
@@ -44,19 +43,21 @@
                 <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(article.id)">
                   <v-row  :key="article.id">
                     <v-col cols="3">
-                      <v-avatar tile size="130" class="ml-5">
+                      <v-avatar tile size="100" class="ml-5">
                         <v-img :src="article.image"></v-img>
                       </v-avatar>
                     </v-col>
-                    <v-col cols="9">
-                      <v-col>
+                    <v-col cols="4">
+                      <!-- <v-col> -->
                         <v-avatar class="profile" color="grey" size="60">
                           <v-img :src="article.image"></v-img>
                         </v-avatar>
                         <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ article.name }}</span>
                         <p class="my-5 font-weight-bold">{{ article.messageComment }}</p>
-                        <span class="grey--text float-right">{{article.date }}</span>
-                      </v-col>
+                      <!-- </v-col> -->
+                    </v-col>
+                    <v-col cols="5">
+                      <span class="grey--text float-right">{{ article.date}}</span>
                     </v-col>
                   </v-row>
                 </v-card>
@@ -187,65 +188,3 @@ img {
   // opacity: 0.6;
  }
 </style>
-
-<!-- <v-row> -->
-        <!-- <v-col cols="3"> -->
-          <!-- <Sidebar /> -->
-        <!-- </v-col> -->
-
-        <!-- <v-col cols="9"> -->
-          <!-- <v-row justify="center">
-            <v-dialog
-              v-model="dialog"
-              persistent
-              max-width="600px"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  fab
-                  large
-                  color="cyan darken-1"
-                  dark
-                  v-bind="attrs"
-                  v-on="on"
-                >
-                  <v-icon dark>mdi-pencil</v-icon>
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="headline">User Article</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <label class="postImage-appendBtn"></label>
-                    <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
-                    <label>名前</label>
-                    <v-text-field v-model="name" class="white"></v-text-field>
-                    <label>場所</label>
-                    <v-text-field v-model="place" class="white"></v-text-field>
-                    <v-textarea v-model="messageComment" class="white" placeholder="コメントを入力"></v-textarea>
-                    <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
-                  </v-container>
-                  <small>*indicates required field</small>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn
-                    color="blue darken-1"
-                    text
-                    @click="dialog = false"
-                  >
-                    Close
-                  </v-btn>
-                  <v-btn
-                    color="blue darken-1"
-                    text
-                    @click="dialog = false"
-                  >
-                    Save
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-row> -->
