@@ -35,7 +35,7 @@
           </v-row>
         </v-container> -->
         <!-- <nuxt-link class="float-right grey--text text--darken-1 font-weight-bold mb-10 text-decoration-none mr-5" to="/list/cleaner">もっとみる</nuxt-link> -->
-        <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/list/project">プロジェクトをみる</nuxt-link>
+        <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/list/project">プロジェクト</nuxt-link>
         <v-container>
           <v-card class="mb-5">
             <template v-for="(article, index) in articles">
@@ -65,29 +65,29 @@
           </v-card>
         </v-container>
         <nuxt-link class="float-right font-weight-bold grey--text text--darken-1 text-decoration-none" to="/list/project">もっとみる</nuxt-link>
-        <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/list/event">イベントをみる</nuxt-link>
+        <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/list/event">イベント</nuxt-link>
         <v-container>
           <v-row>
-            <template v-for="(article, index) in articles">
+            <template v-for="(eventArticle, index) in eventArticles">
               <v-col :key="index" cols="12">
                 <v-hover v-slot="{ hover }">
-                  <v-card :class="{ 'on-hover': hover }">
+                  <v-card :class="{ 'on-hover': hover }" @click="getPersonalEvent(eventArticle.id)">
                     <!-- <v-divider :key="index" /> -->
-                      <v-row :key="article.id" >
+                      <v-row :key="eventArticle.id" >
                         <v-col cols="9">
                           <v-col>
                             <v-avatar class="profile" color="grey" size="60">
-                              <v-img :src="article.image"></v-img>
+                              <v-img :src="eventArticle.image"></v-img>
                             </v-avatar>
-                            <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ article.name }}</span>
-                            <p class="my-5 font-weight-bold">{{ article.messageComment }}</p>
-                            <span class="grey--text float-right">日時： {{ article.date }}</span>
-                            <span class="grey--text float-right">場所： {{ article.place}}</span>
+                            <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ eventArticle.name }}</span>
+                            <p class="my-5 font-weight-bold">{{ eventArticle.messageComment }}</p>
+                            <span class="grey--text float-right">日時： {{ eventArticle.date }}</span>
+                            <span class="grey--text float-right">場所： {{ eventArticle.place}}</span>
                           </v-col>
                         </v-col>
                         <v-col cols="3">
-                          <v-avatar tile size="130" class="ml-5">
-                            <v-img :src="article.image"></v-img>
+                          <v-avatar tile size="130">
+                            <v-img :src="eventArticle.image"></v-img>
                           </v-avatar>
                         </v-col>
                       </v-row>
@@ -143,10 +143,22 @@ export default {
         this.$store.commit('project/setImage', value)
       }
     },
+    eventArticles() {
+      return this.$store.getters['event/eventArticles']
+    },
+    image: {
+      get() {
+        return this.$store.getters['event/image']
+      },
+      set(value) {
+        this.$store.commit('event/setImage', value)
+      }
+    }
   },
   mounted() {
     this.$store.dispatch('user/logInUserDisplay');
     this.$store.dispatch('project/getMessage');
+    this.$store.dispatch('event/getMessage');
   },
   methods: {
     getPersonalId(id) {
@@ -154,6 +166,11 @@ export default {
         id
       })
       console.log(id)
+    },
+    getPersonalEvent(id) {
+      this.$store.dispatch('event/getPersonalEvent', {
+        id
+      })
     }
   }
 }

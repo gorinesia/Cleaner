@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <LoggedInHeader class="mb-10" />
+    <LoggedInHeader class="mb-5" />
     <v-container>
       <v-row>
         <v-col cols="3">

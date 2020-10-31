@@ -9,7 +9,7 @@
           人々に対価を」をコンセプトとしたゴミ拾い<br>
           情報コミュニティです。</p>
           <v-btn class="mb-5" rounded outlined color="cyan darken-1" x-large to="/Auth/Signup">いますぐはじめる</v-btn><br>
-          <v-btn class="text-capitalize" rounded color="primary" x-large dark>Cleanerについて</v-btn>
+          <v-btn class="text-capitalize" rounded color="primary" x-large dark to="aboutcleaner">Cleanerについて</v-btn>
         </v-col>
         <v-col cols="6">
           <HomeHero />
@@ -20,7 +20,7 @@
       Cleanerでできること
     </div>
     <Information />
-    <h2 class="mb-5 cy cyan--text text--darken-1" align="center" justify="center">クリーナーをみる</h2>
+    <!-- <h2 class="mb-5 cy cyan--text text--darken-1" align="center" justify="center">クリーナーをみる</h2>
     <p style="text-align: center;">クリーナーとは、お掃除屋さん(＝ゴミを拾う人)のことです。<br>
     あなたも地球を綺麗にするための清掃員になりませんか？</p>
     <v-container>
@@ -53,7 +53,7 @@
           </v-card>
         </v-col>
       </v-row>
-    </v-container>
+    </v-container> -->
     <h2 style="text-align: center; color: #00ACC1;">プロジェクトをみる</h2>
     <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
     あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
