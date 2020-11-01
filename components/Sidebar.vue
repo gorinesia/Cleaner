@@ -5,7 +5,7 @@
         <template v-slot:prepend>
           <v-list-item two-line>
             <v-list-item-avatar>
-              <img :src="image_src">
+              <v-img :src="image" width="30px" height="30px"></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
@@ -76,6 +76,14 @@ export default {
   computed: {
     currentUser() {
       return this.$store.getters['user/currentUser']
+    },
+    image: {
+      get() {
+        return this.$store.getters['user/image']
+      },
+      set(value) {
+        this.$store.commit('user/setImage', value)
+      }
     },
   }
 }
