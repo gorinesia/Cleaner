@@ -116,9 +116,6 @@ export default {
         ev
       });
     },
-    // getProfile() {
-    //   this.$store.dispatch('user/getProfile');
-    // },
     updateProfile(id) {
       console.log(id)
       this.$store.dispatch('user/updateProfile', {
@@ -129,6 +126,10 @@ export default {
         image: this.image,
         date: new Date().toLocaleString()
       });
+      this.alert = true;
+      setTimeout(() => {
+        this.alert = false
+      }, 3000)
       this.displayName = '';
       this.place = '';
       this.messageComment = '';
@@ -141,8 +142,3 @@ export default {
 <style>
 
 </style>
-
-// this.alert = true;
-//           setTimeout(() => {
-//             this.alert = false
-//           }, 3000)

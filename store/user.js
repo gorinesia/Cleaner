@@ -115,6 +115,7 @@ export const actions = {
           allLoginUsers.push({
             displayName: doc.data().displayName,
             email: doc.data().email,
+            image: doc.data().image,
             id: doc.id
           })
           console.log(doc.data().displayName);
