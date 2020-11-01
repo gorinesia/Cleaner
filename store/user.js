@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 
 export const state = () => ({
+  user: null,
   allUsers: [],
   currentUser: [],
   loginUsers: []
@@ -13,6 +14,9 @@ export const getters = {
 }
 
 export const mutations = {
+  setUser(state, currentUser) {
+    state.user = currentUser
+  },
   setAllUsers: (state, allLoggedInUsers) => {
     state.allUsers = allLoggedInUsers;
   },
@@ -84,21 +88,20 @@ export const actions = {
       if(user) {
         const uid = user.uid;
         const currentLoginUser = [{displayName: 'ゲスト'}]
-        console.log(user);
-        console.log(user.uid);
-        console.log(currentLoginUser);
         commit('setCurrentUser', currentLoginUser);
         this.$router.push('/dashboard');
       }
     })
   },
-  logInUserDisplay(context) {
+  logInUserDisplay(context, payload) {
+    console.log(payload);
     const getUser = firebase.auth().currentUser;
     console.log(getUser);
     if (!getUser.displayName) {
       context.dispatch('signInAnonymously');
       return;
     }
+    context.commit('setUser', payload.displayName);
     const db = firebase.firestore();
     db.collection('users')
       .onSnapshot((querySnapshot) => {
