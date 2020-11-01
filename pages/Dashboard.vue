@@ -157,6 +157,11 @@ export default {
     }
   },
   mounted() {
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   if (user) {
+    //     console.log(user)
+    //   }
+    // })
     this.$store.dispatch('user/logInUserDisplay');
     this.$store.dispatch('project/getMessage');
     this.$store.dispatch('event/getMessage');

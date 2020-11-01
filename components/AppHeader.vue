@@ -11,7 +11,6 @@
           </v-col>
           <v-col cols="6" class="ml-10">
             <v-tabs color="#EF6C00" class="my-5">
-
               <v-tab  v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
                 <v-icon>mdi-account</v-icon>
                 {{ menuItem.name }}
@@ -76,20 +75,6 @@ export default {
     signInAnonymously() {
       this.$store.dispatch('user/signInAnonymously')
     }
-    //   firebase.auth().signInAnonymously()
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-
-    //   firebase.auth().onAuthStateChanged((user) => {
-    //     if(user) {
-    //       const uid = user.uid;
-    //       console.log(user);
-    //       console.log(user.uid);
-    //       this.$router.push('/dashboard');
-    //     }
-    //   })
-    // }
   }
 }
 </script>
