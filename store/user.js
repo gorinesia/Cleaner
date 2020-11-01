@@ -4,13 +4,15 @@ export const state = () => ({
   user: null,
   allUsers: [],
   currentUser: [],
-  loginUsers: []
+  loginUsers: [],
+  image: null
 })
 
 export const getters = {
   allUsers: state => state.allUsers,
   currentUser: state => state.currentUser,
   loginUsers: state => state.loginUsers,
+  image: state => state.image,
 }
 
 export const mutations = {
@@ -25,6 +27,9 @@ export const mutations = {
   },
   setLoginUsers: (state, otherLoginUsers) => {
     state.loginUsers = otherLoginUsers;
+  },
+  setImage: (state, url) => {
+    state.image = url;
   }
 }
 
@@ -108,14 +113,17 @@ export const actions = {
         const allLoginUsers = [];
         querySnapshot.forEach((doc) => {
           allLoginUsers.push({
-            displayName: doc.data().displayName
+            displayName: doc.data().displayName,
+            email: doc.data().email,
+            id: doc.id
           })
-          console.log(doc.data().displayName)
+          console.log(doc.data().displayName);
+          console.log(doc.id);
           const otherLoginUsers = allLoginUsers.filter((otherUsers) => {
-            return otherUsers.displayName != getUser.displayName;
+            return otherUsers.email != getUser.email;
           })
           const currentLoginUser = allLoginUsers.filter((currentUser) => {
-            return currentUser.displayName === getUser.displayName;
+            return currentUser.email === getUser.email;
           })
           context.commit('setCurrentUser', currentLoginUser);
           context.commit('setLoginUsers', otherLoginUsers);
@@ -128,6 +136,64 @@ export const actions = {
         console.log('logout!!');
         commit('setUser', null);
         this.$router.push('/auth/logout');
+      })
+  },
+  btnUploadChange(context, payload) {
+    const file = payload.ev.target.files[0];
+    const storage = firebase.storage();
+    const storageRef = storage.ref('profileImages');
+    const uploadRef = storageRef.child(file.name);
+    uploadRef.put(file)
+      .then((snapshot) => {
+        context.dispatch('getUrl', payload);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  },
+  getUrl({commit}, payload) {
+    const file = payload.ev.target.files[0];
+    const storage = firebase.storage();
+    const storageRef = storage.ref('profileImages');
+    const uploadRef = storageRef.child(file.name);
+    uploadRef.getDownloadURL()
+      .then((url) => {
+        commit('setImage', url);
+      })
+  },
+  getProfile({dispatch}) {
+    const db = firebase.firestore();
+    db.collection('user')
+      .get()
+      .then((querySnapshot) => {
+        const allLoginUsers = [];
+        querySnapshot.forEach((doc) => {
+          allLoginUsers.push({
+            displayName: doc.data().displayName,
+            place: doc.data().place,
+            messageComment: doc.data().comment,
+            image: doc.data().image,
+            id: doc.id,
+            date: doc.data().date,
+          })
+        })
+        dispatch('logInUserDisplay');
+    })
+  },
+  updateProfile(context, payload) {
+    const db = firebase.firestore();
+    db.collection('users')
+      .doc(payload.id)
+      .update({
+        displayName: payload.displayName,
+        place: payload.place,
+        comment: payload.comment,
+        image: payload.image,
+      })
+      .then(() => {
+        console.log(payload);
+        // context.commit('resetImage', null);
+        context.dispatch('logInUserDisplay');
       })
   }
 }
