@@ -37,7 +37,7 @@
 <script>
 export default {
   name: 'event',
-  layout: 'logggedIn',
+  layout: 'loggedIn',
   data() {
     return {
       image_src: require('@/assets/img/everyone.jpg'),
