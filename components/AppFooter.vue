@@ -17,14 +17,14 @@ export default {
           name: 'Home',
           icon: 'mdi-account',
           url: '#',
-          to: '/'
+          to: '/dashboard'
         },
-        {
-          name: 'クリーナーをみる',
-          icon: 'mdi-account',
-          url: '#',
-          to: '/list/cleaner'
-        },
+        // {
+        //   name: 'クリーナーをみる',
+        //   icon: 'mdi-account',
+        //   url: '#',
+        //   to: '/list/cleaner'
+        // },
         {
           name: 'プロジェクトをみる',
           icon: 'mdi-account',

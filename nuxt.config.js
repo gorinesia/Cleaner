@@ -47,7 +47,7 @@ export default {
   */
   plugins: [
     '@/plugins/firebase',
-    '~/plugins/vue2-google-maps.js'
+    {src: '~/plugins/vue2-google-maps.js', ssr: true}
   ],
   /*
   ** Auto import components
