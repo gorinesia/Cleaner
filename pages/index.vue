@@ -81,9 +81,7 @@
         </template>
       </v-card>
     </v-container>
-    <h2 style="text-align: center; color: #00ACC1;" class="my-5">イベントをみる</h2>
-    <p style="text-align: center;">イベントとは、みんなでゴミ拾いをするための企画のことです。<br>
-    イベントを立ち上げて、みんなでゴミ拾いをしてみませんか？</p>
+    
     <v-container>
       <v-card>
         <template v-for="(article, index) in articles">

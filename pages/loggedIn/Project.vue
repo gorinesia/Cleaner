@@ -96,6 +96,7 @@
 <script>
 export default {
   name: 'project',
+  layout: 'loggedIn',
   data() {
     return {
       name: this.$store.state.project.name,

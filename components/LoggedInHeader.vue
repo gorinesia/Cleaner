@@ -12,7 +12,7 @@
           <v-col cols="6">
             <v-tabs color="#EF6C00">
               <v-icon>mdi-account</v-icon>
-              <v-tab v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" :layout="menuItem.layout" router exact>
+              <v-tab v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
                 {{ menuItem.name }}
               </v-tab>
             </v-tabs>
@@ -60,14 +60,12 @@ export default {
         {
           name: 'プロジェクトをみる',
           url: '#',
-          to: '/list/project',
-          layout: 'loggedIn'
+          to: '/loggedIn/project',
         },
         {
           name: 'イベントをみる',
           url: '#',
-          to: '/list/event',
-          layout: 'loggedIn'
+          to: '/loggedIn/event',
         },
       ]
     }

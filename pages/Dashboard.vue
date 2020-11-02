@@ -69,26 +69,26 @@
         <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/list/event">イベント</nuxt-link>
         <v-container>
           <v-row>
-            <template v-for="(eventArticle, index) in eventArticles">
+            <template v-for="(event, index) in events">
               <v-col :key="index" cols="12">
                 <v-hover v-slot="{ hover }">
-                  <v-card :class="{ 'on-hover': hover }" @click="getPersonalEvent(eventArticle.id)">
+                  <v-card :class="{ 'on-hover': hover }" @click="getPersonalEvent(event.id)">
                     <!-- <v-divider :key="index" /> -->
-                      <v-row :key="eventArticle.id" >
+                      <v-row :key="event.id" >
                         <v-col cols="9">
                           <v-col>
                             <v-avatar class="profile" color="grey" size="60">
-                              <v-img :src="eventArticle.image"></v-img>
+                              <v-img :src="event.image"></v-img>
                             </v-avatar>
-                            <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ eventArticle.name }}</span>
-                            <p class="my-5 font-weight-bold">{{ eventArticle.messageComment }}</p>
-                            <span class="grey--text float-right">日時： {{ eventArticle.date }}</span>
-                            <span class="grey--text float-right">場所： {{ eventArticle.place}}</span>
+                            <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ event.name }}</span>
+                            <p class="my-5 font-weight-bold">{{ event.messageComment }}</p>
+                            <span class="grey--text float-right">日時： {{ event.date }}</span>
+                            <span class="grey--text float-right">場所： {{ event.place}}</span>
                           </v-col>
                         </v-col>
                         <v-col cols="3">
                           <v-avatar tile size="130">
-                            <v-img :src="eventArticle.image"></v-img>
+                            <v-img :src="event.image"></v-img>
                           </v-avatar>
                         </v-col>
                       </v-row>
@@ -144,8 +144,8 @@ export default {
         this.$store.commit('project/setImage', value)
       }
     },
-    eventArticles() {
-      return this.$store.getters['event/eventArticles']
+    events() {
+      return this.$store.getters['event/articles']
     },
     image: {
       get() {
