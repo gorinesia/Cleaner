@@ -1,11 +1,10 @@
 <template>
   <v-app>
-    <h2>イベントを投稿</h2>
     <v-container>
       <label class="postImage-appendBtn"></label>
       <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
       <v-img :src="image" width="100" height="100"></v-img>
-      <label>名前</label>
+      <label>ゴミの量</label>
       <v-text-field v-model="name" class="white"></v-text-field>
       <label>場所</label>
       <v-text-field v-model="place" class="white"></v-text-field>
@@ -16,12 +15,13 @@
     <v-container>
       <v-row v-for="message in articles" :key="message.id" class="ma-1">
         <v-card width="100%">
-          <v-row>
+          <v-row v-for="currentUser in currentUser" :key="currentUser.id">
             <v-col cols="3">
               <v-img :src="message.image" max-height="100" max-width="200" class="ml-1"></v-img>
             </v-col>
             <v-col cols="3">
-              <v-card-title class="cyan--text text--darken-1">{{ message.name }}</v-card-title>
+              <v-img :src="currentUser.image" width="30px" height="30px"></v-img>
+              <v-card-title class="cyan--text text--darken-1">{{ currentUser.displayName }}</v-card-title>
               <p>{{ message.place }}</p>
               <p>{{ message.messageComment }}</p>
             </v-col>
@@ -30,11 +30,13 @@
             </v-col>
             <v-col cols="1">
               <v-btn @click="openModalForEdit(message.id)" class="float-right">編集</v-btn>
+
               <v-overlay :value="editOverlay">
-                <label class="postImage-appendBtn">
+                <label class="postImage-appendBtn"></label>
                 <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付">
-                </label>
-                <label for="garbage">名前</label>
+                <v-img :src="image" width="100" height="100"></v-img>
+                <br>
+                <label for="garbage">ゴミの量</label>
                 <v-text-field v-model="name"></v-text-field>
                 <label for="garbage">場所</label>
                 <v-text-field v-model="place"></v-text-field>
@@ -50,6 +52,7 @@
                 <v-btn @click="deleteArticles(articleId)">削除</v-btn>
                 <v-btn @click="closeModalForDelete">閉じる</v-btn>
               </v-overlay>
+
             </v-col>
           </v-row>
         </v-card>
@@ -59,8 +62,6 @@
 </template>
 
 <script>
-import firebase from '@/plugins/firebase';
-
 export default {
   layout: 'loggedIn',
   data() {
@@ -74,6 +75,9 @@ export default {
   computed: {
     articles() {
       return this.$store.getters['event/articles']
+    },
+    currentUser() {
+      return this.$store.getters['user/currentUser']
     },
     image: {
       get() {

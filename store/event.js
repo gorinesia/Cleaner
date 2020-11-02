@@ -5,7 +5,7 @@ export const state = () => ({
   place: '',
   image: null,
   date: '',
-  eventArticles: [],
+  articles: [],
   articleId: '',
   messageComment: '',
   deleteOverlay: false,
@@ -14,7 +14,7 @@ export const state = () => ({
 })
 
 export const getters = {
-  eventArticles: state => state.eventArticles,
+  articles: state => state.articles,
   image: state => state.image,
   deleteOverlay: state => state.deleteOverlay,
   articleId: state => state.articleId,
@@ -23,8 +23,8 @@ export const getters = {
 }
 
 export const mutations = {
-  setEventArticles: (state, eventArticles) => {
-    state.eventArticles = eventArticles;
+  setArticles: (state, articles) => {
+    state.articles = articles;
   },
   setImage: (state, url) => {
     state.image = url;
@@ -82,9 +82,9 @@ export const actions = {
       .orderBy('date', 'desc')
       .get()
       .then((querySnapshot) => {
-        const eventArticles = [];
+        const articles = [];
         querySnapshot.forEach((doc) => {
-          eventArticles.push({
+          articles.push({
             name: doc.data().name,
             place: doc.data().place,
             messageComment: doc.data().comment,
@@ -93,7 +93,7 @@ export const actions = {
             date: doc.data().date,
           })
         })
-        commit('setEventArticles', eventArticles);
+        commit('setArticles', articles);
     })
   },
   addMessage(context, payload) {
@@ -106,7 +106,7 @@ export const actions = {
         context.dispatch('getMessage');
       })
   },
-  deleteEventArticles(context, payload) {
+  deleteArticles(context, payload) {
     const db = firebase.firestore();
     db.collection('events')
       .doc(payload.id)
@@ -116,7 +116,7 @@ export const actions = {
         context.dispatch('getMessage');
       })
   },
-  editeventArticles(context, payload) {
+  editArticles(context, payload) {
     const db = firebase.firestore();
     db.collection('events')
       .doc(payload.id)
@@ -132,7 +132,7 @@ export const actions = {
         context.dispatch('getMessage');
       })
   },
-  getPersonalEvent({commit}, payload) {
+  getPersonalData({commit}, payload) {
     const db = firebase.firestore();
     const personalDetails = [];
     db.collection('events')
@@ -148,7 +148,7 @@ export const actions = {
           date: doc.data().date,
         })
           console.log(doc.data())
-          this.$router.push('personal/personalevent');
+          this.$router.push('personal/personalproject');
           commit('setPersonalDatas', personalDetails);
       })
   }

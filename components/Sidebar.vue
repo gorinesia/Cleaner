@@ -5,7 +5,7 @@
         <template v-slot:prepend>
           <v-list-item two-line>
             <v-list-item-avatar>
-              <v-img :src="image" width="30px" height="30px"></v-img>
+              <v-img :src="currentUser.image" width="30px" height="30px"></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>

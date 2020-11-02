@@ -3,7 +3,8 @@
     <v-container>
       <label class="postImage-appendBtn"></label>
       <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
-      <label>ゴミの数</label>
+      <v-img :src="image" width="100" height="100"></v-img>
+      <label>ゴミの量</label>
       <v-text-field v-model="name" class="white"></v-text-field>
       <label>場所</label>
       <v-text-field v-model="place" class="white"></v-text-field>
@@ -19,6 +20,7 @@
               <v-img :src="message.image" max-height="100" max-width="200" class="ml-1"></v-img>
             </v-col>
             <v-col cols="3">
+              <v-img :src="currentUser.image" width="30px" height="30px"></v-img>
               <v-card-title class="cyan--text text--darken-1">{{ currentUser.displayName }}</v-card-title>
               <p>{{ message.place }}</p>
               <p>{{ message.messageComment }}</p>
@@ -28,11 +30,13 @@
             </v-col>
             <v-col cols="1">
               <v-btn @click="openModalForEdit(message.id)" class="float-right">編集</v-btn>
+
               <v-overlay :value="editOverlay">
-                <label class="postImage-appendBtn">
+                <label class="postImage-appendBtn"></label>
                 <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付">
-                </label>
-                <label for="garbage">名前</label>
+                <v-img :src="image" width="100" height="100"></v-img>
+                <br>
+                <label for="garbage">ゴミの量</label>
                 <v-text-field v-model="name"></v-text-field>
                 <label for="garbage">場所</label>
                 <v-text-field v-model="place"></v-text-field>
@@ -48,6 +52,7 @@
                 <v-btn @click="deleteArticles(articleId)">削除</v-btn>
                 <v-btn @click="closeModalForDelete">閉じる</v-btn>
               </v-overlay>
+
             </v-col>
           </v-row>
         </v-card>
@@ -57,9 +62,6 @@
 </template>
 
 <script>
-import firebase from '@/plugins/firebase';
-const db = firebase.firestore();
-
 export default {
   layout: 'loggedIn',
   data() {
