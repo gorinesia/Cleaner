@@ -29,13 +29,13 @@ export default {
           name: 'プロジェクトをみる',
           icon: 'mdi-account',
           url: '#',
-          to: '/list/project'
+          to: '/loggedIn/project'
         },
         {
           name: 'イベントをみる',
           icon: 'mdi-account',
           url: '#',
-          to: '/list/event'
+          to: '/loggedIn/event'
         },
       ]
   }),
