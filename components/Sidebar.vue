@@ -5,7 +5,7 @@
         <template v-slot:prepend>
           <v-list-item two-line>
             <v-list-item-avatar>
-              <v-img :src="image" width="30px" height="30px"></v-img>
+              <v-img :src="currentUser.image" width="30px" height="30px"></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import firebase from 'firebase';
+
 export default {
   data() {
     return {
@@ -69,6 +71,11 @@ export default {
           title: 'サポート管理',
           icon: 'mdi-upload',
           link: '/edit/sapport'
+        },
+        {
+          title: 'トライアル',
+          icon: 'mdi-upload',
+          link: '/edit/trial'
         }
       ],
     }
@@ -85,7 +92,7 @@ export default {
         this.$store.commit('user/setImage', value)
       }
     },
-  }
+  },
 }
 </script>
 

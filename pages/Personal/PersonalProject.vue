@@ -21,7 +21,6 @@
           </v-col>
         </v-row>
       </v-card>
-      <v-btn class="font-weight-bold float-right" rounded color="#0D47A1" dark large>サポートする</v-btn>
       <h2 class="mb-5">Johnさんのプロジェクト</h2>
       <v-card align="center" class="mb-10" v-for="personalData in personalDatas" :key="personalData.id">
         <v-row >

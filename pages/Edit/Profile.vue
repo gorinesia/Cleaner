@@ -63,7 +63,7 @@
         <input class="d-block" type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
         <v-img :src="image" width="100" height="100"></v-img>
         <label>ユーザー名</label>
-        <v-text-field v-model="displayName" class="white" :placeholder="currentUser.displayName">{{ currentUser.displayName }}</v-text-field>
+        <v-text-field v-model="displayName" class="white" :placeholder="currentUser.displayName"></v-text-field>
         <label>場所</label>
         <v-text-field v-model="place" class="white" placeholder="東京"></v-text-field>
         <label>ひとこと</label>
@@ -116,20 +116,20 @@ export default {
         ev
       });
     },
-    // getProfile() {
-    //   this.$store.dispatch('user/getProfile');
-    // },
     updateProfile(id) {
       console.log(id)
       this.$store.dispatch('user/updateProfile', {
-        id,
-        displayName: this.displayName,
+        displayName: this.user.displayName,
         place: this.place,
         comment: this.messageComment,
         image: this.image,
         date: new Date().toLocaleString()
       });
-      this.displayName = '';
+      this.alert = true;
+      setTimeout(() => {
+        this.alert = false
+      }, 3000)
+      this.user.displayName = '';
       this.place = '';
       this.messageComment = '';
       this.date = '';
@@ -141,8 +141,3 @@ export default {
 <style>
 
 </style>
-
-// this.alert = true;
-//           setTimeout(() => {
-//             this.alert = false
-//           }, 3000)

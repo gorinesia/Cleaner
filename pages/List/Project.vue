@@ -78,6 +78,7 @@
                   <v-img :src="image_src"></v-img>
                 </v-avatar>
                   <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/personalproject')">{{ article.name }}</span>
+                  <span>{{ article.displayName }}</span>
                   <span class="overline mb-1 float-right grey--text">{{ article.date }}</span>
                   <p class="ma-5">{{ article.comment }}</p>
               </v-col>
@@ -96,6 +97,7 @@ export default {
   data() {
     return {
       name: this.$store.state.project.name,
+      displayName: this.$store.state.project.displayName,
       place: this.$store.state.project.place,
       date: this.$store.state.project.date,
       messageComment: this.$store.state.project.messageComment,

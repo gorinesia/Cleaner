@@ -21,7 +21,7 @@
             </v-col>
             <v-col cols="3">
               <v-img :src="currentUser.image" width="30px" height="30px"></v-img>
-              <v-card-title class="cyan--text text--darken-1">{{ currentUser.displayName }}</v-card-title>
+              <v-card-title class="cyan--text text--darken-1">{{ user.displayName }}</v-card-title>
               <p>{{ message.place }}</p>
               <p>{{ message.messageComment }}</p>
             </v-col>
@@ -62,60 +62,71 @@
 </template>
 
 <script>
+import firebase from 'firebase';
+
 export default {
   layout: 'loggedIn',
   data() {
     return {
-      name: this.$store.state.event.name,
-      place: this.$store.state.event.place,
-      date: this.$store.state.event.date,
-      messageComment: this.$store.state.event.messageComment,
+      user: '',
+      name: this.$store.state.project.name,
+      place: this.$store.state.project.place,
+      date: this.$store.state.project.date,
+      messageComment: this.$store.state.project.messageComment,
     }
   },
   computed: {
     articles() {
-      return this.$store.getters['event/articles']
+      return this.$store.getters['project/articles']
     },
     currentUser() {
       return this.$store.getters['user/currentUser']
     },
     image: {
       get() {
-        return this.$store.getters['event/image']
+        return this.$store.getters['project/image']
       },
       set(value) {
-        this.$store.commit('event/setImage', value)
+        this.$store.commit('project/setImage', value)
       }
     },
     deleteOverlay() {
-      return this.$store.getters['event/deleteOverlay']
+      return this.$store.getters['project/deleteOverlay']
     },
     articleId() {
-      return this.$store.getters['event/articleId']
+      return this.$store.getters['project/articleId']
     },
     editOverlay() {
-      return this.$store.getters['event/editOverlay']
+      return this.$store.getters['project/editOverlay']
     },
   },
   mounted() {
-    this.$store.dispatch('event/getMessage');
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.user = firebase.auth().currentUser
+      }
+    });
+    this.$store.dispatch('project/getMessage');
   },
   methods: {
     btnUploadChange(ev) {
-      this.$store.dispatch('event/btnUploadChange', {
+      this.$store.dispatch('project/btnUploadChange', {
         ev
       });
     },
     getUrl(ev) {
-      this.$store.dispatch('event/getUrl', {
+      this.$store.dispatch('project/getUrl', {
         ev
       });
     },
     getMessage() {
-      this.$store.dispatch('event/getMessage');
+      this.$store.dispatch('project/getMessage');
     },
     addMessage() {
-      this.$store.dispatch('event/addMessage', {
+      console.log(this.user);
+      console.log(this.currentUser);
+      this.$store.dispatch('project/addMessage', {
+        displayName: this.currentUser[0].displayName,
         name: this.name,
         place: this.place,
         comment: this.messageComment,
@@ -128,29 +139,29 @@ export default {
       this.date = '';
     },
     openModalForDelete(id) {
-      this.$store.commit('event/openModalForDelete', {
+      this.$store.commit('project/openModalForDelete', {
         id
       });
     },
     closeModalForDelete() {
-      this.$store.commit('event/closeModalForDelete');
+      this.$store.commit('project/closeModalForDelete');
     },
     deleteArticles(id) {
       console.log(id);
-      this.$store.dispatch('event/deleteArticles', {
+      this.$store.dispatch('project/deleteArticles', {
         id
       });
     },
     openModalForEdit(id) {
-      this.$store.commit('event/openModalForEdit', {
+      this.$store.commit('project/openModalForEdit', {
         id
       });
     },
     closeModalForEdit() {
-      this.$store.commit('event/closeModalForEdit');
+      this.$store.commit('project/closeModalForEdit');
     },
     editArticles(id) {
-      this.$store.dispatch('event/editArticles', {
+      this.$store.dispatch('project/editArticles', {
         id,
         name: this.name,
         place: this.place,

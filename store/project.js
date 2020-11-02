@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 
 export const state = () => ({
+  displayName: '',
   name: '',
   place: '',
   image: null,
@@ -85,6 +86,7 @@ export const actions = {
         const articles = [];
         querySnapshot.forEach((doc) => {
           articles.push({
+            displayName: doc.data().displayName,
             name: doc.data().name,
             place: doc.data().place,
             messageComment: doc.data().comment,

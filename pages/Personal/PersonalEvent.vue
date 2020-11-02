@@ -19,7 +19,6 @@
           </v-list-item>
         </v-col>
       </v-row>
-      <v-btn class="float-right" rounded color="#0D47A1" dark x-large>サポートする</v-btn>
     </v-card>
     <h2 class="mb-5">Johnさんの発案中のイベント</h2>
     <v-card align="center" class="mb-10">
