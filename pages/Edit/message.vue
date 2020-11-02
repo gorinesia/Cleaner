@@ -1,25 +1,63 @@
 <template>
   <v-app class="mx-10">
-    <h2>プロフィール編集</h2>
     <v-alert dense text type="success" :value="alert">プロフィール情報を更新しました</v-alert>
-    <v-container max-width="600px">
-    <h2 class="grey--text">ユーザー情報</h2>
-      <label class="postImage-appendBtn block">プロフィール画像</label>
-      <input class="d-block" type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
-      <label>ユーザー名</label>
-      <v-text-field v-model="name" class="white"></v-text-field>
-      <label>場所</label>
-      <v-text-field v-model="place" class="white"></v-text-field>
-      <label>ひとこと</label>
-      <v-textarea v-model="messageComment" class="white" placeholder="コメントを入力"></v-textarea>
-      <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>更新</v-btn>
+    <v-container>
+      <v-row>
+        <v-col>
+          <v-text-field v-model="messageText"></v-text-field>
+        </v-col>
+        <v-col>
+          <v-btn @click="addMessage">投稿</v-btn>
+        </v-col>
+      </v-row>
+      <v-row v-for="(message, key, index) in  messages" :key="index">
+        <v-col>
+          <p>{{ message.messageText }}</p>
+        </v-col>
+      </v-row>
     </v-container>
   </v-app>
 </template>
 
 <script>
+import firebase from 'firebase';
+
 export default {
-  layout: 'loggedIn'
+  layout: 'loggedIn',
+  data() {
+    return {
+      messages: [],
+      messageText: '',
+      alert: false
+    }
+  },
+  mounted() {
+    this.initMessage();
+  },
+  methods: {
+    initMessage() {
+      const db = firebase.firestore();
+      db.collection('messages')
+      .onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.messages.push({
+            messageText: doc.data().messageText,
+            id: doc.id
+          })
+          console.log(doc.data().messageText);
+          console.log(doc.id);
+        })
+      })
+    },
+    addMessage() {
+      const db = firebase.firestore();
+      db.collection('messages')
+        .add({
+          messageText: this.messageText
+        });
+        this.messageText = ''
+    }
+  }
 }
 </script>
 

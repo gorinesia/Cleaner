@@ -12,7 +12,6 @@
       <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
     </v-container>
     <v-divider inset></v-divider>
-
     <v-container>
       <v-row v-for="message in articles" :key="message.id" class="ma-1">
         <v-card width="100%">
@@ -22,7 +21,7 @@
             </v-col>
             <v-col cols="3">
               <v-img :src="currentUser.image" width="30px" height="30px"></v-img>
-              <v-card-title class="cyan--text text--darken-1">{{ currentUser.displayName }}</v-card-title>
+              <v-card-title class="cyan--text text--darken-1">{{ user.displayName }}</v-card-title>
               <p>{{ message.place }}</p>
               <p>{{ message.messageComment }}</p>
             </v-col>
@@ -63,10 +62,13 @@
 </template>
 
 <script>
+import firebase from 'firebase';
+
 export default {
   layout: 'loggedIn',
   data() {
     return {
+      user: '',
       name: this.$store.state.project.name,
       place: this.$store.state.project.place,
       date: this.$store.state.project.date,
@@ -99,6 +101,11 @@ export default {
     },
   },
   mounted() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.user = firebase.auth().currentUser
+      }
+    });
     this.$store.dispatch('project/getMessage');
   },
   methods: {
@@ -116,8 +123,10 @@ export default {
       this.$store.dispatch('project/getMessage');
     },
     addMessage() {
+      console.log(this.user);
+      console.log(this.currentUser);
       this.$store.dispatch('project/addMessage', {
-        displayName: this.displayname,
+        displayName: this.currentUser[0].displayName,
         name: this.name,
         place: this.place,
         comment: this.messageComment,
