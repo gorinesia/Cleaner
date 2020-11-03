@@ -81,10 +81,12 @@
         </template>
       </v-card>
     </v-container>
-    
+    <h2 style="text-align: center; color: #00ACC1;" class="my-5">イベントをみる</h2>
+    <p style="text-align: center;">イベントとは、みんなでゴミ拾いをするための企画のことです。<br>
+    イベントを立ち上げて、みんなでゴミ拾いをしてみませんか？</p>
     <v-container>
       <v-card>
-        <template v-for="(article, index) in articles">
+        <template v-for="(article, index) in events">
           <v-divider :key="index" />
           <v-row  :key="article.id">
             <v-col cols="9">
@@ -131,14 +133,6 @@ export default {
       loading: false,
       selection: 1,
       image_src: require('@/assets/img/doing3.jpg'),
-      messages: [
-        {
-          avatar: 'image_src',
-          name: 'John Leider',
-          title: 'Welcome to Vuetify!',
-          excerpt: 'Thank you for joining our comminity...',
-        }
-      ]
     }
   },
   computed: {
@@ -156,6 +150,17 @@ export default {
         this.$store.commit('project/setImage', value)
       }
     },
+    events() {
+      return this.$store.getters['event/articles']
+    },
+    image: {
+      get() {
+        return this.$store.getters['event/image']
+      },
+      set(value) {
+        this.$store.commit('event/setImage', value)
+      }
+    }
   },
 }
 </script>

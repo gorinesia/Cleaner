@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-container v-for="personalData in personalDatas" :key="personalData.id">
-      <v-card outlined class="cyan mb-5">
+      <v-card outlined class="mb-5">
         <v-row >
           <v-col align-self="start"  cols="2">
             <v-avatar class="profile" color="grey" size="100">

@@ -2,39 +2,7 @@
   <v-app>
     <v-container fluid>
       <v-main app>
-        <!-- <nuxt-link class="text-h5 cyan--text text--darken-1 font-weight-bold text-decoration-none" to="personal/profile">クリーナーをみる</nuxt-link>
-        <v-container>
-          <v-row v-for="loginUser in loginUsers" :key="loginUser.id">
-            <v-col md="6">
-              <v-card class="mb-5">
-                <v-row>
-                  <v-col cols="2">
-                    <v-col align-self="start"  cols="12">
-                      <v-avatar class="profile" color="grey" size="60">
-                        <v-img :src="image_src"></v-img>
-                      </v-avatar>
-                    </v-col>
-                  </v-col>
-                  <v-col cols="10">
-                    <v-list-item three-line>
-                      <v-list-item-content>
-                        <v-list-item-title class="headline mb-3 font-weight-bold" style="color: #00ACC1;" to="/personal/profile">{{ loginUser. displayName }}</v-list-item-title>
-                        <div class="overline mb-1">10月18日</div>
-                        <p class="mb-5 font-weight-bold">ロンドンを綺麗にしましょう。</p>
-                      </v-list-item-content>
-
-                      <v-avatar tile size="100" color="cyan" :src="image_src" class="ml-5">
-                        <img :src="image_src" alt="">
-                      </v-avatar>
-                    </v-list-item>
-                  </v-col>
-                </v-row>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-container> -->
-        <!-- <nuxt-link class="float-right grey--text text--darken-1 font-weight-bold mb-10 text-decoration-none mr-5" to="/list/cleaner">もっとみる</nuxt-link> -->
-        <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/list/project">プロジェクト</nuxt-link>
+        <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/loggedIn/project">プロジェクト</nuxt-link>
         <v-container>
           <v-card class="mb-5">
             <template v-for="(article, index) in articles">
@@ -65,8 +33,8 @@
             </template>
           </v-card>
         </v-container>
-        <nuxt-link class="float-right font-weight-bold grey--text text--darken-1 text-decoration-none" to="/list/project">もっとみる</nuxt-link>
-        <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/list/event">イベント</nuxt-link>
+        <nuxt-link class="float-right font-weight-bold grey--text text--darken-1 text-decoration-none" to="/loggedIn/project">もっとみる</nuxt-link>
+        <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/loggedIn/event">イベント</nuxt-link>
         <v-container>
           <v-row>
             <template v-for="(event, index) in events">
@@ -98,7 +66,7 @@
             </template>
           </v-row>
         </v-container>
-        <nuxt-link class="float-right font-weight-bold grey--text text--darken-1 text-decoration-none" to="/list/event">もっとみる</nuxt-link>
+        <nuxt-link class="float-right font-weight-bold grey--text text--darken-1 text-decoration-none" to="/loggedIn/event">もっとみる</nuxt-link>
       </v-main>
     </v-container>
   </v-app>

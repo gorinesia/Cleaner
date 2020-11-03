@@ -1,6 +1,6 @@
 <template>
   <v-app class="mx-10" style="color: navy">
-    <v-card outlined class="cyan mb-10">
+    <v-card outlined class="mb-10">
       <v-row  class="fill-height">
         <v-col align-self="start"  cols="2">
           <v-avatar class="profile" color="grey" size="100">
