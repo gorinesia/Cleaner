@@ -35,7 +35,7 @@
           height="150"
           :src="personalData.image"
         ></v-img>
-        <p>今日はいつも通る会社近くの神社のゴミ拾いをしました。あまりゴミ自体は多くなかったですが、綺麗になったので気持ちいいです。</p>
+        <p>{{ personalData.comment }}</p>
       </v-card>
       <v-card color="#E0F7FA" class="rounded-xl pa-5 mb-10" rounded>
         <h2 class="mx-10">クリーナーを応援しよう</h2>
