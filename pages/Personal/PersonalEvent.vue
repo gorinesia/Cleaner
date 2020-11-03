@@ -46,32 +46,37 @@
         <p class="ma-2">僕たちにできることを。人もゴミを多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
       </v-card>
     <!-- </v-container> -->
-
     <!-- <v-container> -->
-      <v-card v-for="currentUser in currentUser" :key="currentUser.id" class="">
-        <v-btn class="mb-10" rounded color="orange" dark x-large @click="applyEvent(currentUser.id)">参加する</v-btn>
-      </v-card>
+      <!-- <div v-for="currentUser in currentUser" :key="currentUser.id"> -->
+      <div :id="currentUser[0].id">
+        <v-btn class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent(currentUser[0].id)" :disabled="isPush">参加する</v-btn>
+      </div>
 
       <div>メンバー</div>
-      <v-card v-for="(applyUser, index) in applyUsers" :key="index">
-        <p><span>{{ applyUser.displayName }}</span>さんが参加予定です</p>
-        <v-avatar>
-          <v-img :src="applyUser.image" width="50px" height="50px"></v-img>
-        </v-avatar>
+      <v-card>
+        <v-row>
+          <v-col cols="1" v-for="(applyUser, index) in applyUsers" :key="index">
+            <!-- <span>{{ applyUser.displayName }}</span> -->
+            <v-avatar>
+              <v-img :src="applyUser.image" width="50px" height="50px"></v-img>
+            </v-avatar>
+          </v-col>
+        </v-row>
       </v-card>
     <!-- </v-container> -->
-      <!-- <v-container clss="h-full flex flex-col ml-6">
+      <v-container clss="h-full flex flex-col ml-6">
+        <div>コメント</div>
         <v-card class="border border-gray-900 rounded mb-4">
           <v-textarea background-color="grey lighten-2" class="w-full pt-4 pl-8 outline-none" placeholder="XXXXへのメッセージ"></v-textarea>
           <v-btn class="cyan text-sm white--text font-bold py-1 px-2 rouded">送信</v-btn>
         </v-card>
-      </v-container> -->
+      </v-container>
     <!-- <v-container v-for="personalData in personalDatas" :key="personalData.id"> -->
       <v-card color="#E0F7FA" class="rounded-xl mt-5 pa-5" rounded>
         <h2 class="mx-10">クリーナーを応援しよう</h2>
         <v-row>
           <v-col cols="9">
-            <p>{{ personalData.name }}さんの行動に対してお金を送ってサポートすることが出来ます。</p>
+            <span>{{ personalData.name }}さんの行動に対してお金を送ってサポートすることができます。</span>
             <v-btn color="#0D47A1" rounded x-large dark>サポートする</v-btn>
           </v-col>
           <v-col cols="3">
@@ -96,6 +101,7 @@ export default {
     return {
       image_src: require('@/assets/img/everyone.jpg'),
       applyUsers: [],
+      isPush: false
     }
   },
   computed: {
@@ -121,9 +127,12 @@ export default {
             displayName: doc.data().displayName,
             image: doc.data().image
           })
-
           console.log(doc.data());
+          this.isPush = true;
         })
+    },
+    disabledbutton() {
+      this.isPush = true;
     }
   }
 }
