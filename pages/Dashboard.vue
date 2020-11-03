@@ -20,7 +20,7 @@
                         <v-avatar class="profile" color="grey" size="60">
                           <v-img :src="article.image"></v-img>
                         </v-avatar>
-                        <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ article.name }}</span>
+                        <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ article.name }}</span>
                         <p class="my-5 font-weight-bold">{{ article.messageComment }}</p>
                       <!-- </v-col> -->
                     </v-col>
@@ -48,7 +48,7 @@
                             <v-avatar class="profile" color="grey" size="60">
                               <v-img :src="event.image"></v-img>
                             </v-avatar>
-                            <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ event.name }}</span>
+                            <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ event.name }}</span>
                             <p class="my-5 font-weight-bold">{{ event.messageComment }}</p>
                             <span class="grey--text float-right">日時： {{ event.date }}</span>
                             <span class="grey--text float-right">場所： {{ event.place}}</span>

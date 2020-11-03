@@ -10,7 +10,9 @@
       <v-textarea v-model="messageComment" class="white" placeholder="コメントを入力"></v-textarea>
       <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
     </v-container>
+
     <v-divider inset></v-divider>
+
     <v-container>
       <v-row v-for="message in articles" :key="message.id" class="ma-1">
         <v-card width="100%">

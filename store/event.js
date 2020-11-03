@@ -132,7 +132,7 @@ export const actions = {
         context.dispatch('getMessage');
       })
   },
-  getPersonalData({commit}, payload) {
+  getPersonalEvent({commit}, payload) {
     const db = firebase.firestore();
     const personalDetails = [];
     db.collection('events')
@@ -148,7 +148,7 @@ export const actions = {
           date: doc.data().date,
         })
           console.log(doc.data())
-          this.$router.push('personal/personalproject');
+          this.$router.push('personal/personalevent');
           commit('setPersonalDatas', personalDetails);
       })
   }
