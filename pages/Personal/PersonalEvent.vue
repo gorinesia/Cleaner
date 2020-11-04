@@ -49,7 +49,10 @@
     <!-- <v-container> -->
       <!-- <div v-for="currentUser in currentUser" :key="currentUser.id"> -->
       <div :id="currentUser[0].id">
-        <v-btn class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent(currentUser[0].id)" :disabled="isPush">参加する</v-btn>
+        <v-btn class="mb-10 white--text" rounded color="orange" x-large v-if="!applyFlag" @click="applyEvent(currentUser[0].id)">{{ applyButton }}</v-btn>
+      </div>
+      <div :id="currentUser[0].id">
+        <v-btn class="mb-10 white--text" rounded color="orange" x-large v-if="applyFlag" @click="cancelEvent(currentUser[0].id)">{{ applyButton }}</v-btn>
       </div>
 
       <div>メンバー</div>
@@ -58,7 +61,7 @@
           <v-col cols="1" v-for="(applyUser, index) in applyUsers" :key="index">
             <!-- <span>{{ applyUser.displayName }}</span> -->
             <v-avatar>
-              <v-img :src="applyUser.image" width="50px" height="50px"></v-img>
+              <v-img :src="applyUser.image" width="50px" height="50px" @click="getProfile(applyUser.id)"></v-img>
             </v-avatar>
           </v-col>
         </v-row>
@@ -101,7 +104,9 @@ export default {
     return {
       image_src: require('@/assets/img/everyone.jpg'),
       applyUsers: [],
-      isPush: false
+      // isPush: false,
+      applyFlag: false,
+      applyButton: '参加'
     }
   },
   computed: {
@@ -115,7 +120,23 @@ export default {
     //   return this.$store.getters['event/currentUser']
     // },
   },
+  // mounted() {
+  //   getEvent(this.currentUser[0].id)
+  // },
   methods: {
+    // getEvent(id) {
+    //   const db = firebase.firestore();
+    //   db.collection('users')
+    //     .doc(id)
+    //     .onSnapshot((doc) => {
+    //       this.applyUsers.push({
+    //         displayName: doc.data().displayName,
+    //         image: doc.data().image,
+    //         id: doc.id,
+    //         applyButton: doc.data().applyButton
+    //       })
+    //     })
+    // },
     applyEvent(id) {
       console.log(id);
       const db = firebase.firestore();
@@ -125,15 +146,29 @@ export default {
         .then((doc) => {
           this.applyUsers.push({
             displayName: doc.data().displayName,
-            image: doc.data().image
+            image: doc.data().image,
+            id: doc.id,
           })
-          console.log(doc.data());
-          this.isPush = true;
+          this.applyFlag = true;
+          this.applyButton = 'キャンセル'
         })
     },
-    disabledbutton() {
-      this.isPush = true;
-    }
+    cancelEvent(id) {
+      console.log(id);
+      const db = firebase.firestore();
+      db.collection('users')
+        .doc(id)
+        .get()
+        .then((doc) => {
+          this.applyUsers.pop();
+        })
+          this.applyFlag = false;
+          this.applyButton = '参加'
+          // this.getEvent(id);
+    },
+    getProfile(id) {
+      console.log(id);
+    },
   }
 }
 </script>

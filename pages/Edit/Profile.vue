@@ -119,7 +119,8 @@ export default {
     updateProfile(id) {
       console.log(id)
       this.$store.dispatch('user/updateProfile', {
-        displayName: this.user.displayName,
+        id,
+        displayName: this.displayName,
         place: this.place,
         comment: this.messageComment,
         image: this.image,
@@ -129,7 +130,7 @@ export default {
       setTimeout(() => {
         this.alert = false
       }, 3000)
-      this.user.displayName = '';
+      this.displayName = '';
       this.place = '';
       this.messageComment = '';
       this.date = '';
