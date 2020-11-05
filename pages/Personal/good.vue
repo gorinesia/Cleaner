@@ -48,10 +48,11 @@
     <!-- </v-container> -->
     <!-- <v-container> -->
       <div :id="currentUser[0].id">
-        <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent(currentUser[0].id)">{{ applyButton }}</v-btn>
+        <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent(currentUser[0].id)"><v-icon>mdi-account</v-icon>{{ applyButton }}</v-btn>
       </div>
       <div :id="currentUser[0].id">
-        <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent(currentUser[0].id)">{{ applyButton }}</v-btn>
+        <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent(currentUser[0].id)"><v-icon>mdi-account</v-icon>{{ applyButton }}</v-btn>
+        <span class="like-count">{{ likeSum }}</span>
       </div>
 
       <div>メンバー</div>
@@ -83,7 +84,7 @@
           </v-col>
           <v-col cols="3">
             <v-avatar tile size="100" color="cyan" :src="image_src" class="mx-5">
-              <img :src="image_src" alt="">
+              <img :src="image_src">
             </v-avatar>
           </v-col>
         </v-row>
@@ -106,7 +107,8 @@ export default {
       // isPush: false,
       applyFlag: false,
       applyButton: '参加',
-      loginUser: null
+      loginUser: null,
+      likeSum: 0
     }
   },
   computed: {
@@ -147,7 +149,8 @@ export default {
         if (doc.exists) {
           console.log(doc)
           this.posts = doc.data();
-          this.applyFlag = this.posts.applyButton.includes(this.loginUser.uid)
+          this.likeSum = this.posts.like_users.length
+          this.applyFlag = this.posts.like_users.includes(this.loginUser.uid)
         }
       })
     },
