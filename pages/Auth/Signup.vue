@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-card width="400px" class="mx-auto my-5" align="center" justify="center">
+    <v-card width="400px" class="mx-auto my-5 pa-5" align="center" justify="center">
       <v-card-title class="cyan--text text--darken-1 text-h4 font-weight-bold justify-center">SIGN UP!</v-card-title>
-      <p>メールアドレスもしくはSNSアカウントで登録</p>
+      <p>メールアドレスで登録</p>
       <v-card-text>
         <v-form>
           <v-text-field prepend-icon="mdi-account-circle" label="ユーザー名" outlined filled v-model="displayName"></v-text-field>
@@ -11,9 +11,9 @@
             <v-btn class="pa-2 font-weight-bold" color="#00ACC1" rounded block large dark @click="signUp">登録する</v-btn>
         </v-form>
       </v-card-text>
-      <p>- Signup with -</p>
-      <v-icon class="mb-5">mdi-twitter</v-icon><br>
-      <v-btn class="mb-5" outlined rounded color="#00ACC1" to="/auth/login">アカウントをお持ちの方はこちら</v-btn>
+      <!-- <p>- Signup with -</p>
+      <v-icon class="mb-5">mdi-twitter</v-icon><br> -->
+      <nuxt-link class="mb-5 grey--text text--darken-1 text-decoration-none" outlined rounded color="#00ACC1" to="/auth/login">アカウントをお持ちの方はこちら</nuxt-link>
     </v-card>
   </v-app>
 </template>
