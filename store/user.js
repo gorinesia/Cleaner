@@ -19,7 +19,10 @@ export const getters = {
 }
 
 export const mutations = {
-  setUser(state, currentUser) {
+  setLoggedIn:(state, payload) => {
+    state.loggedIn = payload;
+  },
+  setUser:(state, currentUser) => {
     state.user = currentUser
   },
   setAllUsers: (state, allLoggedInUsers) => {
@@ -67,6 +70,7 @@ export const actions = {
     firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
       .then((result) => {
         console.log('loggedIn!!');
+        commit('setLoggedIn', true);
         this.$router.push('/dashboard')
       })
       .catch((error) => {
@@ -142,6 +146,7 @@ export const actions = {
     firebase.auth().signOut()
       .then(() => {
         console.log('logout!!');
+        commit('setLoggedIn', false);
         commit('setUser', null);
         this.$router.push('/auth/logout');
       })

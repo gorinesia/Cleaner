@@ -19,10 +19,8 @@
           </v-col>
           <v-spacer></v-spacer>
           <nav>
-            <BeforeLogin v-if="user = null"/>
-          <!-- </nav>
-          <nav> -->
-            <AfterLogin v-else-if="user = !null" />
+            <BeforeLogin v-if="!loggedIn"/>
+            <AfterLogin v-else />
           </nav>
           <!-- <nav>
             <v-btn rounded color="#1A237E" dark class="font-weight-bold orange--text text--darken-1" @click="signInAnonymously">ゲストログイン</v-btn>
@@ -66,30 +64,25 @@ export default {
   },
   data() {
     return {
-      // user: this.$store.state.user.user,
       drawer: false,
+      loggedIn: this.$store.state.user.loggedIn,
       menuItems: [
         {
           name: 'プロジェクトをみる',
           icon: 'mdi-account',
-          // url: '#',
           to: '/list/project'
         },
         {
           name: 'イベントをみる',
           icon: 'mdi-account',
-          // url: '#',
           to: '/list/event'
         },
       ]
     }
   },
-  created() {
-    const user = firebase.auth().currentUser
-  },
-  methods: {
-    signInAnonymously() {
-      this.$store.dispatch('user/signInAnonymously')
+  computed : {
+    currentUser() {
+      return this.$store.getters['user/currentUser']
     }
   }
 }

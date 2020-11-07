@@ -5,7 +5,7 @@
       <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
       あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
 
-      <v-row justify="center" v-if="user=!null">
+      <v-row justify="center" v-if="loggedIn">
         <v-dialog
           v-model="dialog"
           persistent
@@ -112,7 +112,8 @@ export default {
       messageComment: this.$store.state.project.messageComment,
       image_src: require('@/assets/img/doing3.jpg'),
       imageOverlay: false,
-      dialog: false
+      dialog: false,
+      loggedIn: this.$store.state.user.loggedIn
     }
   },
   computed: {
