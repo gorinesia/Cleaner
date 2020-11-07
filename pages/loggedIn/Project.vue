@@ -4,6 +4,7 @@
       <h2 style="text-align: center; color: #00ACC1;">プロジェクトをみる</h2>
       <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
       あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
+
       <v-row justify="center">
         <v-dialog
           v-model="dialog"
@@ -64,27 +65,30 @@
       <v-row v-for="article in articles" :key="article.id">
         <v-col>
           <v-card class="mb-5">
-            <v-row>
-              <v-col cols="2">
-                <v-col align-self="start"  cols="12">
-                <v-avatar tile size="100" color="cyan" class="ml-5">
-                  <img :src="article.image" @click="showImage">
-                  <v-overlay :value="imageOverlay">
-                    <v-img :src="article.image" width="300" height="300"></v-img>
-                    <v-btn @click="closeModalForImage">閉じる</v-btn>
-                  </v-overlay>
-                </v-avatar>
-                </v-col>
-              </v-col>
-              <v-col cols="10">
-                <v-avatar class="profile" color="grey" size="60">
-                  <v-img :src="article.image"></v-img>
-                </v-avatar>
-                  <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/personalproject')">{{ article.displayName }}</span>
-                  <span class="overline mb-1 float-right grey--text">{{ article.date }}</span>
-                  <p class="ma-5">{{ article.comment }}</p>
-              </v-col>
-            </v-row>
+            <template v-for="(article, index) in articles">
+              <v-divider :key="index" />
+              <v-hover v-slot="{ hover }">
+                <v-card :class="{ 'on-hover': hover }" @click="getPersonalProjectId(article.id)">
+                  <v-row  :key="article.id">
+                    <v-col cols="3">
+                      <v-avatar tile size="100" class="ml-5">
+                        <v-img :src="article.image"></v-img>
+                      </v-avatar>
+                    </v-col>
+                    <v-col cols="4">
+                      <v-avatar class="profile" color="grey" size="60">
+                        <v-img :src="article.image"></v-img>
+                      </v-avatar>
+                      <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ article.name }}</span>
+                      <p class="my-5 font-weight-bold">{{ article.messageComment }}</p>
+                    </v-col>
+                    <v-col cols="5">
+                      <span class="grey--text float-right">{{ article.date}}</span>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-hover>
+            </template>
           </v-card>
         </v-col>
       </v-row>
@@ -151,6 +155,11 @@ export default {
       this.messageComment = '';
       this.date = '';
     }
+  },
+  getPersonalProjectId(id) {
+    this.$store.dispatch('project/getPersonalProjectId', {
+      id
+    })
   },
 }
 </script>

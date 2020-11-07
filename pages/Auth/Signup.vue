@@ -27,7 +27,7 @@ export default {
     displayName: '',
     email: '',
     password: '',
-    image: '~/assets/img/user.png',
+    image: require('@/assets/img/user.png'),
     showPassword: false
   }),
   methods: {
@@ -36,7 +36,7 @@ export default {
         displayName: this.displayName,
         email: this.email,
         password: this.password,
-        image: 'user.png'
+        image: this.image
       })
     }
   }

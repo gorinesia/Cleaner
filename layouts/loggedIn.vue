@@ -1,7 +1,11 @@
 <template>
   <div>
   <v-app>
-    <LoggedInHeader class="mb-5" />
+    <AppHeader />
+    <v-spacer></v-spacer>
+    <Nuxt />
+    <AppFooter />
+    <!-- <LoggedInHeader class="mb-5" />
     <v-container class="blue-grey lighten-5">
       <v-row>
         <v-col cols="3">
@@ -12,11 +16,7 @@
         </v-col>
       </v-row>
     </v-container>
-
-    <!-- <v-main> -->
-
-    <!-- </v-main> -->
-    <AppFooter />
+    <AppFooter /> -->
   </v-app>
   </div>
 </template>
@@ -24,13 +24,13 @@
 <script>
 import LoggedInHeader from '@/components/LoggedInHeader.vue'
 import AppFooter from '../components/AppFooter.vue'
-import Sidebar from '../components/Sidebar.vue'
+// import Sidebar from '../components/Sidebar.vue'
 
 export default {
   components: {
     LoggedInHeader,
     AppFooter,
-    Sidebar
+    // Sidebar
   }
 }
 </script>

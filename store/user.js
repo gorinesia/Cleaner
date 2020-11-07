@@ -2,10 +2,12 @@ import firebase from 'firebase';
 
 export const state = () => ({
   user: null,
+  loggedIn: false,
   allUsers: [],
   currentUser: [],
   loginUsers: [],
-  image: null
+  image: null,
+  personalDatas: []
 })
 
 export const getters = {
@@ -13,6 +15,7 @@ export const getters = {
   currentUser: state => state.currentUser,
   loginUsers: state => state.loginUsers,
   image: state => state.image,
+  personalDatas: state => state.personalDatas,
 }
 
 export const mutations = {
@@ -30,6 +33,10 @@ export const mutations = {
   },
   setImage: (state, url) => {
     state.image = url;
+  },
+  setPersonalDatas: (state, personalDetails) => {
+    state.personalDatas = personalDetails
+    console.log(state.personalDatas);
   }
 }
 
@@ -195,6 +202,24 @@ export const actions = {
         console.log(payload);
         // context.commit('resetImage', null);
         context.dispatch('logInUserDisplay');
+      })
+  },
+  getProfile({commit}, payload) {
+    const db = firebase.firestore();
+    const personalDetails = [];
+    db.collection('users')
+      .doc(payload.id)
+      .get()
+      .then((doc) => {
+        personalDetails.push({
+          displayName: doc.data().displayName,
+          place: doc.data().place,
+          comment: doc.data().comment,
+          image: doc.data().image,
+          id: doc.id,
+        })
+          console.log(doc.data())
+          commit('setPersonalDatas', personalDetails);
       })
   }
 }

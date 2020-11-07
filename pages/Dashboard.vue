@@ -8,7 +8,7 @@
             <template v-for="(article, index) in articles">
               <v-divider :key="index" />
               <v-hover v-slot="{ hover }">
-                <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(article.id)">
+                <v-card :class="{ 'on-hover': hover }" @click="getPersonalProjectId(article.id)">
                   <v-row  :key="article.id">
                     <v-col cols="3">
                       <v-avatar tile size="100" class="ml-5">
@@ -16,13 +16,11 @@
                       </v-avatar>
                     </v-col>
                     <v-col cols="4">
-                      <!-- <v-col> -->
-                        <v-avatar class="profile" color="grey" size="60">
-                          <v-img :src="article.image"></v-img>
-                        </v-avatar>
-                        <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ article.name }}</span>
-                        <p class="my-5 font-weight-bold">{{ article.messageComment }}</p>
-                      <!-- </v-col> -->
+                      <v-avatar class="profile" color="grey" size="60">
+                        <v-img :src="article.image"></v-img>
+                      </v-avatar>
+                      <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ article.name }}</span>
+                      <p class="my-5 font-weight-bold">{{ article.messageComment }}</p>
                     </v-col>
                     <v-col cols="5">
                       <span class="grey--text float-right">{{ article.date}}</span>
@@ -50,7 +48,7 @@
                             </v-avatar>
                             <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ event.name }}</span>
                             <p class="my-5 font-weight-bold">{{ event.messageComment }}</p>
-                            <span class="grey--text float-right">日時： {{ event.date }}</span>
+                            <span class="grey--text">日時： {{ event.date }}</span>
                             <span class="grey--text float-right">場所： {{ event.place}}</span>
                           </v-col>
                         </v-col>
@@ -135,11 +133,10 @@ export default {
     this.$store.dispatch('event/getMessage');
   },
   methods: {
-    getPersonalId(id) {
-      this.$store.dispatch('project/getPersonalData', {
+    getPersonalProjectId(id) {
+      this.$store.dispatch('project/getPersonalProjectId', {
         id
       })
-      console.log(id)
     },
     getPersonalEvent(id) {
       this.$store.dispatch('event/getPersonalEvent', {

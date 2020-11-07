@@ -1,7 +1,7 @@
 <template>
   <v-app class="mx-10">
     <h2>プロフィール編集</h2>
-    <v-alert dense text type="success" :value="alert">プロフィール情報を更新しました</v-alert>
+    <v-alert dense text type="success" :value="alert" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロフィール情報を更新しました</v-alert>
     <!-- <v-dialog
           v-model="dialog"
           persistent
@@ -33,7 +33,7 @@
             <label>場所</label>
             <v-text-field v-model="place" class="white"></v-text-field>
             <v-textarea v-model="messageComment" class="white" placeholder="コメントを入力"></v-textarea>
-            <!-- <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn> -->
+            <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn> -->
           <!-- </v-container>
           <small>*indicates required field</small>
         </v-card-text>
@@ -65,9 +65,9 @@
         <label>ユーザー名</label>
         <v-text-field v-model="displayName" class="white" :placeholder="currentUser.displayName"></v-text-field>
         <label>場所</label>
-        <v-text-field v-model="place" class="white" placeholder="東京"></v-text-field>
+        <v-text-field v-model="place" class="white" placeholder="現在地を入力"></v-text-field>
         <label>ひとこと</label>
-        <v-textarea v-model="messageComment" class="white" placeholder="コメントを入力"></v-textarea>
+        <v-textarea v-model="comment" class="white" placeholder="コメントを入力"></v-textarea>
         <v-btn @click="updateProfile(currentUser.id)" class=" ma-3 float-right font-weight-bold" color="cyan" dark>更新</v-btn>
       </v-card>
     </v-container>
@@ -84,7 +84,7 @@ export default {
       displayName: '',
       place: '',
       date: '',
-      messageComment: '',
+      comment: '',
       alert: false,
       dialog: false
     }
@@ -122,7 +122,7 @@ export default {
         id,
         displayName: this.displayName,
         place: this.place,
-        comment: this.messageComment,
+        comment: this.comment,
         image: this.image,
         date: new Date().toLocaleString()
       });
@@ -132,7 +132,7 @@ export default {
       }, 3000)
       this.displayName = '';
       this.place = '';
-      this.messageComment = '';
+      this.comment = '';
       this.date = '';
     },
   }

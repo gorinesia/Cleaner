@@ -17,10 +17,10 @@
               </v-tab>
             </v-tabs>
           </v-col>
-          <v-spacer></v-spacer>
-          <nav>
+          <!-- <v-spacer></v-spacer> -->
+          <!-- <nav>
             <v-btn rounded color="#00ACC1" class="font-weight-bold " dark @click="logOut">ログアウト</v-btn>
-          </nav>
+          </nav> -->
         </v-app-bar>
       </v-row>
     </v-container>
@@ -60,7 +60,7 @@ export default {
         {
           name: 'プロジェクトをみる',
           url: '#',
-          to: '/loggedIn/project',
+          to: '/list/project',
         },
         {
           name: 'イベントをみる',

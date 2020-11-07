@@ -1,21 +1,22 @@
 <template>
   <v-app>
-    <AppHeader class="mb-10" />
-    <!-- <v-main> -->
+    <AppHeader />
+    <v-main>
       <Nuxt class="blue-grey lighten-5" />
-    <!-- </v-main> -->
-    <AppFooter />
+    </v-main>
   </v-app>
 </template>
 
 <script>
 import AppHeader from '../components/AppHeader.vue'
 import AppFooter from '../components/AppFooter.vue'
+import BeforeLogin from '../components/BeforeLogin.vue'
 
 export default {
   components: {
     AppHeader,
     AppFooter,
+    BeforeLogin,
   }
 }
 </script>

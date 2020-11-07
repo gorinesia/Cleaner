@@ -19,12 +19,6 @@ export default {
           url: '#',
           to: '/dashboard'
         },
-        // {
-        //   name: 'クリーナーをみる',
-        //   icon: 'mdi-account',
-        //   url: '#',
-        //   to: '/list/cleaner'
-        // },
         {
           name: 'プロジェクトをみる',
           icon: 'mdi-account',

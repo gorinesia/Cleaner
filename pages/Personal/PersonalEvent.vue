@@ -14,7 +14,6 @@
                 <v-list-item-title class="cyan--text text--darken-1 font-weight-bold title text-h4" dark>
                   {{ personalData.name }}
                 </v-list-item-title>
-                <v-list-item-subtitle class="mb-5">Network Engineer</v-list-item-subtitle>
                 <p>世界が綺麗になればいいなと思って日々活動しています。よろしくお願いいたします。</p>
               </v-list-item-content>
             </v-list-item>
@@ -48,10 +47,10 @@
     <!-- </v-container> -->
     <!-- <v-container> -->
       <div :id="currentUser[0].id">
-        <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent(currentUser[0].id)">{{ applyButton }}</v-btn>
+        <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent(currentUser[0].id)"><span :applyButton="applyUsers[0].applyButton">{{ applyUsers[0].applyButton }}</span></v-btn>
       </div>
       <div :id="currentUser[0].id">
-        <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent(currentUser[0].id)">{{ applyButton }}</v-btn>
+        <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent(currentUser[0].id)"><span :applyButton="applyUsers[0].applyButton">{{ applyUsers[0].applyButton }}</span></v-btn>
       </div>
 
       <div>メンバー</div>
@@ -131,47 +130,50 @@ export default {
     // })
   },
   mounted() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        console.log(user)
-        this.loginUser = user;
-        const db = firebase.firestore();
-        const docRef = db.collection('posts').doc(this.currentUser[0].id);
-        this.getEvent(docRef)
-      }
-    })
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   if (user) {
+    //     console.log(user)
+    //     this.loginUser = user;
+    //     const db = firebase.firestore();
+    //     const docRef = db.collection('posts').doc(this.currentUser[0].id);
+    //   }
+    // })
+    this.getEvent(this.currentUser[0].id)
   },
   methods: {
-    getEvent(docRef) {
-      docRef.get().then(doc => {
-        if (doc.exists) {
-          console.log(doc)
-          this.posts = doc.data();
-          this.applyFlag = this.posts.applyButton.includes(this.loginUser.uid)
-        }
-      })
-    },
-    // getEvent(id) {
-    //   const db = firebase.firestore();
-    //   db.collection('posts')
-    //     .doc({id})
-    //     .onSnapshot((doc) => {
-    //       console.log(doc.data());
-    //         this.applyUsers.push({
-    //         // displayName: doc.data().displayName,
-    //         image: doc.data().image,
-    //         id: doc.id,
-    //         applyFlag: doc.data().applyFlag
-    //       })
-    //     })
+    // getEvent(docRef) {
+    //   docRef.get().then(doc => {
+    //     if (doc.exists) {
+    //       console.log(doc)
+    //       this.posts = doc.data();
+    //       this.applyFlag = this.posts.applyButton.includes(this.loginUser.uid)
+    //     }
+    //   })
     // },
+    getEvent(id) {
+      // const db = firebase.firestore();
+      // db.collection('posts')
+      //   .doc(id)
+      const db = firebase.firestore();
+      const docRef = db.collection('users').doc(id).collection('posts').doc('apply')
+      docRef
+        .onSnapshot((doc) => {
+          console.log(doc.data());
+          this.applyUsers.push({
+            // displayName: doc.data().displayName,
+            // image: doc.data().image,
+            // id: doc.id,
+            applyButton: doc.data().applyButton
+          })
+        })
+    },
     applyEvent(id) {
       console.log(id);
       // if (this.applyFlag = false) {
         const db = firebase.firestore();
-        const docRef = db.collection('posts').doc(id);
-          docRef.update({
-            'like_users': firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
+        const docRef = db.collection('users').doc(id).collection('posts').doc('apply')
+          docRef.set({
+            applyButton: 'キャンセル',
           })
           // .then((doc) => {
             // this.applyUsers.push({
@@ -181,7 +183,7 @@ export default {
             // })
             // this.applyFlag = true;
             // this.applyButton = 'キャンセル'
-            this.getEvent(docRef);
+            this.getEvent(id);
           // })
       // }
       // console.log(id);
@@ -205,14 +207,14 @@ export default {
       console.log(id);
       // if (this.applyFlag = true) {
         const db = firebase.firestore();
-        const docRef = db.collection('posts').doc(id);
+        const docRef = db.collection('users').doc(id).collection('posts').doc('apply');
           docRef.update({
-            'like_users': firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
+            applyButton: '参加',
             // applyFlag: false
           })
           // .then((doc) => {
             // this.applyButton = '参加';
-            this.getEvent(docRef);
+            this.getEvent(id);
           // })
             // this.getEvent(id);
       // }
