@@ -9,7 +9,7 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title class="cyan--text text--darken-1 font-weight-bold text-h5">{{ currentUser.displayName }}</v-list-item-title>
+              <nuxt-link class="cyan--text text--darken-1 font-weight-bold text-h5 text-decoration-none" to="/personal/profile" @click.native="getProfile(currentUser.id)">{{ currentUser.displayName }}</nuxt-link>
             </v-list-item-content>
           </v-list-item>
         </template>
@@ -46,7 +46,7 @@ export default {
           link: '/dashboard'
         },
         {
-          title: 'プロフィール',
+          title: 'プロフィール編集',
           icon: 'mdi-folder',
           link: '/edit/profile'
         },
@@ -93,6 +93,13 @@ export default {
       }
     },
   },
+  methods: {
+    getProfile(id) {
+      this.$store.dispatch('user/getProfile', {
+        id
+      })
+    }
+  }
 }
 </script>
 
