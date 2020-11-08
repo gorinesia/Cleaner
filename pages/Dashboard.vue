@@ -2,18 +2,18 @@
   <v-app>
     <v-container>
       <v-main app>
-      <v-tabs color="#EF6C00" class="mb-10" centered>
-        <v-tab  v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
-          <v-icon>{{ menuItem.icon }}</v-icon>
-          {{ menuItem.name }}
-        </v-tab>
-      </v-tabs>
-        <h2 class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" align="center" justify="center">プロジェクト</h2>
+        <!-- <v-tabs color="#EF6C00" class="mb-10" centered>
+          <v-tab  v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
+            <v-icon>{{ menuItem.icon }}</v-icon>
+            {{ menuItem.name }}
+          </v-tab>
+        </v-tabs> -->
+        <!-- <h2 class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" align="center" justify="center">プロジェクト</h2>
         <v-container>
           <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
-          あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
+          あなたも日々のプロジェクトを気軽に投稿してみませんか？</p> -->
 
-          <v-row justify="center" v-if="loggedIn">
+          <!-- <v-row justify="center" v-if="loggedIn">
             <v-dialog
               v-model="dialog"
               persistent
@@ -68,9 +68,9 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-          </v-row>
+          </v-row> -->
 
-          <v-card class="mb-5">
+          <!-- <v-card class="mb-5">
             <template v-for="(article, index) in articles">
               <v-divider :key="index" />
               <v-hover v-slot="{ hover }">
@@ -95,18 +95,18 @@
                 </v-card>
               </v-hover>
             </template>
-          </v-card>
-        </v-container>
+          </v-card> -->
+        <!-- </v-container> -->
         <!-- <nuxt-link class="float-right font-weight-bold grey--text text--darken-1 text-decoration-none" to="/loggedIn/project">もっとみる</nuxt-link> -->
-        <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/loggedIn/event">イベント</nuxt-link>
+        <!-- <nuxt-link class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" to="/loggedIn/event">イベント</nuxt-link> -->
         <!-- <v-container> -->
-          <v-row>
+          <!-- <v-row>
             <template v-for="(event, index) in events">
               <v-col :key="index" cols="12">
                 <v-hover v-slot="{ hover }">
                   <v-card :class="{ 'on-hover': hover }" @click="getPersonalEvent(event.id)">
-                    <!-- <v-divider :key="index" /> -->
-                      <v-row :key="event.id" >
+                    <v-divider :key="index" /> -->
+                      <!-- <v-row :key="event.id" >
                         <v-col cols="9">
                           <v-col>
                             <v-avatar class="profile" color="grey" size="60">
@@ -123,12 +123,12 @@
                             <v-img :src="event.image"></v-img>
                           </v-avatar>
                         </v-col>
-                      </v-row>
-                  </v-card>
+                      </v-row> -->
+                  <!-- </v-card>
                 </v-hover>
               </v-col>
             </template>
-          </v-row>
+          </v-row> -->
         <!-- </v-container> -->
       </v-main>
     </v-container>
@@ -156,23 +156,23 @@ export default {
       item: 0,
       dialog: false,
       loggedIn: this.$store.state.user.loggedIn,
-      menuItems: [
-        {
-          name: 'プロジェクト',
-          icon: 'mdi-tooltip',
-          to: '/list/project'
-        },
-        {
-          name: 'イベント',
-          icon: 'mdi-calendar',
-          to: '/list/event'
-        },
-        {
-          name: 'マイページ',
-          icon: 'mdi-account',
-          to: '/dashboard'
-        },
-      ]
+      // menuItems: [
+      //   {
+      //     name: 'プロジェクト',
+      //     icon: 'mdi-tooltip',
+      //     to: '/list/project'
+      //   },
+      //   {
+      //     name: 'イベント',
+      //     icon: 'mdi-calendar',
+      //     to: '/list/event'
+      //   },
+      //   {
+      //     name: 'マイページ',
+      //     icon: 'mdi-account',
+      //     to: '/dashboard'
+      //   },
+      // ]
     }
   },
   computed: {

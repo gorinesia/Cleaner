@@ -3,6 +3,7 @@
   <v-app>
     <AppHeader />
     <v-main>
+      <Toolbar v-if="loggedIn" />
       <v-row>
         <v-col cols="3">
           <Sidebar />
@@ -21,12 +22,19 @@
 import LoggedInHeader from '@/components/LoggedInHeader.vue'
 import AppFooter from '../components/AppFooter.vue'
 import Sidebar from '../components/Sidebar.vue'
+import Toolbar from '@/components/Toolbar.vue'
 
 export default {
   components: {
     LoggedInHeader,
     AppFooter,
     Sidebar,
+    Toolbar,
+  },
+  data() {
+    return {
+      loggedIn: this.$store.state.user.loggedIn
+    }
   }
 }
 </script>

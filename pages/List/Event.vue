@@ -1,12 +1,12 @@
 <template>
   <v-app>
     <v-container>
-      <v-tabs color="#EF6C00" class="mb-10" centered>
+      <!-- <v-tabs color="#EF6C00" class="mb-10" centered>
         <v-tab  v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
           <v-icon>{{ menuItem.icon }}</v-icon>
           {{ menuItem.name }}
         </v-tab>
-      </v-tabs>
+      </v-tabs> -->
       <h2 style="text-align: center; color: #00ACC1;" class="my-5">イベントをみる</h2>
       <p style="text-align: center;">イベントとは、みんなでゴミ拾いをするための企画のことです。<br>
       イベントを立ち上げて、みんなでゴミ拾いをしてみませんか？</p>
@@ -46,10 +46,18 @@
                 <label>場所</label>
                 <v-text-field v-model="place" class="white" placeholder="例）東京"></v-text-field>
                 <label>イベント説明</label>
-                <v-textarea v-model="messageComment" class="white" placeholder="例）渋谷を綺麗にしましょう"></v-textarea>
+                <v-textarea v-model="comment" class="white" placeholder="例）渋谷を綺麗にしましょう"></v-textarea>
                 <v-btn @click="editArticles(articleId)">編集</v-btn>
                 <v-btn @click="closeModalForEdit">閉じる</v-btn>
               </v-container>
+
+              <v-btn @click="openModalForDelete(message.id)" class="float-right mb-1">削除</v-btn>
+              <v-overlay :value="deleteOverlay">
+                <p>本当に記事を削除しますか？</p>
+                <v-btn @click="deleteArticles(articleId)">削除</v-btn>
+                <v-btn @click="closeModalForDelete">閉じる</v-btn>
+              </v-overlay>
+
               <!-- <small>*indicates required field</small> -->
             </v-card-text>
             <v-card-actions>
@@ -112,30 +120,31 @@ export default {
     return {
       name: this.$store.state.event.name,
       displayName: this.$store.state.event.displayName,
+      time: this.$store.state.event.time,
       place: this.$store.state.event.place,
       date: this.$store.state.event.date,
-      messageComment: this.$store.state.event.messageComment,
+      comment: this.$store.state.event.comment,
       image_src: require('@/assets/img/doing3.jpg'),
       imageOverlay: false,
       dialog: false,
       loggedIn: this.$store.state.user.loggedIn,
-      menuItems: [
-        {
-          name: 'プロジェクト',
-          icon: 'mdi-tooltip',
-          to: '/list/project'
-        },
-        {
-          name: 'イベント',
-          icon: 'mdi-calendar',
-          to: '/list/event'
-        },
-        {
-          name: 'マイページ',
-          icon: 'mdi-account',
-          to: '/dashboard'
-        },
-      ]
+      // menuItems: [
+      //   {
+      //     name: 'プロジェクト',
+      //     icon: 'mdi-tooltip',
+      //     to: '/list/project'
+      //   },
+      //   {
+      //     name: 'イベント',
+      //     icon: 'mdi-calendar',
+      //     to: '/list/event'
+      //   },
+      //   {
+      //     name: 'マイページ',
+      //     icon: 'mdi-account',
+      //     to: '/dashboard'
+      //   },
+      // ]
     }
   },
   computed: {
@@ -149,6 +158,9 @@ export default {
       set(value) {
         this.$store.commit('event/setImage', value)
       }
+    },
+    deleteOverlay() {
+      return this.$store.getters['event/deleteOverlay']
     },
   },
   mounted() {
@@ -166,19 +178,57 @@ export default {
         ev
       });
     },
+    getMessage() {
+      this.$store.dispatch('event/getMessage');
+    },
     addMessage() {
       this.$store.dispatch('event/addMessage', {
         name: this.name,
         place: this.place,
-        comment: this.messageComment,
+        comment: this.comment,
         image: this.image,
         date: new Date().toLocaleString()
       });
       this.name = '';
       this.place = '';
-      this.messageComment = '';
+      this.comment = '';
       this.date = '';
-    }
+    },
+    openModalForDelete(id) {
+      this.$store.commit('event/openModalForDelete', {
+        id
+      });
+    },
+    closeModalForDelete() {
+      this.$store.commit('event/closeModalForDelete');
+    },
+    deleteArticles(id) {
+      console.log(id);
+      this.$store.dispatch('event/deleteArticles', {
+        id
+      });
+    },
+    openModalForEdit(id) {
+      this.$store.commit('event/openModalForEdit', {
+        id
+      });
+    },
+    closeModalForEdit() {
+      this.$store.commit('event/closeModalForEdit');
+    },
+    editArticles(id) {
+      this.$store.dispatch('event/editArticles', {
+        id,
+        name: this.name,
+        place: this.place,
+        comment: this.messageComment,
+        image: this.image,
+      });
+      this.name = ''
+      this.place = ''
+      this.messageComment = ''
+      this.image = ''
+    },
   },
 }
 </script>

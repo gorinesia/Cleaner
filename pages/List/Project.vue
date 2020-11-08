@@ -1,12 +1,12 @@
 <template>
   <v-app>
     <v-container>
-      <v-tabs color="#EF6C00" class="mb-10" centered>
+      <!-- <v-tabs color="#EF6C00" class="mb-10" centered>
         <v-tab  v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
           <v-icon>{{ menuItem.icon }}</v-icon>
           {{ menuItem.name }}
         </v-tab>
-      </v-tabs>
+      </v-tabs> -->
       <h2 style="text-align: center; color: #00ACC1;">プロジェクトをみる</h2>
       <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
       あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
@@ -117,29 +117,30 @@ export default {
       name: this.$store.state.project.name,
       displayName: this.$store.state.project.displayName,
       place: this.$store.state.project.place,
+      time: this.$store.state.project.time,
       date: this.$store.state.project.date,
-      messageComment: this.$store.state.project.messageComment,
+      comment: this.$store.state.project.comment,
       image_src: require('@/assets/img/doing3.jpg'),
       imageOverlay: false,
       dialog: false,
       loggedIn: this.$store.state.user.loggedIn,
-      menuItems: [
-        {
-          name: 'プロジェクト',
-          icon: 'mdi-tooltip',
-          to: '/list/project'
-        },
-        {
-          name: 'イベント',
-          icon: 'mdi-calendar',
-          to: '/list/event'
-        },
-        {
-          name: 'マイページ',
-          icon: 'mdi-account',
-          to: '/dashboard'
-        },
-      ]
+      // menuItems: [
+      //   {
+      //     name: 'プロジェクト',
+      //     icon: 'mdi-tooltip',
+      //     to: '/list/project'
+      //   },
+      //   {
+      //     name: 'イベント',
+      //     icon: 'mdi-calendar',
+      //     to: '/list/event'
+      //   },
+      //   {
+      //     name: 'マイページ',
+      //     icon: 'mdi-account',
+      //     to: '/dashboard'
+      //   },
+      // ]
     }
   },
   computed: {
@@ -172,9 +173,10 @@ export default {
     },
     addMessage() {
       this.$store.dispatch('project/addMessage', {
+        displayName: this.displayName,
         name: this.name,
         place: this.place,
-        comment: this.messageComment,
+        comment: this.comment,
         image: this.image,
         date: new Date().toLocaleString()
       });
@@ -184,7 +186,7 @@ export default {
       this.date = '';
     },
     getPersonalId(id) {
-      this.$store.dispatch('project/getPersonalData', {
+      this.$store.dispatch('project/getPersonalProjectId', {
         id
       })
     },

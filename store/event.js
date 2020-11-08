@@ -8,7 +8,7 @@ export const state = () => ({
   date: '',
   articles: [],
   articleId: '',
-  messageComment: '',
+  comment: '',
   deleteOverlay: false,
   editOverlay: false,
   personalDatas: []
@@ -88,7 +88,7 @@ export const actions = {
           articles.push({
             name: doc.data().name,
             place: doc.data().place,
-            messageComment: doc.data().comment,
+            comment: doc.data().comment,
             image: doc.data().image,
             id: doc.id,
             date: doc.data().date,
@@ -143,7 +143,7 @@ export const actions = {
         personalDetails.push({
           name: doc.data().name,
           place: doc.data().place,
-          messageComment: doc.data().comment,
+          comment: doc.data().comment,
           image: doc.data().image,
           id: doc.id,
           date: doc.data().date,
