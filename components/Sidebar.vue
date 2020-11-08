@@ -40,11 +40,11 @@ export default {
     return {
       image_src: require('@/assets/img/doing3.jpg'),
       items: [
-        {
-          title: 'HOME',
-          icon: 'mdi-folder',
-          link: '/dashboard'
-        },
+        // {
+        //   title: 'HOME',
+        //   icon: 'mdi-folder',
+        //   link: '/dashboard'
+        // },
         {
           title: 'プロフィール編集',
           icon: 'mdi-folder',
@@ -72,11 +72,11 @@ export default {
           icon: 'mdi-upload',
           link: '/edit/sapport'
         },
-        {
-          title: 'トライアル',
-          icon: 'mdi-upload',
-          link: '/edit/trial'
-        }
+        // {
+        //   title: 'トライアル',
+        //   icon: 'mdi-upload',
+        //   link: '/edit/trial'
+        // }
       ],
     }
   },

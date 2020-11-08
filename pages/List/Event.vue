@@ -1,9 +1,78 @@
 <template>
   <v-app>
     <v-container>
+      <v-tabs color="#EF6C00" class="mb-10" centered>
+        <v-tab  v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
+          <v-icon>{{ menuItem.icon }}</v-icon>
+          {{ menuItem.name }}
+        </v-tab>
+      </v-tabs>
       <h2 style="text-align: center; color: #00ACC1;" class="my-5">イベントをみる</h2>
       <p style="text-align: center;">イベントとは、みんなでゴミ拾いをするための企画のことです。<br>
       イベントを立ち上げて、みんなでゴミ拾いをしてみませんか？</p>
+
+      <v-row justify="center" v-if="loggedIn">
+        <v-dialog
+          v-model="dialog"
+          persistent
+          max-width="600px"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              style="position: fixed; z-index: 1; right: 200px; bottom: 100px"
+              fab
+              large
+              color="cyan darken-1"
+              dark
+              v-bind="attrs"
+              v-on="on"
+            >
+              <v-icon dark>mdi-plus</v-icon>
+            </v-btn>
+          </template>
+          <v-card>
+            <v-card-title>
+              <span class="headline">イベントを作成する</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <label class="postImage-appendBtn"></label>
+                <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
+                <v-img :src="image" width="100" height="100"></v-img>
+                <label>イベント名</label>
+                <v-text-field v-model="name" class="white" placeholder="例）東京を綺麗にしよう大作戦"></v-text-field>
+                <label>日時</label>
+                <v-text-field v-model="time" class="white" placeholder="例）11月7日 9:00"></v-text-field>
+                <label>場所</label>
+                <v-text-field v-model="place" class="white" placeholder="例）東京"></v-text-field>
+                <label>イベント説明</label>
+                <v-textarea v-model="messageComment" class="white" placeholder="例）渋谷を綺麗にしましょう"></v-textarea>
+                <v-btn @click="editArticles(articleId)">編集</v-btn>
+                <v-btn @click="closeModalForEdit">閉じる</v-btn>
+              </v-container>
+              <!-- <small>*indicates required field</small> -->
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="blue darken-1"
+                text
+                @click="dialog = false"
+              >
+                Close
+              </v-btn>
+              <v-btn
+                color="blue darken-1"
+                text
+                @click="dialog = false"
+              >
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
+
       <v-row v-for="article in articles" :key="article.id">
         <v-col>
           <v-card class="mb-5">
@@ -48,8 +117,25 @@ export default {
       messageComment: this.$store.state.event.messageComment,
       image_src: require('@/assets/img/doing3.jpg'),
       imageOverlay: false,
-      dialog: false
-
+      dialog: false,
+      loggedIn: this.$store.state.user.loggedIn,
+      menuItems: [
+        {
+          name: 'プロジェクト',
+          icon: 'mdi-tooltip',
+          to: '/list/project'
+        },
+        {
+          name: 'イベント',
+          icon: 'mdi-calendar',
+          to: '/list/event'
+        },
+        {
+          name: 'マイページ',
+          icon: 'mdi-account',
+          to: '/dashboard'
+        },
+      ]
     }
   },
   computed: {

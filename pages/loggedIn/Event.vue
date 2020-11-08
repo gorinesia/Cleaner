@@ -96,7 +96,6 @@
 <script>
 export default {
   name: 'event',
-  layout: 'loggedIn',
   data() {
     return {
       name: this.$store.state.event.name,

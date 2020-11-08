@@ -1,6 +1,12 @@
 <template>
   <v-app class="mx-10">
     <v-container v-for="personalData in personalDatas" :key="personalData.id">
+      <v-tabs color="#EF6C00" class="mb-10" centered>
+        <v-tab  v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
+          <v-icon>{{ menuItem.icon }}</v-icon>
+          {{ menuItem.name }}
+        </v-tab>
+      </v-tabs>
       <v-card outlined class="mb-10">
         <v-row  class="fill-height">
           <v-col align-self="start"  cols="2">
@@ -101,6 +107,23 @@ export default {
         'プロジェクト', 'イベント',
       ],
       image_src: require('@/assets/img/everyone.jpg'),
+      menuItems: [
+        {
+          name: 'プロジェクト',
+          icon: 'mdi-tooltip',
+          to: '/dashboard'
+        },
+        {
+          name: 'イベント',
+          icon: 'mdi-calendar',
+          to: '/list/event'
+        },
+        {
+          name: 'マイページ',
+          icon: 'mdi-account',
+          to: '/personal/profile'
+        },
+      ]
     }
   },
   computed: {
