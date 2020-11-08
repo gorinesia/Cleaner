@@ -47,10 +47,10 @@
     <!-- </v-container> -->
     <!-- <v-container> -->
       <div :id="currentUser[0].id">
-        <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent(currentUser[0].id)"><span :applyButton="applyUsers[0].applyButton">{{ applyUsers[0].applyButton }}</span></v-btn>
+        <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent(currentUser[0].id)">{{ applyButton }}</v-btn>
       </div>
       <div :id="currentUser[0].id">
-        <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent(currentUser[0].id)"><span :applyButton="applyUsers[0].applyButton">{{ applyUsers[0].applyButton }}</span></v-btn>
+        <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent(currentUser[0].id)">{{ applyButton }}</v-btn>
       </div>
 
       <div>メンバー</div>
@@ -155,7 +155,19 @@ export default {
       // db.collection('posts')
       //   .doc(id)
       const db = firebase.firestore();
-      const docRef = db.collection('users').doc(id).collection('posts').doc('apply')
+      const docRef = db.collection('users').doc(id).collection('posts').doc('apply');
+      // docRef
+      //   .get()
+      //   .then((querySnapshot) => {
+      //     querySnapshot.forEach((doc) => {
+      //       this.applyUsers.push({
+      //         // displayName: doc.data().displayName,
+      //         // image: doc.data().image,
+      //         // id: doc.id,
+      //         applyButton: doc.data().applyButton
+      //       })
+      //     })
+      //   })
       docRef
         .onSnapshot((doc) => {
           console.log(doc.data());
@@ -163,7 +175,7 @@ export default {
             // displayName: doc.data().displayName,
             // image: doc.data().image,
             // id: doc.id,
-            applyButton: doc.data().applyButton
+            // applyButton: doc.data().applyButton
           })
         })
     },
@@ -173,7 +185,7 @@ export default {
         const db = firebase.firestore();
         const docRef = db.collection('users').doc(id).collection('posts').doc('apply')
           docRef.set({
-            applyButton: 'キャンセル',
+            // applyButton: 'キャンセル',
           })
           // .then((doc) => {
             // this.applyUsers.push({
@@ -209,7 +221,7 @@ export default {
         const db = firebase.firestore();
         const docRef = db.collection('users').doc(id).collection('posts').doc('apply');
           docRef.update({
-            applyButton: '参加',
+            // applyButton: '参加',
             // applyFlag: false
           })
           // .then((doc) => {

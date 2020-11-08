@@ -126,6 +126,7 @@ export const actions = {
           allLoginUsers.push({
             displayName: doc.data().displayName,
             email: doc.data().email,
+            comment: doc.data().comment,
             image: doc.data().image,
             id: doc.id
           })

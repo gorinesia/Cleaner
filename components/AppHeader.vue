@@ -7,7 +7,11 @@
           <v-col cols="1"></v-col>
           <v-col cols="7">
               <span><v-icon>fas fa-lock</v-icon></span>
-              <nuxt-link class="font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/">
+              <nuxt-link v-if="!loggedIn" class="font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/">
+                <v-icon large color="cyan darken-1">mdi-earth</v-icon>
+                Cleaner
+              </nuxt-link>
+              <nuxt-link  v-else class="font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/dashboard">
                 <v-icon large color="cyan darken-1">mdi-earth</v-icon>
                 Cleaner
               </nuxt-link>
@@ -71,18 +75,6 @@ export default {
     return {
       drawer: false,
       loggedIn: this.$store.state.user.loggedIn,
-    //   menuItems: [
-    //     {
-    //       name: 'プロジェクトをみる',
-    //       icon: 'mdi-account',
-    //       to: '/list/project'
-    //     },
-    //     {
-    //       name: 'イベントをみる',
-    //       icon: 'mdi-account',
-    //       to: '/list/event'
-    //     },
-    //   ]
     }
   },
   computed : {

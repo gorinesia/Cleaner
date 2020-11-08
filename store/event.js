@@ -149,7 +149,7 @@ export const actions = {
           date: doc.data().date,
         })
           console.log(doc.data())
-          this.$router.push('personal/personalevent');
+          this.$router.push('/personal/personalevent');
           commit('setPersonalDatas', personalDetails);
       })
   }

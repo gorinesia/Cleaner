@@ -1,11 +1,11 @@
 <template>
   <v-app>
-    <v-container v-for="personalProjectId in personalProjectIds" :key="personalProjectId.id">
+    <v-container v-for="personalProjectId in personalProjectId" :key="personalProjectId.id">
       <v-card outlined class="mb-5">
         <v-row >
           <v-col align-self="start"  cols="2">
             <v-avatar class="profile" color="grey" size="100">
-              <v-img :src="personalProjectId.image"></v-img>
+              <v-img :src="personalProjectId.displayImage"></v-img>
             </v-avatar>
           </v-col>
           <v-col>
@@ -14,14 +14,14 @@
                 <v-list-item-title class="font-weight-bold title text-h4" dark>
                   {{ personalProjectId.displayName }}
                 </v-list-item-title>
-                <p>{{ personalProjectId.comment }}</p>
+                <p>{{ currentUser[0].comment }}</p>
               </v-list-item-content>
             </v-list-item>
           </v-col>
         </v-row>
       </v-card>
       <h2 class="mb-5">{{ personalProjectId.displayName }}さんのプロジェクト</h2>
-      <v-card align="center" class="mb-10" v-for="personalProjectId in personalProjectIds" :key="personalProjectId.id">
+      <v-card align="center" class="mb-10">
         <v-row >
           <v-col cols="2">
             <p>{{ personalProjectId.date}}</p>
@@ -45,7 +45,7 @@
         <v-row>
           <v-col cols="9">
             <v-avatar class="profile mx-10" color="grey" size="50">
-              <v-img :src="personalProjectId.image"></v-img>
+              <v-img :src="personalProjectId.displayImage"></v-img>
             </v-avatar>
             <p class="mb-10 mx-10">{{ personalProjectId.displayName }}さんの行動に対してお金を送ってサポートすることが出来ます。</p>
             <v-btn color="#0D47A1" class="mx-10" rounded x-large dark>サポートする</v-btn>
@@ -70,7 +70,10 @@ export default {
     }
   },
   computed: {
-    personalProjectIds() {
+    currentUser() {
+      return this.$store.getters['user/currentUser']
+    },
+    personalProjectId() {
       return this.$store.getters['project/personalProjectId']
     }
   },

@@ -1,15 +1,10 @@
 <template>
   <v-app>
     <v-container>
-      <!-- <v-tabs color="#EF6C00" class="mb-10" centered>
-        <v-tab  v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
-          <v-icon>{{ menuItem.icon }}</v-icon>
-          {{ menuItem.name }}
-        </v-tab>
-      </v-tabs> -->
-      <h2 style="text-align: center; color: #00ACC1;">プロジェクトをみる</h2>
+      <h2 style="text-align: center; color: #00ACC1;" class="my-5">プロジェクトをみる</h2>
       <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
       あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
+
       <v-row justify="center" v-if="loggedIn">
         <v-dialog
           v-model="dialog"
@@ -71,7 +66,7 @@
         </v-dialog>
       </v-row>
 
-      <v-row v-for="article in articles" :key="article.id">
+      <v-row>
         <v-col>
           <v-card class="mb-5">
             <template v-for="(article, index) in articles">
@@ -86,13 +81,16 @@
                     </v-col>
                     <v-col cols="4">
                       <v-avatar class="profile" color="grey" size="60">
-                        <v-img :src="article.image"></v-img>
+                        <v-img :src="article.displayImage"></v-img>
                       </v-avatar>
-                      <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ article.name }}</span>
-                      <p class="my-5 font-weight-bold">{{ article.messageComment }}</p>
+                      <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ article.displayName }}</span>
+                      <span>{{ article.place}}</span>
+                      <p class="my-5 font-weight-bold">{{ article.comment }}</p>
                     </v-col>
                     <v-col cols="5">
-                      <span class="grey--text float-right">{{ article.date}}</span>
+                      <!-- <v-icon>mdi-scale</v-icon> -->
+                      <!-- <span>{{ article.name }}</span> -->
+                      <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ article.name }}・{{ article.date}}</span>
                     </v-col>
                   </v-row>
                 </v-card>
@@ -115,7 +113,6 @@ export default {
     return {
       user: this.$store.state.user.user,
       name: this.$store.state.project.name,
-      displayName: this.$store.state.project.displayName,
       place: this.$store.state.project.place,
       time: this.$store.state.project.time,
       date: this.$store.state.project.date,
@@ -124,26 +121,12 @@ export default {
       imageOverlay: false,
       dialog: false,
       loggedIn: this.$store.state.user.loggedIn,
-      // menuItems: [
-      //   {
-      //     name: 'プロジェクト',
-      //     icon: 'mdi-tooltip',
-      //     to: '/list/project'
-      //   },
-      //   {
-      //     name: 'イベント',
-      //     icon: 'mdi-calendar',
-      //     to: '/list/event'
-      //   },
-      //   {
-      //     name: 'マイページ',
-      //     icon: 'mdi-account',
-      //     to: '/dashboard'
-      //   },
-      // ]
     }
   },
   computed: {
+    currentUser() {
+      return this.$store.getters['user/currentUser']
+    },
     articles() {
       return this.$store.getters['project/articles']
     },
@@ -173,7 +156,8 @@ export default {
     },
     addMessage() {
       this.$store.dispatch('project/addMessage', {
-        displayName: this.displayName,
+        displayName: this.currentUser[0].displayName,
+        displayImage: this.currentUser[0].image,
         name: this.name,
         place: this.place,
         comment: this.comment,
