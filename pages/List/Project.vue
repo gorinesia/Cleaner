@@ -1,11 +1,16 @@
 <template>
   <v-app>
     <v-container>
+      <!-- <v-tabs color="#EF6C00" class="mb-10" centered>
+        <v-tab  v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
+          <v-icon>{{ menuItem.icon }}</v-icon>
+          {{ menuItem.name }}
+        </v-tab>
+      </v-tabs> -->
       <h2 style="text-align: center; color: #00ACC1;">プロジェクトをみる</h2>
       <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
       あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
-
-      <v-row justify="center" v-if="user=!null">
+      <v-row justify="center" v-if="loggedIn">
         <v-dialog
           v-model="dialog"
           persistent
@@ -26,20 +31,24 @@
           </template>
           <v-card>
             <v-card-title>
-              <span class="headline">User Article</span>
+              <span class="headline">プロジェクトの様子を投稿する</span>
             </v-card-title>
             <v-card-text>
               <v-container>
-                <label class="postImage-appendBtn"></label>
-                <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
-                <label>名前</label>
-                <v-text-field v-model="name" class="white"></v-text-field>
-                <label>場所</label>
-                <v-text-field v-model="place" class="white"></v-text-field>
-                <v-textarea v-model="messageComment" class="white" placeholder="コメントを入力"></v-textarea>
-                <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
+                  <label class="postImage-appendBtn"></label>
+                  <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
+                  <v-img :src="image" width="100" height="100"></v-img>
+                  <label>ゴミの量</label>
+                  <v-text-field v-model="name" class="white" placeholder="例) 5kg"></v-text-field>
+                  <label>日時</label>
+                  <v-text-field v-model="time" class="white" placeholder="例）11月7日 9:00"></v-text-field>
+                  <label>場所</label>
+                  <v-text-field v-model="place" class="white" placeholder="例) 東京"></v-text-field>
+                  <label>コメント</label>
+                  <v-textarea v-model="comment" class="white" placeholder="例) 今日もたくさん拾いました。"></v-textarea>
+                  <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
               </v-container>
-              <small>*indicates required field</small>
+              <!-- <small>*indicates required field</small> -->
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -67,7 +76,7 @@
           <v-card class="mb-5">
             <template v-for="(article, index) in articles">
               <v-divider :key="index" />
-              <v-hover v-slot="{ hover }">
+              <v-hover v-slot ="{ hover }">
                 <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(article.id)">
                   <v-row  :key="article.id">
                     <v-col cols="3">
@@ -108,11 +117,30 @@ export default {
       name: this.$store.state.project.name,
       displayName: this.$store.state.project.displayName,
       place: this.$store.state.project.place,
+      time: this.$store.state.project.time,
       date: this.$store.state.project.date,
-      messageComment: this.$store.state.project.messageComment,
+      comment: this.$store.state.project.comment,
       image_src: require('@/assets/img/doing3.jpg'),
       imageOverlay: false,
-      dialog: false
+      dialog: false,
+      loggedIn: this.$store.state.user.loggedIn,
+      // menuItems: [
+      //   {
+      //     name: 'プロジェクト',
+      //     icon: 'mdi-tooltip',
+      //     to: '/list/project'
+      //   },
+      //   {
+      //     name: 'イベント',
+      //     icon: 'mdi-calendar',
+      //     to: '/list/event'
+      //   },
+      //   {
+      //     name: 'マイページ',
+      //     icon: 'mdi-account',
+      //     to: '/dashboard'
+      //   },
+      // ]
     }
   },
   computed: {
@@ -145,9 +173,10 @@ export default {
     },
     addMessage() {
       this.$store.dispatch('project/addMessage', {
+        displayName: this.displayName,
         name: this.name,
         place: this.place,
-        comment: this.messageComment,
+        comment: this.comment,
         image: this.image,
         date: new Date().toLocaleString()
       });
@@ -157,7 +186,7 @@ export default {
       this.date = '';
     },
     getPersonalId(id) {
-      this.$store.dispatch('project/getPersonalData', {
+      this.$store.dispatch('project/getPersonalProjectId', {
         id
       })
     },

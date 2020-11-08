@@ -8,7 +8,7 @@ export const state = () => ({
   date: '',
   articles: [],
   articleId: '',
-  messageComment: '',
+  comment: '',
   deleteOverlay: false,
   editOverlay: false,
   personalProjectId: []
@@ -49,7 +49,7 @@ export const mutations = {
   },
   setPersonalProjectId: (state, personalDetails) => {
     state.personalProjectId = personalDetails
-    console.log(state.personalDatas);
+    console.log(state.personalProjectId);
   }
 }
 
@@ -89,7 +89,7 @@ export const actions = {
             displayName: doc.data().displayName,
             name: doc.data().name,
             place: doc.data().place,
-            messageComment: doc.data().comment,
+            comment: doc.data().comment,
             image: doc.data().image,
             id: doc.id,
             date: doc.data().date,
@@ -144,13 +144,13 @@ export const actions = {
         personalDetails.push({
           name: doc.data().name,
           place: doc.data().place,
-          messageComment: doc.data().comment,
+          comment: doc.data().comment,
           image: doc.data().image,
           id: doc.id,
           date: doc.data().date,
         })
           console.log(doc.data())
-          this.$router.push('personal/personalproject');
+          this.$router.push('/personal/personalproject');
           commit('setPersonalProjectId', personalDetails);
       })
   }

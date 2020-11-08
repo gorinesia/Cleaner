@@ -1,55 +1,58 @@
 <template>
   <v-app>
-    <v-container v-for="personalData in personalDatas" :key="personalData.id">
+    <v-container v-for="personalProjectId in personalProjectIds" :key="personalProjectId.id">
       <v-card outlined class="mb-5">
         <v-row >
           <v-col align-self="start"  cols="2">
             <v-avatar class="profile" color="grey" size="100">
-              <v-img :src="personalData.image"></v-img>
+              <v-img :src="personalProjectId.image"></v-img>
             </v-avatar>
           </v-col>
           <v-col>
             <v-list-item color="rgba(0, 0, 0, .4)">
               <v-list-item-content>
                 <v-list-item-title class="font-weight-bold title text-h4" dark>
-                  {{ personalData.name }}
+                  {{ personalProjectId.displayName }}
                 </v-list-item-title>
-                <p>{{ personalData.messageComment }}</p>
+                <p>{{ personalProjectId.comment }}</p>
               </v-list-item-content>
             </v-list-item>
           </v-col>
         </v-row>
       </v-card>
-      <h2 class="mb-5">Johnさんのプロジェクト</h2>
-      <v-card align="center" class="mb-10" v-for="personalData in personalDatas" :key="personalData.id">
+      <h2 class="mb-5">{{ personalProjectId.displayName }}さんのプロジェクト</h2>
+      <v-card align="center" class="mb-10" v-for="personalProjectId in personalProjectIds" :key="personalProjectId.id">
         <v-row >
           <v-col cols="2">
-            <p>{{ personalData.date}}</p>
+            <p>{{ personalProjectId.date}}</p>
           </v-col>
           <v-col class="font-weight-bold text-h5" cols="6">
-            <p>{{ personalData.place }}</p>
+            <p>{{ personalProjectId.place }}</p>
           </v-col>
         </v-row>
         <v-img
           height="150"
-          :src="personalData.image"
+          :src="personalProjectId.image"
         ></v-img>
-        <p>{{ personalData.messageComment }}</p>
+        <!-- <p>{{ personalProjectId.comment }}</p> -->
       </v-card>
+
+      <div>いいね</div>
+      <div>コメント</div>
 
       <v-card color="#E0F7FA" class="rounded-xl pa-5 mb-10" rounded>
         <h2 class="mx-10">クリーナーを応援しよう</h2>
         <v-row>
           <v-col cols="9">
             <v-avatar class="profile mx-10" color="grey" size="50">
-              <v-img :src="personalData.image"></v-img>
+              <v-img :src="personalProjectId.image"></v-img>
             </v-avatar>
-            <p class="mb-10 mx-10">Johnさんの行動に対してお金を送ってサポートすることが出来ます。</p>
+            <p class="mb-10 mx-10">{{ personalProjectId.displayName }}さんの行動に対してお金を送ってサポートすることが出来ます。</p>
             <v-btn color="#0D47A1" class="mx-10" rounded x-large dark>サポートする</v-btn>
           </v-col>
           <v-col cols="3">
             <v-avatar tile size="150" color="cyan" class="mr-5">
-              <v-img :src="personalData.image"></v-img>
+              <v-img :src="personalProjectId.image"></v-img>
             </v-avatar>
           </v-col>
         </v-row>
@@ -59,18 +62,15 @@
 </template>
 
 <script>
-import firebase from 'firebase';
-
 export default {
   name: 'personalProject',
-  layout: 'loggedIn',
   data() {
     return {
       image_src: require('@/assets/img/everyone.jpg'),
     }
   },
   computed: {
-    personalProjectId() {
+    personalProjectIds() {
       return this.$store.getters['project/personalProjectId']
     }
   },

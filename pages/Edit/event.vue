@@ -24,19 +24,19 @@
 
         <v-overlay :value="editOverlay">
           <v-card>
-          <label class="postImage-appendBtn"></label>
-          <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
-          <v-img :src="image" width="100" height="100"></v-img>
-          <label>イベント名</label>
-          <v-text-field v-model="name" class="white" placeholder="例）東京を綺麗にしよう大作戦"></v-text-field>
-          <label>日時</label>
-          <v-text-field v-model="time" class="white" placeholder="例）11月7日 9:00"></v-text-field>
-          <label>場所</label>
-          <v-text-field v-model="place" class="white" placeholder="例）東京"></v-text-field>
-          <label>イベント説明</label>
-          <v-textarea v-model="messageComment" class="white" placeholder="例）渋谷を綺麗にしましょう"></v-textarea>
-          <v-btn @click="editArticles(articleId)">編集</v-btn>
-          <v-btn @click="closeModalForEdit">閉じる</v-btn>
+            <label class="postImage-appendBtn"></label>
+            <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
+            <v-img :src="image" width="100" height="100"></v-img>
+            <label>イベント名</label>
+            <v-text-field v-model="name" class="white" placeholder="例）東京を綺麗にしよう大作戦"></v-text-field>
+            <label>日時</label>
+            <v-text-field v-model="time" class="white" placeholder="例）11月7日 9:00"></v-text-field>
+            <label>場所</label>
+            <v-text-field v-model="place" class="white" placeholder="例）東京"></v-text-field>
+            <label>イベント説明</label>
+            <v-textarea v-model="messageComment" class="white" placeholder="例）渋谷を綺麗にしましょう"></v-textarea>
+            <v-btn @click="editArticles(articleId)">編集</v-btn>
+            <v-btn @click="closeModalForEdit">閉じる</v-btn>
           </v-card>
         </v-overlay>
 
