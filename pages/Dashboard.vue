@@ -156,23 +156,6 @@ export default {
       item: 0,
       dialog: false,
       loggedIn: this.$store.state.user.loggedIn,
-      // menuItems: [
-      //   {
-      //     name: 'プロジェクト',
-      //     icon: 'mdi-tooltip',
-      //     to: '/list/project'
-      //   },
-      //   {
-      //     name: 'イベント',
-      //     icon: 'mdi-calendar',
-      //     to: '/list/event'
-      //   },
-      //   {
-      //     name: 'マイページ',
-      //     icon: 'mdi-account',
-      //     to: '/dashboard'
-      //   },
-      // ]
     }
   },
   computed: {

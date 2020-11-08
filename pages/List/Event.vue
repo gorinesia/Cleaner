@@ -1,12 +1,6 @@
 <template>
   <v-app>
     <v-container>
-      <!-- <v-tabs color="#EF6C00" class="mb-10" centered>
-        <v-tab  v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
-          <v-icon>{{ menuItem.icon }}</v-icon>
-          {{ menuItem.name }}
-        </v-tab>
-      </v-tabs> -->
       <h2 style="text-align: center; color: #00ACC1;" class="my-5">イベントをみる</h2>
       <p style="text-align: center;">イベントとは、みんなでゴミ拾いをするための企画のことです。<br>
       イベントを立ち上げて、みんなでゴミ拾いをしてみませんか？</p>
@@ -81,7 +75,37 @@
         </v-dialog>
       </v-row>
 
-      <v-row v-for="article in articles" :key="article.id">
+      <v-row>
+        <template v-for="(event, index) in events">
+          <v-col :key="index" cols="12">
+            <v-hover v-slot="{ hover }">
+              <v-card :class="{ 'on-hover': hover }" @click="getPersonalEvent(event.id)">
+                <v-divider :key="index" />
+                  <v-row :key="event.id" >
+                    <v-col cols="9">
+                      <v-col>
+                        <v-avatar class="profile" color="grey" size="60">
+                          <v-img :src="event.image"></v-img>
+                        </v-avatar>
+                        <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ event.name }}</span>
+                        <p class="my-5 font-weight-bold">{{ event.messageComment }}</p>
+                        <span class="grey--text">日時： {{ event.date }}</span>
+                        <span class="grey--text float-right">場所： {{ event.place}}</span>
+                      </v-col>
+                    </v-col>
+                    <v-col cols="3">
+                      <v-avatar tile size="130">
+                        <v-img :src="event.image"></v-img>
+                      </v-avatar>
+                    </v-col>
+                  </v-row>
+              </v-card>
+            </v-hover>
+          </v-col>
+        </template>
+      </v-row>
+
+      <!-- <v-row v-for="article in articles" :key="article.id">
         <v-col>
           <v-card class="mb-5">
             <v-row>
@@ -107,7 +131,7 @@
             </v-row>
           </v-card>
         </v-col>
-      </v-row>
+      </v-row> -->
 
     </v-container>
   </v-app>
@@ -128,27 +152,10 @@ export default {
       imageOverlay: false,
       dialog: false,
       loggedIn: this.$store.state.user.loggedIn,
-      // menuItems: [
-      //   {
-      //     name: 'プロジェクト',
-      //     icon: 'mdi-tooltip',
-      //     to: '/list/project'
-      //   },
-      //   {
-      //     name: 'イベント',
-      //     icon: 'mdi-calendar',
-      //     to: '/list/event'
-      //   },
-      //   {
-      //     name: 'マイページ',
-      //     icon: 'mdi-account',
-      //     to: '/dashboard'
-      //   },
-      // ]
     }
   },
   computed: {
-    articles() {
+    events() {
       return this.$store.getters['event/articles']
     },
     image: {
@@ -228,6 +235,11 @@ export default {
       this.place = ''
       this.messageComment = ''
       this.image = ''
+    },
+    getPersonalEvent(id) {
+      this.$store.dispatch('event/getPersonalEvent', {
+        id
+      })
     },
   },
 }
