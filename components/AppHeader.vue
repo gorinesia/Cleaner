@@ -16,14 +16,6 @@
                 Cleaner
               </nuxt-link>
           </v-col>
-          <!-- <v-col cols="6" class="ml-10">
-            <v-tabs color="#EF6C00" class="my-5">
-              <v-tab  v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
-                <v-icon>mdi-account</v-icon>
-                {{ menuItem.name }}
-              </v-tab>
-            </v-tabs>
-          </v-col> -->
           <v-spacer></v-spacer>
           <v-col cols="4">
             <nav>
@@ -31,11 +23,6 @@
               <AfterLogin v-else />
             </nav>
           </v-col>
-          <!-- <nav>
-            <v-btn rounded color="#1A237E" dark class="font-weight-bold orange--text text--darken-1" @click="signInAnonymously">ゲストログイン</v-btn>
-            <v-btn rounded outlined color="#00ACC1" class="font-weight-bold" dark to="/auth/login">ログイン</v-btn>
-            <v-btn rounded color="#00ACC1" class="font-weight-bold" dark to="/auth/signup">新規登録</v-btn>
-          </nav> -->
         </v-app-bar>
       </v-row>
     </v-container>
@@ -48,13 +35,6 @@
         nav
         dense
       >
-        <!-- <v-list-item-group>
-          <v-list-item
-            v-for="(menuItem, index) in menuItems" :key="index"
-          >
-            <v-list-item-title>{{ menuItem.name }}</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group> -->
       </v-list>
     </v-navigation-drawer>
   </header>

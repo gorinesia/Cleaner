@@ -38,7 +38,6 @@ import firebase from 'firebase';
 export default {
   data() {
     return {
-      image_src: require('@/assets/img/doing3.jpg'),
       items: [
         {
           title: 'プロフィール編集',

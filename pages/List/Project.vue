@@ -110,7 +110,7 @@ export default {
       time: this.$store.state.project.time,
       date: this.$store.state.project.date,
       comment: this.$store.state.project.comment,
-      image_src: require('@/assets/img/doing3.jpg'),
+      image_src: require('@/assets/img/top-page.jpg'),
       imageOverlay: false,
       dialog: false,
       loggedIn: this.$store.state.user.loggedIn,

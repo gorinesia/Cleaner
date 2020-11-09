@@ -19,14 +19,12 @@
 </template>
 
 <script>
-import LoggedInHeader from '@/components/LoggedInHeader.vue'
 import AppFooter from '../components/AppFooter.vue'
 import Sidebar from '../components/Sidebar.vue'
 import Toolbar from '@/components/Toolbar.vue'
 
 export default {
   components: {
-    LoggedInHeader,
     AppFooter,
     Sidebar,
     Toolbar,

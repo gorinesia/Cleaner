@@ -45,12 +45,12 @@
           <div>ゴミ拾いをイメージするとき、そこにはボランティアという意識がついてまわります。ボランティアとは、無償作業です。つまり一円ももらえません。それゆえ多くの人はやりたがらず、捨てられたゴミはそのまま環境を汚染していきます。</div>
           </v-col>
           <v-col cols="4">
-            <v-img :src="picture" width="200" height="200" class="ma-10"></v-img>
+            <v-img :src="picture1" width="200" height="200" class="ma-10"></v-img>
           </v-col>
         </v-row>
         <v-row class="ma-10">
           <v-col cols="4">
-            <v-img :src="picture" width="200" height="200"></v-img>
+            <v-img :src="picture2" width="200" height="200"></v-img>
           </v-col>
           <v-col cols="8">
             <div>しかし、地球が汚れていく中、動けるのは我々人間しかいません。</div>
@@ -63,7 +63,7 @@
             <div class="ma-10">むしろ、そんな想いにこそ価値がつくべきではないでしょうか。</div>
           </v-col>
           <v-col cols="4">
-            <v-img :src="picture" width="200" height="200"></v-img>
+            <v-img :src="picture3" width="200" height="200"></v-img>
           </v-col>
         </v-row>
     </v-container>
@@ -96,7 +96,9 @@
 export default {
   data() {
     return {
-      picture: require('../assets/img/doing3.jpg'),
+      picture1: require('../assets/img/garbage.jpg'),
+      picture2: require('../assets/img/crow.jpg'),
+      picture3: require('../assets/img/litter.jpg'),
     }
   }
 }

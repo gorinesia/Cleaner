@@ -14,6 +14,11 @@ export default {
     return {
       menuItems: [
         {
+          name: 'マイページ',
+          icon: 'mdi-account',
+          to: '/mypage'
+        },
+        {
           name: 'プロジェクト',
           icon: 'mdi-tooltip',
           to: '/list/project'
@@ -22,11 +27,6 @@ export default {
           name: 'イベント',
           icon: 'mdi-calendar',
           to: '/list/event'
-        },
-        {
-          name: 'マイページ',
-          icon: 'mdi-account',
-          to: '/mypage'
         },
       ]
     }

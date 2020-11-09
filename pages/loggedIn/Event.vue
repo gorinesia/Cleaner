@@ -103,7 +103,7 @@ export default {
       place: this.$store.state.event.place,
       date: this.$store.state.event.date,
       messageComment: this.$store.state.event.messageComment,
-      image_src: require('@/assets/img/doing3.jpg'),
+      image_src: require('@/assets/img/top-page.jpg'),
       imageOverlay: false,
       dialog: false
 

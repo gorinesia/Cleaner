@@ -108,7 +108,7 @@ export default {
       place: this.$store.state.project.place,
       date: this.$store.state.project.date,
       messageComment: this.$store.state.project.messageComment,
-      image_src: require('@/assets/img/doing3.jpg'),
+      image_src: require('@/assets/img/top-page.jpg'),
       imageOverlay: false,
       dialog: false
 

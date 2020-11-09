@@ -142,7 +142,7 @@ export default {
       place: this.$store.state.event.place,
       date: this.$store.state.event.date,
       comment: this.$store.state.event.comment,
-      image_src: require('@/assets/img/doing3.jpg'),
+      image_src: require('@/assets/img/top-page.jpg'),
       imageOverlay: false,
       dialog: false,
       loggedIn: this.$store.state.user.loggedIn,

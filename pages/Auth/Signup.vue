@@ -11,8 +11,6 @@
             <v-btn class="pa-2 font-weight-bold" color="#00ACC1" rounded block large dark @click="signUp">登録する</v-btn>
         </v-form>
       </v-card-text>
-      <!-- <p>- Signup with -</p>
-      <v-icon class="mb-5">mdi-twitter</v-icon><br> -->
       <nuxt-link class="mb-5 grey--text text--darken-1 text-decoration-none" outlined rounded color="#00ACC1" to="/auth/login">アカウントをお持ちの方はこちら</nuxt-link>
     </v-card>
   </v-app>

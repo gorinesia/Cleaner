@@ -20,40 +20,6 @@
       Cleanerでできること
     </div>
     <Information />
-    <!-- <h2 class="mb-5 cy cyan--text text--darken-1" align="center" justify="center">クリーナーをみる</h2>
-    <p style="text-align: center;">クリーナーとは、お掃除屋さん(＝ゴミを拾う人)のことです。<br>
-    あなたも地球を綺麗にするための清掃員になりませんか？</p>
-    <v-container>
-      <v-row v-for="allUser in allUsers" :key="allUser.id">
-        <v-col>
-          <v-card class="mb-5">
-            <v-row>
-              <v-col cols="3">
-                <v-col align-self="start"  cols="12">
-                  <v-avatar class="profile" color="grey" size="60">
-                    <v-img :src="image_src"></v-img>
-                  </v-avatar>
-                </v-col>
-              </v-col>
-              <v-col cols="9">
-                <v-list three-line>
-                  <v-list-item-content>
-                    <v-list-item-title class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ allUser.displayName }}</v-list-item-title>
-                    <div class="overline mb-1">{{ }}</div>
-                    <v-list-item-subtitle class="overline mb-1">{{ }}</v-list-item-subtitle>
-                    <p class="mb-5 font-weight-bold">{{ }}</p>
-                  </v-list-item-content>
-
-                  <v-list-item-avatar tile size="100" color="cyan" :src="image_src" class="ml-5">
-                    <img :src="image_src">
-                  </v-list-item-avatar>
-                </v-list>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container> -->
     <h2 style="text-align: center; color: #00ACC1;">プロジェクトをみる</h2>
     <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
     あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
@@ -132,7 +98,7 @@ export default {
       messageComment: this.$store.state.project.messageComment,
       loading: false,
       selection: 1,
-      image_src: require('@/assets/img/doing3.jpg'),
+      image_src: require('@/assets/img/top-page.jpg'),
     }
   },
   computed: {

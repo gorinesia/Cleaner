@@ -11,7 +11,7 @@
       <v-divider vertical></v-divider>
       <v-col cols="3.5" align="center" justify="center">
         <div class="font-weight-bold">みんなでできる</div>
-        <img src="~/assets/img/everyone.jpg">
+        <img src="~/assets/img/people.jpg">
         <p>イベントを企画して、自分のプロジェクトに仲間を募ったり、誰かのプロジェクトに参加することもできます。</p>
       </v-col>
       <v-divider vertical></v-divider>
