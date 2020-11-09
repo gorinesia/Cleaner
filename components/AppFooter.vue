@@ -14,22 +14,22 @@ export default {
   data: () => ({
     menuItems: [
         {
-          name: 'Home',
+          name: 'マイページ',
           icon: 'mdi-account',
           url: '#',
-          to: '/dashboard'
+          to: '/mypage'
         },
         {
-          name: 'プロジェクトをみる',
+          name: 'プロジェクト',
           icon: 'mdi-account',
           url: '#',
-          to: '/loggedIn/project'
+          to: '/list/project'
         },
         {
-          name: 'イベントをみる',
+          name: 'イベント',
           icon: 'mdi-account',
           url: '#',
-          to: '/loggedIn/event'
+          to: '/list/event'
         },
       ]
   }),

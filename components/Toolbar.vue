@@ -26,7 +26,7 @@ export default {
         {
           name: 'マイページ',
           icon: 'mdi-account',
-          to: '/dashboard'
+          to: '/mypage'
         },
       ]
     }

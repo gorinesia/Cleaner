@@ -10,7 +10,7 @@
           <v-btn @click="addMessage">投稿</v-btn>
         </v-col>
       </v-row>
-      <v-row v-for="(message, key, index) in  messages" :key="index">
+      <v-row v-for="(message, key, index) in messages" :key="index">
         <v-col>
           <p>{{ message.messageText }}</p>
         </v-col>
@@ -40,7 +40,7 @@ export default {
       db.collection('messages')
       .onSnapshot((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          this.messages.push({
+          this.messages.unshift({
             messageText: doc.data().messageText,
             id: doc.id
           })
@@ -55,7 +55,7 @@ export default {
         .add({
           messageText: this.messageText
         });
-        this.messageText = ''
+        this.messageText = '';
     }
   }
 }

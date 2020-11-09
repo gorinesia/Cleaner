@@ -41,16 +41,17 @@
                 <v-text-field v-model="place" class="white" placeholder="例）東京"></v-text-field>
                 <label>イベント説明</label>
                 <v-textarea v-model="comment" class="white" placeholder="例）渋谷を綺麗にしましょう"></v-textarea>
-                <v-btn @click="editArticles(articleId)">編集</v-btn>
-                <v-btn @click="closeModalForEdit">閉じる</v-btn>
+                <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
+                <!-- <v-btn @click="editArticles(articleId)">編集</v-btn>
+                <v-btn @click="closeModalForEdit">閉じる</v-btn> -->
               </v-container>
 
-              <v-btn @click="openModalForDelete(message.id)" class="float-right mb-1">削除</v-btn>
+              <!-- <v-btn @click="openModalForDelete(message.id)" class="float-right mb-1">削除</v-btn>
               <v-overlay :value="deleteOverlay">
                 <p>本当に記事を削除しますか？</p>
                 <v-btn @click="deleteArticles(articleId)">削除</v-btn>
                 <v-btn @click="closeModalForDelete">閉じる</v-btn>
-              </v-overlay>
+              </v-overlay> -->
 
               <!-- <small>*indicates required field</small> -->
             </v-card-text>
@@ -62,13 +63,6 @@
                 @click="dialog = false"
               >
                 Close
-              </v-btn>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="dialog = false"
-              >
-                Save
               </v-btn>
             </v-card-actions>
           </v-card>
