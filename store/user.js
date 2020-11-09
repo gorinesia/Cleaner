@@ -94,30 +94,9 @@ export const actions = {
         })
       })
   },
-  // signInAnonymously({commit}) {
-  //   firebase.auth().signInAnonymously()
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-
-  //   firebase.auth().onAuthStateChanged((user) => {
-  //     if(user) {
-  //       const uid = user.uid;
-  //       const currentLoginUser = [{displayName: 'ゲスト'}]
-  //       commit('setCurrentUser', currentLoginUser);
-  //       this.$router.push('/dashboard');
-  //     }
-  //   })
-  // },
   logInUserDisplay(context) {
-    // console.log(payload);
     const getUser = firebase.auth().currentUser;
     console.log(getUser);
-    // if (!getUser.displayName) {
-    //   context.dispatch('signInAnonymously');
-    //   return;
-    // }
-    // context.commit('setUser', payload.displayName);
     const db = firebase.firestore();
     db.collection('users')
       .onSnapshot((querySnapshot) => {
@@ -206,7 +185,6 @@ export const actions = {
       })
       .then(() => {
         console.log(payload);
-        // context.commit('resetImage', null);
         context.dispatch('logInUserDisplay');
       })
   },

@@ -94,6 +94,7 @@
 export default {
   name: 'profile',
   layout: 'loggedIn',
+  middleware: 'authenticated',
   data() {
     return {
       tabs: null,
