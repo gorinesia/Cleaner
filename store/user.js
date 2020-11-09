@@ -71,7 +71,7 @@ export const actions = {
       .then((result) => {
         console.log('loggedIn!!');
         commit('setLoggedIn', true);
-        this.$router.push('/dashboard')
+        this.$router.push('/mypage')
       })
       .catch((error) => {
         console.log(error.message);

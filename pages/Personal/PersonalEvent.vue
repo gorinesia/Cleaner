@@ -1,27 +1,6 @@
 <template>
   <v-app class="mx-10" style="color: navy">
     <v-container v-for="personalData in personalDatas" :key="personalData.id">
-      <v-card outlined class="mb-10">
-        <v-row  class="fill-height">
-          <v-col align-self="start"  cols="2">
-            <v-avatar class="profile" color="grey" size="100">
-              <v-img :src="image_src"></v-img>
-            </v-avatar>
-          </v-col>
-          <v-col>
-            <v-list-item color="rgba(0, 0, 0, .4)">
-              <v-list-item-content>
-                <v-list-item-title class="cyan--text text--darken-1 font-weight-bold title text-h4" dark>
-                  {{ personalData.name }}
-                </v-list-item-title>
-                <p>世界が綺麗になればいいなと思って日々活動しています。よろしくお願いいたします。</p>
-              </v-list-item-content>
-            </v-list-item>
-          </v-col>
-        </v-row>
-      </v-card>
-      <h2 class="mb-5">Johnさんの発案中のイベント</h2>
-
       <v-card align="center" class="mb-10">
         <v-row>
           <v-col cols="2">
@@ -44,6 +23,27 @@
         <div class="grey--text text--darken-1 font-weight-bold">イベント概要</div>
         <p class="ma-2">僕たちにできることを。人もゴミを多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
       </v-card>
+      <v-card outlined class="mb-10">
+        <v-row  class="fill-height">
+          <v-col align-self="start"  cols="2">
+            <v-avatar class="profile" color="grey" size="100">
+              <v-img :src="image_src"></v-img>
+            </v-avatar>
+          </v-col>
+          <v-col>
+            <v-list-item color="rgba(0, 0, 0, .4)">
+              <v-list-item-content>
+                <v-list-item-title class="cyan--text text--darken-1 font-weight-bold title text-h4" dark>
+                  {{ personalData.name }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-col>
+        </v-row>
+      </v-card>
+      <h2 class="mb-5">Johnさんの発案中のイベント</h2>
+
+
     <!-- </v-container> -->
     <!-- <v-container> -->
       <div :id="currentUser[0].id">
@@ -97,7 +97,6 @@ import 'firebase/firestore';
 
 export default {
   name: 'personalEvent',
-  layout: 'loggedIn',
   data() {
     return {
       image_src: require('@/assets/img/everyone.jpg'),

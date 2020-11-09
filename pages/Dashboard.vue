@@ -10,8 +10,6 @@
         </v-tabs> -->
         <!-- <h2 class="cyan--text text--darken-1 text-h5 font-weight-bold text-decoration-none" align="center" justify="center">プロジェクト</h2>
         <v-container>
-          <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
-          あなたも日々のプロジェクトを気軽に投稿してみませんか？</p> -->
 
           <!-- <v-row justify="center" v-if="loggedIn">
             <v-dialog

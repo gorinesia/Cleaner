@@ -13,7 +13,7 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              style="position: fixed; z-index: 1; right: 200px; bottom: 100px"
+              style="position: fixed; z-index: 1; right: 250px; bottom: 100px"
               fab
               large
               color="cyan darken-1"
@@ -54,13 +54,6 @@
               >
                 Close
               </v-btn>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="dialog = false"
-              >
-                Save
-              </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -68,12 +61,12 @@
 
       <v-row>
         <v-col>
-          <v-card class="mb-5">
-            <template v-for="(article, index) in articles">
-              <v-divider :key="index" />
+          <v-card v-for="article in articles" :key="article.id">
+            <template >
+              <v-divider  />
               <v-hover v-slot ="{ hover }">
                 <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(article.id)">
-                  <v-row  :key="article.id">
+                  <v-row>
                     <v-col cols="3">
                       <v-avatar tile size="100" class="ml-5">
                         <v-img :src="article.image"></v-img>

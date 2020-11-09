@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 
 export const state = () => ({
-  // displayName: '',
   name: '',
   place: '',
   image: null,
