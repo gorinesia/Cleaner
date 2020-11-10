@@ -35,6 +35,13 @@
         nav
         dense
       >
+        <v-list-item-group>
+          <v-list-item
+            v-for="(menuItem, index) in menuItems" :key="index"
+          >
+            <v-list-item-title>{{ menuItem.name }}</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
   </header>
@@ -55,6 +62,20 @@ export default {
     return {
       drawer: false,
       loggedIn: this.$store.state.user.loggedIn,
+      menuItems: [
+        {
+          name: 'ゲストログイン',
+          url: '#'
+        },
+        {
+          name: 'ログイン',
+          url: '#'
+        },
+        {
+          name: '新規登録',
+          url: '#'
+        },
+      ]
     }
   },
   computed : {

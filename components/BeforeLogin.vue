@@ -10,8 +10,8 @@
 export default {
   data() {
     return {
-      email: 'kkk@kkk.com',
-      password: 'kkkkkkk',
+      email: 'test@test.com',
+      password: '123456',
     }
   },
   methods: {
