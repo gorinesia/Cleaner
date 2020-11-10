@@ -62,7 +62,7 @@
         <v-col>
           <v-card v-for="article in articles" :key="article.id">
             <template >
-              <v-divider  />
+              <v-divider />
               <v-hover v-slot ="{ hover }">
                 <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(article.id)">
                   <v-row>
@@ -156,11 +156,11 @@ export default {
       });
       this.name = '';
       this.place = '';
-      this.messageComment = '';
+      this.comment = '';
       this.date = '';
     },
     getPersonalId(id) {
-      this.$store.dispatch('project/getPersonalProjectId', {
+      this.$store.dispatch('project/getPersonalProject', {
         id
       })
     },
