@@ -10,7 +10,7 @@
                 <v-icon large color="cyan darken-1">mdi-earth</v-icon>
                 Cleaner
               </nuxt-link>
-              <nuxt-link  v-else class="font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/dashboard">
+              <nuxt-link  v-else class="font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/mypage">
                 <v-icon large color="cyan darken-1">mdi-earth</v-icon>
                 Cleaner
               </nuxt-link>

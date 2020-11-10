@@ -21,61 +21,50 @@
       Cleanerでできること
     </div>
     <Information />
-    <h2 style="text-align: center; color: #00ACC1;">プロジェクトをみる</h2>
-    <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
-    あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
-    <v-container>
-      <v-card class="mb-5">
-        <template v-for="(article, index) in articles">
-          <v-divider :key="index" />
-          <v-row  :key="article.id">
-            <v-col cols="3">
-              <v-avatar tile size="130" class="ml-5">
-                <v-img :src="article.image"></v-img>
-              </v-avatar>
-            </v-col>
-            <v-col cols="9">
-              <v-col>
-                <v-avatar class="profile" color="grey" size="60">
-                  <v-img :src="article.image"></v-img>
-                </v-avatar>
-                <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ article.name }}</span>
-                <p class="my-5 font-weight-bold">{{ article.messageComment }}</p>
-                <span class="grey--text float-right">{{article.date }}</span>
-              </v-col>
-            </v-col>
-          </v-row>
-        </template>
-      </v-card>
-    </v-container>
-    <h2 style="text-align: center; color: #00ACC1;" class="my-5">イベントをみる</h2>
-    <p style="text-align: center;">イベントとは、みんなでゴミ拾いをするための企画のことです。<br>
-    イベントを立ち上げて、みんなでゴミ拾いをしてみませんか？</p>
+
     <v-container>
       <v-card>
-        <template v-for="(article, index) in events">
-          <v-divider :key="index" />
-          <v-row  :key="article.id">
-            <v-col cols="9">
-              <v-col>
-                <v-avatar class="profile" color="grey" size="60">
-                  <v-img :src="article.image"></v-img>
-                </v-avatar>
-                <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/profile')">{{ article.name }}</span>
-                <p class="my-5 font-weight-bold">{{ article.messageComment }}</p>
-                <span class="grey--text float-right">日時： {{ article.date }}</span>
-                <span class="grey--text float-right">場所： {{ article.place}}</span>
-              </v-col>
-            </v-col>
-            <v-col cols="3">
-              <v-avatar tile size="130" class="ml-5">
-                <v-img :src="article.image"></v-img>
-              </v-avatar>
-            </v-col>
-          </v-row>
-        </template>
+        <v-tabs
+          v-model="tab"
+          background-color="cyan darken-1"
+          centered
+          dark
+          icons-and-text
+        >
+          <v-tabs-slider color="orange"></v-tabs-slider>
+
+          <v-tab>
+            プロジェクト
+            <v-icon>mdi-tooltip</v-icon>
+          </v-tab>
+
+          <v-tab>
+            イベント
+            <v-icon>mdi-calendar</v-icon>
+          </v-tab>
+
+        </v-tabs>
+
+        <v-tabs-items v-model="tab">
+          <v-tab-item
+          >
+            <v-card flat align="center" justify="center">
+              <p class="my-5"><span class="font-weight-bold">プロジェクト</span>とは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
+              あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
+              <v-btn class="mb-5" color="cyan darken-1" align="center" justify="center" rounded  large dark to="/list/project">プロジェクトをみる</v-btn>
+            </v-card>
+          </v-tab-item>
+          <v-tab-item>
+            <v-card flat align="center" justify="center">
+              <p class="my-5"><span class="font-weight-bold">イベント</span>とは、みんなでゴミ拾いをするための企画のことです。<br>
+              イベントを立ち上げて、みんなでゴミ拾いをしてみませんか？</p>
+              <v-btn class="mb-5" color="cyan darken-1"  rounded  large dark to="/list/event">イベントをみる</v-btn>
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items>
       </v-card>
     </v-container>
+
   </v-app>
 </template>
 
@@ -91,42 +80,21 @@ export default {
   },
   data() {
     return {
-      name: this.$store.state.project.name,
-      place: this.$store.state.project.place,
-      date: this.$store.state.project.date,
-      messageComment: this.$store.state.project.messageComment,
-      loading: false,
-      selection: 1,
-      image_src: require('@/assets/img/top-page.jpg'),
+      menuItems: [
+        {
+          name: 'プロジェクトをみる',
+          icon: 'mdi-tooltip',
+          // to: '/list/project'
+        },
+        {
+          name: 'イベントをみる',
+          icon: 'mdi-calendar',
+          // to: '/list/event'
+        },
+      ],
+      tab: null
     }
-  },
-  computed: {
-    allUsers() {
-      return this.$store.getters['user/allUsers']
-    },
-    articles() {
-      return this.$store.getters['project/articles']
-    },
-    image: {
-      get() {
-        return this.$store.getters['project/image']
-      },
-      set(value) {
-        this.$store.commit('project/setImage', value)
-      }
-    },
-    events() {
-      return this.$store.getters['event/articles']
-    },
-    image: {
-      get() {
-        return this.$store.getters['event/image']
-      },
-      set(value) {
-        this.$store.commit('event/setImage', value)
-      }
-    }
-  },
+  }
 }
 </script>
 
@@ -140,10 +108,8 @@ img {
 .home-hero__content {
   background: url('../assets/img/top-page.jpg');
   background-size: cover;
-  // background-position: center;
   width: 500px;
   height: 300px;
-  // float: right;
   margin-right: 20px;
   border-radius: 20%;
   justify-items: center;

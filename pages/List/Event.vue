@@ -36,7 +36,7 @@
                 <label>イベント名</label>
                 <v-text-field v-model="name" class="white" placeholder="例）東京を綺麗にしよう大作戦"></v-text-field>
                 <label>日時</label>
-                <v-text-field v-model="time" class="white" placeholder="例）11月7日 9:00"></v-text-field>
+                <v-text-field v-model="time" type="date" class="white" placeholder="例）11月7日 9:00"></v-text-field>
                 <label>場所</label>
                 <v-text-field v-model="place" class="white" placeholder="例）東京"></v-text-field>
                 <label>イベント説明</label>
