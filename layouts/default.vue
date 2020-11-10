@@ -10,14 +10,12 @@
 
 <script>
 import AppHeader from '../components/AppHeader.vue'
-import BeforeLogin from '../components/BeforeLogin.vue'
 import Toolbar from '@/components/Toolbar.vue'
 import firebase from 'firebase'
 
 export default {
   components: {
     AppHeader,
-    BeforeLogin,
     Toolbar,
   },
   data() {

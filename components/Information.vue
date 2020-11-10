@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="3.5" align="center" justify="center">
+      <v-col cols="12" md="3.5" align="center" justify="center">
         <div class="font-weight-bold">誰でもできる</div>
         <img src="~/assets/img/lonly.jpg">
         <p>あなた自身がクリーナー(掃除屋)となり、ゴミ拾いを「プロジェクト」として、はじめることができます。<br>
@@ -9,13 +9,13 @@
         できます。</p>
       </v-col>
       <v-divider vertical></v-divider>
-      <v-col cols="3.5" align="center" justify="center">
+      <v-col cols="12" md="3.5" align="center" justify="center">
         <div class="font-weight-bold">みんなでできる</div>
         <img src="~/assets/img/people.jpg">
         <p>イベントを企画して、自分のプロジェクトに仲間を募ったり、誰かのプロジェクトに参加することもできます。</p>
       </v-col>
       <v-divider vertical></v-divider>
-      <v-col cols="3.5" align="center" justify="center">
+      <v-col cols="12" md="3.5" align="center" justify="center">
         <div class="font-weight-bold">誰かをサポートできる</div>
         <img src="~/assets/img/support.jpg">
         <p>あなたのプロフィールページやあなたの企画したプロジェクトに対して、

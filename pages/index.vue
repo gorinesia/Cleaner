@@ -1,9 +1,9 @@
 <template>
   <v-app class="blue-grey lighten-5">
     <v-system-bar height="30" color="#00ACC1" dark class="white--text font-weight-bold justify-center"><nuxt-link class="white--text text-decoration-none" to="auth/signup">まずは気軽に新規登録から！綺麗な世界は自分たちの手で創り上げていこう！</nuxt-link></v-system-bar>
-    <v-container class="container">
+    <v-container>
       <v-row>
-        <v-col cols="6">
+        <v-col cols="12" md="6" align="center" justify="center">
           <h1 style="color: navy">地球の未来のために<br>今目の前のゴミを拾おう</h1>
           <p>Cleanerは「地球の未来を考えて行動する<br>
           人々に対価を」をコンセプトとしたゴミ拾い<br>
@@ -11,8 +11,9 @@
           <v-btn class="mb-5" rounded outlined color="cyan darken-1" x-large to="/Auth/Signup">いますぐはじめる</v-btn><br>
           <v-btn class="text-capitalize" rounded color="primary" x-large dark to="aboutcleaner">Cleanerについて</v-btn>
         </v-col>
-        <v-col cols="6">
-          <HomeHero />
+        <v-col cols="12" md="6" align="center" justify="center">
+            <v-img fluid fill-height class="home-hero__content">
+            </v-img>
         </v-col>
       </v-row>
     </v-container>
@@ -79,7 +80,6 @@
 </template>
 
 <script>
-import HomeHero from '@/components/HomeHero.vue'
 import Information from '@/components/Information.vue'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -87,7 +87,6 @@ import 'firebase/firestore'
 export default {
   name: 'home',
   components: {
-    HomeHero,
     Information
   },
   data() {
@@ -136,5 +135,17 @@ img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
+}
+
+.home-hero__content {
+  background: url('../assets/img/top-page.jpg');
+  background-size: cover;
+  // background-position: center;
+  width: 500px;
+  height: 300px;
+  // float: right;
+  margin-right: 20px;
+  border-radius: 20%;
+  justify-items: center;
 }
 </style>
