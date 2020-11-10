@@ -4,7 +4,30 @@
       <v-row>
         <v-app-bar app color="white" style="color: #00ACC1" class="font-weight-bold">
           <v-app-bar-nav-icon color="#00ACC1" @click="drawer = true"></v-app-bar-nav-icon>
-          <v-col cols="1"></v-col>
+          <v-toolbar-title>
+            <span><v-icon>fas fa-lock</v-icon></span>
+              <nuxt-link v-if="!loggedIn" class="font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/">
+                <v-icon large color="cyan darken-1">mdi-earth</v-icon>
+                Cleaner
+              </nuxt-link>
+              <nuxt-link  v-else class="font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/dashboard">
+                <v-icon large color="cyan darken-1">mdi-earth</v-icon>
+                Cleaner
+              </nuxt-link>
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
+          <!-- <v-tabs>
+            <v-tab v-for="(menuItem, index) in menuItems" :key="index">
+              {{ menuItem.name}} -->
+            <nav class="mt-2">
+              <v-tabs>
+                <BeforeLogin v-if="!loggedIn"/>
+                <AfterLogin v-else />
+              </v-tabs>
+            </nav>
+            <!-- </v-tab> -->
+          <!-- </v-tabs> -->
+          <!-- <v-col cols="1"></v-col>
           <v-col cols="7">
               <span><v-icon>fas fa-lock</v-icon></span>
               <nuxt-link v-if="!loggedIn" class="font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/">
@@ -22,7 +45,7 @@
               <BeforeLogin v-if="!loggedIn"/>
               <AfterLogin v-else />
             </nav>
-          </v-col>
+          </v-col> -->
         </v-app-bar>
       </v-row>
     </v-container>
@@ -65,15 +88,12 @@ export default {
       menuItems: [
         {
           name: 'ゲストログイン',
-          url: '#'
         },
         {
           name: 'ログイン',
-          url: '#'
         },
         {
           name: '新規登録',
-          url: '#'
         },
       ]
     }
