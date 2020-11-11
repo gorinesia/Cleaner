@@ -15,10 +15,6 @@
                   {{ personalProject.displayName}}
                 </v-list-item-title>
                 <p class="grey--text mb-2">{{ personalProject.place }}</p>
-                <div>
-                  <!-- <p v-if="personalDatas[0].comment">{{ personalDatas[0].comment }}</p> -->
-                  <!-- <p v-else>コメントはありません</p> -->
-                </div>
 
               </v-list-item-content>
             </v-list-item>
