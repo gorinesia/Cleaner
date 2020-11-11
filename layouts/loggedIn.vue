@@ -1,30 +1,38 @@
 <template>
+  <div>
   <v-app>
     <AppHeader />
     <v-main>
       <Toolbar v-if="loggedIn" />
-      <Nuxt class="blue-grey lighten-5" />
+      <v-row>
+        <v-col cols="3">
+          <Sidebar />
+        </v-col>
+        <v-col cols="9">
+          <Nuxt />
+        </v-col>
+      </v-row>
     </v-main>
+    <AppFooter />
   </v-app>
+  </div>
 </template>
 
 <script>
-import AppHeader from '../components/AppHeader.vue'
+import AppFooter from '../components/AppFooter.vue'
+import Sidebar from '../components/Sidebar.vue'
 import Toolbar from '@/components/Toolbar.vue'
-import firebase from 'firebase'
 
 export default {
   components: {
-    AppHeader,
+    AppFooter,
+    Sidebar,
     Toolbar,
   },
   data() {
     return {
       loggedIn: this.$store.state.user.loggedIn
     }
-  },
-  currentUser() {
-    return this.$store.getters['user/currentUser']
   }
 }
 </script>
