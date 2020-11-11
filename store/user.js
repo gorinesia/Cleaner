@@ -1,4 +1,7 @@
 import firebase from 'firebase';
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/storage';
 
 export const state = () => ({
   user: null,
@@ -7,7 +10,7 @@ export const state = () => ({
   currentUser: [],
   loginUsers: [],
   image: null,
-  personalDatas: []
+  personalDatas: [],
 })
 
 export const getters = {
@@ -40,7 +43,7 @@ export const mutations = {
   setPersonalDatas: (state, personalDetails) => {
     state.personalDatas = personalDetails
     console.log(state.personalDatas);
-  }
+  },
 }
 
 export const actions = {

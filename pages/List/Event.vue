@@ -36,24 +36,13 @@
                 <label>イベント名</label>
                 <v-text-field v-model="name" class="white" placeholder="例）東京を綺麗にしよう大作戦"></v-text-field>
                 <label>日時</label>
-                <v-text-field v-model="time" class="white" placeholder="例）11月7日 9:00"></v-text-field>
+                <v-text-field v-model="time" type="date" class="white" placeholder="例）11月7日 9:00"></v-text-field>
                 <label>場所</label>
                 <v-text-field v-model="place" class="white" placeholder="例）東京"></v-text-field>
                 <label>イベント説明</label>
                 <v-textarea v-model="comment" class="white" placeholder="例）渋谷を綺麗にしましょう"></v-textarea>
                 <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
-                <!-- <v-btn @click="editArticles(articleId)">編集</v-btn>
-                <v-btn @click="closeModalForEdit">閉じる</v-btn> -->
               </v-container>
-
-              <!-- <v-btn @click="openModalForDelete(message.id)" class="float-right mb-1">削除</v-btn>
-              <v-overlay :value="deleteOverlay">
-                <p>本当に記事を削除しますか？</p>
-                <v-btn @click="deleteArticles(articleId)">削除</v-btn>
-                <v-btn @click="closeModalForDelete">閉じる</v-btn>
-              </v-overlay> -->
-
-              <!-- <small>*indicates required field</small> -->
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -70,62 +59,36 @@
       </v-row>
 
       <v-row>
-        <template v-for="(event, index) in events">
-          <v-col :key="index" cols="12">
-            <v-hover v-slot="{ hover }">
-              <v-card :class="{ 'on-hover': hover }" @click="getPersonalEvent(event.id)">
-                <v-divider :key="index" />
-                  <v-row :key="event.id" >
-                    <v-col cols="9">
-                      <v-col>
-                        <v-avatar class="profile" color="grey" size="60">
-                          <v-img :src="event.image"></v-img>
-                        </v-avatar>
-                        <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ event.name }}</span>
-                        <p class="my-5 font-weight-bold">{{ event.messageComment }}</p>
-                        <span class="grey--text">日時： {{ event.date }}</span>
-                        <span class="grey--text float-right">場所： {{ event.place}}</span>
-                      </v-col>
-                    </v-col>
-                    <v-col cols="3">
-                      <v-avatar tile size="130">
-                        <v-img :src="event.image"></v-img>
-                      </v-avatar>
-                    </v-col>
-                  </v-row>
-              </v-card>
-            </v-hover>
-          </v-col>
-        </template>
-      </v-row>
-
-      <!-- <v-row v-for="article in articles" :key="article.id">
         <v-col>
-          <v-card class="mb-5">
-            <v-row>
-              <v-col cols="2">
-                <v-col align-self="start"  cols="12">
-                <v-avatar tile size="100" color="cyan" class="ml-5">
-                  <img :src="article.image" @click="showImage">
-                  <v-overlay :value="imageOverlay">
-                    <v-img :src="article.image" width="300" height="300"></v-img>
-                    <v-btn @click="closeModalForImage">閉じる</v-btn>
-                  </v-overlay>
-                </v-avatar>
-                </v-col>
-              </v-col>
-              <v-col cols="10">
-                <v-avatar class="profile" color="grey" size="60">
-                  <v-img :src="article.image"></v-img>
-                </v-avatar>
-                  <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;" @click="$router.push('/personal/personalEvent')">{{ article.displayName }}</span>
-                  <span class="overline mb-1 float-right grey--text">{{ article.date }}</span>
-                  <p class="ma-5">{{ article.comment }}</p>
-              </v-col>
-            </v-row>
+          <v-card v-for="event in events" :key="event.id">
+            <template>
+                <v-divider />
+                <v-hover v-slot="{ hover }">
+                  <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(event.id)">
+                      <v-row :key="event.id" >
+                        <v-col cols="9">
+                          <v-col>
+                            <v-avatar class="profile" color="grey" size="60">
+                              <v-img :src="event.displayImage"></v-img>
+                            </v-avatar>
+                            <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ event.name }}</span>
+                            <p class="my-5 font-weight-bold">{{ event.comment }}</p>
+                            <span class="grey--text">日時： {{ event.date }}</span>
+                            <span class="grey--text float-right">場所： {{ event.place}}</span>
+                          </v-col>
+                        </v-col>
+                        <v-col cols="3">
+                          <v-avatar tile size="130">
+                            <v-img :src="event.image"></v-img>
+                          </v-avatar>
+                        </v-col>
+                      </v-row>
+                  </v-card>
+                </v-hover>
+            </template>
           </v-card>
         </v-col>
-      </v-row> -->
+      </v-row>
 
     </v-container>
   </v-app>
@@ -137,7 +100,6 @@ export default {
   data() {
     return {
       name: this.$store.state.event.name,
-      displayName: this.$store.state.event.displayName,
       time: this.$store.state.event.time,
       place: this.$store.state.event.place,
       date: this.$store.state.event.date,
@@ -149,8 +111,11 @@ export default {
     }
   },
   computed: {
+    currentUser() {
+      return this.$store.getters['user/currentUser']
+    },
     events() {
-      return this.$store.getters['event/articles']
+      return this.$store.getters['event/events']
     },
     image: {
       get() {
@@ -184,11 +149,13 @@ export default {
     },
     addMessage() {
       this.$store.dispatch('event/addMessage', {
+        displayName: this.currentUser[0].displayName,
+        displayImage: this.currentUser[0].image,
         name: this.name,
         place: this.place,
         comment: this.comment,
         image: this.image,
-        date: new Date().toLocaleString()
+        date: this.date
       });
       this.name = '';
       this.place = '';
@@ -230,7 +197,7 @@ export default {
       this.messageComment = ''
       this.image = ''
     },
-    getPersonalEvent(id) {
+    getPersonalId(id) {
       this.$store.dispatch('event/getPersonalEvent', {
         id
       })

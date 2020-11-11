@@ -1,25 +1,25 @@
 <template>
   <v-app>
-    <v-container v-for="personalProjectId in personalProjectId" :key="personalProjectId.id">
+    <v-container v-for="personalProject in personalProject" :key="personalProject.id">
       <v-card outlined class="mb-5">
         <v-row >
           <v-col align-self="start"  cols="2">
             <v-avatar class="profile ml-5" color="grey" size="80">
-              <v-img :src="personalProjectId.displayImage"></v-img>
+              <v-img :src="personalProject.displayImage"></v-img>
             </v-avatar>
           </v-col>
           <v-col>
             <v-list-item color="rgba(0, 0, 0, .4)">
               <v-list-item-content>
                 <nuxt-link class="cyan--text text--darken-1 font-weight-bold title text-h4 text-decoration-none" to="/personal/profile" dark>
-                  {{ personalProjectId.displayName }}
+                  {{ personalProject.displayName }}
                 </nuxt-link>
-                <p class="mt-3">{{ personalProjectId.comment }}</p>
+                <p class="mt-3">{{ personalProject.comment }}</p>
               </v-list-item-content>
             </v-list-item>
           </v-col>
           <v-col>
-            <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ personalProjectId.name }}・{{ personalProjectId.date}}</span>
+            <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ personalProject.name }}・{{ personalProject.date}}</span>
           </v-col>
         </v-row>
       </v-card>
@@ -28,13 +28,13 @@
           <v-col cols="2">
           </v-col>
           <v-col class="font-weight-bold text-h5" cols="6">
-            <p>{{ personalProjectId.place }}</p>
+            <p>{{ personalProject.place }}</p>
           </v-col>
         </v-row>
         <v-img
           height="200"
           width="500"
-          :src="personalProjectId.image"
+          :src="personalProject.image"
         ></v-img>
       </v-card>
 
@@ -69,14 +69,14 @@
         <v-row>
           <v-col cols="9">
             <v-avatar class="profile mx-10" color="grey" size="50">
-              <v-img :src="personalProjectId.displayImage"></v-img>
+              <v-img :src="personalProject.displayImage"></v-img>
             </v-avatar>
-            <p class="mb-10 mx-10">{{ personalProjectId.displayName }}さんの行動に対してお金を送ってサポートすることが出来ます。</p>
+            <p class="mb-10 mx-10">{{ personalProject.displayName }}さんの行動に対してお金を送ってサポートすることが出来ます。</p>
             <v-btn color="#0D47A1" class="mx-10" rounded x-large dark>サポートする</v-btn>
           </v-col>
           <v-col cols="3">
             <v-avatar tile size="150" color="cyan" class="mr-5">
-              <v-img :src="personalProjectId.image"></v-img>
+              <v-img :src="personalProject.image"></v-img>
             </v-avatar>
           </v-col>
         </v-row>
@@ -106,8 +106,8 @@ export default {
     currentUser() {
       return this.$store.getters['user/currentUser']
     },
-    personalProjectId() {
-      return this.$store.getters['project/personalProjectId']
+    personalProject() {
+      return this.$store.getters['project/personalProject']
     }
   },
   mounted() {

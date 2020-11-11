@@ -36,14 +36,13 @@
                   <label>ゴミの量</label>
                   <v-text-field v-model="name" class="white" placeholder="例) 5kg"></v-text-field>
                   <label>日時</label>
-                  <v-text-field v-model="time" class="white" placeholder="例）11月7日 9:00"></v-text-field>
+                  <v-text-field v-model="time" type="date" class="white" placeholder="例）11月7日 9:00"></v-text-field>
                   <label>場所</label>
                   <v-text-field v-model="place" class="white" placeholder="例) 東京"></v-text-field>
                   <label>コメント</label>
                   <v-textarea v-model="comment" class="white" placeholder="例) 今日もたくさん拾いました。"></v-textarea>
                   <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
               </v-container>
-              <!-- <small>*indicates required field</small> -->
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -63,7 +62,7 @@
         <v-col>
           <v-card v-for="article in articles" :key="article.id">
             <template >
-              <v-divider  />
+              <v-divider />
               <v-hover v-slot ="{ hover }">
                 <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(article.id)">
                   <v-row>
@@ -81,8 +80,6 @@
                       <p class="my-5 font-weight-bold">{{ article.comment }}</p>
                     </v-col>
                     <v-col cols="5">
-                      <!-- <v-icon>mdi-scale</v-icon> -->
-                      <!-- <span>{{ article.name }}</span> -->
                       <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ article.name }}・{{ article.date}}</span>
                     </v-col>
                   </v-row>
@@ -159,11 +156,11 @@ export default {
       });
       this.name = '';
       this.place = '';
-      this.messageComment = '';
+      this.comment = '';
       this.date = '';
     },
     getPersonalId(id) {
-      this.$store.dispatch('project/getPersonalProjectId', {
+      this.$store.dispatch('project/getPersonalProject', {
         id
       })
     },

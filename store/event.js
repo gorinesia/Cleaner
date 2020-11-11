@@ -6,26 +6,26 @@ export const state = () => ({
   time: '',
   image: null,
   date: '',
-  articles: [],
+  events: [],
   articleId: '',
   comment: '',
   deleteOverlay: false,
   editOverlay: false,
-  personalDatas: []
+  personalEvent: []
 })
 
 export const getters = {
-  articles: state => state.articles,
+  events: state => state.events,
   image: state => state.image,
   deleteOverlay: state => state.deleteOverlay,
   articleId: state => state.articleId,
   editOverlay: state => state.editOverlay,
-  personalDatas: state=> state.personalDatas
+  personalEvent: state=> state.personalEvent
 }
 
 export const mutations = {
-  setArticles: (state, articles) => {
-    state.articles = articles;
+  setEvents: (state, events) => {
+    state.events = events;
   },
   setImage: (state, url) => {
     state.image = url;
@@ -47,9 +47,9 @@ export const mutations = {
   closeModalForEdit: (state) => {
     state.editOverlay = false;
   },
-  setPersonalDatas: (state, personalDetails) => {
-    state.personalDatas = personalDetails
-    console.log(state.personalDatas);
+  setPersonalEvent: (state, personalDetails) => {
+    state.personalEvent = personalDetails
+    console.log(state.personalEvent);
   }
 }
 
@@ -83,9 +83,11 @@ export const actions = {
       .orderBy('date', 'desc')
       .get()
       .then((querySnapshot) => {
-        const articles = [];
+        const events = [];
         querySnapshot.forEach((doc) => {
-          articles.push({
+          events.push({
+            displayName: doc.data().displayName,
+            displayImage: doc.data().displayImage,
             name: doc.data().name,
             place: doc.data().place,
             comment: doc.data().comment,
@@ -94,7 +96,7 @@ export const actions = {
             date: doc.data().date,
           })
         })
-        commit('setArticles', articles);
+        commit('setEvents', events);
     })
   },
   addMessage(context, payload) {
@@ -141,6 +143,8 @@ export const actions = {
       .get()
       .then((doc) => {
         personalDetails.push({
+          displayName: doc.data().displayName,
+          displayImage: doc.data().displayImage,
           name: doc.data().name,
           place: doc.data().place,
           comment: doc.data().comment,
@@ -150,7 +154,7 @@ export const actions = {
         })
           console.log(doc.data())
           this.$router.push('/personal/personalevent');
-          commit('setPersonalDatas', personalDetails);
+          commit('setPersonalEvent', personalDetails);
       })
   }
 }

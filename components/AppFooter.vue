@@ -16,19 +16,16 @@ export default {
         {
           name: 'マイページ',
           icon: 'mdi-account',
-          url: '#',
           to: '/mypage'
         },
         {
           name: 'プロジェクト',
           icon: 'mdi-account',
-          url: '#',
           to: '/list/project'
         },
         {
           name: 'イベント',
           icon: 'mdi-account',
-          url: '#',
           to: '/list/event'
         },
       ]
