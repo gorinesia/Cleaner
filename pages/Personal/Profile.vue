@@ -1,20 +1,20 @@
 <template>
   <v-app class="mx-10">
-    <v-container v-for="personalProjectId in personalProjectId" :key="personalProjectId.id">
+    <v-container v-for="personalProject in personalProject" :key="personalProject.id">
       <v-card outlined class="mb-10">
         <v-row  class="fill-height">
           <v-col align-self="start"  cols="2">
             <v-avatar class="profile ml-3 mt-3" color="grey" size="80">
-              <v-img :src="personalProjectId.displayImage"></v-img>
+              <v-img :src="personalProject.displayImage"></v-img>
             </v-avatar>
           </v-col>
           <v-col>
             <v-list-item color="rgba(0, 0, 0, .4)">
               <v-list-item-content>
                 <v-list-item-title class="cyan--text text--darken-1 font-weight-bold title mb-2" dark>
-                  {{ personalProjectId.displayName}}
+                  {{ personalProject.displayName}}
                 </v-list-item-title>
-                <p class="grey--text mb-2">{{ personalProjectId.place }}</p>
+                <p class="grey--text mb-2">{{ personalProject.place }}</p>
                 <div>
                   <!-- <p v-if="personalDatas[0].comment">{{ personalDatas[0].comment }}</p> -->
                   <!-- <p v-else>コメントはありません</p> -->
@@ -48,22 +48,22 @@
               <template >
                 <v-divider />
                 <v-hover v-slot="{ hover }">
-                  <v-card :class="{ 'on-hover': hover }" @click="getPersonalProjectId(personalProjectId.id)">
+                  <v-card :class="{ 'on-hover': hover }" @click="getPersonalProject(personalProject.id)">
                     <v-row>
                       <v-col cols="3">
                         <v-avatar tile size="100" class="ml-5">
-                          <v-img :src="personalProjectId.image"></v-img>
+                          <v-img :src="personalProject.image"></v-img>
                         </v-avatar>
                       </v-col>
                       <v-col cols="4">
                         <v-avatar class="profile" color="grey" size="60">
-                          <v-img :src="personalProjectId.displayImage"></v-img>
+                          <v-img :src="personalProject.displayImage"></v-img>
                         </v-avatar>
-                        <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ personalProjectId.displayName }}</span>
-                        <p class="my-5 font-weight-bold">{{ personalProjectId.comment }}</p>
+                        <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ personalProject.displayName }}</span>
+                        <p class="my-5 font-weight-bold">{{ personalProject.comment }}</p>
                       </v-col>
                       <v-col cols="5">
-                        <span class="grey--text float-right">{{ personalProjectId.date}}</span>
+                        <span class="grey--text float-right">{{ personalProject.date}}</span>
                       </v-col>
                     </v-row>
                   </v-card>
@@ -114,13 +114,13 @@ export default {
     articles() {
       return this.$store.getters['project/articles']
     },
-    personalProjectId() {
-      return this.$store.getters['project/personalProjectId']
+    personalProject() {
+      return this.$store.getters['project/personalProject']
     }
   },
   methods: {
-    getPersonalProjectId(id) {
-      this.$store.dispatch('project/getPersonalProjectId', {
+    getPersonalProject(id) {
+      this.$store.dispatch('project/getPersonalProject', {
         id
       })
     },

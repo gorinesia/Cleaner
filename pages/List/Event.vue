@@ -155,7 +155,7 @@ export default {
         place: this.place,
         comment: this.comment,
         image: this.image,
-        date: this.date
+        date: new Date().toLocaleString()
       });
       this.name = '';
       this.place = '';
