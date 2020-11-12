@@ -70,8 +70,6 @@
 
 <script>
 import Information from '@/components/Information.vue'
-import firebase from 'firebase/app'
-import 'firebase/firestore'
 
 export default {
   name: 'home',
@@ -84,12 +82,10 @@ export default {
         {
           name: 'プロジェクトをみる',
           icon: 'mdi-tooltip',
-          // to: '/list/project'
         },
         {
           name: 'イベントをみる',
           icon: 'mdi-calendar',
-          // to: '/list/event'
         },
       ],
       tab: null

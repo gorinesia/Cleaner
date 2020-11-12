@@ -75,7 +75,8 @@
 </template>
 
 <script>
-import firebase from '@/plugins/firebase';
+import firebase from 'firebase/app';
+import 'firebase/firestore'
 
 export default {
   layout: 'loggedIn',
