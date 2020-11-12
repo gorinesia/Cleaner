@@ -122,7 +122,6 @@ export default {
           this.applyUsers.push({
             // displayName: doc.data().displayName,
             // image: doc.data().image,
-            // id: doc.id,
             // applyButton: doc.data().applyButton
           })
         })
