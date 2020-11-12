@@ -9,7 +9,7 @@
           人々に対価を」をコンセプトとしたゴミ拾い<br>
           情報コミュニティです。</p>
           <v-btn class="mb-5" rounded outlined color="cyan darken-1" x-large to="/Auth/Signup">いますぐはじめる</v-btn><br>
-          <v-btn class="text-capitalize" rounded color="primary" x-large dark to="aboutcleaner">Cleanerについて</v-btn>
+          <v-btn class="text-capitalize" rounded color="primary" x-large dark to="/About">Cleanerについて</v-btn>
         </v-col>
         <v-col cols="12" md="6" align="center" justify="center">
             <v-img fluid fill-height class="home-hero__content">
