@@ -86,7 +86,8 @@
 </template>
 
 <script>
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/firestore'
 
 export default {
   name: 'personalProject',
@@ -132,7 +133,6 @@ export default {
             console.log(doc.data());
             console.log(doc.id);
           })
-          // this.comments = comments;
       })
     },
     addComment(id) {
