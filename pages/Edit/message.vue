@@ -20,7 +20,8 @@
 </template>
 
 <script>
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/firestore'
 
 export default {
   layout: 'loggedIn',
