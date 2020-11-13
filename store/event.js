@@ -1,6 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/storage'
+// import firebase, { firestore, storage } from '@/plugins/firebase.js'
+
 
 export const state = () => ({
   name: '',

@@ -23,6 +23,8 @@
 <script>
 import firebase from 'firebase/app';
 import 'firebase/firestore'
+// import firebase, { firestore } from '@/plugins/firebase.js'
+
 
 export default {
   layout: 'loggedIn',
