@@ -48,7 +48,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '@/plugins/firebase',
+    '~/plugins/firebase.js',
     {src: '~/plugins/vue2-google-maps.js', ssr: true}
   ],
   /*
