@@ -89,6 +89,8 @@
 <script>
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+// import firebase, { firestore } from '@/plugins/firebase.js'
+
 
 export default {
   name: 'personalEvent',
@@ -131,6 +133,7 @@ export default {
         const db = firebase.firestore();
         const docRef = db.collection('users').doc(id).collection('posts').doc('apply')
           docRef.set({
+            applyButton: 'キャンセル'
           })
             this.getEvent(id);
     },
@@ -139,6 +142,7 @@ export default {
         const db = firebase.firestore();
         const docRef = db.collection('users').doc(id).collection('posts').doc('apply');
           docRef.update({
+            applyButton: '参加'
           })
             this.getEvent(id);
     },
