@@ -109,7 +109,7 @@ export default {
     FB_DATABASE_URL: process.env.VUE_APP_FB_DATABASE_URL,
     FB_PROJECT_ID: process.env.VUE_APP_FB_PROJECT_ID,
     FB_STORAGE_BUCKET: process.env.VUE_APP_FB_STORAGE_BUCKET,
-    FB_MESSAGING_SENDER_ID: process.env.FB_MESSAGING_SENDER_ID,
-    FB_APP_ID: process.env.FB_APP_ID
+    FB_MESSAGING_SENDER_ID: process.env.VUE_APP_FB_MESSAGING_SENDER_ID,
+    FB_APP_ID: process.env.VUE_APP_FB_APP_ID
   }
 }
