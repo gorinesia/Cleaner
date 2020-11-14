@@ -22,6 +22,4 @@ export const auth = firebaseApp.auth();
 export const firestore = firebaseApp.firestore();
 export const storage = firebaseApp.storage();
 
-
-
 export default firebaseApp;
