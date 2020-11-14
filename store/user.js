@@ -1,9 +1,8 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
-import 'firebase/storage';
-
-// import firebase, { auth, firestore, storage } from '@/plugins/firebase.js'
+// import firebase from 'firebase/app';
+// import 'firebase/auth';
+// import 'firebase/firestore';
+// import 'firebase/storage';
+import firebase, { auth, firestore, storage } from '~/plugins/firebase.js'
 
 export const state = () => ({
   user: null,
