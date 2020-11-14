@@ -46,7 +46,6 @@ export default {
             id: doc.id
           })
           console.log(doc.data().messageText);
-          console.log(doc.id);
         })
       })
     },
