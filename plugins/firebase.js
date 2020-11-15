@@ -13,8 +13,13 @@ const config = {
   appId: process.env.VUE_APP_FB_APP_ID
 }
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(config)
-}
+// if (!firebase.apps.length) {
+//   firebase.initializeApp(config)
+// }
+const firebaseApp = firebase.initializeApp(config)
 
-export default firebase;
+export const auth = firebaseApp.auth();
+export const firestore = firebaseApp.firestore();
+export const storage = firebaseApp.storage();
+
+export default firebaseApp;

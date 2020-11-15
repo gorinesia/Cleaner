@@ -48,7 +48,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '@/plugins/firebase',
+    '~/plugins/firebase.js',
     {src: '~/plugins/vue2-google-maps.js', ssr: true}
   ],
   /*
@@ -60,15 +60,14 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    '@nuxtjs/dotenv',
     '@nuxtjs/vuetify'
   ],
   /*
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/style-resources',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/style-resources'
   ],
   styleResources: {
     scss: [
@@ -104,12 +103,12 @@ export default {
     transpile: [/^vue2-google-maps($|\/)/]
   },
   env: {
-    VUE_APP_FB_API_KEY: process.env.FB_API_KEY,
-    VUE_APP_FB_AUTH_DOMAIN: process.env.FB_AUTH_DOMAIN,
-    VUE_APP_FB_DATABASE_URL: process.env.FB_DATABASE_URL,
-    VUE_APP_FB_PROJECT_ID: process.env.FB_PROJECT_ID,
-    VUE_APP_FB_STORAGE_BUCKET: process.env.FB_STORAGE_BUCKET,
-    VUE_APP_FB_MESSAGING_SENDER_ID: process.env.FB_MESSAGING_SENDER_ID,
-    VUE_APP_FB_APP_ID: process.env.FB_APP_ID
+    VUE_APP_FB_API_KEY: process.env.VUE_APP_FB_API_KEY,
+    VUE_APP_FB_AUTH_DOMAIN: process.env.VUE_APP_FB_AUTH_DOMAIN,
+    VUE_APP_FB_DATABASE_URL: process.env.VUE_APP_FB_DATABASE_URL,
+    VUE_APP_FB_PROJECT_ID: process.env.VUE_APP_FB_PROJECT_ID,
+    VUE_APP_FB_STORAGE_BUCKET: process.env.VUE_APP_FB_STORAGE_BUCKET,
+    VUE_APP_FB_MESSAGING_SENDER_ID: process.env.VUE_APP_FB_MESSAGING_SENDER_ID,
+    VUE_APP_FB_APP_ID: process.env.VUE_APP_FB_APP_ID
   }
 }
