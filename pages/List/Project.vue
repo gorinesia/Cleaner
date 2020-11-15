@@ -109,10 +109,13 @@ export default {
       image_src: require('@/assets/img/top-page.jpg'),
       imageOverlay: false,
       dialog: false,
-      loggedIn: this.$store.state.user.loggedIn,
+      // loggedIn: this.$store.state.user.loggedIn,
     }
   },
   computed: {
+    loggedIn() {
+      return this.$store.getters['user/loggedIn']
+    },
     currentUser() {
       return this.$store.getters['user/currentUser']
     },
