@@ -1,7 +1,7 @@
 <template>
   <v-app class="mx-10" style="color: navy">
-    <v-container>
-      <v-card align="center" class="mb-10" v-for="personalEvent in personalEvent" :key="`first-${personalEvent.id}`">
+    <v-container v-for="personalEvent in personalEvent" :key="personalEvent.id">
+      <v-card align="center" class="mb-10">
         <v-row>
           <v-col cols="2">
             <p>{{ personalEvent.date}}</p>
@@ -23,7 +23,7 @@
         <div class="grey--text text--darken-1 font-weight-bold">イベント概要</div>
         <p class="ma-2">{{ personalEvent.comment }}</p>
       </v-card>
-      <v-card outlined class="mb-10" v-for="personalEvent in personalEvent" :key="`second-${personalEvent.id}`">
+      <v-card outlined class="mb-10">
         <v-row  class="fill-height">
           <v-col align-self="start"  cols="2">
             <v-avatar class="profile" color="grey" size="100">
@@ -83,7 +83,7 @@
         </v-card>
       </v-container>
 
-      <v-card color="#E0F7FA" class="rounded-xl mt-5 pa-5" rounded v-for="personalEvent in personalEvent" :key="`third-${personalEvent.id}`">
+      <v-card color="#E0F7FA" class="rounded-xl mt-5 pa-5" rounded>
         <h2 class="mx-10">クリーナーを応援しよう</h2>
         <v-row>
           <v-col cols="9">
@@ -136,7 +136,8 @@ export default {
       }
     })
     const db = firebase.firestore();
-    const docRef = db.collection('posts').doc();
+    const docRef = db.collection('posts').doc(this.personalEvent[0].id);
+    console.log(this.personalEvent[0].id);
     // const docRef = db.collection('posts').doc(this.documentId);
     // const docRef = db.collection('posts').doc(this.currentUser[0].id);
     this.getEvent(docRef)
@@ -151,34 +152,34 @@ export default {
           this.posts = doc.data();
           this.likeSum = this.posts.like_users.length;
           this.applyFlag = this.posts.like_users.includes(this.loginUser.uid)
-          this.likeUser.push({
-            like_users: doc.data().like_users
-          })
+          // this.likeUser.push({
+          //   like_users: doc.data().like_users
+          // })
         } else {
           console.log(doc.data());
         }
       })
     },
-    applyEvent() {
+    applyEvent(id) {
         const db = firebase.firestore();
-        const docRef = db.collection('posts')
+        const docRef = db.collection('posts').doc(this.personalEvent[0].id)
         // const docRef = db.collection('posts').doc(this.documentId);
         // const docRef = db.collection('posts').doc(this.documentId);
-        docRef.add({
+        docRef.set({
           like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid)
-        })
+        }, { merge: true })
         this.getEvent(docRef);
         // this.getEvent(docRef);
     },
-    cancelEvent() {
+    cancelEvent(id) {
         const db = firebase.firestore();
-        const docRef = db.collection('posts')
+        const docRef = db.collection('posts').doc(this.personalEvent[0].id)
         // const docRef = db.collection('posts').doc(this.documentId);
         // const docRef = db.collection('posts').doc(this.documentId);
         docRef.update({
           like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid)
         })
-          this.getEvent(docRef);
+        this.getEvent(docRef);
           // this.getEvent(docRef);
     },
     getProfile(id) {
