@@ -1,7 +1,7 @@
 <template>
   <v-app class="mx-10" style="color: navy">
-    <v-container v-for="personalEvent in personalEvent" :key="personalEvent.id">
-      <v-card align="center" class="mb-10">
+    <v-container>
+      <v-card align="center" class="mb-10" v-for="personalEvent in personalEvent" :key="`first-${personalEvent.id}`">
         <v-row>
           <v-col cols="2">
             <p>{{ personalEvent.date}}</p>
@@ -23,7 +23,7 @@
         <div class="grey--text text--darken-1 font-weight-bold">イベント概要</div>
         <p class="ma-2">{{ personalEvent.comment }}</p>
       </v-card>
-      <v-card outlined class="mb-10">
+      <v-card outlined class="mb-10" v-for="personalEvent in personalEvent" :key="`second-${personalEvent.id}`">
         <v-row  class="fill-height">
           <v-col align-self="start"  cols="2">
             <v-avatar class="profile" color="grey" size="100">
@@ -44,11 +44,24 @@
       <h2 class="mb-5">{{ personalEvent.displayName }}さんの発案中のイベント</h2>
 
 
-      <div :id="currentUser[0].id">
+      <!-- <div :id="currentUser[0].id">
         <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent(currentUser[0].id)">{{ applyButton }}</v-btn>
       </div>
       <div :id="currentUser[0].id">
         <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent(currentUser[0].id)">{{ applyButton }}</v-btn>
+      </div> -->
+      <div v-for="likeUser in likeUser" :key="likeUser.id">
+        <div>
+          <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent()"><v-icon color="cyan darken-1">mdi-thumb-up</v-icon></v-btn>
+        <span>{{ likeUser.like_users.length }}</span>
+        </div>
+        <div>
+          <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent()"><v-icon x-large color="cyan darken-1">mdi-thumb-up</v-icon></v-btn>
+        </div>
+        <!-- <span>{{ likeSum }}</span> -->
+        <span>{{ likeUser.like_users.length }}</span>
+        <div >
+        </div>
       </div>
 
       <div>メンバー</div>
@@ -68,7 +81,8 @@
           <v-btn class="cyan text-sm white--text font-bold py-1 px-2 rouded">送信</v-btn>
         </v-card>
       </v-container>
-      <v-card color="#E0F7FA" class="rounded-xl mt-5 pa-5" rounded>
+
+      <v-card color="#E0F7FA" class="rounded-xl mt-5 pa-5" rounded v-for="personalEvent in personalEvent" :key="`third-${personalEvent.id}`">
         <h2 class="mx-10">クリーナーを応援しよう</h2>
         <v-row>
           <v-col cols="9">
@@ -87,9 +101,9 @@
 </template>
 
 <script>
-// import firebase from 'firebase/app';
-// import 'firebase/firestore';
-import firebase, { firestore } from '~/plugins/firebase.js'
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+// import firebase, { firestore } from '~/plugins/firebase.js'
 
 
 export default {
@@ -100,7 +114,10 @@ export default {
       applyUsers: [],
       applyFlag: false,
       applyButton: '参加',
-      loginUser: null
+      loginUser: null,
+      likeSum: 0,
+      documentId: 'YoJyFj5D6gZPEnpnhOVQ',
+      likeUser: []
     }
   },
   computed: {
@@ -112,39 +129,52 @@ export default {
     }
   },
   mounted() {
-    this.getEvent(this.currentUser[0].id)
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.loginUser = user;
+      }
+    })
+    const db = firebase.firestore();
+    const docRef = db.collection('posts').doc(this.documentId);
+    // const docRef = db.collection('posts').doc(this.documentId);
+    // const docRef = db.collection('posts').doc(this.currentUser[0].id);
+    this.getEvent(docRef)
+    // this.getEvent(this.currentUser[0].id)
+
   },
   methods: {
-    getEvent(id) {
-      const db = firebase.firestore();
-      const docRef = db.collection('users').doc(id).collection('posts').doc('apply');
-      docRef
-        .onSnapshot((doc) => {
+    getEvent(docRef) {
+      docRef.get().then(doc => {
+        if (doc.exists) {
           console.log(doc.data());
-          this.applyUsers.push({
-            // displayName: doc.data().displayName,
-            // image: doc.data().image,
-            // applyButton: doc.data().applyButton
+          this.posts = doc.data();
+          this.likeSum = this.posts.like_users.length;
+          this.applyFlag = this.posts.like_users.includes(this.loginUser.uid)
+          this.likeUser.push({
+            like_users: doc.data().like_users
           })
+        } else {
+          console.log(doc.data());
+        }
+      })
+    },
+    applyEvent() {
+        const db = firebase.firestore();
+        const docRef = db.collection('posts').doc(this.documentId);
+        // const docRef = db.collection('posts').doc(this.documentId);
+        docRef.update({
+          like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid)
         })
+        this.getEvent(docRef);
     },
-    applyEvent(id) {
-      console.log(id);
+    cancelEvent() {
         const db = firebase.firestore();
-        const docRef = db.collection('users').doc(id).collection('posts').doc('apply')
-          docRef.set({
-            applyButton: 'キャンセル'
-          })
-            this.getEvent(id);
-    },
-    cancelEvent(id) {
-      console.log(id);
-        const db = firebase.firestore();
-        const docRef = db.collection('users').doc(id).collection('posts').doc('apply');
-          docRef.update({
-            applyButton: '参加'
-          })
-            this.getEvent(id);
+        const docRef = db.collection('posts').doc(this.documentId);
+        // const docRef = db.collection('posts').doc(this.documentId);
+        docRef.update({
+          like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid)
+        })
+          this.getEvent(docRef);
     },
     getProfile(id) {
       console.log(id);

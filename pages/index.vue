@@ -1,6 +1,6 @@
 <template>
   <v-app class="blue-grey lighten-5">
-    <v-system-bar height="30" color="#00ACC1" dark class="white--text font-weight-bold justify-center"><nuxt-link class="white--text text-decoration-none" to="auth/signup">まずは気軽に新規登録から！綺麗な世界は自分たちの手で創り上げていこう！</nuxt-link></v-system-bar>
+    <v-system-bar height="35" color="#00ACC1" dark class="white--text font-weight-bold justify-center"><nuxt-link class="white--text text-decoration-none" to="auth/signup">まずは気軽に新規登録から！綺麗な世界は自分たちの手で創り上げていこう！</nuxt-link></v-system-bar>
     <v-container>
       <v-row>
         <v-col cols="12" md="6" align="center" justify="center">
@@ -22,7 +22,7 @@
     </div>
     <Information />
 
-    <v-container>
+    <v-container class="mb-10">
       <v-card>
         <v-tabs
           v-model="tab"

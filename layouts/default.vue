@@ -19,11 +19,16 @@ export default {
   },
   data() {
     return {
-      loggedIn: this.$store.state.user.loggedIn
+      // loggedIn: this.$store.state.user.loggedIn
     }
   },
-  currentUser() {
-    return this.$store.getters['user/currentUser']
+  computed: {
+    loggedIn() {
+        return this.$store.getters['user/loggedIn']
+      },
+    currentUser() {
+      return this.$store.getters['user/currentUser']
+    }
   }
 }
 </script>
