@@ -50,16 +50,17 @@
       <div :id="currentUser[0].id">
         <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent(currentUser[0].id)">{{ applyButton }}</v-btn>
       </div> -->
-      <div v-for="likeUser in likeUser" :key="likeUser.id">
+      <div>
+      <!-- <div v-for="likeUser in likeUser" :key="likeUser.id"> -->
         <div>
-          <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent()"><v-icon color="cyan darken-1">mdi-thumb-up</v-icon></v-btn>
-        <span>{{ likeUser.like_users.length }}</span>
+          <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent(personalEvent.id)"><v-icon color="cyan darken-1">mdi-thumb-up</v-icon></v-btn>
+        <!-- <span>{{ likeUser.like_users.length }}</span> -->
         </div>
         <div>
-          <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent()"><v-icon x-large color="cyan darken-1">mdi-thumb-up</v-icon></v-btn>
+          <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent(personalEvent.id)"><v-icon x-large color="cyan darken-1">mdi-thumb-up</v-icon></v-btn>
         </div>
-        <!-- <span>{{ likeSum }}</span> -->
-        <span>{{ likeUser.like_users.length }}</span>
+        <span>{{ likeSum }}</span>
+        <!-- <span>{{ likeUser.like_users.length }}</span> -->
         <div >
         </div>
       </div>
@@ -135,7 +136,7 @@ export default {
       }
     })
     const db = firebase.firestore();
-    const docRef = db.collection('posts').doc(this.documentId);
+    const docRef = db.collection('posts').doc();
     // const docRef = db.collection('posts').doc(this.documentId);
     // const docRef = db.collection('posts').doc(this.currentUser[0].id);
     this.getEvent(docRef)
@@ -160,21 +161,25 @@ export default {
     },
     applyEvent() {
         const db = firebase.firestore();
-        const docRef = db.collection('posts').doc(this.documentId);
+        const docRef = db.collection('posts')
         // const docRef = db.collection('posts').doc(this.documentId);
-        docRef.update({
+        // const docRef = db.collection('posts').doc(this.documentId);
+        docRef.add({
           like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid)
         })
         this.getEvent(docRef);
+        // this.getEvent(docRef);
     },
     cancelEvent() {
         const db = firebase.firestore();
-        const docRef = db.collection('posts').doc(this.documentId);
+        const docRef = db.collection('posts')
+        // const docRef = db.collection('posts').doc(this.documentId);
         // const docRef = db.collection('posts').doc(this.documentId);
         docRef.update({
           like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid)
         })
           this.getEvent(docRef);
+          // this.getEvent(docRef);
     },
     getProfile(id) {
       console.log(id);
