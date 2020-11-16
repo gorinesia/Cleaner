@@ -60,6 +60,7 @@
           <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent(personalEvent.id)"><v-icon x-large color="cyan darken-1">mdi-thumb-up</v-icon></v-btn>
         </div>
         <span>{{ likeSum }}</span>
+        <v-img :src="image" width="50px" height="50px"></v-img>
         <!-- <span>{{ likeUser.like_users.length }}</span> -->
         <div >
         </div>
@@ -67,10 +68,11 @@
 
       <div>メンバー</div>
       <v-card>
-        <v-row>
+        <v-row v-for="image in image" :key="image.id">
           <v-col>
             <v-avatar>
-              <v-img :src="personalEvent.displayImage" width="50px" height="50px" @click="getProfile(personalEvent.id)"></v-img>
+              <v-img :src="image.image" width="50px" height="50px" @click="getProfile(personalEvent.id)"></v-img>
+              <!-- <v-img :src="personalEvent.displayImage" width="50px" height="50px" @click="getProfile(personalEvent.id)"></v-img> -->
             </v-avatar>
           </v-col>
         </v-row>
@@ -117,6 +119,7 @@ export default {
       applyButton: '参加',
       loginUser: null,
       likeSum: 0,
+      image: null,
       documentId: 'YoJyFj5D6gZPEnpnhOVQ',
       likeUser: []
     }
@@ -151,10 +154,9 @@ export default {
           console.log(doc.data());
           this.posts = doc.data();
           this.likeSum = this.posts.like_users.length;
-          this.applyFlag = this.posts.like_users.includes(this.loginUser.uid)
-          // this.likeUser.push({
-          //   like_users: doc.data().like_users
-          // })
+          this.image = this.posts.image_users[0];
+          this.imageFlag = this.posts.image_users.includes(this.personalEvent[0].displayImage);
+          this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
         } else {
           console.log(doc.data());
         }
@@ -163,24 +165,20 @@ export default {
     applyEvent(id) {
         const db = firebase.firestore();
         const docRef = db.collection('posts').doc(this.personalEvent[0].id)
-        // const docRef = db.collection('posts').doc(this.documentId);
-        // const docRef = db.collection('posts').doc(this.documentId);
         docRef.set({
-          like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid)
+          like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
+          image_users: firebase.firestore.FieldValue.arrayUnion(this.personalEvent[0].displayImage),
         }, { merge: true })
         this.getEvent(docRef);
-        // this.getEvent(docRef);
     },
     cancelEvent(id) {
         const db = firebase.firestore();
         const docRef = db.collection('posts').doc(this.personalEvent[0].id)
-        // const docRef = db.collection('posts').doc(this.documentId);
-        // const docRef = db.collection('posts').doc(this.documentId);
         docRef.update({
-          like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid)
+          like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
+          image_users: firebase.firestore.FieldValue.arrayRemove(this.personalEvent[0].displayImage)
         })
         this.getEvent(docRef);
-          // this.getEvent(docRef);
     },
     getProfile(id) {
       console.log(id);
