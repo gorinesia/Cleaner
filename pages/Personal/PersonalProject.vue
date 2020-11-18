@@ -2,13 +2,13 @@
   <v-app>
     <v-container v-for="personalProject in personalProject" :key="personalProject.id">
       <v-card outlined class="mb-5">
-        <v-row >
+        <v-row cols="2">
           <v-col align-self="start"  cols="2">
             <v-avatar class="profile ml-5" color="grey" size="80">
               <v-img :src="personalProject.displayImage"></v-img>
             </v-avatar>
           </v-col>
-          <v-col>
+          <v-col cols="5">
             <v-list-item color="rgba(0, 0, 0, .4)">
               <v-list-item-content>
                 <nuxt-link class="cyan--text text--darken-1 font-weight-bold title text-h4 text-decoration-none" to="/personal/profile" dark>
@@ -18,8 +18,38 @@
               </v-list-item-content>
             </v-list-item>
           </v-col>
-          <v-col>
+          <v-col cols="4">
             <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ personalProject.name }}・{{ personalProject.date}}</span>
+          </v-col>
+          <v-col cols="1">
+
+            <v-menu
+              v-if="currentUser[0].displayName === personalProject.displayName"
+              bottom
+              left
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon>mdi-dots-vertical</v-icon>
+                </v-btn>
+              </template>
+
+              <v-list>
+                <v-list-item>
+                  <v-icon>mdi-pencil-plus</v-icon>
+                  <v-list-item-title>投稿を編集</v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-icon>mdi-trash-can</v-icon>
+                  <v-list-item-title>投稿を削除</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+
           </v-col>
         </v-row>
       </v-card>
@@ -102,7 +132,11 @@ export default {
       },
       messageComment: '',
       comments: [],
-      comment: ''
+      comment: '',
+      items: [
+        { title: '投稿を編集', icon: 'mdi-pencil-plus' },
+        { title: '投稿を削除', icon: 'mdi-trash-can' },
+      ],
     }
   },
   computed: {
@@ -115,6 +149,10 @@ export default {
   },
   mounted() {
     this.getComment(this.currentUser[0].id);
+    console.log(this.currentUser[0].displayName);
+    console.log(this.currentUser[0].id);
+    console.log(this.personalProject[0].displayName);
+    console.log(this.personalProject[0].id);
   },
   methods: {
     getComment(id) {
