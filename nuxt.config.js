@@ -7,7 +7,7 @@ export default {
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
   */
-  mode: 'universal',
+  mode: 'spa',
   /*
   ** Nuxt target
   ** See https://nuxtjs.org/api/configuration-target
@@ -102,9 +102,9 @@ export default {
   build: {
     transpile: [/^vue2-google-maps($|\/)/]
   },
-  generate: {
-    dir: 'public'
-  },
+  // generate: {
+  //   dir: 'public'
+  // },
   env: {
     VUE_APP_FB_API_KEY: process.env.VUE_APP_FB_API_KEY,
     VUE_APP_FB_AUTH_DOMAIN: process.env.VUE_APP_FB_AUTH_DOMAIN,
