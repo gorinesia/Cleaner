@@ -30,18 +30,18 @@
             </v-card-title>
             <v-card-text>
               <v-container>
-                  <label class="postImage-appendBtn"></label>
-                  <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
-                  <v-img :src="image" width="100" height="100"></v-img>
-                  <label>ゴミの量</label>
-                  <v-text-field v-model="name" class="white" placeholder="例) 5kg"></v-text-field>
-                  <label>日時</label>
-                  <v-text-field v-model="time" type="date" class="white" placeholder="例）11月7日 9:00"></v-text-field>
-                  <label>場所</label>
-                  <v-text-field v-model="place" class="white" placeholder="例) 東京"></v-text-field>
-                  <label>コメント</label>
-                  <v-textarea v-model="comment" class="white" placeholder="例) 今日もたくさん拾いました。"></v-textarea>
-                  <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
+                <label class="postImage-appendBtn"></label>
+                <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
+                <v-img :src="image" width="100" height="100"></v-img>
+                <label>ゴミの量</label>
+                <v-text-field v-model="name" class="white" placeholder="例) 5kg"></v-text-field>
+                <label>日時</label>
+                <v-text-field v-model="time" type="date" class="white" placeholder="例）11月7日 9:00"></v-text-field>
+                <label>場所</label>
+                <v-text-field v-model="place" class="white" placeholder="例) 東京"></v-text-field>
+                <label>コメント</label>
+                <v-textarea v-model="comment" class="white" placeholder="例) 今日もたくさん拾いました。"></v-textarea>
+                <!-- <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn> -->
               </v-container>
             </v-card-text>
             <v-card-actions>
@@ -52,6 +52,13 @@
                 @click="dialog = false"
               >
                 Close
+              </v-btn>
+              <v-btn
+                color="blue darken-1"
+                text
+                @click="addMessage"
+              >
+                Save
               </v-btn>
             </v-card-actions>
           </v-card>
