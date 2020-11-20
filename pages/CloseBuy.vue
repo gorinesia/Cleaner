@@ -61,11 +61,13 @@ export default {
       }
     );
 
-    // autocomplete.addListener('place_changed', () => {
-    //   let place = autocomplete.getPlace();
-    //   console.log(place);
-    //   this.showUserLocationOnTheMap(place.geometry.location.lat(), place.geometry.location.lng())
-    // });
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      this.address = place.formatted_address;
+      this.lat = place.geometry.location.lat();
+      this.lng = place.geometry.location.lng();
+      // this.showUserLocationOnTheMap(place.geometry.location.lat(), place.geometry.location.lng())
+    });
   },
   methods: {
     locatorButtonPressed() {
@@ -131,10 +133,15 @@ export default {
     //   })
     // },
     findCloseBuyButtonPressed() {
-      console.log(this.lat);
-      console.log(this.lng);
-      console.log(this.type);
-      console.log(this.radius);
+      const URL = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.lat}, ${this.lng}&type=${this.type}&radius=${this.radius * 1000}&key=${
+        this.apiKey
+      }`;
+
+      axios.get(URL).then(response => {
+        console.log(response);
+      }).catch(error => {
+        this.error = error.message;
+      })
     }
   }
 }
