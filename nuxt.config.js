@@ -24,8 +24,12 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/earth.png' }
+      { rel: 'icon', type: 'image/x-icon', href: '/earth.png' },
+      { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css' },
       // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      { src:'https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAzighvakmvCU9UN7_yfBgJvdojhzyuCc4' }
     ]
   },
   /*
