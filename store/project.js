@@ -120,6 +120,7 @@ export const actions = {
       .delete()
       .then(() => {
         console.log('deleted!!');
+        this.$router.push('/list/project');
         context.dispatch('getMessage');
       })
   },

@@ -28,6 +28,9 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/earth.png' }
       // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      { type: 'text/javascript', src:'https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAzighvakmvCU9UN7_yfBgJvdojhzyuCc4', defer: true}
     ]
   },
   /*
