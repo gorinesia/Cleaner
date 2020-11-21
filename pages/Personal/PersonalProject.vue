@@ -21,7 +21,7 @@
           <v-col cols="4">
             <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ personalProject.name }}・{{ personalProject.date}}</span>
           </v-col>
-          <v-col cols="1">
+          <v-col cols="1" v-if="loggedIn">
 
             <v-menu
               v-if="currentUser[0].displayName === personalProject.displayName"
@@ -106,7 +106,7 @@
                   max-width="600px"
                 >
                   <template v-slot:activator="{ on, attrs }">
-                    <!-- <v-btn
+                    <v-btn
                       style="position: fixed; z-index: 1; right: 250px; bottom: 100px"
                       fab
                       large
@@ -253,6 +253,9 @@ export default {
     }
   },
   computed: {
+    loggedIn() {
+      return this.$store.getters['user/loggedIn']
+    },
     articles() {
       return this.$store.getters['project/articles']
     },
