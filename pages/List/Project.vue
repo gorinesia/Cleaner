@@ -123,7 +123,8 @@ export default {
       image_src: require('@/assets/img/top-page.jpg'),
       imageOverlay: false,
       dialog: false,
-      address: ''
+      address: '',
+      map: ''
       // loggedIn: this.$store.state.user.loggedIn,
     }
   },
@@ -150,7 +151,7 @@ export default {
     // this.$store.dispatch('project/getMessage');
 
     let autocomplete = new google.maps.places.Autocomplete(
-      window.parent.document.getElementById('autocomplete'),
+      document.getElementById('autocomplete'),
       {
         bounds: new google.maps.LatLngBounds(
           new google.maps.LatLng(45.4215296, -75.6971931)
@@ -251,7 +252,7 @@ export default {
       })
     },
     showLocationOnTheMap(latitude, longitude) {
-      let map = new google.maps.Map(window.parent.document.getElementById('map'), {
+      let map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
         center: new google.maps.LatLng(latitude, longitude),
         mapTypeId: google.maps.MapTypeId.ROADMAP

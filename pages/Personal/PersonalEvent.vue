@@ -59,10 +59,10 @@
       <v-card>
         <v-row>
           <v-col>
-            <!-- <v-avatar v-for="image in images" :key="image.id"> -->
-              <!-- <img :src="image" :key="imge" width="50px" height="50px" @click="getProfile(personalEvent.id)">
-              <v-img :src="personalEvent.displayImage" width="50px" height="50px" @click="getProfile(personalEvent.id)"></v-img>
-            </v-avatar> -->
+            <v-avatar v-for="image in images" :key="image.id">
+              <!-- <img :src="image" :key="imge" width="50px" height="50px" @click="getProfile(personalEvent.id)"> -->
+              <v-img :src="image.displayImage" width="50px" height="50px" @click="getProfile(personalEvent.id)"></v-img>
+            </v-avatar>
           </v-col>
         </v-row>
       </v-card>
@@ -104,7 +104,7 @@ export default {
       applyFlag: false,
       loginUser: null,
       likeSum: 0,
-      images: null,
+      images: [],
       nameUser: [],
       name_users: []
     }
@@ -135,7 +135,8 @@ export default {
           console.log(doc.data());
           this.posts = doc.data();
           this.likeSum = this.posts.like_users.length;
-          this.images = [...this.posts.image_users];
+          this.images = this.posts.displayImage;
+          // this.images = [...this.posts.image_users];
           this.nameUser = [...this.posts.name_users];
           this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
         } else {
@@ -147,8 +148,9 @@ export default {
         const db = firebase.firestore();
         const docRef = db.collection('posts').doc(this.personalEvent[0].id)
         docRef.set({
+          displayImage: this.personalEvent[0].displayImage,
           like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
-          image_users: firebase.firestore.FieldValue.arrayUnion(this.currentUser[0].image),
+          // image_users: firebase.firestore.FieldValue.arrayUnion(this.currentUser[0].image),
           name_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.displayName),
         }, { merge: true })
         this.getEvent(docRef);
@@ -156,11 +158,15 @@ export default {
     cancelEvent() {
         const db = firebase.firestore();
         const docRef = db.collection('posts').doc(this.personalEvent[0].id)
-        docRef.update({
-          like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
-          image_users: firebase.firestore.FieldValue.arrayRemove(this.currentUser[0].image),
-          name_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.displayName),
-        })
+        // docRef.update({
+        docRef.delete(
+        //   {
+        //   displayImage: this.peronalEvent[0].displayImage,
+        //   like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
+        //   // image_users: firebase.firestore.FieldValue.arrayRemove(this.currentUser[0].image),
+        //   name_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.displayName),
+        // }
+        )
         this.getEvent(docRef);
     },
     getProfile(id) {
