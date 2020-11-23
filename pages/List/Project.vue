@@ -36,7 +36,7 @@
                 <label>ゴミの量</label>
                 <v-text-field v-model="name" class="white" placeholder="例) 5kg"></v-text-field>
                 <label>日時</label>
-                <v-text-field v-model="time" type="date" class="white" placeholder="例）11月7日 9:00"></v-text-field>
+                <v-text-field v-model="date" class="white" placeholder="">{{ date }}</v-text-field>
                 <label>場所</label>
                 <v-text-field v-model="place" class="white" placeholder="例) 東京"></v-text-field>
                 <label>コメント</label>
@@ -91,6 +91,15 @@
                       <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ article.displayName }}</span>
                       <span>{{ article.place}}</span>
                       <p class="my-5 font-weight-bold">{{ article.comment }}</p>
+                      <div>
+                        <div>
+                          <v-icon v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" @click.stop="applyEvent()" outlined>mdi-thumb-up-outline</v-icon><span>{{ likeSum }}</span>
+
+                        </div>
+                        <div>
+                          <v-icon v-if="applyFlag" class="mb-10 white--text" rounded color="orange" @click.stop="cancelEvent()">mdi-thumb-up<span>{{ likeSum }}</span></v-icon>
+                        </div>
+                      </div>
                     </v-col>
                     <v-col cols="5">
                       <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ article.name }}・{{ article.date}}</span>
@@ -109,6 +118,8 @@
 
 <script>
 import axios from 'axios';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 export default {
   name: 'project',
@@ -118,14 +129,15 @@ export default {
       name: this.$store.state.project.name,
       place: this.$store.state.project.place,
       time: this.$store.state.project.time,
-      date: this.$store.state.project.date,
+      date: new Date().toLocaleString(),
       comment: this.$store.state.project.comment,
-      image_src: require('@/assets/img/top-page.jpg'),
       imageOverlay: false,
       dialog: false,
       address: '',
-      map: ''
-      // loggedIn: this.$store.state.user.loggedIn,
+      map: '',
+      applyFlag: false,
+      loginUser: null,
+      likeSum: 0,
     }
   },
   computed: {
@@ -149,6 +161,14 @@ export default {
   },
   mounted() {
     // this.$store.dispatch('project/getMessage');
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.loginUser = user;
+      }
+    })
+    const db = firebase.firestore();
+    const docRef = db.collection('posts').doc(this.articles[0].id);
+    this.getEvent(docRef)
 
     let autocomplete = new google.maps.places.Autocomplete(
       document.getElementById('autocomplete'),
@@ -167,6 +187,7 @@ export default {
     });
 
     this.$store.dispatch('project/getMessage');
+
   },
   methods: {
     showImage() {
@@ -188,7 +209,7 @@ export default {
         place: this.place,
         comment: this.comment,
         image: this.image,
-        date: new Date().toLocaleString()
+        date: this.date
       });
       this.name = '';
       this.place = '';
@@ -261,8 +282,37 @@ export default {
         position: new google.maps.LatLng(latitude, longitude),
         map: map
       })
+    },
+    getEvent(docRef) {
+      docRef.get().then(doc => {
+        if (doc.exists) {
+          console.log(doc.data());
+          this.posts = doc.data();
+          this.likeSum = this.posts.like_users.length;
+          this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
+        } else {
+          console.log(doc.data());
+        }
+      });
+    },
+    applyEvent() {
+      const db = firebase.firestore();
+      const docRef = db.collection('posts').doc(this.articles[0].id);
+      docRef.set({
+        // displayImage: this.currentUser[0].image,
+        like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
+      }, { merge: true })
+      this.getEvent(docRef);
+    },
+    cancelEvent() {
+      const db = firebase.firestore();
+      const docRef = db.collection('posts').doc(this.articles[0].id);
+      docRef.update({
+        like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
+      })
+      this.getEvent(docRef);
     }
-  },
+  }
 }
 </script>
 

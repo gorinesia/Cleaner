@@ -45,6 +45,18 @@
 
       <div>
         <div>
+          <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent()">参加</v-btn>
+        </div>
+        <div>
+          <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent()">キャンセル</v-btn>
+        </div>
+        <span>{{ likeSum }}</span>
+        <!-- <span>{{ likeSum }}</span>
+        <span>{{ nameUser }}</span> -->
+        <!-- <img :src="images" width="50px" height="50px"> -->
+      </div>
+      <!-- <div>
+        <div>
           <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent()"><v-icon color="cyan darken-1">mdi-thumb-up</v-icon></v-btn>
         </div>
         <div>
@@ -53,7 +65,7 @@
         <span>{{ likeSum }}</span>
         <span>{{ nameUser }}</span>
         <img :src="images" width="50px" height="50px">
-      </div>
+      </div> -->
 
       <div>メンバー</div>
       <v-card>
@@ -134,11 +146,15 @@ export default {
         if (doc.exists) {
           console.log(doc.data());
           this.posts = doc.data();
-          this.likeSum = this.posts.like_users.length;
-          this.images = this.posts.displayImage;
+          // this.likeSum = this.posts.like_users.length;
+          // this.images = this.posts.displayImage;
+          this.images.push({
+            displayImage: this.posts.displayImage
+          })
+
           // this.images = [...this.posts.image_users];
-          this.nameUser = [...this.posts.name_users];
-          this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
+          // this.nameUser = [...this.posts.name_users];
+          // this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
         } else {
           console.log(doc.data());
         }
@@ -148,25 +164,25 @@ export default {
         const db = firebase.firestore();
         const docRef = db.collection('posts').doc(this.personalEvent[0].id)
         docRef.set({
-          displayImage: this.personalEvent[0].displayImage,
-          like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
+          displayImage: this.currentUser[0].image,
+          // like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
           // image_users: firebase.firestore.FieldValue.arrayUnion(this.currentUser[0].image),
-          name_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.displayName),
+          // name_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.displayName),
         }, { merge: true })
+        this.applyFlag = true;
         this.getEvent(docRef);
     },
     cancelEvent() {
         const db = firebase.firestore();
         const docRef = db.collection('posts').doc(this.personalEvent[0].id)
-        // docRef.update({
         docRef.delete(
-        //   {
-        //   displayImage: this.peronalEvent[0].displayImage,
-        //   like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
-        //   // image_users: firebase.firestore.FieldValue.arrayRemove(this.currentUser[0].image),
-        //   name_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.displayName),
-        // }
+        // docRef.update({
+          // displayImage: null,
+          // like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
+          // image_users: firebase.firestore.FieldValue.arrayRemove(this.currentUser[0].image),
+          // name_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.displayName),
         )
+        this.applyFlag = false;
         this.getEvent(docRef);
     },
     getProfile(id) {
