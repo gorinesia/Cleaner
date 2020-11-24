@@ -90,16 +90,12 @@
                       </v-avatar>
                       <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ article.displayName }}</span>
                       <span>{{ article.place}}</span>
-                      <p class="my-5 font-weight-bold">{{ article.comment }}</p>
-                      <div>
-                        <div>
-                          <v-icon v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" @click.stop="applyEvent()" outlined>mdi-thumb-up-outline</v-icon><span>{{ likeSum }}</span>
+                      <p class="my-2 font-weight-bold">{{ article.comment }}</p>
 
-                        </div>
-                        <div>
-                          <v-icon v-if="applyFlag" class="mb-10 white--text" rounded color="orange" @click.stop="cancelEvent()">mdi-thumb-up<span>{{ likeSum }}</span></v-icon>
-                        </div>
-                      </div>
+                      <v-icon v-if="!applyFlag" color="orange" @click.stop="applyEvent()" outlined>mdi-thumb-up-outline</v-icon>
+                      <v-icon v-if="applyFlag" color="orange" @click.stop="cancelEvent()">mdi-thumb-up</v-icon>
+                      <span>{{ likeSum }}</span>
+
                     </v-col>
                     <v-col cols="5">
                       <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ article.name }}・{{ article.date}}</span>
@@ -158,6 +154,9 @@ export default {
         this.$store.commit('project/setImage', value)
       }
     },
+    personalProject() {
+      return this.$store.getters['project/personalProject']
+    }
   },
   mounted() {
     // this.$store.dispatch('project/getMessage');
@@ -167,7 +166,7 @@ export default {
       }
     })
     const db = firebase.firestore();
-    const docRef = db.collection('posts').doc(this.articles[0].id);
+    const docRef = db.collection('posts').doc(this.personalProject[0].id);
     this.getEvent(docRef)
 
     let autocomplete = new google.maps.places.Autocomplete(
@@ -297,7 +296,7 @@ export default {
     },
     applyEvent() {
       const db = firebase.firestore();
-      const docRef = db.collection('posts').doc(this.articles[0].id);
+      const docRef = db.collection('posts').doc(this.personalProject[0].id);
       docRef.set({
         // displayImage: this.currentUser[0].image,
         like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
@@ -306,7 +305,7 @@ export default {
     },
     cancelEvent() {
       const db = firebase.firestore();
-      const docRef = db.collection('posts').doc(this.articles[0].id);
+      const docRef = db.collection('posts').doc(this.personalProject[0].id);
       docRef.update({
         like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
       })
