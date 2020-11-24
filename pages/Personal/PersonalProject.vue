@@ -234,7 +234,6 @@ export default {
   name: 'personalProject',
   data() {
     return {
-      image_src: require('@/assets/img/everyone.jpg'),
       messages: [],
       article: {
         id: ''
@@ -334,21 +333,6 @@ export default {
         this.date = ''
         this.getComment(id);
       })
-    },
-    addMessage() {
-      this.$store.dispatch('project/addMessage', {
-        displayName: this.currentUser[0].displayName,
-        displayImage: this.currentUser[0].image,
-        name: this.name,
-        place: this.place,
-        comment: this.comment,
-        image: this.image,
-        date: new Date().toLocaleString()
-      });
-      this.name = '';
-      this.place = '';
-      this.comment = '';
-      this.date = '';
     },
     addMessage() {
       this.$store.dispatch('project/addMessage', {
