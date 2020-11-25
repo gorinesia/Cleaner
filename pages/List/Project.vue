@@ -92,8 +92,8 @@
                       <span>{{ article.place}}</span>
                       <p class="my-2 font-weight-bold">{{ article.comment }}</p>
 
-                      <v-icon v-if="!applyFlag" color="orange" @click.stop="applyEvent()" outlined>mdi-thumb-up-outline</v-icon>
-                      <v-icon v-if="applyFlag" color="orange" @click.stop="cancelEvent()">mdi-thumb-up</v-icon>
+                      <v-icon v-if="!applyFlag" color="orange" @click.stop="applyEvent(article.id)" outlined>mdi-thumb-up-outline</v-icon>
+                      <v-icon v-if="applyFlag" color="orange" @click.stop="cancelEvent(article.id)">mdi-thumb-up</v-icon>
                       <span>{{ likeSum }}</span>
 
                     </v-col>
@@ -165,9 +165,10 @@ export default {
         this.loginUser = user;
       }
     })
-    const db = firebase.firestore();
-    const docRef = db.collection('posts').doc(this.personalProject[0].id);
-    this.getEvent(docRef)
+    // const db = firebase.firestore();
+    // const docRef = db.collection('posts').doc(this.currentUser[0].id);
+    this.getEvent()
+    // this.getEvent(docRef)
 
     let autocomplete = new google.maps.places.Autocomplete(
       document.getElementById('autocomplete'),
@@ -282,34 +283,45 @@ export default {
         map: map
       })
     },
-    getEvent(docRef) {
-      docRef.get().then(doc => {
-        if (doc.exists) {
-          console.log(doc.data());
+    // getEvent(docRef) {
+    getEvent() {
+      const db = firebase.firestore();
+      // docRef.get().then(snapshot => {
+      db.collection('posts').get().then(snapshot => {
+        snapshot.docs.forEach(doc => {
           this.posts = doc.data();
           this.likeSum = this.posts.like_users.length;
           this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
-        } else {
-          console.log(doc.data());
-        }
+        })
+      // docRef.get().then(doc => {
+        // if (doc.exists) {
+        //   console.log(doc.data());
+        //   this.posts = doc.data();
+        //   this.likeSum = this.posts.like_users.length;
+        //   this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
+        // } else {
+        //   console.log(doc.data());
+        // }
       });
     },
-    applyEvent() {
+    applyEvent(id) {
       const db = firebase.firestore();
-      const docRef = db.collection('posts').doc(this.personalProject[0].id);
+      const docRef = db.collection('posts').doc(id);
       docRef.set({
         // displayImage: this.currentUser[0].image,
         like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
       }, { merge: true })
-      this.getEvent(docRef);
+      this.getEvent();
+      // this.getEvent(docRef);
     },
-    cancelEvent() {
+    cancelEvent(id) {
       const db = firebase.firestore();
-      const docRef = db.collection('posts').doc(this.personalProject[0].id);
+      const docRef = db.collection('posts').doc(id);
       docRef.update({
         like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
       })
-      this.getEvent(docRef);
+      this.getEvent();
+      // this.getEvent(docRef);
     }
   }
 }

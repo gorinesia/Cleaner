@@ -212,7 +212,7 @@
             <v-avatar class="profile mx-10" color="grey" size="50">
               <v-img :src="personalProject.displayImage"></v-img>
             </v-avatar>
-            <p class="mb-10 mx-10">{{ personalProject.displayName }}さんの行動に対してお金を送ってサポートすることが出来ます。</p>
+            <p class="mb-3 mx-10">{{ personalProject.displayName }}さんの行動に対してお金を送ってサポートすることが出来ます。</p>
             <v-btn color="#0D47A1" class="mx-10" rounded x-large dark>サポートする</v-btn>
           </v-col>
           <v-col cols="3">
