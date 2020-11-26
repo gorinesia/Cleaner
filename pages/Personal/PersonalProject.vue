@@ -1,5 +1,7 @@
 <template>
   <v-app>
+    <v-alert dense text type="info" :value="alertEdit" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を編集しました</v-alert>
+    <v-alert dense text type="error" :value="alertDelete" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を削除しました</v-alert>
     <v-container v-for="personalProject in personalProject" :key="personalProject.id">
       <v-card outlined class="mb-5">
         <v-row cols="2">
@@ -250,6 +252,8 @@ export default {
       place: this.$store.state.project.place,
       time: new Date().toLocaleString(),
       dialog: false,
+      alertEdit: false,
+      alertDelete: false,
     }
   },
   computed: {
@@ -380,6 +384,10 @@ export default {
         comment: this.comment,
         image: this.image,
       });
+      this.alertEdit = true;
+      setTimeout(() => {
+        this.alertEdit = false
+      }, 3000);
       this.name = ''
       this.place = ''
       this.comment = ''

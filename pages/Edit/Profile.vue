@@ -1,8 +1,7 @@
 <template>
   <v-app class="mx-10">
-    <h2>プロフィール編集</h2>
     <v-alert dense text type="success" :value="alert" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロフィール情報を更新しました</v-alert>
-    <h2 class="grey--text">ユーザー情報</h2>
+    <h2 class="cyan--text text--darken-1">ユーザー情報</h2>
     <v-container max-width="600px">
       <v-card v-for="currentUser in currentUser" :key="currentUser.id">
         <label class="postImage-appendBtn block">プロフィール画像</label>
@@ -10,10 +9,8 @@
         <v-img :src="image" width="100" height="100"></v-img>
         <label>ユーザー名</label>
         <v-text-field v-model="displayName" class="white" :placeholder="currentUser.displayName"></v-text-field>
-        <label>場所</label>
-        <v-text-field v-model="place" class="white" placeholder="現在地を入力"></v-text-field>
-        <label>ひとこと</label>
-        <v-textarea v-model="comment" class="white" placeholder="コメントを入力"></v-textarea>
+        <label>プロフィール</label>
+        <v-textarea v-model="comment" class="white" placeholder="自己紹介を書きましょう"></v-textarea>
         <v-btn @click="updateProfile(currentUser.id)" class=" ma-3 float-right font-weight-bold" color="cyan" dark>更新</v-btn>
       </v-card>
     </v-container>

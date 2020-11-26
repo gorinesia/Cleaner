@@ -4,6 +4,7 @@
       <h2 style="text-align: center; color: #00ACC1;" class="my-5">プロジェクトをみる</h2>
       <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
       あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
+      <v-alert dense text type="success" :value="alertPost" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を投稿しました</v-alert>
 
       <v-row justify="center" v-if="loggedIn">
         <v-dialog
@@ -134,6 +135,7 @@ export default {
       applyFlag: false,
       loginUser: null,
       likeSum: 0,
+      alertPost: false,
     }
   },
   computed: {
@@ -211,10 +213,15 @@ export default {
         image: this.image,
         date: this.date
       });
+      this.alertPost = true;
+      setTimeout(() => {
+        this.alertPost = false
+      }, 3000);
       this.name = '';
       this.place = '';
       this.comment = '';
       this.date = '';
+      this.dialog = false;
     },
     getPersonalId(id) {
       this.$store.dispatch('project/getPersonalProject', {
