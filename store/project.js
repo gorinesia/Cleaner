@@ -122,7 +122,11 @@ export const actions = {
         console.log('deleted!!');
         this.$router.push('/list/project');
         context.dispatch('getMessage');
-      })
+        this.alertDelete = true;
+        setTimeout(() => {
+          this.alertDelete = false
+        }, 3000);
+        });
   },
   editArticles(context, payload) {
     const db = firebase.firestore();

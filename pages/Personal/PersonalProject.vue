@@ -1,5 +1,7 @@
 <template>
   <v-app>
+    <v-alert dense text type="info" :value="alertEdit" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を編集しました</v-alert>
+    <v-alert dense text type="error" :value="alertDelete" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を削除しました</v-alert>
     <v-container v-for="personalProject in personalProject" :key="personalProject.id">
       <v-card outlined class="mb-5">
         <v-row cols="2">
@@ -51,6 +53,7 @@
                         <v-list-item-title
                           v-bind="attrs"
                           v-on="on"
+                          @click="openModalForEdit(personalProject.id)"
                         >
                           <v-icon>mdi-pencil-plus</v-icon>
                           <!-- <v-icon dark>mdi-pencil</v-icon> -->
@@ -69,12 +72,12 @@
                             <label>ゴミの量</label>
                             <v-text-field v-model="name" class="white" placeholder="例) 5kg"></v-text-field>
                             <label>日時</label>
-                            <v-text-field v-model="time" type="date" class="white" placeholder="例）11月7日 9:00"></v-text-field>
+                            <v-text-field v-model="time" class="white">{{ time }}</v-text-field>
                             <label>場所</label>
                             <v-text-field v-model="place" class="white" placeholder="例) 東京"></v-text-field>
                             <label>コメント</label>
                             <v-textarea v-model="comment" class="white" placeholder="例) 今日もたくさん拾いました。"></v-textarea>
-                            <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
+                            <v-btn @click="editArticles(articleId)" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
                           </v-container>
                         </v-card-text>
                         <v-card-actions>
@@ -164,7 +167,7 @@
           </v-col>
         </v-row>
       </v-card>
-      <v-card align="center" class="mb-10">
+      <v-card align="center" class="mb-10 pa-5">
         <v-row >
           <v-col cols="2">
           </v-col>
@@ -173,7 +176,7 @@
           </v-col>
         </v-row>
         <v-img
-          height="200"
+          height="300"
           width="500"
           :src="personalProject.image"
         ></v-img>
@@ -247,8 +250,10 @@ export default {
       ],
       name: this.$store.state.project.name,
       place: this.$store.state.project.place,
-      time: this.$store.state.project.time,
+      time: new Date().toLocaleString(),
       dialog: false,
+      alertEdit: false,
+      alertDelete: false,
     }
   },
   computed: {
@@ -370,6 +375,23 @@ export default {
     },
     closeModalForEdit() {
       this.$store.commit('project/closeModalForEdit');
+    },
+    editArticles(id) {
+      this.$store.dispatch('project/editArticles', {
+        id,
+        name: this.name,
+        place: this.place,
+        comment: this.comment,
+        image: this.image,
+      });
+      this.alertEdit = true;
+      setTimeout(() => {
+        this.alertEdit = false
+      }, 3000);
+      this.name = ''
+      this.place = ''
+      this.comment = ''
+      this.image = ''
     },
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-card height="350px" v-for="currentUser in currentUser" :key="currentUser.id">
+    <v-card height="200px" v-for="currentUser in currentUser" :key="currentUser.id">
       <v-navigation-drawer absolute permanent>
         <template v-slot:prepend>
           <v-list-item two-line>
@@ -38,27 +38,27 @@ export default {
     return {
       items: [
         {
-          title: 'プロフィール編集',
+          title: 'ユーザー情報設定',
           icon: 'mdi-folder',
           link: '/edit/profile'
         },
         {
-          title: 'メッセージ',
+          title: 'メッセージ管理',
           icon: 'mdi-account-multiple',
           link: '/edit/message'
         },
-        {
-          title: 'プロジェクト管理',
-          icon: 'mdi-star',
-          lists: ['Colors', 'Content', 'Display'],
-          link: '/edit/project'
-        },
-        {
-          title: 'イベント管理',
-          icon: 'mdi-history',
-          lists: ['API explorer', 'Alerts'],
-          link: '/edit/event'
-        },
+        // {
+        //   title: 'プロジェクト管理',
+        //   icon: 'mdi-star',
+        //   lists: ['Colors', 'Content', 'Display'],
+        //   link: '/edit/project'
+        // },
+        // {
+        //   title: 'イベント管理',
+        //   icon: 'mdi-history',
+        //   lists: ['API explorer', 'Alerts'],
+        //   link: '/edit/event'
+        // },
         {
           title: 'サポート管理',
           icon: 'mdi-upload',

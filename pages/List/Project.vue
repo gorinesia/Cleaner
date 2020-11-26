@@ -4,6 +4,7 @@
       <h2 style="text-align: center; color: #00ACC1;" class="my-5">プロジェクトをみる</h2>
       <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
       あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
+      <v-alert dense text type="success" :value="alertPost" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を投稿しました</v-alert>
 
       <v-row justify="center" v-if="loggedIn">
         <v-dialog
@@ -89,7 +90,7 @@
                         <v-img :src="article.displayImage"></v-img>
                       </v-avatar>
                       <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ article.displayName }}</span>
-                      <span>{{ article.place}}</span>
+                      <p class="my-2 grey--text text--darken-1">{{ article.place}}</p>
                       <p class="my-2 font-weight-bold">{{ article.comment }}</p>
 
                       <v-icon v-if="!applyFlag" color="orange" @click.stop="applyEvent(article.id)" outlined>mdi-thumb-up-outline</v-icon>
@@ -134,6 +135,7 @@ export default {
       applyFlag: false,
       loginUser: null,
       likeSum: 0,
+      alertPost: false,
     }
   },
   computed: {
@@ -211,10 +213,15 @@ export default {
         image: this.image,
         date: this.date
       });
+      this.alertPost = true;
+      setTimeout(() => {
+        this.alertPost = false
+      }, 3000);
       this.name = '';
       this.place = '';
       this.comment = '';
       this.date = '';
+      this.dialog = false;
     },
     getPersonalId(id) {
       this.$store.dispatch('project/getPersonalProject', {
@@ -305,6 +312,7 @@ export default {
       });
     },
     applyEvent(id) {
+      console.log(id);
       const db = firebase.firestore();
       const docRef = db.collection('posts').doc(id);
       docRef.set({
@@ -315,6 +323,7 @@ export default {
       // this.getEvent(docRef);
     },
     cancelEvent(id) {
+      console.log(id);
       const db = firebase.firestore();
       const docRef = db.collection('posts').doc(id);
       docRef.update({
