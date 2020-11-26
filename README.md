@@ -14,13 +14,13 @@ https://cleaner-caffc.web.app/
 画面右上部のゲストログインボタンから、メールアドレスとパスワードを入力せずにログインできます。
 
 # 使用技術
-・Nuxt.js 2.14.0
-・Vuetify 1.11.2
-・firebase 7.24.0
-    ・Authentication
-    ・Cloud Firestore
-    ・Storage
-    ・Hosting
+- Nuxt.js 2.14.0
+- Vuetify 1.11.2
+- firebase 7.24.0
+  - Authentication
+  - Cloud Firestore
+  - Storage
+  - Hosting
 
 # DB設計図 (ER図)
 ![DB設計 ER図 改訂版](https://user-images.githubusercontent.com/65007308/99282274-d33a5700-2876-11eb-96e4-2a7dce4933bc.jpg)
@@ -28,15 +28,17 @@ https://cleaner-caffc.web.app/
 
 # 機能一覧
 
-・ユーザー登録、ログイン機能
-・投稿機能
-    ・画像＆テキスト投稿
-    ・投稿記事編集機能(追加予定)
-    ・投稿記事削除機能(追加予定)
-・いいね機能(追加予定)
-・コメント機能(追加予定)
-・ダイレクトメッセージ機能(追加予定)
-・投げ銭機能(追加予定)
+- ユーザー登録、ログイン機能
+- 投稿機能
+  - 画像＆テキスト投稿
+  - 投稿記事編集機能
+  - 投稿記事削除機能
+- ユーザー情報管理機能
+  - プロフィール(画像・名前・コメント)編集機能
+- いいね機能(追加予定)
+- コメント機能(追加予定)
+- ダイレクトメッセージ機能(追加予定)
+- 投げ銭機能(追加予定)
 
 ## Build Setup
 

@@ -89,7 +89,7 @@
                         <v-img :src="article.displayImage"></v-img>
                       </v-avatar>
                       <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ article.displayName }}</span>
-                      <span>{{ article.place}}</span>
+                      <p class="my-2 grey--text text--darken-1">{{ article.place}}</p>
                       <p class="my-2 font-weight-bold">{{ article.comment }}</p>
 
                       <v-icon v-if="!applyFlag" color="orange" @click.stop="applyEvent(article.id)" outlined>mdi-thumb-up-outline</v-icon>
@@ -305,6 +305,7 @@ export default {
       });
     },
     applyEvent(id) {
+      console.log(id);
       const db = firebase.firestore();
       const docRef = db.collection('posts').doc(id);
       docRef.set({
@@ -315,6 +316,7 @@ export default {
       // this.getEvent(docRef);
     },
     cancelEvent(id) {
+      console.log(id);
       const db = firebase.firestore();
       const docRef = db.collection('posts').doc(id);
       docRef.update({
