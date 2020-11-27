@@ -85,8 +85,11 @@ export const actions = {
     const db = firebase.firestore();
     db.collection('projects')
       .orderBy('date', 'desc')
-      .get()
-      .then((querySnapshot) => {
+      .onSnapshot((querySnapshot) => {
+      //   console.log(doc.data())
+      // })
+      // // .get()
+      // .then((querySnapshot) => {
         const articles = [];
         querySnapshot.forEach((doc) => {
           articles.push({

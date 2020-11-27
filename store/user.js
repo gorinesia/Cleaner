@@ -16,7 +16,7 @@ export const state = () => ({
 
 export const getters = {
   loggedIn: state => state.loggedIn,
-  allUsers: state => state.allUsers,
+  // allUsers: state => state.allUsers,
   currentUser: state => state.currentUser,
   loginUsers: state => state.loginUsers,
   image: state => state.image,
@@ -30,9 +30,9 @@ export const mutations = {
   setUser:(state, currentUser) => {
     state.user = currentUser
   },
-  setAllUsers: (state, allLoggedInUsers) => {
-    state.allUsers = allLoggedInUsers;
-  },
+  // setAllUsers: (state, allLoggedInUsers) => {
+  //   state.allUsers = allLoggedInUsers;
+  // },
   setCurrentUser: (state, currentLoginUser) => {
     state.currentUser = currentLoginUser;
   },
@@ -82,23 +82,23 @@ export const actions = {
         console.log(error.message);
       })
   },
-  openTheApplication({commit}) {
-    const db = firebase.firestore();
-    db.collection('users')
-      .onSnapshot((querySnapshot) => {
-        const allLogUsers = [];
-        querySnapshot.forEach((doc) => {
-          allLogUsers.push({
-            displayName: doc.data().displayName
-          })
-          console.log(doc.data().displayName)
-          const allLoggedInUsers = allLogUsers.filter(() => {
-            return  doc.data().displayName
-          })
-          commit('setAllUsers', allLoggedInUsers);
-        })
-      })
-  },
+  // openTheApplication({commit}) {
+  //   const db = firebase.firestore();
+  //   db.collection('users')
+  //     .onSnapshot((querySnapshot) => {
+  //       const allLogUsers = [];
+  //       querySnapshot.forEach((doc) => {
+  //         allLogUsers.push({
+  //           displayName: doc.data().displayName
+  //         })
+  //         console.log(doc.data().displayName)
+  //         const allLoggedInUsers = allLogUsers.filter(() => {
+  //           return  doc.data().displayName
+  //         })
+  //         commit('setAllUsers', allLoggedInUsers);
+  //       })
+  //     })
+  // },
   logInUserDisplay(context) {
     const getUser = firebase.auth().currentUser;
     console.log(getUser);
