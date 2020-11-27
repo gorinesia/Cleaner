@@ -182,7 +182,10 @@
         ></v-img>
       </v-card>
 
-      <div>いいね</div>
+      <v-container>
+        <div>いいね</div>
+      </v-container>
+
       <v-container class="h-full flex flex-col">
         <v-card class="h-full flex flex-col">
           <p>コメント</p>
