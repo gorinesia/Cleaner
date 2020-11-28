@@ -37,6 +37,9 @@ export default {
     currentUser() {
       return this.$store.getters['user/currentUser']
     },
+    uid() {
+      return this.$store.getters['user/uid']
+    },
     image: {
       get() {
         return this.$store.getters['user/image']
@@ -73,7 +76,12 @@ export default {
       this.alert = true;
       setTimeout(() => {
         this.alert = false
-      }, 3000)
+      }, 3000);
+      this.$store.dispatch('project/updateProject', {
+        uid: this.uid,
+        displayName: this.displayName,
+        displayImage: this.image
+      })
       this.displayName = '';
       this.place = '';
       this.comment = '';

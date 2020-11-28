@@ -142,6 +142,9 @@ export default {
     loggedIn() {
       return this.$store.getters['user/loggedIn']
     },
+    uid() {
+      return this.$store.getters['user/uid']
+    },
     currentUser() {
       return this.$store.getters['user/currentUser']
     },
@@ -205,6 +208,7 @@ export default {
     },
     addMessage() {
       this.$store.dispatch('project/addMessage', {
+        uid: this.uid,
         displayName: this.currentUser[0].displayName,
         displayImage: this.currentUser[0].image,
         name: this.name,
@@ -224,9 +228,11 @@ export default {
       this.dialog = false;
     },
     getPersonalId(id) {
-      this.$store.dispatch('project/getPersonalProject', {
-        id
-      })
+      console.log(id);
+      console.log(this.currentUser[0].email);
+      // this.$store.dispatch('project/getPersonalProject', {
+      //   id
+      // })
     },
     locatorButtonPressed() {
       this.spinner = true;
@@ -293,13 +299,18 @@ export default {
     // getEvent(docRef) {
     getEvent() {
       const db = firebase.firestore();
-      // docRef.get().then(snapshot => {
-      db.collection('posts').get().then(snapshot => {
-        snapshot.docs.forEach(doc => {
-          this.posts = doc.data();
-          this.likeSum = this.posts.like_users.length;
-          this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
+      db.collection('projects').get().then(snapShot => {
+        snapShot.docs.forEach(doc => {
+          console.log(doc.data());
         })
+      })
+      // docRef.get().then(snapshot => {
+      // db.collection('posts').get().then(snapshot => {
+      //   snapshot.docs.forEach(doc => {
+      //     this.posts = doc.data();
+      //     this.likeSum = this.posts.like_users.length;
+      //     this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
+      //   })
       // docRef.get().then(doc => {
         // if (doc.exists) {
         //   console.log(doc.data());
@@ -309,7 +320,7 @@ export default {
         // } else {
         //   console.log(doc.data());
         // }
-      });
+      // });
     },
     applyEvent(id) {
       console.log(id);

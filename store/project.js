@@ -93,6 +93,7 @@ export const actions = {
         const articles = [];
         querySnapshot.forEach((doc) => {
           articles.push({
+            uid: doc.data().uid,
             displayName: doc.data().displayName,
             displayImage: doc.data().displayImage,
             name: doc.data().name,
@@ -144,6 +145,20 @@ export const actions = {
       .then(() => {
         console.log('updated!!');
         context.commit('resetImage', null);
+        context.dispatch('getMessage');
+      })
+  },
+  updateProject(context, payload) {
+    const getUser = firebase.auth().currentUser
+    const db = firebase.firestore();
+    db.collection('projects')
+      .where('getUser.uid', '==', 'payload.uid')
+      .update({
+        displayName: payload.displayName,
+        displayImage: payload.displayImage,
+      })
+      .then(() => {
+        console.log('updatedProject!!');
         context.dispatch('getMessage');
       })
   },

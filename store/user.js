@@ -7,6 +7,7 @@ import 'firebase/storage';
 export const state = () => ({
   user: null,
   loggedIn: false,
+  uid: '',
   allUsers: [],
   currentUser: [],
   loginUsers: [],
@@ -16,6 +17,7 @@ export const state = () => ({
 
 export const getters = {
   loggedIn: state => state.loggedIn,
+  uid: state => state.uid,
   // allUsers: state => state.allUsers,
   currentUser: state => state.currentUser,
   loginUsers: state => state.loginUsers,
@@ -29,6 +31,9 @@ export const mutations = {
   },
   setUser:(state, currentUser) => {
     state.user = currentUser
+  },
+  setUserUid:(state, uid) => {
+    state.uid = uid;
   },
   // setAllUsers: (state, allLoggedInUsers) => {
   //   state.allUsers = allLoggedInUsers;
@@ -74,8 +79,11 @@ export const actions = {
   logInAction({commit}, payload) {
     firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
       .then((result) => {
+        console.log(result.user.uid);
+        const uid = result.user.uid;
         console.log('loggedIn!!');
         commit('setLoggedIn', true);
+        commit('setUserUid', uid);
         this.$router.push('/mypage')
       })
       .catch((error) => {
@@ -99,23 +107,25 @@ export const actions = {
   //       })
   //     })
   // },
-  logInUserDisplay(context) {
+  logInUserDisplay(context, uid) {
     const getUser = firebase.auth().currentUser;
-    console.log(getUser);
+    console.log(getUser.uid);
     const db = firebase.firestore();
     db.collection('users')
       .onSnapshot((querySnapshot) => {
         const allLoginUsers = [];
         querySnapshot.forEach((doc) => {
           allLoginUsers.push({
+            uid: uid,
             displayName: doc.data().displayName,
             email: doc.data().email,
             comment: doc.data().comment,
             image: doc.data().image,
             id: doc.id
           })
-          console.log(doc.data().displayName);
-          console.log(doc.id);
+          // console.log(doc.data().displayName);
+          // console.log(doc.id);
+          // console.log(doc.data());
           const otherLoginUsers = allLoginUsers.filter((otherUsers) => {
             return otherUsers.email != getUser.email;
           })
