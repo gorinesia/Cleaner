@@ -77,16 +77,19 @@ export default {
       setTimeout(() => {
         this.alert = false
       }, 3000);
-      this.$store.dispatch('project/updateProject', {
-        uid: this.uid,
-        displayName: this.displayName,
-        displayImage: this.image
-      })
+      this.updateProject();
       this.displayName = '';
       this.place = '';
       this.comment = '';
       this.date = '';
     },
+    updateProject() {
+      this.$store.dispatch('project/updateProject', {
+        uid: this.uid,
+        displayName: this.displayName,
+        displayImage: this.image
+      });
+    }
   }
 }
 </script>
