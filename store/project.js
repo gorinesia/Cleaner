@@ -150,9 +150,13 @@ export const actions = {
   },
   updateProject(context, payload) {
     const getUser = firebase.auth().currentUser
+    console.log(getUser.uid);
+    console.log(payload.uid);
+    console.log(payload.displayName);
+    console.log(payload.displayImage);
     const db = firebase.firestore();
     db.collection('projects')
-      .where('getUser.uid', '==', 'payload.uid')
+      .where('payload.uid')
       .update({
         displayName: payload.displayName,
         displayImage: payload.displayImage,
