@@ -151,20 +151,27 @@ export const actions = {
   updateProject(context, payload) {
     const getUser = firebase.auth().currentUser
     console.log(getUser.uid);
+    console.log(getUser.displayName);
     console.log(payload.uid);
     console.log(payload.displayName);
     console.log(payload.displayImage);
     const db = firebase.firestore();
     db.collection('projects')
-      .where('payload.uid')
-      .update({
-        displayName: payload.displayName,
-        displayImage: payload.displayImage,
+      .where('displayName', '==', 'payload.displayName')
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          console.log(doc.data());
+        })
       })
-      .then(() => {
-        console.log('updatedProject!!');
-        context.dispatch('getMessage');
-      })
+      // .update({
+      //   displayName: payload.displayName,
+      //   displayImage: payload.displayImage,
+      // })
+      // .then(() => {
+      //   console.log('updatedProject!!');
+      //   context.dispatch('getMessage');
+      // })
   },
   getPersonalProject({commit}, payload) {
     const db = firebase.firestore();

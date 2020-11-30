@@ -73,11 +73,11 @@ export default {
         image: this.image,
         date: new Date().toLocaleString()
       });
+      this.updateProject();
       this.alert = true;
       setTimeout(() => {
         this.alert = false
       }, 3000);
-      this.updateProject();
       this.displayName = '';
       this.place = '';
       this.comment = '';
