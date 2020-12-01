@@ -157,21 +157,22 @@ export const actions = {
     console.log(payload.displayImage);
     const db = firebase.firestore();
     db.collection('projects')
-      .where('displayName', '==', 'payload.displayName')
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          console.log(doc.data());
-        })
+      // .where('displayName', '==', 'payload.displayName')
+      // .get()
+      // .then((snapshot) => {
+      //   snapshot.forEach((doc) => {
+      //     console.log(doc.data());
+      //   })
+      // })
+      .doc(payload.uid)
+      .set({
+        displayName: payload.displayName,
+        displayImage: payload.displayImage,
+      }, {merge: true})
+      .then(() => {
+        console.log('updatedProject!!');
+        context.dispatch('getMessage');
       })
-      // .update({
-      //   displayName: payload.displayName,
-      //   displayImage: payload.displayImage,
-      // })
-      // .then(() => {
-      //   console.log('updatedProject!!');
-      //   context.dispatch('getMessage');
-      // })
   },
   getPersonalProject({commit}, payload) {
     const db = firebase.firestore();
