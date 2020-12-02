@@ -155,8 +155,12 @@ export const actions = {
     console.log(payload.uid);
     console.log(payload.displayName);
     console.log(payload.displayImage);
-    const db = firebase.firestore();
-    db.collection('projects')
+    getUser.updateProfile({
+      displayName: payload.displayName,
+      displayImage: payload.displayImage,
+    })
+    // const db = firebase.firestore();
+    // db.collection('projects')
       // .where('displayName', '==', 'payload.displayName')
       // .get()
       // .then((snapshot) => {
@@ -164,13 +168,14 @@ export const actions = {
       //     console.log(doc.data());
       //   })
       // })
-      .doc(payload.uid)
-      .set({
-        displayName: payload.displayName,
-        displayImage: payload.displayImage,
-      }, {merge: true})
+      // .doc(payload.uid)
+      // .set({
+      //   displayName: payload.displayName,
+      //   displayImage: payload.displayImage,
+      // }, {merge: true})
       .then(() => {
         console.log('updatedProject!!');
+        context.commit('setArticles', )
         context.dispatch('getMessage');
       })
   },
