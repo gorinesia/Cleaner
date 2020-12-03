@@ -189,15 +189,20 @@ export const actions = {
     })
   },
   updateProfile(context, payload) {
-    const db = firebase.firestore();
-    db.collection('users')
-      .doc(payload.id)
-      .update({
-        displayName: payload.displayName,
-        place: payload.place,
-        comment: payload.comment,
-        image: payload.image,
-      })
+    const user = firebase.auth().currentUser;
+    user.updateProfile({
+      displayName: payload.displayName,
+      displayImage: payload.displayImage,
+    })
+    // const db = firebase.firestore();
+    // db.collection('users')
+    //   .doc(payload.id)
+    //   .update({
+    //     displayName: payload.displayName,
+    //     place: payload.place,
+    //     comment: payload.comment,
+    //     image: payload.image,
+    //   })
       .then(() => {
         console.log(payload);
         context.dispatch('logInUserDisplay');
