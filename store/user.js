@@ -192,7 +192,7 @@ export const actions = {
     const user = firebase.auth().currentUser;
     user.updateProfile({
       displayName: payload.displayName,
-      displayImage: payload.displayImage,
+      displayImage: payload.image,
     })
     // const db = firebase.firestore();
     // db.collection('users')
