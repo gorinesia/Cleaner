@@ -116,7 +116,7 @@ export const actions = {
         const allLoginUsers = [];
         querySnapshot.forEach((doc) => {
           allLoginUsers.push({
-            uid: uid,
+            uid: doc.data().uid,
             displayName: doc.data().displayName,
             email: doc.data().email,
             comment: doc.data().comment,
@@ -191,6 +191,7 @@ export const actions = {
   updateProfile(context, payload) {
     const user = firebase.auth().currentUser;
     user.updateProfile({
+      uid: payload.uid,
       displayName: payload.displayName,
       displayImage: payload.image,
     })
