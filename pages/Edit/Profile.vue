@@ -63,10 +63,10 @@ export default {
         ev
       });
     },
-    updateProfile(id) {
-      console.log(id)
+    updateProfile(uid) {
+      console.log(uid)
       this.$store.dispatch('user/updateProfile', {
-        id,
+        uid,
         displayName: this.displayName,
         place: this.place,
         comment: this.comment,
