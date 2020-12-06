@@ -175,7 +175,7 @@ export const actions = {
       // }, {merge: true})
       .then(() => {
         console.log('updatedProject!!');
-        context.commit('setArticles', )
+        // context.commit('setArticles', )
         context.dispatch('getMessage');
       })
   },
