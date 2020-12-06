@@ -116,7 +116,7 @@ export const actions = {
         const allLoginUsers = [];
         querySnapshot.forEach((doc) => {
           allLoginUsers.push({
-            uid: doc.data().uid,
+            uid: getUser.uid,
             displayName: doc.data().displayName,
             email: doc.data().email,
             comment: doc.data().comment,
@@ -189,21 +189,21 @@ export const actions = {
     })
   },
   updateProfile(context, payload) {
-    const user = firebase.auth().currentUser;
-    user.updateProfile({
-      uid: payload.uid,
-      displayName: payload.displayName,
-      displayImage: payload.image,
-    })
-    // const db = firebase.firestore();
-    // db.collection('users')
-    //   .doc(payload.id)
-    //   .update({
-    //     displayName: payload.displayName,
-    //     place: payload.place,
-    //     comment: payload.comment,
-    //     image: payload.image,
-    //   })
+    // const user = firebase.auth().currentUser;
+    // user.updateProfile({
+    //   uid: payload.uid,
+    //   displayName: payload.displayName,
+    //   displayImage: payload.image,
+    // })
+    const db = firebase.firestore();
+    db.collection('users')
+      .doc(payload.uid)
+      .update({
+        displayName: payload.displayName,
+        place: payload.place,
+        comment: payload.comment,
+        image: payload.image,
+      })
       .then(() => {
         console.log(payload);
         context.dispatch('logInUserDisplay');
