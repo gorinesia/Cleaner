@@ -11,7 +11,7 @@
         <v-text-field v-model="displayName" class="white" :placeholder="currentUser.displayName"></v-text-field>
         <label class="font-weight-bold">プロフィール</label>
         <v-textarea v-model="comment" class="white" placeholder="自己紹介を書きましょう"></v-textarea>
-        <v-btn @click="updateProfile(currentUser.uid)" class="mt-8 float-right font-weight-bold" color="cyan" dark>更新</v-btn>
+        <v-btn @click="updateProfile(currentUser.id)" class="mt-8 float-right font-weight-bold" color="cyan" dark>更新</v-btn>
       </v-card>
     </v-container>
   </v-app>
@@ -26,8 +26,6 @@ export default {
   data() {
     return {
       displayName: '',
-      place: '',
-      date: '',
       comment: '',
       alert: false,
       dialog: false
@@ -63,17 +61,15 @@ export default {
         ev
       });
     },
-    updateProfile(uid) {
-      console.log(uid)
+    updateProfile(id) {
+      console.log(id)
       this.$store.dispatch('user/updateProfile', {
-        uid,
+        id,
         displayName: this.displayName,
-        place: this.place,
         comment: this.comment,
         image: this.image,
-        date: new Date().toLocaleString()
       });
-      this.updateProject();
+      this.updateProject(id);
       this.alert = true;
       setTimeout(() => {
         this.alert = false
@@ -83,9 +79,9 @@ export default {
       this.comment = '';
       this.date = '';
     },
-    updateProject() {
+    updateProject(id) {
       this.$store.dispatch('project/updateProject', {
-        uid: this.uid,
+        id,
         displayName: this.displayName,
         displayImage: this.image
       });

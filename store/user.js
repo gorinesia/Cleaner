@@ -197,7 +197,7 @@ export const actions = {
     // })
     const db = firebase.firestore();
     db.collection('users')
-      .doc(payload.uid)
+      .doc(payload.id)
       .update({
         displayName: payload.displayName,
         place: payload.place,

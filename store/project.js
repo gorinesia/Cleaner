@@ -149,30 +149,23 @@ export const actions = {
       })
   },
   updateProject(context, payload) {
-    const getUser = firebase.auth().currentUser
-    console.log(getUser.uid);
-    console.log(getUser.displayName);
-    console.log(payload.uid);
-    console.log(payload.displayName);
-    console.log(payload.displayImage);
-    getUser.updateProfile({
-      displayName: payload.displayName,
-      displayImage: payload.displayImage,
-    })
-    // const db = firebase.firestore();
-    // db.collection('projects')
-      // .where('displayName', '==', 'payload.displayName')
-      // .get()
-      // .then((snapshot) => {
-      //   snapshot.forEach((doc) => {
-      //     console.log(doc.data());
-      //   })
-      // })
-      // .doc(payload.uid)
-      // .set({
-      //   displayName: payload.displayName,
-      //   displayImage: payload.displayImage,
-      // }, {merge: true})
+    // const getUser = firebase.auth().currentUser
+    // console.log(getUser.uid);
+    // console.log(getUser.displayName);
+    // console.log(payload.uid);
+    // console.log(payload.displayName);
+    // console.log(payload.displayImage);
+    // getUser.updateProfile({
+    //   displayName: payload.displayName,
+    //   displayImage: payload.displayImage,
+    // })
+    const db = firebase.firestore();
+    db.collection('projects')
+      .doc(payload.id)
+      .set({
+        displayName: payload.displayName,
+        displayImage: payload.displayImage,
+      }, {merge: true})
       .then(() => {
         console.log('updatedProject!!');
         // context.commit('setArticles', )
