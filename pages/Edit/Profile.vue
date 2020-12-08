@@ -69,7 +69,7 @@ export default {
         comment: this.comment,
         image: this.image,
       });
-      this.updateProject(id);
+      this.updateProject();
       this.alert = true;
       setTimeout(() => {
         this.alert = false
