@@ -79,7 +79,7 @@ export default {
       this.comment = '';
       this.date = '';
     },
-    updateProject(id) {
+    updateProject() {
       this.$store.dispatch('project/updateProject', {
         id,
         displayName: this.displayName,
