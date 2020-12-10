@@ -86,10 +86,6 @@ export const actions = {
     db.collection('projects')
       .orderBy('date', 'desc')
       .onSnapshot((querySnapshot) => {
-      //   console.log(doc.data())
-      // })
-      // // .get()
-      // .then((querySnapshot) => {
         const articles = [];
         querySnapshot.forEach((doc) => {
           articles.push({
