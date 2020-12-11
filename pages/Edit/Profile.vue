@@ -62,14 +62,12 @@ export default {
       });
     },
     updateProfile(id) {
-      console.log(id)
       this.$store.dispatch('user/updateProfile', {
         id,
         displayName: this.displayName,
         comment: this.comment,
         image: this.image,
       });
-      this.updateProject();
       this.alert = true;
       setTimeout(() => {
         this.alert = false
