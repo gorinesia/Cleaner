@@ -109,7 +109,7 @@ export const actions = {
       .add(payload)
       .then(() => {
         console.log(payload);
-        context.commit('resetImage', null);
+        // context.commit('resetImage', null);
         context.dispatch('getMessage');
       })
   },
