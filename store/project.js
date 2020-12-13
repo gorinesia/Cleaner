@@ -103,6 +103,17 @@ export const actions = {
         commit('setArticles', articles);
     })
   },
+  getUserProfile(context, payload) {
+    const db = firebase.firestore();
+    const getUser = firebase.auth().currentUser;
+    db.collection('projects')
+      .where('uid', '==', 'payload.uid')
+      .onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log(doc.data());
+        })
+      })
+  },
   addMessage(context, payload) {
     const db = firebase.firestore();
     db.collection('projects')
