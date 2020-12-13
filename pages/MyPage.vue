@@ -122,9 +122,10 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('user/logInUserDisplay', this.uid);
+    this.$store.dispatch('user/logInUserDisplay', {
+      uid: this.uid });
     console.log(this.currentUser);
-    this.$store.dispatch('project/getMessage', this.uid);
+    this.$store.dispatch('project/getMessage');
     this.$store.dispatch('event/getMessage');
   },
   methods: {
