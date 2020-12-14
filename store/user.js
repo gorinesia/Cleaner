@@ -107,8 +107,8 @@ export const actions = {
   //       })
   //     })
   // },
-  logInUserDisplay(context, uid) {
-    console.log(uid);
+  logInUserDisplay(context, payload) {
+    console.log(payload.uid);
     const getUser = firebase.auth().currentUser;
     // console.log(getUser.uid);
     const db = firebase.firestore();
@@ -117,7 +117,7 @@ export const actions = {
         const allLoginUsers = [];
         querySnapshot.forEach((doc) => {
           allLoginUsers.push({
-            uid: uid,
+            uid: payload.uid,
             displayName: doc.data().displayName,
             email: doc.data().email,
             comment: doc.data().comment,

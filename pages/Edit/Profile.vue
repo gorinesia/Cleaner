@@ -48,7 +48,9 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch('user/logInUserDisplay');
+    this.$store.dispatch('user/logInUserDisplay', {
+      uid: this.uid
+    });
   },
   methods: {
     btnUploadChange(ev) {
@@ -63,7 +65,7 @@ export default {
     },
     updateProfile(uid) {
       this.$store.dispatch('user/updateProfile', {
-        uid,
+        uid: this.uid,
         displayName: this.displayName,
         comment: this.comment,
         image: this.image,
