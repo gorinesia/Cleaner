@@ -80,13 +80,13 @@ export default {
       this.comment = '';
       this.date = '';
     },
-    updateProject() {
-      this.$store.dispatch('project/updateProject', {
-        id,
-        displayName: this.displayName,
-        displayImage: this.image
-      });
-    },
+    // updateProject() {
+    //   this.$store.dispatch('project/updateProject', {
+    //     id,
+    //     displayName: this.displayName,
+    //     displayImage: this.image
+    //   });
+    // },
     getUserProfile(uid) {
       this.$store.dispatch('project/getUserProfile', {
         uid
