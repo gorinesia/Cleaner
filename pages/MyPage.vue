@@ -125,7 +125,9 @@ export default {
     this.$store.dispatch('user/logInUserDisplay', {
       uid: this.uid });
     console.log(this.currentUser);
-    this.$store.dispatch('project/getMessage');
+    this.$store.dispatch('project/getMessage', {
+      uid: this.uid
+    });
     this.$store.dispatch('event/getMessage');
   },
   methods: {
