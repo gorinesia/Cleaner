@@ -65,7 +65,7 @@ export default {
     },
     updateProfile(uid) {
       this.$store.dispatch('user/updateProfile', {
-        uid: this.uid,
+        uid,
         displayName: this.displayName,
         comment: this.comment,
         image: this.image,
