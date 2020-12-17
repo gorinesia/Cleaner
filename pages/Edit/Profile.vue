@@ -11,7 +11,7 @@
         <v-text-field v-model="displayName" class="white" :placeholder="currentUser.displayName"></v-text-field>
         <label class="font-weight-bold">プロフィール</label>
         <v-textarea v-model="comment" class="white" placeholder="自己紹介を書きましょう"></v-textarea>
-        <v-btn @click="updateProfile(currentUser.uid)" class="mt-8 float-right font-weight-bold" color="cyan" dark>更新</v-btn>
+        <v-btn @click="updateProfile(currentUser.id)" class="mt-8 float-right font-weight-bold" color="cyan" dark>更新</v-btn>
       </v-card>
     </v-container>
   </v-app>
@@ -63,9 +63,10 @@ export default {
         ev
       });
     },
-    updateProfile(uid) {
+    updateProfile(id) {
       this.$store.dispatch('user/updateProfile', {
-        uid,
+        id,
+        uid: this.currentUser[0].uid,
         displayName: this.displayName,
         comment: this.comment,
         image: this.image,
