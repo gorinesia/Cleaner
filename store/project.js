@@ -104,6 +104,7 @@ export const actions = {
     })
   },
   getUserProfile(context, payload) {
+    console.log(payload);
     const db = firebase.firestore();
     const getUser = firebase.auth().currentUser;
     db.collection('projects')

@@ -190,6 +190,7 @@ export const actions = {
     })
   },
   updateProfile(context, payload) {
+    console.log(payload);
     // const user = firebase.auth().currentUser;
     // user.updateProfile({
     //   uid: payload.uid,
@@ -198,12 +199,12 @@ export const actions = {
     // })
     const db = firebase.firestore();
     db.collection('users')
-      .doc(payload.uid)
+      .doc(payload.id)
       .update({
-        displayName: payload.displayName,
-        place: payload.place,
-        comment: payload.comment,
         image: payload.image,
+        displayName: payload.displayName,
+        comment: payload.comment,
+        uid: payload.uid
       })
       .then(() => {
         console.log(payload);
