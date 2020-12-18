@@ -49,7 +49,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch('user/logInUserDisplay', {
-      uid: this.uid
+      uid: this.uid,
+      email: this.currentUser[0].email
     });
   },
   methods: {
@@ -64,14 +65,16 @@ export default {
       });
     },
     updateProfile(id) {
+      console.log(this.currentUser);
       this.$store.dispatch('user/updateProfile', {
         id,
         uid: this.currentUser[0].uid,
         displayName: this.displayName,
         comment: this.comment,
         image: this.image,
+        email: this.currentUser[0].email
       });
-      this.getUserProfile(uid);
+      this.getUserProfile(this.currentUser[0].uid);
       this.alert = true;
       setTimeout(() => {
         this.alert = false

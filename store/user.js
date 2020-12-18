@@ -108,7 +108,7 @@ export const actions = {
   //     })
   // },
   logInUserDisplay(context, payload) {
-    console.log(payload.uid);
+    console.log(payload);
     const getUser = firebase.auth().currentUser;
     // console.log(getUser.uid);
     const db = firebase.firestore();
@@ -204,11 +204,12 @@ export const actions = {
         image: payload.image,
         displayName: payload.displayName,
         comment: payload.comment,
-        uid: payload.uid
+        uid: payload.uid,
+        // email: payload.email
       })
       .then(() => {
         console.log(payload);
-        context.dispatch('logInUserDisplay');
+        // context.dispatch('logInUserDisplay');
       })
   },
   getProfile({commit}, payload) {

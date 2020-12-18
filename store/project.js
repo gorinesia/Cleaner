@@ -109,11 +109,17 @@ export const actions = {
     const getUser = firebase.auth().currentUser;
     db.collection('projects')
       .where('uid', '==', 'payload.uid')
-      .onSnapshot((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          console.log(doc.data());
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          console.log(doc.data());ｆ
         })
       })
+      // .onSnapshot((querySnapshot) => {
+      //   querySnapshot.forEach((doc) => {
+      //     console.log(doc.data());
+      //   })
+      // })
   },
   addMessage(context, payload) {
     const db = firebase.firestore();
