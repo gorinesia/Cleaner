@@ -74,7 +74,7 @@ export default {
         image: this.image,
         email: this.currentUser[0].email
       });
-      this.getUserProfile(this.currentUser[0].uid);
+      // this.getUserProfile(this.currentUser[0].uid);
       this.alert = true;
       setTimeout(() => {
         this.alert = false

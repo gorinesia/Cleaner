@@ -209,6 +209,9 @@ export const actions = {
       })
       .then(() => {
         console.log(payload);
+        context.dispatch('project/getUserProfile', {
+          uid: payload.uid
+        }, { root: true })
         // context.dispatch('logInUserDisplay');
       })
   },

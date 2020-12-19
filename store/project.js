@@ -107,14 +107,29 @@ export const actions = {
     console.log(payload);
     const db = firebase.firestore();
     const getUser = firebase.auth().currentUser;
+    console.log(getUser.uid);
     db.collection('projects')
-      .where('uid', '==', 'payload.uid')
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          console.log(doc.data());ｆ
+      .onSnapshot((querySnapshot) => {
+        const allProjects = [];
+        querySnapshot.forEach((doc) => {
+          allProjects.push({
+            displayName: doc.data().displayName,
+            uid: payload.uid
+          })
         })
+        const currentProjects = allProjects.filter((currentProjects) => {
+          return currentProjects.uid === getUser.uid
+        })
+        console.log(currentProjects);
       })
+    // db.collection('projects')
+    //   .where('uid', '==', 'payload.uid')
+    //   .get()
+    //   .then((snapshot) => {
+    //     snapshot.forEach((doc) => {
+    //       console.log(doc.data());
+    //     })
+    //   })
       // .onSnapshot((querySnapshot) => {
       //   querySnapshot.forEach((doc) => {
       //     console.log(doc.data());
