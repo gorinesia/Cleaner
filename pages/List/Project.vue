@@ -208,7 +208,6 @@ export default {
     },
     addMessage() {
       this.$store.dispatch('project/addMessage', {
-        // uid: this.uid,
         uid: this.currentUser[0].uid,
         displayName: this.currentUser[0].displayName,
         displayImage: this.currentUser[0].image,
