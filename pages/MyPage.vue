@@ -126,7 +126,8 @@ export default {
       uid: this.uid });
     console.log(this.currentUser);
     this.$store.dispatch('project/getMessage', {
-      uid: this.uid
+      uid: this.uid,
+      displayName: this.currentUser[0].displayName,
     });
     this.$store.dispatch('event/getMessage');
   },

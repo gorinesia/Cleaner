@@ -90,27 +90,9 @@ export const actions = {
         console.log(error.message);
       })
   },
-  // openTheApplication({commit}) {
-  //   const db = firebase.firestore();
-  //   db.collection('users')
-  //     .onSnapshot((querySnapshot) => {
-  //       const allLogUsers = [];
-  //       querySnapshot.forEach((doc) => {
-  //         allLogUsers.push({
-  //           displayName: doc.data().displayName
-  //         })
-  //         console.log(doc.data().displayName)
-  //         const allLoggedInUsers = allLogUsers.filter(() => {
-  //           return  doc.data().displayName
-  //         })
-  //         commit('setAllUsers', allLoggedInUsers);
-  //       })
-  //     })
-  // },
   logInUserDisplay(context, payload) {
-    console.log(payload);
+    // console.log(payload);
     const getUser = firebase.auth().currentUser;
-    // console.log(getUser.uid);
     const db = firebase.firestore();
     db.collection('users')
       .onSnapshot((querySnapshot) => {
@@ -190,7 +172,6 @@ export const actions = {
     })
   },
   updateProfile(context, payload) {
-    console.log(payload);
     // const user = firebase.auth().currentUser;
     // user.updateProfile({
     //   uid: payload.uid,
@@ -208,9 +189,10 @@ export const actions = {
         // email: payload.email
       })
       .then(() => {
-        console.log(payload);
         context.dispatch('project/getUserProfile', {
-          uid: payload.uid
+          uid: payload.uid,
+          displayName: payload.displayName,
+          image: payload.image,
         }, { root: true })
         // context.dispatch('logInUserDisplay');
       })
