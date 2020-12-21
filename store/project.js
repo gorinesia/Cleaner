@@ -81,7 +81,7 @@ export const actions = {
         commit('setImage', url);
       })
   },
-  getMessage({commit}) {
+  getMessage({commit}, payload) {
     const db = firebase.firestore();
     db.collection('projects')
       .orderBy('date', 'desc')
@@ -108,33 +108,44 @@ export const actions = {
     const db = firebase.firestore();
     const getUser = firebase.auth().currentUser;
     console.log(getUser.uid);
-    db.collection('projects')
-      .onSnapshot((querySnapshot) => {
-        const allProjects = [];
-        querySnapshot.forEach((doc) => {
-          allProjects.push({
-            displayName: doc.data().displayName,
-            uid: payload.uid
-          })
-        })
-        const currentProjects = allProjects.filter((currentProjects) => {
-          return currentProjects.uid === getUser.uid
-        })
-        console.log(currentProjects);
-      })
     // db.collection('projects')
-    //   .where('uid', '==', 'payload.uid')
-    //   .get()
-    //   .then((snapshot) => {
-    //     snapshot.forEach((doc) => {
-    //       console.log(doc.data());
+    //   .onSnapshot((querySnapshot) => {
+    //     const allProjects = [];
+    //     querySnapshot.forEach((doc) => {
+    //       allProjects.push({
+    //         displayName: doc.data().displayName,
+    //         uid: payload.uid
+    //       })
     //     })
+    //     const currentProjects = allProjects.filter((currentProjects) => {
+    //       return currentProjects.uid === getUser.uid
+    //     })
+    //     console.log(currentProjects);
     //   })
-      // .onSnapshot((querySnapshot) => {
-      //   querySnapshot.forEach((doc) => {
-      //     console.log(doc.data());
-      //   })
-      // })
+    db.collection('projects')
+      .where('uid', '==', payload.uid)
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          console.log(doc.data());
+          const nameData = doc;
+          context.dispatch('changeNameArticle', {
+            nameData: doc,
+            changeName: payload})
+        })
+      })
+  },
+  changeNameArticle(context, payload) {
+    console.log(payload)
+    console.log(payload.nameData.id);
+    console.log(payload.changeName.displayName);
+    const db = firebase.firestore();
+    db.collection('projects')
+      .doc(payload.nameData.id)
+      .update({
+        displayName: payload.changeName.displayName,
+        displayImage: payload.changeName.image,
+      })
   },
   addMessage(context, payload) {
     const db = firebase.firestore();

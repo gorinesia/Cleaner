@@ -164,7 +164,9 @@ export default {
     }
   },
   mounted() {
-    // this.$store.dispatch('project/getMessage');
+    this.$store.dispatch('project/getMessage', {
+      displayName: this.currentUser[0].displayName,
+    });
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.loginUser = user;
@@ -205,6 +207,11 @@ export default {
       this.$store.dispatch('project/btnUploadChange', {
         ev
       });
+    },
+    getMessage() {
+      this.$store.dispatch('project/getMessage', {
+        displayName: this.currentUser[0].displayName,
+      })
     },
     addMessage() {
       this.$store.dispatch('project/addMessage', {
