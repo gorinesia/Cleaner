@@ -20,12 +20,14 @@
               </v-list-item-content>
             </v-list-item>
             <div>
-              <div>
-              <v-icon v-if="!applyFlag" class="mb-1 white--text" rounded color="orange" medium @click="applyEvent()">mdi-thumb-up-outline</v-icon>
-            </div>
-            <div>
-              <v-icon v-if="applyFlag" class="mb-1 white--text" rounded color="orange" medium @click="cancelEvent()">mdi-thumb-up</v-icon>
-            </div>
+              <div v-if="!applyFlag">
+                <v-icon class="mb-1 white--text" rounded color="orange" medium @click="applyEvent()">mdi-thumb-up-outline</v-icon>
+                <span>{{ likeSum }}</span>
+              </div>
+              <div v-if="applyFlag">
+                <v-icon class="mb-1 white--text" rounded color="orange" medium @click="cancelEvent()">mdi-thumb-up</v-icon>
+                <span>{{ likeSum }}</span>
+              </div>
             </div>
           </v-col>
           <v-col cols="4">
@@ -192,7 +194,6 @@
 
       <v-container>
         <div>
-          <span>{{ likeSum }}</span>
           <span>{{ nameUser }}</span>
           <!-- <img :src="images" width="50px" height="50px"> -->
         </div>
