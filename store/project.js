@@ -117,11 +117,6 @@ export const actions = {
     //         uid: payload.uid
     //       })
     //     })
-    //     const currentProjects = allProjects.filter((currentProjects) => {
-    //       return currentProjects.uid === getUser.uid
-    //     })
-    //     console.log(currentProjects);
-    //   })
     db.collection('projects')
       .where('uid', '==', payload.uid)
       .get()
@@ -189,16 +184,6 @@ export const actions = {
       })
   },
   updateProject(context, payload) {
-    // const getUser = firebase.auth().currentUser
-    // console.log(getUser.uid);
-    // console.log(getUser.displayName);
-    // console.log(payload.uid);
-    // console.log(payload.displayName);
-    // console.log(payload.displayImage);
-    // getUser.updateProfile({
-    //   displayName: payload.displayName,
-    //   displayImage: payload.displayImage,
-    // })
     const db = firebase.firestore();
     db.collection('projects')
       .doc(payload.id)
@@ -208,7 +193,6 @@ export const actions = {
       }, {merge: true})
       .then(() => {
         console.log('updatedProject!!');
-        // context.commit('setArticles', )
         context.dispatch('getMessage');
       })
   },

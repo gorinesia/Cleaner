@@ -183,7 +183,28 @@
       </v-card>
 
       <v-container>
+        <div>
+          <div>
+            <v-icon v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent()">mdi-thumb-up-outline</v-icon>
+          </div>
+          <div>
+            <v-icon v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent()">mdi-thumb-up</v-icon>
+          </div>
+          <span>{{ likeSum }}</span>
+          <span>{{ nameUser }}</span>
+          <!-- <img :src="images" width="50px" height="50px"> -->
+        </div>
         <div>いいね</div>
+        <v-card>
+          <v-row>
+            <v-col>
+              <v-avatar v-for="image in images" :key="image.id">
+                <img :src="image" :key="image" width="50px" height="50px" @click="getProfile(personalProject.id)">
+                <!-- <v-img :src="image.displayImage" width="50px" height="50px" @click="getProfile(personalProject.id)"></v-img> -->
+              </v-avatar>
+            </v-col>
+          </v-row>
+        </v-card>
       </v-container>
 
       <v-container class="h-full flex flex-col">
@@ -257,6 +278,14 @@ export default {
       dialog: false,
       alertEdit: false,
       alertDelete: false,
+      applyUsers: [],
+      applyFlag: false,
+      loginUser: null,
+      likeSum: 0,
+      images: [],
+      image_users: [],
+      nameUser: [],
+      name_users: []
     }
   },
   computed: {
@@ -296,6 +325,14 @@ export default {
     console.log(this.currentUser[0].id);
     console.log(this.personalProject[0].displayName);
     console.log(this.personalProject[0].id);
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.loginUser = user;
+      }
+    })
+    const db = firebase.firestore();
+    const docRef = db.collection('posts').doc(this.personalProject[0].id);
+    this.getEvent(docRef)
   },
   methods: {
     btnUploadChange(ev) {
@@ -395,6 +432,50 @@ export default {
       this.place = ''
       this.comment = ''
       this.image = ''
+    },
+    getEvent(docRef) {
+      docRef.get().then(doc => {
+        if (doc.exists) {
+          console.log(doc.data());
+          this.posts = doc.data();
+          this.likeSum = this.posts.like_users.length;
+          // this.images = this.posts.displayImage;
+          // this.images.push({
+          //   displayImage: this.posts.displayImage
+          // })
+
+          this.images = [...this.posts.image_users];
+          this.nameUser = [...this.posts.name_users];
+          this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
+        } else {
+          console.log(doc.data());
+        }
+      })
+    },
+    applyEvent() {
+        const db = firebase.firestore();
+        const docRef = db.collection('posts').doc(this.personalProject[0].id)
+        docRef.set({
+          displayImage: this.currentUser[0].image,
+          like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
+          image_users: firebase.firestore.FieldValue.arrayUnion(this.currentUser[0].image),
+          name_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.displayName),
+        }, { merge: true })
+        this.applyFlag = true;
+        this.getEvent(docRef);
+    },
+    cancelEvent() {
+        const db = firebase.firestore();
+        const docRef = db.collection('posts').doc(this.personalProject[0].id)
+        // docRef.delete(
+        docRef.update({
+          // displayImage: null,
+          like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
+          image_users: firebase.firestore.FieldValue.arrayRemove(this.currentUser[0].image),
+          name_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.displayName),
+        })
+        this.applyFlag = false;
+        this.getEvent(docRef);
     },
   }
 }
