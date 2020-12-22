@@ -74,7 +74,6 @@ export default {
         image: this.image,
         email: this.currentUser[0].email
       });
-      // this.getUserProfile(this.currentUser[0].uid);
       this.alert = true;
       setTimeout(() => {
         this.alert = false
@@ -84,13 +83,6 @@ export default {
       this.comment = '';
       this.date = '';
     },
-    // updateProject() {
-    //   this.$store.dispatch('project/updateProject', {
-    //     id,
-    //     displayName: this.displayName,
-    //     displayImage: this.image
-    //   });
-    // },
     getUserProfile(uid) {
       this.$store.dispatch('project/getUserProfile', {
         uid
