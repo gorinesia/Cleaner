@@ -92,10 +92,17 @@
                       <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ article.displayName }}</span>
                       <p class="my-2 grey--text text--darken-1">{{ article.place}}</p>
                       <p class="my-2 font-weight-bold">{{ article.comment }}</p>
-
-                      <v-icon v-if="!applyFlag" color="orange" @click.stop="applyEvent(article.id)" outlined>mdi-thumb-up-outline</v-icon>
-                      <v-icon v-if="applyFlag" color="orange" @click.stop="cancelEvent(article.id)">mdi-thumb-up</v-icon>
-                      <span>{{ likeSum }}</span>
+                      <div v-for="post in posts" :key="post.id">
+                        <div v-if="!applyFlag">
+                          <v-icon color="orange" @click.stop="applyEvent(articles[0].id)" outlined>mdi-thumb-up-outline</v-icon>
+                          <span>{{ post.likeSum }}</span>
+                        </div>
+                        <div v-if="applyFlag">
+                          <v-icon  color="orange" @click.stop="cancelEvent(articles[0].id)">mdi-thumb-up</v-icon>
+                          <span>{{ post.likeSum }}</span>
+                          <!-- <span>{{ likeSum }}</span> -->
+                        </div>
+                      </div>
 
                     </v-col>
                     <v-col cols="5">
@@ -136,6 +143,7 @@ export default {
       loginUser: null,
       likeSum: 0,
       alertPost: false,
+      posts: []
     }
   },
   computed: {
@@ -164,6 +172,7 @@ export default {
     }
   },
   mounted() {
+    console.log([...this.articles]);
     this.$store.dispatch('project/getMessage', {
       displayName: this.currentUser[0].displayName,
     });
@@ -172,10 +181,10 @@ export default {
         this.loginUser = user;
       }
     })
-    // const db = firebase.firestore();
-    // const docRef = db.collection('posts').doc(this.currentUser[0].id);
-    this.getEvent()
-    // this.getEvent(docRef)
+    const db = firebase.firestore();
+    const docRef = db.collection('posts').doc(this.articles[0].id);
+    // this.getEvent()
+    this.getEvent(docRef)
 
     let autocomplete = new google.maps.places.Autocomplete(
       document.getElementById('autocomplete'),
@@ -303,14 +312,14 @@ export default {
         map: map
       })
     },
-    // getEvent(docRef) {
-    getEvent() {
-      const db = firebase.firestore();
-      db.collection('projects').get().then(snapShot => {
-        snapShot.docs.forEach(doc => {
-          console.log(doc.data());
-        })
-      })
+    getEvent(docRef) {
+    // getEvent() {
+      // const db = firebase.firestore();
+      // db.collection('projects').get().then(snapShot => {
+      //   snapShot.docs.forEach(doc => {
+      //     console.log(doc.data());
+      //   })
+      // })
       // docRef.get().then(snapshot => {
       // db.collection('posts').get().then(snapshot => {
       //   snapshot.docs.forEach(doc => {
@@ -318,36 +327,36 @@ export default {
       //     this.likeSum = this.posts.like_users.length;
       //     this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
       //   })
-      // docRef.get().then(doc => {
-        // if (doc.exists) {
-        //   console.log(doc.data());
-        //   this.posts = doc.data();
-        //   this.likeSum = this.posts.like_users.length;
-        //   this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
-        // } else {
-        //   console.log(doc.data());
-        // }
-      // });
+      docRef.get().then(doc => {
+        if (doc.exists) {
+          console.log(doc.data());
+          this.posts = doc.data();
+          const posts = this.posts;
+          this.likeSum = this.posts.like_users.length;
+          posts.push({likeSum: this.likeSum});
+          this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
+        } else {
+          console.log(doc.data());
+        }
+      });
     },
     applyEvent(id) {
-      console.log(id);
       const db = firebase.firestore();
       const docRef = db.collection('posts').doc(id);
       docRef.set({
         // displayImage: this.currentUser[0].image,
         like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
       }, { merge: true })
-      this.getEvent();
+      this.getEvent(docRef);
       // this.getEvent(docRef);
     },
     cancelEvent(id) {
-      console.log(id);
       const db = firebase.firestore();
       const docRef = db.collection('posts').doc(id);
       docRef.update({
         like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
       })
-      this.getEvent();
+      this.getEvent(docRef);
       // this.getEvent(docRef);
     }
   }
