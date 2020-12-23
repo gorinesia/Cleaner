@@ -19,6 +19,16 @@
                 <p class="mt-3">{{ personalProject.comment }}</p>
               </v-list-item-content>
             </v-list-item>
+            <div>
+              <div v-if="!applyFlag">
+                <v-icon class="mb-1 white--text" rounded color="orange" medium @click="applyEvent()">mdi-thumb-up-outline</v-icon>
+                <span>{{ likeSum }}</span>
+              </div>
+              <div v-if="applyFlag">
+                <v-icon class="mb-1 white--text" rounded color="orange" medium @click="cancelEvent()">mdi-thumb-up</v-icon>
+                <span>{{ likeSum }}</span>
+              </div>
+            </div>
           </v-col>
           <v-col cols="4">
             <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ personalProject.name }}・{{ personalProject.date}}</span>
@@ -184,13 +194,6 @@
 
       <v-container>
         <div>
-          <div>
-            <v-icon v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent()">mdi-thumb-up-outline</v-icon>
-          </div>
-          <div>
-            <v-icon v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent()">mdi-thumb-up</v-icon>
-          </div>
-          <span>{{ likeSum }}</span>
           <span>{{ nameUser }}</span>
           <!-- <img :src="images" width="50px" height="50px"> -->
         </div>
