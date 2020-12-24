@@ -12,6 +12,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/dotenv": "^1.4.1",
+    "express": "^4.17.1",
     "firebase": "^7.24.0",
     "nuxt": "^2.14.0",
     "stripe": "^8.129.0",
