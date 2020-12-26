@@ -90,7 +90,7 @@
         <v-row>
           <v-col cols="9">
             <span>{{ personalEvent.displayName }}さんの行動に対してお金を送ってサポートすることができます。</span>
-            <v-btn color="#0D47A1" rounded x-large dark @click="pay">サポートする</v-btn>
+            <v-btn color="#0D47A1" rounded x-large dark @click="sendMoneyToSomeone">サポートする</v-btn>
           </v-col>
           <v-col cols="3">
             <v-avatar tile size="100" color="cyan" class="mx-5">
@@ -188,7 +188,7 @@ export default {
     getProfile(id) {
       console.log(id);
     },
-    async pay() {
+    async sendMoneyToSomeone() {
       const Stripe = require('stripe');
       const stripe = Stripe('pk_test_51Hp8W6GM8QHm52Sew543CT6L0qkt1A4K6eKS89CRiVKKrLCHdzSaAEsmseYVrYJdDx3x0MWjt3kIiShsjOlo73w800iAHOtu3v');
 
