@@ -15,7 +15,15 @@
 import stripe from 'stripe'
 
 export default {
-
+  methods: {
+    async getSetLink() {
+      const result = await POST('/api/create-connect-account', {
+        name: 'test',
+        email: 'test@mail.com'
+      })
+      await router.push(result.url)
+    }
+  }
 }
 </script>
 
