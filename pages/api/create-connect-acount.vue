@@ -13,6 +13,7 @@
 
 <script>
 import stripe from 'stripe'
+import { POST } from '@nuxtjs/axios'
 
 export default {
   methods: {
