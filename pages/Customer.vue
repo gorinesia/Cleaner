@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import { POST } from '@nuxtjs/axios';
+
 export default {
 
 }
