@@ -15,7 +15,8 @@
 
 <script>
 import stripe from 'stripe'
-import { POST } from '@nuxtjs/axios'
+import { POST } from 'axios'
+import express from 'express'
 
 export default {
   methods: {
