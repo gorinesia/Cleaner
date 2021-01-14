@@ -12,10 +12,11 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/dotenv": "^1.4.1",
+    "@stripe/stripe-js": "^1.11.0",
     "express": "^4.17.1",
     "firebase": "^7.24.0",
     "nuxt": "^2.14.0",
-    "stripe": "^8.129.0",
+    "stripe": "^8.130.0",
     "vue-stripe-elements-plus": "^0.3.2",
     "vue2-google-maps": "^0.10.7",
     "vuexfire": "^3.2.0-alpha.0"

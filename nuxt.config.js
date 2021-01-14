@@ -7,7 +7,7 @@ export default {
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
   */
-  mode: 'spa',
+  mode: 'universal',
   /*
   ** Nuxt target
   ** See https://nuxtjs.org/api/configuration-target
@@ -20,7 +20,7 @@ export default {
   head: {
     // titleTemplate: '%s - ' + process.env.npm_package_name,
     title: process.env.npm_package_name || '',
-    script: [{ src: 'https://js.stripe.com/v3' }],
+    // script: [{ src: 'https://js.stripe.com/v3' }],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -31,15 +31,16 @@ export default {
       // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { type: 'text/javascript', src:'https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAzighvakmvCU9UN7_yfBgJvdojhzyuCc4', defer: true}
+      { type: 'text/javascript', src:'https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAzighvakmvCU9UN7_yfBgJvdojhzyuCc4', defer: true},
+      { src: 'https://js.stripe.com/v3' }
     ]
   },
   /*
   ** Global CSS
   */
- css: [
-   { src: '~/assets/scss/common.scss', lang: 'scss' },
- ],
+  css: [
+    { src: '~/assets/scss/common.scss', lang: 'scss' },
+  ],
 //  css: {
 //   loaderOptions: {
 //     scss: {
@@ -71,8 +72,12 @@ export default {
   */
   modules: [
     '@nuxtjs/dotenv',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    '@nuxtjs/axios'
   ],
+  serverMiddleware: ['~/api'],
+  // axios: { proxy: true, prefix: '/api' },
+  // proxy: { '/api/': { target: 'http://localhost:8000' }},
   styleResources: {
     scss: [
       '~/assets/scss/common.scss'
