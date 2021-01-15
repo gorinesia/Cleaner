@@ -1,5 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
+// const URL = 'http://localhost:3000'
+
 require('dotenv').config()
 
 export default {
@@ -75,7 +77,15 @@ export default {
     '@nuxtjs/style-resources',
     '@nuxtjs/axios'
   ],
-  serverMiddleware: ['~/api'],
+  serverMiddleware: ['~/api/index.js'],
+  // axios: {
+  //   proxy: true,
+  //   baseURL: URL
+  // },
+
+  // proxy: {
+  //   '/api': URL
+  // },
   // axios: { proxy: true, prefix: '/api' },
   // proxy: { '/api/': { target: 'http://localhost:8000' }},
   styleResources: {

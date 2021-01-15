@@ -47,12 +47,18 @@ export default {
   },
   methods: {
     async getSetLink() {
-      const result = await this.$axios.$post('/api/create-connect-account', {
+      const response = await this.$axios.$post('/api/create', {
         name: 'test',
         email: 'test@mail.com'
       });
-      // await router.push(result.url)
-      console.log(result);
+      console.log(response);
+      await this.$router.push(result.url);
+      // const result = await this.$axios.$post('/api/create', {
+      //   name: 'test',
+      //   email: 'test@mail.com'
+      // });
+      // // await router.push(result.url)
+      // console.log(result);
     }
   }
 }

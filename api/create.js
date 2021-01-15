@@ -1,18 +1,11 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const session = require("express-session");
+// import stripe from '../lib/stripe';
+const router = require('express').Router();
+// const app = express();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
-module.exports = { path: '/api', handler: app };
-
-app.get('/hello', (req, res) => {
-  console.log('hello nuxt in text');
-  res.send('world');
-});
+// module.exports = { path: '/api', handler: app };
 
 // export default async (req, res) => {
-app.post('/create', async (req, res) => {
+router.post('/create', async (req, res) => {
   try {
     console.log(req, res);
 
@@ -21,7 +14,7 @@ app.post('/create', async (req, res) => {
       country: 'JP'
     });
 
-    const origin = process.env.NODE_ENV === 'development' ? `http://${req.headers.host}` : `https://${req.headers.host}`;
+    const origin = process.env.NODE_ENV === 'development' ? `https://${req.headers.host}` : `https://${req.headers.host}`;
     const accountLinkURL = await generateAccountLink(account.id, origin);
 
     res.statusCode = 200;
@@ -58,15 +51,4 @@ app.post("/onboard-user", async (req, res) => {
   }
 });
 
-function generateAccountLink(accountID, origin) {
-  return stripe.accountLinks
-    .create({
-      type: "account_onboarding",
-      account: accountID,
-      refresh_url: `${origin}/onboard-user/refresh`,
-      return_url: `${origin}/success.html`,
-    })
-    .then((link) => link.url);
-}
-
-// module.exports = router;
+module.exports = router;
