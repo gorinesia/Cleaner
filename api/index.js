@@ -1,60 +1,73 @@
-// const express = require('express');
-// const app = express();
-// const bodyParser = require('body-parser');
-// const session = require("express-session");
-// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const session = require("express-session");
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-// module.exports = { path: '/api', handler: app };
+module.exports = { path: '/api', handler: app };
 
-// app.get('/hello', (req, res) => {
-//   console.log('hello nuxt in text');
-//   res.send('world');
-// });
+app.use(session({
+  secret: 'Set this to a random string taht is kept secure',
+  resave: false,
+  saveUninitialized: true,
+}))
 
-// // export default async (req, res) => {
-// app.post('/create', async (req, res) => {
-//   try {
-//     const account = await stripe.accounts.create({
-//       type: 'express',
-//       country: 'JP'
-//     });
+app.get('/hello', (req, res) => {
+  console.log('hello nuxt in text');
+  res.send('world');
+});
 
-//     const origin = process.env.NODE_ENV === 'development' ? `http://${req.headers.host}` : `https://${req.headers.host}`;
-//     const accountLinkURL = await generateAccountLink(account.id, origin);
+// export default async (req, res) => {
+app.post('/create', async (req, res) => {
+  try {
+    // req.session.accountID = account.id;
+    // const account = await stripe.accounts.create({
+    //   type: 'express',
+    //   country: 'JP'
+    // });
+    const account = await stripe.accounts.create({type: "express"});
+    req.session.accountID = account.id;
+    console.log(account);
+    const origin = `${req.headers.origin}`;
+    console.log(req.headers.host);
 
-//     res.statusCode = 200;
-//     res.json({ url: accountLinkURL });
+    // const origin = process.env.NODE_ENV === 'development' ? `http://${req.headers.host}` : `https://${req.headers.host}`;
+    // const accountLinkURL = await generateAccountLink(account.id, origin);
+    // res.send({ url: accountLinkURL });
+    res.statusCode = 200;
+    // res.json({ url: accountLinkURL });
 
-//   } catch (err) {
-//     res.status(500).send({
-//       error: err.message
-//     });
-//   }
-// });
+  } catch (err) {
+    res.status(500).send({
+      error: err.message
+    });
+  }
+});
 
-// function generateAccountLink(accountID, origin) {
-//   return stripe.accountLinks.create({
-//     type: 'account_onboarding',
-//     account: accountID,
-//     refresh_url: `${origin}/onboard-user/refresh`,
-//     return_url: `${origin}/success`
-//   }).then((link) => link.url);
-// }
+function generateAccountLink(accountID, origin) {
+  console.log(accountID, origin);
+  return stripe.accountLinks.create({
+    type: 'account_onboarding',
+    account: accountID,
+    refresh_url: `${origin}/onboard-user/refresh`,
+    return_url: `${origin}/success`
+  }).then((link) => link.url);
+}
 
-// app.post("/onboard-user", async (req, res) => {
-//   try {
-//     const account = await stripe.accounts.create({type: "standard"});
-//     req.session.accountID = account.id;
+app.post("/onboard-user", async (req, res) => {
+  try {
+    const account = await stripe.accounts.create({type: "standard"});
+    req.session.accountID = account.id;
 
-//     const origin = `${req.headers.origin}`;
-//     const accountLinkURL = await generateAccountLink(account.id, origin);
-//     res.send({ url: accountLinkURL });
-//   } catch (err) {
-//     res.status(500).send({
-//       error: err.message,
-//     });
-//   }
-// });
+    const origin = `${req.headers.origin}`;
+    const accountLinkURL = await generateAccountLink(account.id, origin);
+    res.send({ url: accountLinkURL });
+  } catch (err) {
+    res.status(500).send({
+      error: err.message,
+    });
+  }
+});
 
 // function generateAccountLink(accountID, origin) {
 //   return stripe.accountLinks
@@ -154,19 +167,16 @@
 
 // app.listen(port, () => console.log(`Node server listening on port ${port}!`));
 
-// // const handler = app.callback();
+// module.exports = { path: '/api', handler: app };
 
-// // module.exports = { handler };
-// module.exports = { path: '/api/', handler: app };
+// const express = require('express');
+// const app = express();
 
-const express = require('express');
-const app = express();
+// app.get('/', function(req, res) {
+//   res.send('hello world');
+// });
 
-app.get('/', function(req, res) {
-  res.send('hello world');
-});
-
-module.exports = {
-  path: '/api/',
-  handler: app
-};
+// module.exports = {
+//   path: '/api/',
+//   handler: app
+// };
