@@ -77,7 +77,7 @@ export default {
     '@nuxtjs/style-resources',
     '@nuxtjs/axios'
   ],
-  serverMiddleware: ['~/api/index'],
+  serverMiddleware: ['~/api/index.js'],
   // serverMiddleware: [{ path: '/api', handler: '~/api/index.js' }],
   // axios: {
   //   proxy: true,
