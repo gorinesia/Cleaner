@@ -6,35 +6,29 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 module.exports = { path: '/api', handler: app };
 
-app.use(session({
-  secret: 'Set this to a random string taht is kept secure',
-  resave: false,
-  saveUninitialized: true,
-}))
+// app.use(session({
+//   secret: 'Set this to a random string taht is kept secure',
+//   resave: false,
+//   saveUninitialized: true,
+// }))
 
 app.get('/hello', (req, res) => {
   console.log('hello nuxt in text');
   res.send('world');
 });
 
-// export default async (req, res) => {
+// // export default async (req, res) => {
 app.post('/create', async (req, res) => {
   try {
-    // req.session.accountID = account.id;
     // const account = await stripe.accounts.create({
     //   type: 'express',
     //   country: 'JP'
     // });
-    const account = await stripe.accounts.create({type: "express"});
-    req.session.accountID = account.id;
-    console.log(account);
-    const origin = `${req.headers.origin}`;
-    console.log(req.headers.host);
+    console.log('account');
 
     // const origin = process.env.NODE_ENV === 'development' ? `http://${req.headers.host}` : `https://${req.headers.host}`;
     // const accountLinkURL = await generateAccountLink(account.id, origin);
-    // res.send({ url: accountLinkURL });
-    res.statusCode = 200;
+    // res.statusCode = 200;
     // res.json({ url: accountLinkURL });
 
   } catch (err) {
@@ -44,30 +38,30 @@ app.post('/create', async (req, res) => {
   }
 });
 
-function generateAccountLink(accountID, origin) {
-  console.log(accountID, origin);
-  return stripe.accountLinks.create({
-    type: 'account_onboarding',
-    account: accountID,
-    refresh_url: `${origin}/onboard-user/refresh`,
-    return_url: `${origin}/success`
-  }).then((link) => link.url);
-}
+// function generateAccountLink(accountID, origin) {
+//   console.log(accountID, origin);
+//   return stripe.accountLinks.create({
+//     type: 'account_onboarding',
+//     account: accountID,
+//     refresh_url: `${origin}/onboard-user/refresh`,
+//     return_url: `${origin}/success`
+//   }).then((link) => link.url);
+// }
 
-app.post("/onboard-user", async (req, res) => {
-  try {
-    const account = await stripe.accounts.create({type: "standard"});
-    req.session.accountID = account.id;
+// app.post("/onboard-user", async (req, res) => {
+//   try {
+//     const account = await stripe.accounts.create({type: "standard"});
+//     req.session.accountID = account.id;
 
-    const origin = `${req.headers.origin}`;
-    const accountLinkURL = await generateAccountLink(account.id, origin);
-    res.send({ url: accountLinkURL });
-  } catch (err) {
-    res.status(500).send({
-      error: err.message,
-    });
-  }
-});
+//     const origin = `${req.headers.origin}`;
+//     const accountLinkURL = await generateAccountLink(account.id, origin);
+//     res.send({ url: accountLinkURL });
+//   } catch (err) {
+//     res.status(500).send({
+//       error: err.message,
+//     });
+//   }
+// });
 
 // function generateAccountLink(accountID, origin) {
 //   return stripe.accountLinks
@@ -90,10 +84,7 @@ app.post("/onboard-user", async (req, res) => {
 // const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // const app = express();
-// const port = process.env.PORT || 4242;
-
-// // module.exports = { handler };
-// // module.exports = { path: '/api', handler: app };
+// const port = process.env.PORT || 3000;
 
 // app.get('/hello', (req, res) => {
 //     console.log('hello nuxt in text');
@@ -101,7 +92,8 @@ app.post("/onboard-user", async (req, res) => {
 //   });
 
 
-// app.use(express.static(process.env.STATIC_DIR));
+// app.use(express.static('pages'));
+// // app.use(express.static(process.env.STATIC_DIR));
 // app.use(session({
 //   secret: "Set this to a random string that is kept secure",
 //   resave: false,
@@ -109,16 +101,17 @@ app.post("/onboard-user", async (req, res) => {
 // }))
 
 // // Use JSON parser for all non-webhook routes
-// app.use((req, res, next) => {
-//   if (req.originalUrl === "/webhook") {
-//     next();
-//   } else {
-//     bodyParser.json()(req, res, next);
-//   }
-// });
+// // app.use((req, res, next) => {
+// // if (req.originalUrl === "/webhook") {
+// //   next();
+// //   } else {
+// //     bodyParser.json()(req, res, next);
+// //   }
+// // });
 
 // app.get("/", (req, res) => {
-//   const path = resolve(process.env.STATIC_DIR + "/index.html");
+//   // const path = resolve(process.env.STATIC_DIR + "/index.html");
+//   const path = resolve('~/api');
 //   res.sendFile(path);
 // });
 
@@ -145,7 +138,7 @@ app.post("/onboard-user", async (req, res) => {
 //   }
 //   try {
 //     const {accountID} = req.session;
-//     const origin = `${req.secure ? "https://" : "https://"}${req.headers.host}`;
+//     const origin = `${req.secure ? "http://" : "http://"}${req.headers.host}`;
 
 //     const accountLinkURL = await generateAccountLink(accountID, origin)
 //     res.redirect(accountLinkURL);
@@ -168,15 +161,3 @@ app.post("/onboard-user", async (req, res) => {
 // app.listen(port, () => console.log(`Node server listening on port ${port}!`));
 
 // module.exports = { path: '/api', handler: app };
-
-// const express = require('express');
-// const app = express();
-
-// app.get('/', function(req, res) {
-//   res.send('hello world');
-// });
-
-// module.exports = {
-//   path: '/api/',
-//   handler: app
-// };
