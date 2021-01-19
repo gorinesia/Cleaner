@@ -61,7 +61,7 @@ export default {
         email: 'test@mail.com'
       });
       console.log(result);
-      await this.$router.push(result.url)
+      await this.$router.push('/stripe/oauth');
     }
   }
 }
