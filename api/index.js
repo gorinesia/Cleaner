@@ -45,14 +45,12 @@ function generateAccountLink(accountID, origin) {
   return stripe.accountLinks.create({
     type: 'account_onboarding',
     account: accountID,
-    refresh_url: `${origin}/owner`,
-    return_url: `${origin}/owner`
+    refresh_url: `${origin}/onboard-user/refresh`,
+    return_url: `${origin}/success`
     // refresh_url: `${origin}/onboard-user/refresh`,
     // return_url: `${origin}/success`
-  }).then((link) => {
-    console.log(link);
-    return link.url
-  });
+  }).then((link) => link.url)
+  .catch((err) => console.log(err.message))
 }
 
 // app.post("/onboard-user", async (req, res) => {
