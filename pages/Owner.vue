@@ -12,6 +12,12 @@
         <div>
           <p>api response result : {{ response }}</p>
         </div>
+        <h2>ユーザー用のメニュー</h2>
+        <div>
+          <v-btn @click="onboardToCustomer">クレジットカードを登録する</v-btn>
+        </div>
+        <div>
+        </div>
       </main>
     <!-- </layout> -->
   </div>
@@ -64,6 +70,9 @@ export default {
       await window.location.replace(result.url);
       // await this.$router.replace(result.url);
       // await this.$router.push({path: `${result.url}`});
+    },
+    onboardToCustomer() {
+      this.$router.push('/customer');
     }
   }
 }
