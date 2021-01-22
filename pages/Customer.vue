@@ -1,6 +1,6 @@
 <template>
   <div>
-    <layout>
+    <!-- <layout> -->
       <main>
         <div>
           <h4>こちらからクレジットカードを登録してください</h4>
@@ -8,13 +8,19 @@
         </div>
         <div>
           <h4>お客様のお名前を登録してください</h4>
-          <form action="">
+          <form action="charge" id="payment-form" @submit="onCard">
+            <div class="form-row">
+              <label for="card"></label>
+              <div ref="card"></div>
+              <div id="card-errors" role="alert"></div>
+              <button>お支払い</button>
+            </div>
+          </form>
             <input type="text">
             <v-btn>名前を登録する</v-btn>
-          </form>
         </div>
       </main>
-    </layout>
+    <!-- </layout> -->
   </div>
 </template>
 
@@ -25,7 +31,13 @@ export default {
   mounted() {
     this.stripe = Stripe('pk_test_51Hp8W6GM8QHm52Sew543CT6L0qkt1A4K6eKS89CRiVKKrLCHdzSaAEsmseYVrYJdDx3x0MWjt3kIiShsjOlo73w800iAHOtu3v');
     let elements = this.stripe.elements();
-    this.card = elements.create('card');
+    let style = {
+      base: {
+        fontSize: '16px',
+        color: '#32325d'
+      }
+    }
+    this.card = elements.create('card', {style: style});
     this.card.mount(this.$refs.card);
   },
   methods: {
@@ -40,6 +52,10 @@ export default {
         id: result.id,
         client_secret: result.client_secret
       })
+    },
+    onCard(ev) {
+      ev.preventDefault();
+      
     }
   }
 }
