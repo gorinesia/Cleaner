@@ -55,7 +55,20 @@ export default {
     },
     onCard(ev) {
       ev.preventDefault();
-      
+      stripe.confirmCardPayment(client_secret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            name: 'Jenny Rosen'
+          }
+        }
+      }).then((result) => {
+        if (result.error) {
+          console.log(result.error.message);
+        } else {
+          if (result.paymentIntent.status === 'succeeded')
+        }
+      })
     }
   }
 }
