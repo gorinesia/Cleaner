@@ -25,9 +25,12 @@
 </template>
 
 <script>
-import { POST } from '@nuxtjs/axios';
-
 export default {
+  data() {
+    return {
+      stripe: null
+    }
+  },
   mounted() {
     this.stripe = Stripe('pk_test_51Hp8W6GM8QHm52Sew543CT6L0qkt1A4K6eKS89CRiVKKrLCHdzSaAEsmseYVrYJdDx3x0MWjt3kIiShsjOlo73w800iAHOtu3v');
     let elements = this.stripe.elements();
@@ -53,23 +56,44 @@ export default {
         client_secret: result.client_secret
       })
     },
-    onCard(ev) {
+    async onCard(ev) {
+      // const stripe = Stripe('pk_test_51Hp8W6GM8QHm52Sew543CT6L0qkt1A4K6eKS89CRiVKKrLCHdzSaAEsmseYVrYJdDx3x0MWjt3kIiShsjOlo73w800iAHOtu3v')
       ev.preventDefault();
-      stripe.confirmCardPayment(client_secret, {
-        payment_method: {
-          card: card,
-          billing_details: {
-            name: 'Jenny Rosen'
-          }
-        }
-      }).then((result) => {
+      await this.stripe.createToken(this.card).then((result) => {
         if (result.error) {
-          console.log(result.error.message);
+          const errorElement = document.getElementById('card-errors');
+          errorElement.textContent = result.error.message;
         } else {
-          if (result.paymentIntent.status === 'succeeded')
+          this.stripeTokenHandler(result.token);
         }
       })
+    },
+    stripeTokenHandler(token) {
+      console.log(token);
+      const form = document.getElementById('payment-form');
+      const hiddenInput = document.createElement('input');
+      hiddenInput.setAttribute('type', 'hidden');
+      hiddenInput.setAttribute('name', 'stripeToken');
+      hiddenInput.setAttribute('value', token.id);
+      form.appendChild(hiddenInput);
+      form.submit();
     }
+      // stripe.confirmCardPayment(client_secret, {
+      //   payment_method: {
+      //     card: card,
+      //     billing_details: {
+      //       name: 'Jenny Rosen'
+      //     }
+      //   }
+      // }).then((result) => {
+      //   if (result.error) {
+      //     console.log(result.error.message);
+      //   } else {
+      //     if (result.paymentIntent.status === 'succeeded') {
+
+      //     }
+      //   }
+      // })
   }
 }
 </script>
