@@ -2,7 +2,30 @@
   <div>
     <!-- <layout> -->
       <main>
-        <div>
+        {customerState.client_secret ? (
+          <div>
+            <h4>こちらからクレジットカードを登録してください</h4>
+            <p>**テスト用の番号 "4242424242424242" を使用してください**</p>
+            {loading ? (
+              '登録中...'
+            ):(
+              <div ref="card"></div>
+              <!-- <Elements stripe={stripePromise}>
+                <CardInputForm clientSecret={customerState.client_secret} customerName={customer.name}/>
+              </Elements> -->
+            )}
+          </div>
+        ) : (
+          <div>
+            <h4>お客様のお名前を登録してください</h4>
+            <form @submit="registerCustomer(e)">
+              <input type="text" defaultValue={name} @change="setName(e.target.value)">
+              <button>名前を登録する</button>
+            </form>
+          </div>
+        )}
+
+        <!-- <div>
           <h4>こちらからクレジットカードを登録してください</h4>
           <p>**テスト用の番号 "4242424242424242" を使用してください**</p>
         </div>
@@ -18,7 +41,7 @@
           </form>
             <input type="text">
             <v-btn>名前を登録する</v-btn>
-        </div>
+        </div> -->
       </main>
     <!-- </layout> -->
   </div>
@@ -28,7 +51,8 @@
 export default {
   data() {
     return {
-      stripe: null
+      stripe: null,
+      name: 'Test User'
     }
   },
   mounted() {
