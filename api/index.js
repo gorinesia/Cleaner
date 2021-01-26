@@ -80,6 +80,31 @@ app.post('/register', async (req, res) => {
   }
 });
 
+app.post('/registerCard', async (req, res) => {
+  try {
+    const customerName = req.body.customerName;
+    const customer = await stripe.customers.create({
+      name: customerName
+    });
+
+    const setupIntent = await stripe.setupIntents.create({
+      payment_method_types: ['card'],
+      customer: customer.id
+    });
+
+    res.statusCode = 201;
+    res.json({
+      customerName: customerName,
+      clientSecret: setupIntent.client_secret
+    })
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      error: err.message
+    })
+  }
+});
+
 app.post('/payment', async (req, res) => {
   try {
     const item = req.body.item;
