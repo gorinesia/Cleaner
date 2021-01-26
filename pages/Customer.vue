@@ -2,7 +2,7 @@
   <div>
     <!-- <layout> -->
       <main>
-        {customerState.client_secret ? (
+        {v-if customerState.client_secret ? (
           <div>
             <h4>こちらからクレジットカードを登録してください</h4>
             <p>**テスト用の番号 "4242424242424242" を使用してください**</p>
