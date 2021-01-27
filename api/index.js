@@ -154,33 +154,30 @@ app.post('/payment', async (req, res) => {
   }
 });
 
-// app.post("/onboard-user", async (req, res) => {
-//   try {
-//     const account = await stripe.accounts.create({type: "standard"});
-//     req.session.accountID = account.id;
+app.get('/secret', async (req, res) => {
+  try {
+    console.log(req.body)
+    // const paymentIntent = await stripe.paymentIntents.create({
+    //   payment_method_types: ['card'],
+    //   amount: 1000,
+    //   currency: 'jpy',
+    //   application_fee_amount: 123,
+    //   transfer_data: {
+    //     destination: req.body.data.account
+    //     // destination: '{{CONNECTED_STRIPE_ACCOUNT_ID}}'
+    //   }
+    // });
 
-//     const origin = `${req.headers.origin}`;
-//     const accountLinkURL = await generateAccountLink(account.id, origin);
-//     res.send({ url: accountLinkURL });
-//   } catch (err) {
-//     res.status(500).send({
-//       error: err.message,
-//     });
-//   }
-// });
-
-// function generateAccountLink(accountID, origin) {
-//   return stripe.accountLinks
-//     .create({
-//       type: "account_onboarding",
-//       account: accountID,
-//       refresh_url: `${origin}/onboard-user/refresh`,
-//       return_url: `${origin}/success.html`,
-//     })
-//     .then((link) => link.url);
-// }
-
-// // module.exports = router;
+    // res.json({
+    //   client_secret: intent.client_secret
+    // });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      error: err.message
+    })
+  }
+});
 
 // require("dotenv").config();
 // const bodyParser = require("body-parser");
@@ -265,5 +262,3 @@ app.post('/payment', async (req, res) => {
 // }
 
 // app.listen(port, () => console.log(`Node server listening on port ${port}!`));
-
-// module.exports = { path: '/api', handler: app };
