@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- <layout> -->
+    <layout>
       <main>
-        {v-if customerState.client_secret ? (
+        <!-- {v-if customerState.client_secret ? (
           <div>
             <h4>こちらからクレジットカードを登録してください</h4>
             <p>**テスト用の番号 "4242424242424242" を使用してください**</p>
@@ -10,9 +10,9 @@
               '登録中...'
             ):(
               <div ref="card"></div>
-              <!-- <Elements stripe={stripePromise}>
+              <Elements stripe={stripePromise}>
                 <CardInputForm clientSecret={customerState.client_secret} customerName={customer.name}/>
-              </Elements> -->
+              </Elements>
             )}
           </div>
         ) : (
@@ -23,27 +23,27 @@
               <button>名前を登録する</button>
             </form>
           </div>
-        )}
+        )} -->
 
-        <!-- <div>
+        <div>
           <h4>こちらからクレジットカードを登録してください</h4>
           <p>**テスト用の番号 "4242424242424242" を使用してください**</p>
         </div>
         <div>
           <h4>お客様のお名前を登録してください</h4>
-          <form action="charge" id="payment-form" @submit="onCard">
+          <form action="charge" id="payment-form">
             <div class="form-row">
               <label for="card"></label>
               <div ref="card"></div>
               <div id="card-errors" role="alert"></div>
-              <button>お支払い</button>
+              <button @click="pay">お支払い</button>
             </div>
           </form>
             <input type="text">
             <v-btn>名前を登録する</v-btn>
-        </div> -->
+        </div>
       </main>
-    <!-- </layout> -->
+    </layout>
   </div>
 </template>
 
@@ -101,6 +101,11 @@ export default {
       hiddenInput.setAttribute('value', token.id);
       form.appendChild(hiddenInput);
       form.submit();
+    },
+    async pay() {
+      const response = await this.$axios.$get('/api/secret');
+      const {client_secret: clientSecret} = await response.json();
+      console.log({client_secret: clientSecret});
     }
       // stripe.confirmCardPayment(client_secret, {
       //   payment_method: {
