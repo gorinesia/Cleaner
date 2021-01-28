@@ -1,6 +1,6 @@
 <template>
   <div>
-    <layout>
+    <!-- <layout> -->
       <main>
         <!-- {v-if customerState.client_secret ? (
           <div>
@@ -43,7 +43,7 @@
             <v-btn>名前を登録する</v-btn>
         </div>
       </main>
-    </layout>
+    <!-- </layout> -->
   </div>
 </template>
 
@@ -103,7 +103,7 @@ export default {
       form.submit();
     },
     async pay() {
-      const response = await this.$axios.$get('/api/secret');
+      const response = await this.$axios.$post('/api/secret');
       const {client_secret: clientSecret} = await response.json();
       console.log({client_secret: clientSecret});
     }
