@@ -157,20 +157,20 @@ app.post('/payment', async (req, res) => {
 app.post('/secret', async (req, res) => {
   try {
     console.log(req.body)
-    // const paymentIntent = await stripe.paymentIntents.create({
-    //   payment_method_types: ['card'],
-    //   amount: 1000,
-    //   currency: 'jpy',
-    //   application_fee_amount: 123,
-    //   transfer_data: {
-    //     destination: req.body.data.account
-    //     // destination: '{{CONNECTED_STRIPE_ACCOUNT_ID}}'
-    //   }
-    // });
+    const paymentIntent = await stripe.paymentIntents.create({
+      payment_method_types: ['card'],
+      amount: 1000,
+      currency: 'jpy',
+      application_fee_amount: 123,
+      transfer_data: {
+        // destination: req.body.data.account
+        destination: '{{CONNECTED_STRIPE_ACCOUNT_ID}}'
+      }
+    });
 
-    // res.json({
-    //   client_secret: intent.client_secret
-    // });
+    res.json({
+      client_secret: intent.client_secret
+    });
   } catch (err) {
     console.log(err);
     res.status(500).send({
