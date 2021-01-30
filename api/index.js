@@ -154,7 +154,7 @@ app.post('/payment', async (req, res) => {
   }
 });
 
-app.post('/secret', async (req, res) => {
+app.post('/create-payment-intent', async (req, res) => {
   try {
     console.log(req.body)
     const paymentIntent = await stripe.paymentIntents.create({

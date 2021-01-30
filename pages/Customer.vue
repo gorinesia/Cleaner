@@ -31,12 +31,12 @@
         </div>
         <div>
           <h4>お客様のお名前を登録してください</h4>
-          <form action="charge" id="payment-form">
+          <form action="charge" id="payment-form" @submit="pay">
             <div class="form-row">
               <label for="card"></label>
               <div ref="card"></div>
               <div id="card-errors" role="alert"></div>
-              <button @click="pay">お支払い</button>
+              <button>お支払い</button>
             </div>
           </form>
             <input type="text">
@@ -103,26 +103,26 @@ export default {
       form.submit();
     },
     async pay() {
-      const response = await this.$axios.$post('/api/secret');
+      const response = await this.$axios.$post('/api/create-payment-intent');
       const {client_secret: clientSecret} = await response.json();
       console.log({client_secret: clientSecret});
+      stripe.confirmCardPayment(client_secret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            name: 'Jenny Rosen'
+          }
+        }
+      }).then((result) => {
+        if (result.error) {
+          console.log(result.error.message);
+        } else {
+          if (result.paymentIntent.status === 'succeeded') {
+            console.log('ok');
+          }
+        }
+      })
     }
-      // stripe.confirmCardPayment(client_secret, {
-      //   payment_method: {
-      //     card: card,
-      //     billing_details: {
-      //       name: 'Jenny Rosen'
-      //     }
-      //   }
-      // }).then((result) => {
-      //   if (result.error) {
-      //     console.log(result.error.message);
-      //   } else {
-      //     if (result.paymentIntent.status === 'succeeded') {
-
-      //     }
-      //   }
-      // })
   }
 }
 </script>
