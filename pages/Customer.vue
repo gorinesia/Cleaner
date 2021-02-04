@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <layout> -->
       <main>
         <!-- {v-if customerState.client_secret ? (
           <div>
@@ -43,7 +42,6 @@
             <v-btn>名前を登録する</v-btn>
         </div>
       </main>
-    <!-- </layout> -->
   </div>
 </template>
 
