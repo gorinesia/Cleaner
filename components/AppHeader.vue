@@ -66,19 +66,20 @@
 </template>
 
 <script>
-import firebase from 'firebase';
-
 export default {
   name: 'app-header',
   data() {
     return {
       drawer: false,
-      loggedIn: this.$store.state.user.loggedIn,
+      // loggedIn: this.$store.state.user.loggedIn,
       email: 'test@test.com',
       password: '123456',
     }
   },
   computed : {
+    loggedIn() {
+      return this.$store.getters['user/loggedIn']
+    },
     currentUser() {
       return this.$store.getters['user/currentUser']
     }

@@ -108,6 +108,9 @@ export default {
     currentUser() {
       return this.$store.getters['user/currentUser']
     },
+    uid() {
+      return this.$store.getters['user/uid']
+    },
     personalDatas() {
       return this.$store.getters['user/personalDatas']
     },
@@ -119,8 +122,15 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('user/logInUserDisplay');
-    this.$store.dispatch('project/getMessage');
+    this.$store.dispatch('user/logInUserDisplay', {
+      uid: this.uid,
+      // email: this.currentUser[0].email
+    });
+    console.log(this.currentUser);
+    this.$store.dispatch('project/getMessage', {
+      uid: this.uid,
+      // displayName: this.currentUser[0].displayName,
+    });
     this.$store.dispatch('event/getMessage');
   },
   methods: {

@@ -43,20 +43,36 @@
       </v-card>
       <h2 class="mb-5">{{ personalEvent.displayName }}さんの発案中のイベント</h2>
 
-
-      <div :id="currentUser[0].id">
-        <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent(currentUser[0].id)">{{ applyButton }}</v-btn>
+      <div>
+        <div>
+          <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent()">参加</v-btn>
+        </div>
+        <div>
+          <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent()">キャンセル</v-btn>
+        </div>
+        <span>{{ likeSum }}</span>
+        <span>{{ nameUser }}</span>
+        <!-- <img :src="images" width="50px" height="50px"> -->
       </div>
-      <div :id="currentUser[0].id">
-        <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent(currentUser[0].id)">{{ applyButton }}</v-btn>
-      </div>
+      <!-- <div>
+        <div>
+          <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent()"><v-icon color="cyan darken-1">mdi-thumb-up</v-icon></v-btn>
+        </div>
+        <div>
+          <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent()"><v-icon color="cyan darken-1">mdi-thumb-up</v-icon></v-btn>
+        </div>
+        <span>{{ likeSum }}</span>
+        <span>{{ nameUser }}</span>
+        <img :src="images" width="50px" height="50px">
+      </div> -->
 
       <div>メンバー</div>
       <v-card>
         <v-row>
           <v-col>
-            <v-avatar>
-              <v-img :src="personalEvent.displayImage" width="50px" height="50px" @click="getProfile(personalEvent.id)"></v-img>
+            <v-avatar v-for="image in images" :key="image.id">
+              <img :src="image" :key="image" width="50px" height="50px" @click="getProfile(personalEvent.id)">
+              <!-- <v-img :src="image.displayImage" width="50px" height="50px" @click="getProfile(personalEvent.id)"></v-img> -->
             </v-avatar>
           </v-col>
         </v-row>
@@ -68,16 +84,17 @@
           <v-btn class="cyan text-sm white--text font-bold py-1 px-2 rouded">送信</v-btn>
         </v-card>
       </v-container>
+
       <v-card color="#E0F7FA" class="rounded-xl mt-5 pa-5" rounded>
         <h2 class="mx-10">クリーナーを応援しよう</h2>
         <v-row>
           <v-col cols="9">
             <span>{{ personalEvent.displayName }}さんの行動に対してお金を送ってサポートすることができます。</span>
-            <v-btn color="#0D47A1" rounded x-large dark>サポートする</v-btn>
+            <v-btn color="#0D47A1" rounded x-large dark @click="sendMoneyToSomeone">サポートする</v-btn>
           </v-col>
           <v-col cols="3">
-            <v-avatar tile size="100" color="cyan" :src="image_src" class="mx-5">
-              <img :src="personalEvent.image" alt="">
+            <v-avatar tile size="100" color="cyan" class="mx-5">
+              <img :src="personalEvent.image">
             </v-avatar>
           </v-col>
         </v-row>
@@ -94,11 +111,14 @@ export default {
   name: 'personalEvent',
   data() {
     return {
-      image_src: require('@/assets/img/everyone.jpg'),
       applyUsers: [],
       applyFlag: false,
-      applyButton: '参加',
-      loginUser: null
+      loginUser: null,
+      likeSum: 0,
+      images: [],
+      image_users: [],
+      nameUser: [],
+      name_users: []
     }
   },
   computed: {
@@ -110,42 +130,72 @@ export default {
     }
   },
   mounted() {
-    this.getEvent(this.currentUser[0].id)
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.loginUser = user;
+      }
+    })
+    const db = firebase.firestore();
+    const docRef = db.collection('posts').doc(this.personalEvent[0].id);
+    this.getEvent(docRef)
+
   },
   methods: {
-    getEvent(id) {
-      const db = firebase.firestore();
-      const docRef = db.collection('users').doc(id).collection('posts').doc('apply');
-      docRef
-        .onSnapshot((doc) => {
+    getEvent(docRef) {
+      docRef.get().then(doc => {
+        if (doc.exists) {
           console.log(doc.data());
-          this.applyUsers.push({
-            // displayName: doc.data().displayName,
-            // image: doc.data().image,
-            // id: doc.id,
-            // applyButton: doc.data().applyButton
-          })
+          this.posts = doc.data();
+          this.likeSum = this.posts.like_users.length;
+          // this.images = this.posts.displayImage;
+          // this.images.push({
+          //   displayImage: this.posts.displayImage
+          // })
+
+          this.images = [...this.posts.image_users];
+          this.nameUser = [...this.posts.name_users];
+          this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
+        } else {
+          console.log(doc.data());
+        }
+      })
+    },
+    applyEvent() {
+        const db = firebase.firestore();
+        const docRef = db.collection('posts').doc(this.personalEvent[0].id)
+        docRef.set({
+          displayImage: this.currentUser[0].image,
+          like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
+          image_users: firebase.firestore.FieldValue.arrayUnion(this.currentUser[0].image),
+          name_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.displayName),
+        }, { merge: true })
+        this.applyFlag = true;
+        this.getEvent(docRef);
+    },
+    cancelEvent() {
+        const db = firebase.firestore();
+        const docRef = db.collection('posts').doc(this.personalEvent[0].id)
+        // docRef.delete(
+        docRef.update({
+          // displayImage: null,
+          like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
+          image_users: firebase.firestore.FieldValue.arrayRemove(this.currentUser[0].image),
+          name_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.displayName),
         })
-    },
-    applyEvent(id) {
-      console.log(id);
-        const db = firebase.firestore();
-        const docRef = db.collection('users').doc(id).collection('posts').doc('apply')
-          docRef.set({
-          })
-            this.getEvent(id);
-    },
-    cancelEvent(id) {
-      console.log(id);
-        const db = firebase.firestore();
-        const docRef = db.collection('users').doc(id).collection('posts').doc('apply');
-          docRef.update({
-          })
-            this.getEvent(id);
+        this.applyFlag = false;
+        this.getEvent(docRef);
     },
     getProfile(id) {
       console.log(id);
     },
+    async sendMoneyToSomeone() {
+      const Stripe = require('stripe');
+      const stripe = Stripe('pk_test_51Hp8W6GM8QHm52Sew543CT6L0qkt1A4K6eKS89CRiVKKrLCHdzSaAEsmseYVrYJdDx3x0MWjt3kIiShsjOlo73w800iAHOtu3v');
+
+      const account = await stripe.accounts.create({
+        type: 'express'
+      })
+    }
   }
 }
 </script>

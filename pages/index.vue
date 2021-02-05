@@ -1,6 +1,6 @@
 <template>
   <v-app class="blue-grey lighten-5">
-    <v-system-bar height="30" color="#00ACC1" dark class="white--text font-weight-bold justify-center"><nuxt-link class="white--text text-decoration-none" to="auth/signup">まずは気軽に新規登録から！綺麗な世界は自分たちの手で創り上げていこう！</nuxt-link></v-system-bar>
+    <v-system-bar height="35" color="#00ACC1" dark class="white--text font-weight-bold justify-center"><nuxt-link class="white--text text-decoration-none" to="auth/signup">まずは気軽に新規登録から！綺麗な世界は自分たちの手で創り上げていこう！</nuxt-link></v-system-bar>
     <v-container>
       <v-row>
         <v-col cols="12" md="6" align="center" justify="center">
@@ -9,7 +9,7 @@
           人々に対価を」をコンセプトとしたゴミ拾い<br>
           情報コミュニティです。</p>
           <v-btn class="mb-5" rounded outlined color="cyan darken-1" x-large to="/Auth/Signup">いますぐはじめる</v-btn><br>
-          <v-btn class="text-capitalize" rounded color="primary" x-large dark to="aboutcleaner">Cleanerについて</v-btn>
+          <v-btn class="text-capitalize" rounded color="primary" x-large dark to="/About">Cleanerについて</v-btn>
         </v-col>
         <v-col cols="12" md="6" align="center" justify="center">
             <v-img fluid fill-height class="home-hero__content">
@@ -22,7 +22,7 @@
     </div>
     <Information />
 
-    <v-container>
+    <v-container class="mb-10">
       <v-card>
         <v-tabs
           v-model="tab"
@@ -70,8 +70,6 @@
 
 <script>
 import Information from '@/components/Information.vue'
-import firebase from 'firebase/app'
-import 'firebase/firestore'
 
 export default {
   name: 'home',
@@ -84,12 +82,10 @@ export default {
         {
           name: 'プロジェクトをみる',
           icon: 'mdi-tooltip',
-          // to: '/list/project'
         },
         {
           name: 'イベントをみる',
           icon: 'mdi-calendar',
-          // to: '/list/event'
         },
       ],
       tab: null
