@@ -17,11 +17,6 @@ export default {
     AppHeader,
     Toolbar,
   },
-  data() {
-    return {
-      // loggedIn: this.$store.state.user.loggedIn
-    }
-  },
   computed: {
     loggedIn() {
         return this.$store.getters['user/loggedIn']

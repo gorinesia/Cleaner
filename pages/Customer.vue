@@ -1,29 +1,6 @@
 <template>
   <div>
       <main>
-        <!-- {v-if customerState.client_secret ? (
-          <div>
-            <h4>こちらからクレジットカードを登録してください</h4>
-            <p>**テスト用の番号 "4242424242424242" を使用してください**</p>
-            {loading ? (
-              '登録中...'
-            ):(
-              <div ref="card"></div>
-              <Elements stripe={stripePromise}>
-                <CardInputForm clientSecret={customerState.client_secret} customerName={customer.name}/>
-              </Elements>
-            )}
-          </div>
-        ) : (
-          <div>
-            <h4>お客様のお名前を登録してください</h4>
-            <form @submit="registerCustomer(e)">
-              <input type="text" defaultValue={name} @change="setName(e.target.value)">
-              <button>名前を登録する</button>
-            </form>
-          </div>
-        )} -->
-
         <div>
           <h4>こちらからクレジットカードを登録してください</h4>
           <p>**テスト用の番号 "4242424242424242" を使用してください**</p>
@@ -79,7 +56,6 @@ export default {
       })
     },
     async onCard(ev) {
-      // const stripe = Stripe('pk_test_51Hp8W6GM8QHm52Sew543CT6L0qkt1A4K6eKS89CRiVKKrLCHdzSaAEsmseYVrYJdDx3x0MWjt3kIiShsjOlo73w800iAHOtu3v')
       ev.preventDefault();
       await this.stripe.createToken(this.card).then((result) => {
         if (result.error) {

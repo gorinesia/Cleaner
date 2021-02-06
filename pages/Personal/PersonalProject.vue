@@ -66,7 +66,6 @@
                           @click="openModalForEdit(personalProject.id)"
                         >
                           <v-icon>mdi-pencil-plus</v-icon>
-                          <!-- <v-icon dark>mdi-pencil</v-icon> -->
                           投稿を編集
                         </v-list-item-title>
                       </template>
@@ -339,11 +338,6 @@ export default {
     const db = firebase.firestore();
     const docRef = db.collection('posts').doc(this.personalProject[0].id);
     this.getEvent(docRef);
-
-    // this.stripe = Stripe('pk_test_51Hp8W6GM8QHm52Sew543CT6L0qkt1A4K6eKS89CRiVKKrLCHdzSaAEsmseYVrYJdDx3x0MWjt3kIiShsjOlo73w800iAHOtu3v');
-    // let elements = this.stripe.elements();
-    // this.card = elements.create('card');
-    // this.card.mount(this.$refs.card);
   },
   methods: {
     btnUploadChange(ev) {
@@ -356,14 +350,11 @@ export default {
       db.collection('posts').doc(id).collection('comments')
         .orderBy('date', 'asc')
         .onSnapshot((querySnapshot) => {
-          // const comments = [];
           querySnapshot.forEach((doc) => {
             this.comments.push({
               displayName: doc.data().displayName,
-              // place: doc.data().place,
               comment: doc.data().comment,
               image: doc.data().image,
-              // id: doc.id,
               date: doc.data().date,
             })
             console.log(doc.data());
@@ -375,7 +366,6 @@ export default {
       const db = firebase.firestore();
       db.collection('posts').doc(id).collection('comments').add({
         displayName: this.currentUser[0].displayName,
-        // place: this.place,
         comment: this.comment,
         image: this.currentUser[0].image,
         date: new Date().toLocaleString()
@@ -383,7 +373,6 @@ export default {
       .then(() => {
         console.log(this.comment);
         this.displayName = ''
-        // this.place = ''
         this.comment = ''
         this.image = ''
         this.date = ''
@@ -450,11 +439,6 @@ export default {
           console.log(doc.data());
           this.posts = doc.data();
           this.likeSum = this.posts.like_users.length;
-          // this.images = this.posts.displayImage;
-          // this.images.push({
-          //   displayImage: this.posts.displayImage
-          // })
-
           this.images = [...this.posts.image_users];
           this.nameUser = [...this.posts.name_users];
           this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
@@ -478,9 +462,7 @@ export default {
     cancelEvent() {
         const db = firebase.firestore();
         const docRef = db.collection('posts').doc(this.personalProject[0].id)
-        // docRef.delete(
         docRef.update({
-          // displayImage: null,
           like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
           image_users: firebase.firestore.FieldValue.arrayRemove(this.currentUser[0].image),
           name_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.displayName),
