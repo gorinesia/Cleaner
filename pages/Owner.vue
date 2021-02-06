@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <layout> -->
       <main>
         <h2>店舗オーナー用のメニュー</h2>
         <div>
@@ -19,13 +18,10 @@
         <div>
         </div>
       </main>
-    <!-- </layout> -->
   </div>
 </template>
 
 <script>
-// import { loadStripe } from '@stripe/stripe-js';
-// import { POST } from 'axios'
 
 export default {
   data() {
@@ -53,23 +49,12 @@ export default {
   },
   methods: {
     async getSetLink() {
-      // const response = await this.$axios.$post('/api/onboard-user', {
-      // // headers: {
-      //     // 'Content-Type': 'application/json'
-      //   name: 'test',
-      //   email: 'test@mail.com'
-      //   // }
-      // });
-      // console.log(response);
-      // await this.$router.push(response.url);
       const result = await this.$axios.$post('/api/create', {
         name: 'test',
         email: 'test@mail.com'
       });
       console.log(result);
       await window.location.replace(result.url);
-      // await this.$router.replace(result.url);
-      // await this.$router.push({path: `${result.url}`});
     },
     onboardToCustomer() {
       this.$router.push('/customer');
