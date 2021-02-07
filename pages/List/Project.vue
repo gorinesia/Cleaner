@@ -241,7 +241,7 @@ export default {
     },
     getPersonalId(id) {
       console.log(id);
-      console.log(this.currentUser[0].email);
+      // console.log(this.currentUser[0].email);
       this.$store.dispatch('project/getPersonalProject', {
         id
       })

@@ -325,19 +325,19 @@ export default {
     },
   },
   mounted() {
-    this.getComment(this.currentUser[0].id);
-    console.log(this.currentUser[0].displayName);
-    console.log(this.currentUser[0].id);
-    console.log(this.personalProject[0].displayName);
-    console.log(this.personalProject[0].id);
+    // this.getComment(this.currentUser[0].id);
+    // console.log(this.currentUser[0].displayName);
+    // console.log(this.currentUser[0].id);
+    // console.log(this.personalProject[0].displayName);
+    // console.log(this.personalProject[0].id);
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.loginUser = user;
       }
     })
-    const db = firebase.firestore();
-    const docRef = db.collection('posts').doc(this.personalProject[0].id);
-    this.getEvent(docRef);
+    // const db = firebase.firestore();
+    // const docRef = db.collection('posts').doc(this.personalProject[0].id);
+    // this.getEvent(docRef);
   },
   methods: {
     btnUploadChange(ev) {
