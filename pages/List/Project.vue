@@ -47,8 +47,6 @@
                   <input type="text" v-model="address" placeholder="例) Enter your address" id="autocomplete"><br>
                   <v-btn @click="locatorButtonPressed">検索</v-btn>
                   <div id="map"></div>
-                <!-- </section> -->
-                <!-- <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn> -->
               </v-container>
             </v-card-text>
             <v-card-actions>
@@ -100,7 +98,6 @@
                         <div v-if="applyFlag">
                           <v-icon  color="orange" @click.stop="cancelEvent(articles[0].id)">mdi-thumb-up</v-icon>
                           <span>{{ post.likeSum }}</span>
-                          <!-- <span>{{ likeSum }}</span> -->
                         </div>
                       </div>
 
@@ -172,35 +169,34 @@ export default {
     }
   },
   mounted() {
-    console.log([...this.articles]);
-    this.$store.dispatch('project/getMessage', {
-      displayName: this.currentUser[0].displayName,
-    });
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.loginUser = user;
-      }
-    })
-    const db = firebase.firestore();
-    const docRef = db.collection('posts').doc(this.articles[0].id);
+    // this.$store.dispatch('project/getMessage', {
+    // //   displayName: this.currentUser[0].displayName,
+    // });
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   if (user) {
+    //     this.loginUser = user;
+    //   }
+    // })
+    // const db = firebase.firestore();
+    // // const docRef = db.collection('posts').doc(this.articles[0].id);
     // this.getEvent()
-    this.getEvent(docRef)
+    // // this.getEvent(docRef)
 
-    let autocomplete = new google.maps.places.Autocomplete(
-      document.getElementById('autocomplete'),
-      {
-        bounds: new google.maps.LatLngBounds(
-          new google.maps.LatLng(45.4215296, -75.6971931)
-        ),
-      }
-    );
-    autocomplete.addListener('place_changed', () => {
-      let place = autocomplete.getPlace();
-      console.log(place);
-      this.showLocationOnTheMap(
-        place.geometry.location.lat(),
-        place.geometry.location.lng())
-    });
+    // let autocomplete = new google.maps.places.Autocomplete(
+    //   document.getElementById('autocomplete'),
+    //   {
+    //     bounds: new google.maps.LatLngBounds(
+    //       new google.maps.LatLng(45.4215296, -75.6971931)
+    //     ),
+    //   }
+    // );
+    // autocomplete.addListener('place_changed', () => {
+    //   let place = autocomplete.getPlace();
+    //   console.log(place);
+    //   this.showLocationOnTheMap(
+    //     place.geometry.location.lat(),
+    //     place.geometry.location.lng())
+    // });
 
     this.$store.dispatch('project/getMessage');
 
@@ -245,7 +241,7 @@ export default {
     },
     getPersonalId(id) {
       console.log(id);
-      console.log(this.currentUser[0].email);
+      // console.log(this.currentUser[0].email);
       this.$store.dispatch('project/getPersonalProject', {
         id
       })
@@ -267,13 +263,10 @@ export default {
           (error) => {
             this.error =
               'Locator is unable to find your address. Please type your address manually.';
-            // this.spinner = false;
-            // console.log(error.message);
           }
         );
       } else {
         this.error = error.message;
-        // this.spinner = false;
         console.log('Your browser does not support geolocation API');
       }
     },
@@ -291,13 +284,10 @@ export default {
           console.log(response.data.error_message);
         } else {
           this.address = response.data.results[0].formatted_address;
-          // console.log(response.data.results[0].formatted_address);
         }
-        // this.spinner = false;
       })
       .catch((error) => {
         this.error = error.message;
-        // this.spinner = false;
         console.log(error.message);
       })
     },
@@ -313,27 +303,12 @@ export default {
       })
     },
     getEvent(docRef) {
-    // getEvent() {
-      // const db = firebase.firestore();
-      // db.collection('projects').get().then(snapShot => {
-      //   snapShot.docs.forEach(doc => {
-      //     console.log(doc.data());
-      //   })
-      // })
-      // docRef.get().then(snapshot => {
-      // db.collection('posts').get().then(snapshot => {
-      //   snapshot.docs.forEach(doc => {
-      //     this.posts = doc.data();
-      //     this.likeSum = this.posts.like_users.length;
-      //     this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
-      //   })
       docRef.get().then(doc => {
         if (doc.exists) {
           console.log(doc.data());
           this.posts = doc.data();
           const posts = this.posts;
           this.likeSum = this.posts.like_users.length;
-          posts.push({likeSum: this.likeSum});
           this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
         } else {
           console.log(doc.data());
@@ -344,11 +319,9 @@ export default {
       const db = firebase.firestore();
       const docRef = db.collection('posts').doc(id);
       docRef.set({
-        // displayImage: this.currentUser[0].image,
         like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
       }, { merge: true })
       this.getEvent(docRef);
-      // this.getEvent(docRef);
     },
     cancelEvent(id) {
       const db = firebase.firestore();
@@ -357,19 +330,7 @@ export default {
         like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
       })
       this.getEvent(docRef);
-      // this.getEvent(docRef);
     }
   }
 }
 </script>
-
-<style scoped>
-/* #map {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: teal;
-} */
-</style>

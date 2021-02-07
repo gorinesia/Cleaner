@@ -17,7 +17,6 @@ app.get('/hello', (req, res) => {
   res.send('world');
 });
 
-// export default async (req, res) => {
 app.post('/create', async (req, res) => {
   try {
     const account = await stripe.accounts.create({
