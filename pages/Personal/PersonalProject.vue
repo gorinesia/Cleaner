@@ -20,13 +20,18 @@
               </v-list-item-content>
             </v-list-item>
             <div>
-              <div v-if="!applyFlag">
-                <v-icon class="mb-1 white--text" rounded color="orange" medium @click="applyEvent()">mdi-thumb-up-outline</v-icon>
-                <span>{{ likeSum }}</span>
+              <div v-if="loggedIn">
+                <div v-if="!applyFlag">
+                  <v-icon class="mb-1 white--text" rounded color="orange" medium @click="applyEvent()">mdi-thumb-up-outline</v-icon>
+                  <span>{{ likeSum }}</span>
+                </div>
+                <div v-if="applyFlag">
+                  <v-icon class="mb-1 white--text" rounded color="orange" medium @click="cancelEvent()">mdi-thumb-up</v-icon>
+                  <span>{{ likeSum }}</span>
+                </div>
               </div>
-              <div v-if="applyFlag">
-                <v-icon class="mb-1 white--text" rounded color="orange" medium @click="cancelEvent()">mdi-thumb-up</v-icon>
-                <span>{{ likeSum }}</span>
+              <div v-else>
+                <v-alert>ユーザー登録をして、Cleanerをもっと便利に使ってみませんか。</v-alert>
               </div>
             </div>
           </v-col>

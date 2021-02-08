@@ -1,18 +1,18 @@
 <template>
   <v-app class="mx-10" style="color: navy">
     <v-container v-for="personalEvent in personalEvent" :key="personalEvent.id">
-      <v-card align="center" class="mb-10">
+      <v-card align="center" class="mb-5 pa-5">
         <v-row>
-          <v-col cols="2">
+          <v-col cols="12" md="2" class="mb-n5">
             <p>{{ personalEvent.date}}</p>
           </v-col>
-          <v-col class="font-weight-bold text-h5" cols="6">
+          <v-col class="font-weight-bold text-h5 my-n4" cols="12" md="6">
             <p>{{ personalEvent.name }}</p>
           </v-col>
-          <v-col cols="2">
+          <v-col cols="12" md="2" class="my-n4">
             <p>日時：{{ personalEvent.date }}</p>
           </v-col>
-          <v-col cols="2">
+          <v-col cols="12" md="2" class="my-n4">
             <p>場所：{{ personalEvent.place }}</p>
           </v-col>
         </v-row>
@@ -20,12 +20,12 @@
           height="200"
           :src="personalEvent.image"
         ></v-img>
-        <div class="grey--text text--darken-1 font-weight-bold">イベント概要</div>
-        <p class="ma-2">{{ personalEvent.comment }}</p>
+        <div class="grey--text text--darken-1 font-weight-bold mt-5">イベント概要</div>
+        <p class="ma-5">{{ personalEvent.comment }}</p>
       </v-card>
-      <v-card outlined class="mb-10">
-        <v-row  class="fill-height">
-          <v-col align-self="start"  cols="2">
+      <!-- <v-card outlined class="mb-10">
+        <v-row  class="fill-height ml-2">
+          <v-col align-self="start"  cols="12" md="2">
             <v-avatar class="profile" color="grey" size="100">
               <v-img :src="personalEvent.image"></v-img>
             </v-avatar>
@@ -40,8 +40,8 @@
             </v-list-item>
           </v-col>
         </v-row>
-      </v-card>
-      <h2 class="mb-5">{{ personalEvent.displayName }}さんの発案中のイベント</h2>
+      </v-card> -->
+      <h2 class="mb-5"><span class="cyan--text text--darken-1">{{ personalEvent.displayName }}</span>さんの発案中のイベント</h2>
 
       <div>
         <div>
@@ -88,11 +88,11 @@
       <v-card color="#E0F7FA" class="rounded-xl mt-5 pa-5" rounded>
         <h2 class="mx-10">クリーナーを応援しよう</h2>
         <v-row>
-          <v-col cols="9">
-            <span>{{ personalEvent.displayName }}さんの行動に対してお金を送ってサポートすることができます。</span>
+          <v-col cols="12" md="9">
+            <span class="mb-3">{{ personalEvent.displayName }}さんの行動に対してお金を送ってサポートすることができます。</span>
             <v-btn color="#0D47A1" rounded x-large dark @click="sendMoneyToSomeone">サポートする</v-btn>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="12" md="3">
             <v-avatar tile size="100" color="cyan" class="mx-5">
               <img :src="personalEvent.image">
             </v-avatar>
@@ -189,12 +189,7 @@ export default {
       console.log(id);
     },
     async sendMoneyToSomeone() {
-      const Stripe = require('stripe');
-      const stripe = Stripe('pk_test_51Hp8W6GM8QHm52Sew543CT6L0qkt1A4K6eKS89CRiVKKrLCHdzSaAEsmseYVrYJdDx3x0MWjt3kIiShsjOlo73w800iAHOtu3v');
-
-      const account = await stripe.accounts.create({
-        type: 'express'
-      })
+      
     }
   }
 }
