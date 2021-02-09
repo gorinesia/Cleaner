@@ -19,21 +19,6 @@
                 <p class="mt-3">{{ personalProject.comment }}</p>
               </v-list-item-content>
             </v-list-item>
-            <div>
-              <div v-if="loggedIn">
-                <div v-if="!applyFlag">
-                  <v-icon class="mb-1 white--text" rounded color="orange" medium @click="applyEvent()">mdi-thumb-up-outline</v-icon>
-                  <span>{{ likeSum }}</span>
-                </div>
-                <div v-if="applyFlag">
-                  <v-icon class="mb-1 white--text" rounded color="orange" medium @click="cancelEvent()">mdi-thumb-up</v-icon>
-                  <span>{{ likeSum }}</span>
-                </div>
-              </div>
-              <div v-else>
-                <v-alert>ユーザー登録をして、Cleanerをもっと便利に使ってみませんか。</v-alert>
-              </div>
-            </div>
           </v-col>
           <v-col cols="4">
             <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ personalProject.name }}・{{ personalProject.date}}</span>
@@ -57,7 +42,6 @@
 
               <v-list>
                 <v-list-item>
-                  <!-- <v-list-item-title style="cursor: pointer" @click="openModalForEdit(personalProject.id)">投稿を編集</v-list-item-title> -->
                   <v-row justify="center">
                     <v-dialog
                       v-model="dialog"
@@ -115,60 +99,6 @@
               </v-list>
             </v-menu>
 
-            <!-- <v-overlay :value="editOverlay"> -->
-              <!-- <v-row justify="center">
-                <v-dialog
-                  v-model="dialog"
-                  persistent
-                  max-width="600px"
-                >
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      style="position: fixed; z-index: 1; right: 250px; bottom: 100px"
-                      fab
-                      large
-                      color="cyan darken-1"
-                      dark
-                      v-bind="attrs"
-                      v-on="on"
-                    >
-                      <v-icon dark>mdi-pencil</v-icon>
-                    </v-btn> -->
-                  <!-- </template>
-                  <v-card>
-                    <v-card-title>
-                      <span class="headline">プロジェクトの内容を編集する</span>
-                    </v-card-title>
-                    <v-card-text>
-                      <v-container> -->
-                        <!-- <label class="postImage-appendBtn"></label>
-                        <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
-                        <v-img :src="image" width="100" height="100"></v-img>
-                        <label>ゴミの量</label>
-                        <v-text-field v-model="name" class="white" placeholder="例) 5kg"></v-text-field>
-                        <label>日時</label>
-                        <v-text-field v-model="time" type="date" class="white" placeholder="例）11月7日 9:00"></v-text-field>
-                        <label>場所</label>
-                        <v-text-field v-model="place" class="white" placeholder="例) 東京"></v-text-field>
-                        <label>コメント</label> -->
-                        <!-- <v-textarea v-model="comment" class="white" placeholder="例) 今日もたくさん拾いました。"></v-textarea>
-                        <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
-                      </v-container>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn
-                        color="blue darken-1"
-                        text
-                        @click="dialog = false"
-                      >
-                        Close
-                      </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </v-row> -->
-            <!-- </v-overlay> -->
 
             <v-overlay :value="deleteOverlay">
               <v-card class="pa-5">
@@ -199,15 +129,25 @@
       <v-container>
         <div>
           <span>{{ nameUser }}</span>
-          <!-- <img :src="images" width="50px" height="50px"> -->
         </div>
         <div>いいね</div>
+        <div>
+          <div v-if="loggedIn">
+            <div v-if="!applyFlag">
+              <v-icon class="mb-1 white--text" rounded color="orange" large @click="applyEvent()">mdi-thumb-up-outline</v-icon>
+              <span>{{ likeSum }}</span>
+            </div>
+            <div v-if="applyFlag">
+              <v-icon class="mb-1 white--text" rounded color="orange" large @click="cancelEvent()">mdi-thumb-up</v-icon>
+              <span>{{ likeSum }}</span>
+            </div>
+          </div>
+        </div>
         <v-card>
           <v-row>
             <v-col>
               <v-avatar v-for="image in images" :key="image.id">
                 <img :src="image" :key="image" width="50px" height="50px" @click="getProfile(personalProject.id)">
-                <!-- <v-img :src="image.displayImage" width="50px" height="50px" @click="getProfile(personalProject.id)"></v-img> -->
               </v-avatar>
             </v-col>
           </v-row>
@@ -242,14 +182,14 @@
       <v-card color="#E0F7FA" class="rounded-xl pa-5 mb-10" rounded>
         <h2 class="mx-10">クリーナーを応援しよう</h2>
         <v-row>
-          <v-col cols="9">
+          <v-col cols="12" md="9">
             <v-avatar class="profile mx-10" color="grey" size="50">
               <v-img :src="personalProject.displayImage"></v-img>
             </v-avatar>
             <p class="mb-3 mx-10">{{ personalProject.displayName }}さんの行動に対してお金を送ってサポートすることが出来ます。</p>
             <v-btn color="#0D47A1" class="mx-10" rounded x-large dark>サポートする</v-btn>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="12" md="3">
             <v-avatar tile size="150" color="cyan" class="mr-5">
               <v-img :src="personalProject.image"></v-img>
             </v-avatar>
@@ -478,7 +418,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
