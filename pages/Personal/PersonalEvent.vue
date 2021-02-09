@@ -1,18 +1,18 @@
 <template>
   <v-app class="mx-10" style="color: navy">
     <v-container v-for="personalEvent in personalEvent" :key="personalEvent.id">
-      <v-card align="center" class="mb-10">
+      <v-card align="center" class="mb-5 pa-5">
         <v-row>
-          <v-col cols="2">
+          <v-col cols="12" md="2" class="mb-n5">
             <p>{{ personalEvent.date}}</p>
           </v-col>
-          <v-col class="font-weight-bold text-h5" cols="6">
+          <v-col class="font-weight-bold text-h5 my-n4" cols="12" md="6">
             <p>{{ personalEvent.name }}</p>
           </v-col>
-          <v-col cols="2">
+          <v-col cols="12" md="2" class="my-n4">
             <p>日時：{{ personalEvent.date }}</p>
           </v-col>
-          <v-col cols="2">
+          <v-col cols="12" md="2" class="my-n4">
             <p>場所：{{ personalEvent.place }}</p>
           </v-col>
         </v-row>
@@ -20,30 +20,12 @@
           height="200"
           :src="personalEvent.image"
         ></v-img>
-        <div class="grey--text text--darken-1 font-weight-bold">イベント概要</div>
-        <p class="ma-2">{{ personalEvent.comment }}</p>
+        <div class="grey--text text--darken-1 font-weight-bold mt-5">イベント概要</div>
+        <p class="ma-5">{{ personalEvent.comment }}</p>
       </v-card>
-      <v-card outlined class="mb-10">
-        <v-row  class="fill-height">
-          <v-col align-self="start"  cols="2">
-            <v-avatar class="profile" color="grey" size="100">
-              <v-img :src="personalEvent.image"></v-img>
-            </v-avatar>
-          </v-col>
-          <v-col>
-            <v-list-item color="rgba(0, 0, 0, .4)">
-              <v-list-item-content>
-                <v-list-item-title class="cyan--text text--darken-1 font-weight-bold title text-h4" dark>
-                  {{ personalEvent.name }}
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-col>
-        </v-row>
-      </v-card>
-      <h2 class="mb-5">{{ personalEvent.displayName }}さんの発案中のイベント</h2>
+      <h2 class="mb-5"><span class="cyan--text text--darken-1">{{ personalEvent.displayName }}</span>さんの発案中のイベント</h2>
 
-      <div>
+      <div v-if="loggedIn">
         <div>
           <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent()">参加</v-btn>
         </div>
@@ -52,19 +34,31 @@
         </div>
         <span>{{ likeSum }}</span>
         <span>{{ nameUser }}</span>
-        <!-- <img :src="images" width="50px" height="50px"> -->
       </div>
-      <!-- <div>
+      <div v-else>
         <div>
-          <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent()"><v-icon color="cyan darken-1">mdi-thumb-up</v-icon></v-btn>
+          <v-dialog v-model="dialog" width="500">
+            <template v-slot:activator="{ on, attrs}">
+              <v-btn v-if="!applyFlag" class="mb-10 white--text" v-bind="attrs " v-on="on" rounded color="orange" x-large>参加</v-btn>
+            </template>
+            <v-card>
+              <v-card-title>Need to Login</v-card-title>
+              <v-card-text>ログインしてCleanerを楽しみませんか？</v-card-text>
+              <v-divider></v-divider>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="cyan" outlined rounded to="/auth/login">ログイン</v-btn>
+                <v-btn color="orange" outlined rounded @click="dialog = false">閉じる</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </div>
         <div>
-          <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent()"><v-icon color="cyan darken-1">mdi-thumb-up</v-icon></v-btn>
+          <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="pushEvent">キャンセル</v-btn>
         </div>
         <span>{{ likeSum }}</span>
         <span>{{ nameUser }}</span>
-        <img :src="images" width="50px" height="50px">
-      </div> -->
+      </div>
 
       <div>メンバー</div>
       <v-card>
@@ -72,7 +66,6 @@
           <v-col>
             <v-avatar v-for="image in images" :key="image.id">
               <img :src="image" :key="image" width="50px" height="50px" @click="getProfile(personalEvent.id)">
-              <!-- <v-img :src="image.displayImage" width="50px" height="50px" @click="getProfile(personalEvent.id)"></v-img> -->
             </v-avatar>
           </v-col>
         </v-row>
@@ -88,11 +81,26 @@
       <v-card color="#E0F7FA" class="rounded-xl mt-5 pa-5" rounded>
         <h2 class="mx-10">クリーナーを応援しよう</h2>
         <v-row>
-          <v-col cols="9">
-            <span>{{ personalEvent.displayName }}さんの行動に対してお金を送ってサポートすることができます。</span>
-            <v-btn color="#0D47A1" rounded x-large dark @click="sendMoneyToSomeone">サポートする</v-btn>
+          <v-col cols="12" md="9">
+            <span class="mb-3"><span class="cyan--text text--darken-1">{{ personalEvent.displayName }}</span>さんの行動に対してジュースを渡す(100円)感覚でサポートすることができます。</span>
+            <v-dialog v-model="payDialog" persistent max-width="290">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn color="#0D47A1" rounded x-large dark v-bind="attrs" v-on="on">ジュースをプレゼントする</v-btn>
+              </template>
+              <v-card>
+                <v-card-title class="headline">
+                  ジュース代(100円)をプレゼントする
+                </v-card-title>
+                <v-card-text><span class="cyan--text text--darken-1">{{ personalEvent.displayName }}</span>さんへ<br>「お疲れさま」の気持ちを込めて、ジュース代をプレゼントします。</v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn class="ma-3" color="cyan" dark @click="openStripeCardform">支払う</v-btn>
+                  <v-btn class="ma-3" @click="payDialog = false">閉じる</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="12" md="3">
             <v-avatar tile size="100" color="cyan" class="mx-5">
               <img :src="personalEvent.image">
             </v-avatar>
@@ -118,10 +126,15 @@ export default {
       images: [],
       image_users: [],
       nameUser: [],
-      name_users: []
+      name_users: [],
+      dialog: false,
+      payDialog: false,
     }
   },
   computed: {
+    loggedIn() {
+      return this.$store.getters['user/loggedIn']
+    },
     currentUser() {
       return this.$store.getters['user/currentUser']
     },
@@ -138,7 +151,6 @@ export default {
     const db = firebase.firestore();
     const docRef = db.collection('posts').doc(this.personalEvent[0].id);
     this.getEvent(docRef)
-
   },
   methods: {
     getEvent(docRef) {
@@ -147,11 +159,6 @@ export default {
           console.log(doc.data());
           this.posts = doc.data();
           this.likeSum = this.posts.like_users.length;
-          // this.images = this.posts.displayImage;
-          // this.images.push({
-          //   displayImage: this.posts.displayImage
-          // })
-
           this.images = [...this.posts.image_users];
           this.nameUser = [...this.posts.name_users];
           this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
@@ -175,9 +182,7 @@ export default {
     cancelEvent() {
         const db = firebase.firestore();
         const docRef = db.collection('posts').doc(this.personalEvent[0].id)
-        // docRef.delete(
         docRef.update({
-          // displayImage: null,
           like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
           image_users: firebase.firestore.FieldValue.arrayRemove(this.currentUser[0].image),
           name_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.displayName),
@@ -188,13 +193,8 @@ export default {
     getProfile(id) {
       console.log(id);
     },
-    async sendMoneyToSomeone() {
-      const Stripe = require('stripe');
-      const stripe = Stripe('pk_test_51Hp8W6GM8QHm52Sew543CT6L0qkt1A4K6eKS89CRiVKKrLCHdzSaAEsmseYVrYJdDx3x0MWjt3kIiShsjOlo73w800iAHOtu3v');
+    openStripeCardform() {
 
-      const account = await stripe.accounts.create({
-        type: 'express'
-      })
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <v-card height="200px" v-for="currentUser in currentUser" :key="currentUser.id">
-      <v-navigation-drawer absolute permanent>
+    <v-card height="200px" width="256" v-for="currentUser in currentUser" :key="currentUser.id">
+      <v-navigation-drawer permanent>
         <template v-slot:prepend>
           <v-list-item two-line>
             <v-list-item-avatar>
@@ -47,18 +47,6 @@ export default {
           icon: 'mdi-account-multiple',
           link: '/edit/message'
         },
-        // {
-        //   title: 'プロジェクト管理',
-        //   icon: 'mdi-star',
-        //   lists: ['Colors', 'Content', 'Display'],
-        //   link: '/edit/project'
-        // },
-        // {
-        //   title: 'イベント管理',
-        //   icon: 'mdi-history',
-        //   lists: ['API explorer', 'Alerts'],
-        //   link: '/edit/event'
-        // },
         {
           title: 'サポート管理',
           icon: 'mdi-upload',
@@ -89,7 +77,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

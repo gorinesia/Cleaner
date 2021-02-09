@@ -1,11 +1,13 @@
 <template>
-  <v-app>
-    <AppHeader />
-    <v-main>
-      <Toolbar v-if="loggedIn" />
-      <Nuxt class="blue-grey lighten-5" />
-    </v-main>
-  </v-app>
+  <div>
+    <v-app>
+      <AppHeader app />
+      <v-main>
+        <Toolbar v-if="loggedIn" />
+        <Nuxt class="blue-grey lighten-5" />
+      </v-main>
+    </v-app>
+  </div>
 </template>
 
 <script>

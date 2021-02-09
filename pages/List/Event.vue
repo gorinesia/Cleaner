@@ -11,9 +11,9 @@
           persistent
           max-width="600px"
         >
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ on, attrs }" style="position: relative">
             <v-btn
-              style="position: fixed; z-index: 1; right: 200px; bottom: 100px"
+              style="position: fixed; z-index: 1; right: 20%; bottom: 5%"
               fab
               large
               color="cyan darken-1"
@@ -66,7 +66,7 @@
                 <v-hover v-slot="{ hover }">
                   <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(event.id)">
                       <v-row :key="event.id" >
-                        <v-col cols="9">
+                        <v-col cols="12" md="9">
                           <v-col>
                             <v-avatar class="profile" color="grey" size="60">
                               <v-img :src="event.displayImage"></v-img>
@@ -77,7 +77,7 @@
                             <span class="grey--text float-right">場所： {{ event.place}}</span>
                           </v-col>
                         </v-col>
-                        <v-col cols="3">
+                        <v-col cols="12" md="3">
                           <v-avatar tile size="130">
                             <v-img :src="event.image"></v-img>
                           </v-avatar>
@@ -107,7 +107,6 @@ export default {
       image_src: require('@/assets/img/top-page.jpg'),
       imageOverlay: false,
       dialog: false,
-      // loggedIn: this.$store.state.user.loggedIn,
     }
   },
   computed: {

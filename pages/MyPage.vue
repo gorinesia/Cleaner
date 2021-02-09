@@ -3,12 +3,12 @@
     <v-container v-for="currentUser in currentUser" :key="currentUser.id">
       <v-card outlined class="mb-10">
         <v-row  class="fill-height">
-          <v-col align-self="start"  cols="2">
+          <v-col align-self="start"  cols="12" md="2">
             <v-avatar class="profile ml-3 mt-3" color="grey" size="80">
               <v-img :src="currentUser.image"></v-img>
             </v-avatar>
           </v-col>
-          <v-col>
+          <v-col cols="12" md="10">
             <v-list-item color="rgba(0, 0, 0, .4)">
               <v-list-item-content>
                 <v-list-item-title class="cyan--text text--darken-1 font-weight-bold title mb-2" dark>
@@ -51,14 +51,14 @@
                           <v-img :src="currentUser.image"></v-img>
                         </v-avatar>
                       </v-col>
-                      <v-col cols="4">
+                      <v-col cols="12" md="4">
                         <v-avatar class="profile" color="grey" size="60">
                           <v-img :src="currentUser.displayImage"></v-img>
                         </v-avatar>
                         <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ currentUser.displayName }}</span>
                         <p class="my-5 font-weight-bold">{{ currentUser.comment }}</p>
                       </v-col>
-                      <v-col cols="5">
+                      <v-col cols="12" md="5">
                         <span class="grey--text float-right">{{ currentUser.date }}</span>
                       </v-col>
                     </v-row>

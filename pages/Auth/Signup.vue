@@ -8,10 +8,10 @@
           <v-text-field prepend-icon="mdi-account-circle" label="ユーザー名" outlined filled v-model="displayName"></v-text-field>
           <v-text-field prepend-icon="mdi-account-circle" label="email" outlined filled v-model="email"></v-text-field>
           <v-text-field :type="showPassword ? 'text' : 'password'" prepend-icon="mdi-lock" append-icon="mdi-eye-off" label="パスワード" @click:append="showPassword = !showPassword" outlined filled v-model="password"></v-text-field>
-            <v-btn class="pa-2 font-weight-bold" color="#00ACC1" rounded block large dark @click="signUp">登録する</v-btn>
+            <v-btn class="pa-2 font-weight-bold text-h6" color="#00ACC1" rounded block large dark @click="signUp">登録する</v-btn>
         </v-form>
       </v-card-text>
-      <nuxt-link class="mb-5 grey--text text--darken-1 text-decoration-none" outlined rounded color="#00ACC1" to="/auth/login">アカウントをお持ちの方はこちら</nuxt-link>
+      <nuxt-link class="mb-5 cyan--text text-decoration-none text-body-2"  to="/auth/login">アカウントをお持ちの方はこちら</nuxt-link>
     </v-card>
   </v-app>
 </template>

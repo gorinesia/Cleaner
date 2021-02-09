@@ -14,7 +14,7 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              style="position: fixed; z-index: 1; right: 250px; bottom: 100px"
+              style="position: fixed; z-index: 1; right: 20%; bottom: 5%"
               fab
               large
               color="cyan darken-1"
@@ -43,27 +43,21 @@
                 <label>コメント</label>
                 <v-textarea v-model="comment" class="white" placeholder="例) 今日もたくさん拾いました。"></v-textarea>
                 <!-- <section style="position:relative; z-index:1;"> -->
-                  <label>google maps</label>
-                  <input type="text" v-model="address" placeholder="例) Enter your address" id="autocomplete"><br>
+                  <!-- <label>google maps</label> -->
+                  <!-- <input type="text" v-model="address" placeholder="例) Enter your address" id="autocomplete"><br>
                   <v-btn @click="locatorButtonPressed">検索</v-btn>
-                  <div id="map"></div>
+                  <div id="map"></div> -->
               </v-container>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
+              <v-btn @click="editArticles(articleId)" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
               <v-btn
                 color="blue darken-1"
                 text
                 @click="dialog = false"
               >
                 Close
-              </v-btn>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="addMessage"
-              >
-                Save
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -78,12 +72,12 @@
               <v-hover v-slot ="{ hover }">
                 <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(article.id)">
                   <v-row>
-                    <v-col cols="3">
+                    <v-col cols="12" md="3">
                       <v-avatar tile size="100" class="ml-5">
                         <v-img :src="article.image"></v-img>
                       </v-avatar>
                     </v-col>
-                    <v-col cols="4">
+                    <v-col cols="12" md="4">
                       <v-avatar class="profile" color="grey" size="60">
                         <v-img :src="article.displayImage"></v-img>
                       </v-avatar>
@@ -102,7 +96,7 @@
                       </div>
 
                     </v-col>
-                    <v-col cols="5">
+                    <v-col cols="12" md="5">
                       <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ article.name }}・{{ article.date}}</span>
                     </v-col>
                   </v-row>
@@ -241,7 +235,7 @@ export default {
     },
     getPersonalId(id) {
       console.log(id);
-      console.log(this.currentUser[0].email);
+      // console.log(this.currentUser[0].email);
       this.$store.dispatch('project/getPersonalProject', {
         id
       })

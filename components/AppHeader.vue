@@ -1,11 +1,10 @@
 <template>
   <header>
-    <v-container>
+    <v-container my-n3>
       <v-row>
-        <v-app-bar app color="white" style="color: #00ACC1" class="font-weight-bold">
-          <v-app-bar-nav-icon color="#00ACC1" @click="drawer = true"></v-app-bar-nav-icon>
-          <v-toolbar-title>
-            <span><v-icon>fas fa-lock</v-icon></span>
+        <v-app-bar color="white" style="color: #00ACC1" class="font-weight-bold">
+            <v-toolbar-title>
+              <span><v-icon>fas fa-lock</v-icon></span>
               <nuxt-link v-if="!loggedIn" class="font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/">
                 <v-icon large color="cyan darken-1">mdi-earth</v-icon>
                 Cleaner
@@ -14,8 +13,8 @@
                 <v-icon large color="cyan darken-1">mdi-earth</v-icon>
                 Cleaner
               </nuxt-link>
-          </v-toolbar-title>
-          <v-spacer></v-spacer>
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
             <nav class="mt-2">
               <v-tabs>
                 <nav v-if="!loggedIn">
@@ -28,6 +27,7 @@
                 </nav>
               </v-tabs>
             </nav>
+          <v-app-bar-nav-icon color="#00ACC1" @click="drawer = true"></v-app-bar-nav-icon>
         </v-app-bar>
       </v-row>
     </v-container>
@@ -42,22 +42,51 @@
       >
         <v-list-item-group>
           <v-list-item>
-                <nav v-if="!loggedIn">
-                  <ul style="list-style: none">
-                    <li class="ma-2">
-                      <v-btn rounded color="#1A237E" dark class="font-weight-bold orange--text text--darken-1" @click="guestLogin">ゲストログイン</v-btn>
-                    </li>
-                    <li class="ma-2">
-                      <v-btn rounded outlined color="#00ACC1" class="font-weight-bold" dark to="/auth/login">ログイン</v-btn>
-                    </li>
-                    <li class="ma-2">
-                      <v-btn rounded color="#00ACC1" class="font-weight-bold" dark to="/auth/signup">新規登録</v-btn>
-                    </li>
-                  </ul>
-                </nav>
-                <nav v-else>
-                  <v-btn rounded color="#00ACC1" class="font-weight-bold " dark @click="logOut">ログアウト</v-btn>
-                </nav>
+            <nav v-if="!loggedIn">
+              <ul style="list-style: none">
+                <li class="ma-2">
+                  <v-btn rounded color="#1A237E" dark class="font-weight-bold orange--text text--darken-1" @click="guestLogin">ゲストログイン</v-btn>
+                </li>
+                <li class="ma-2">
+                  <v-btn rounded outlined color="#00ACC1" class="font-weight-bold" dark to="/auth/login">ログイン</v-btn>
+                </li>
+                <li class="ma-2">
+                  <v-btn rounded color="#00ACC1" class="font-weight-bold" dark to="/auth/signup">新規登録</v-btn>
+                </li>
+              </ul>
+            </nav>
+            <nav v-else>
+              <v-card class="pa-2" height="200px" width="256" v-for="currentUser in currentUser" :key="currentUser.id">
+                <v-navigation-drawer permanent>
+                  <template v-slot:prepend>
+                    <v-list-item two-line>
+                      <v-list-item-avatar>
+                        <v-img :src="currentUser.image" width="30px" height="30px"></v-img>
+                      </v-list-item-avatar>
+
+                      <v-list-item-content>
+                        <nuxt-link class="cyan--text text--darken-1 font-weight-bold text-h5 text-decoration-none" to="/personal/profile" @click.native="getProfile(currentUser.id)">{{ currentUser.displayName }}</nuxt-link>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </template>
+
+                  <v-divider></v-divider>
+
+                  <v-list dense>
+                    <v-list-item v-for="item  in items" :key="item.title" :to="item.link">
+                      <v-list-item-icon>
+                        <v-icon>{{ item.icon }}</v-icon>
+                      </v-list-item-icon>
+
+                      <v-list-item-content>
+                        <v-list-item-title>{{ item.title }}</v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
+                </v-navigation-drawer>
+              </v-card>
+              <v-btn rounded color="#00ACC1" class="font-weight-bold " dark @click="logOut">ログアウト</v-btn>
+            </nav>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -71,9 +100,25 @@ export default {
   data() {
     return {
       drawer: false,
-      // loggedIn: this.$store.state.user.loggedIn,
       email: 'test@test.com',
       password: '123456',
+      items: [
+        {
+          title: 'ユーザー情報設定',
+          icon: 'mdi-folder',
+          link: '/edit/profile'
+        },
+        {
+          title: 'メッセージ管理',
+          icon: 'mdi-account-multiple',
+          link: '/edit/message'
+        },
+        {
+          title: 'サポート管理',
+          icon: 'mdi-upload',
+          link: '/edit/support'
+        },
+      ],
     }
   },
   computed : {
