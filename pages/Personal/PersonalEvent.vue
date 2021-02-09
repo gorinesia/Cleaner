@@ -89,7 +89,7 @@
         <h2 class="mx-10">クリーナーを応援しよう</h2>
         <v-row>
           <v-col cols="12" md="9">
-            <span class="mb-3">{{ personalEvent.displayName }}さんの行動に対してお金を送ってサポートすることができます。</span>
+            <span class="mb-3">{{ personalEvent.displayName }}さんの行動に対してジュースを渡す感覚でサポートすることができます。</span>
             <v-btn color="#0D47A1" rounded x-large dark @click="sendMoneyToSomeone">ジュースをプレゼントすする</v-btn>
           </v-col>
           <v-col cols="12" md="3">

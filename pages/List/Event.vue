@@ -11,9 +11,9 @@
           persistent
           max-width="600px"
         >
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ on, attrs }" style="position: relative">
             <v-btn
-              style="position: fixed; z-index: 1; right: 200px; bottom: 100px"
+              style="position: fixed; z-index: 1; right: 20%; bottom: 5%"
               fab
               large
               color="cyan darken-1"

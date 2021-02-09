@@ -14,7 +14,7 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              style="position: fixed; z-index: 1; right: 250px; bottom: 100px"
+              style="position: fixed; z-index: 1; right: 20%; bottom: 5%"
               fab
               large
               color="cyan darken-1"
@@ -78,12 +78,12 @@
               <v-hover v-slot ="{ hover }">
                 <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(article.id)">
                   <v-row>
-                    <v-col cols="3">
+                    <v-col cols="12" md="3">
                       <v-avatar tile size="100" class="ml-5">
                         <v-img :src="article.image"></v-img>
                       </v-avatar>
                     </v-col>
-                    <v-col cols="4">
+                    <v-col cols="12" md="4">
                       <v-avatar class="profile" color="grey" size="60">
                         <v-img :src="article.displayImage"></v-img>
                       </v-avatar>
@@ -102,7 +102,7 @@
                       </div>
 
                     </v-col>
-                    <v-col cols="5">
+                    <v-col cols="12" md="5">
                       <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ article.name }}・{{ article.date}}</span>
                     </v-col>
                   </v-row>
