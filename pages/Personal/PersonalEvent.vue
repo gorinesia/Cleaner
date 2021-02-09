@@ -1,70 +1,82 @@
 <template>
   <v-app class="mx-10" style="color: navy">
-    <v-container v-for="personalData in personalDatas" :key="personalData.id">
-      <v-card align="center" class="mb-10">
+    <v-container v-for="personalEvent in personalEvent" :key="personalEvent.id">
+      <v-card align="center" class="mb-5 pa-5">
         <v-row>
-          <v-col cols="2">
-            <p>10月30日</p>
+          <v-col cols="12" md="2" class="mb-n5">
+            <p>{{ personalEvent.date}}</p>
           </v-col>
-          <v-col class="font-weight-bold text-h5" cols="6">
-            <p>渋谷の路上でゴミを拾います。</p>
+          <v-col class="font-weight-bold text-h5 my-n4" cols="12" md="6">
+            <p>{{ personalEvent.name }}</p>
           </v-col>
-          <v-col cols="2">
-            <p>日時：{{ personalData.date }}</p>
+          <v-col cols="12" md="2" class="my-n4">
+            <p>日時：{{ personalEvent.date }}</p>
           </v-col>
-          <v-col cols="2">
-            <p>場所：東京都渋谷区</p>
+          <v-col cols="12" md="2" class="my-n4">
+            <p>場所：{{ personalEvent.place }}</p>
           </v-col>
         </v-row>
         <v-img
           height="200"
-          :src="image_src"
+          :src="personalEvent.image"
         ></v-img>
-        <div class="grey--text text--darken-1 font-weight-bold">イベント概要</div>
-        <p class="ma-2">僕たちにできることを。人もゴミを多く、やりがいのある場所をみんなで綺麗にしませんか？</p>
+        <div class="grey--text text--darken-1 font-weight-bold mt-5">イベント概要</div>
+        <p class="ma-5">{{ personalEvent.comment }}</p>
       </v-card>
-      <v-card outlined class="mb-10">
-        <v-row  class="fill-height">
-          <v-col align-self="start"  cols="2">
+      <!-- <v-card outlined class="mb-10">
+        <v-row  class="fill-height ml-2">
+          <v-col align-self="start"  cols="12" md="2">
             <v-avatar class="profile" color="grey" size="100">
-              <v-img :src="image_src"></v-img>
+              <v-img :src="personalEvent.image"></v-img>
             </v-avatar>
           </v-col>
           <v-col>
             <v-list-item color="rgba(0, 0, 0, .4)">
               <v-list-item-content>
                 <v-list-item-title class="cyan--text text--darken-1 font-weight-bold title text-h4" dark>
-                  {{ personalData.name }}
+                  {{ personalEvent.name }}
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-col>
         </v-row>
-      </v-card>
-      <h2 class="mb-5">Johnさんの発案中のイベント</h2>
+      </v-card> -->
+      <h2 class="mb-5"><span class="cyan--text text--darken-1">{{ personalEvent.displayName }}</span>さんの発案中のイベント</h2>
 
-
-    <!-- </v-container> -->
-    <!-- <v-container> -->
-      <div :id="currentUser[0].id">
-        <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent(currentUser[0].id)">{{ applyButton }}</v-btn>
+      <div>
+        <div>
+          <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent()">参加</v-btn>
+        </div>
+        <div>
+          <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent()">キャンセル</v-btn>
+        </div>
+        <span>{{ likeSum }}</span>
+        <span>{{ nameUser }}</span>
+        <!-- <img :src="images" width="50px" height="50px"> -->
       </div>
-      <div :id="currentUser[0].id">
-        <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent(currentUser[0].id)">{{ applyButton }}</v-btn>
-      </div>
+      <!-- <div>
+        <div>
+          <v-btn v-if="!applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="applyEvent()"><v-icon color="cyan darken-1">mdi-thumb-up</v-icon></v-btn>
+        </div>
+        <div>
+          <v-btn v-if="applyFlag" class="mb-10 white--text" rounded color="orange" x-large @click="cancelEvent()"><v-icon color="cyan darken-1">mdi-thumb-up</v-icon></v-btn>
+        </div>
+        <span>{{ likeSum }}</span>
+        <span>{{ nameUser }}</span>
+        <img :src="images" width="50px" height="50px">
+      </div> -->
 
       <div>メンバー</div>
       <v-card>
         <v-row>
-          <v-col cols="1" v-for="(applyUser, index) in applyUsers" :key="index">
-            <!-- <span>{{ applyUser.displayName }}</span> -->
-            <v-avatar>
-              <v-img :src="applyUser.image" width="50px" height="50px" @click="getProfile(applyUser.id)"></v-img>
+          <v-col>
+            <v-avatar v-for="image in images" :key="image.id">
+              <img :src="image" :key="image" width="50px" height="50px" @click="getProfile(personalEvent.id)">
+              <!-- <v-img :src="image.displayImage" width="50px" height="50px" @click="getProfile(personalEvent.id)"></v-img> -->
             </v-avatar>
           </v-col>
         </v-row>
       </v-card>
-    <!-- </v-container> -->
       <v-container clss="h-full flex flex-col ml-6">
         <div>コメント</div>
         <v-card class="border border-gray-900 rounded mb-4">
@@ -72,17 +84,17 @@
           <v-btn class="cyan text-sm white--text font-bold py-1 px-2 rouded">送信</v-btn>
         </v-card>
       </v-container>
-    <!-- <v-container v-for="personalData in personalDatas" :key="personalData.id"> -->
+
       <v-card color="#E0F7FA" class="rounded-xl mt-5 pa-5" rounded>
         <h2 class="mx-10">クリーナーを応援しよう</h2>
         <v-row>
-          <v-col cols="9">
-            <span>{{ personalData.name }}さんの行動に対してお金を送ってサポートすることができます。</span>
-            <v-btn color="#0D47A1" rounded x-large dark>サポートする</v-btn>
+          <v-col cols="12" md="9">
+            <span class="mb-3">{{ personalEvent.displayName }}さんの行動に対してジュースを渡す感覚でサポートすることができます。</span>
+            <v-btn color="#0D47A1" rounded x-large dark @click="sendMoneyToSomeone">ジュースをプレゼントすする</v-btn>
           </v-col>
-          <v-col cols="3">
-            <v-avatar tile size="100" color="cyan" :src="image_src" class="mx-5">
-              <img :src="image_src" alt="">
+          <v-col cols="12" md="3">
+            <v-avatar tile size="100" color="cyan" class="mx-5">
+              <img :src="personalEvent.image">
             </v-avatar>
           </v-col>
         </v-row>
@@ -99,155 +111,86 @@ export default {
   name: 'personalEvent',
   data() {
     return {
-      image_src: require('@/assets/img/everyone.jpg'),
       applyUsers: [],
-      // isPush: false,
       applyFlag: false,
-      applyButton: '参加',
-      loginUser: null
+      loginUser: null,
+      likeSum: 0,
+      images: [],
+      image_users: [],
+      nameUser: [],
+      name_users: []
     }
   },
   computed: {
-    personalDatas() {
-      return this.$store.getters['event/personalDatas']
-    },
     currentUser() {
       return this.$store.getters['user/currentUser']
     },
-    // applyUser() {
-    //   return this.$store.getters['event/currentUser']
-    // },
-  },
-  created() {
-    // firebase.auth().onAuthStateChanged((user) => {
-    //   if (user) {
-    //     this.loginUser = user;
-    //     const db = firebase.firestore();
-    //     const docRef = db.collection('posts').doc(this.loginUser.uid);
-    //     this.getEvent(docRef)
-    //   }
-    // })
+    personalEvent() {
+      return this.$store.getters['event/personalEvent']
+    }
   },
   mounted() {
-    // firebase.auth().onAuthStateChanged((user) => {
-    //   if (user) {
-    //     console.log(user)
-    //     this.loginUser = user;
-    //     const db = firebase.firestore();
-    //     const docRef = db.collection('posts').doc(this.currentUser[0].id);
-    //   }
-    // })
-    this.getEvent(this.currentUser[0].id)
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.loginUser = user;
+      }
+    })
+    const db = firebase.firestore();
+    const docRef = db.collection('posts').doc(this.personalEvent[0].id);
+    this.getEvent(docRef)
+
   },
   methods: {
-    // getEvent(docRef) {
-    //   docRef.get().then(doc => {
-    //     if (doc.exists) {
-    //       console.log(doc)
-    //       this.posts = doc.data();
-    //       this.applyFlag = this.posts.applyButton.includes(this.loginUser.uid)
-    //     }
-    //   })
-    // },
-    getEvent(id) {
-      // const db = firebase.firestore();
-      // db.collection('posts')
-      //   .doc(id)
-      const db = firebase.firestore();
-      const docRef = db.collection('users').doc(id).collection('posts').doc('apply');
-      // docRef
-      //   .get()
-      //   .then((querySnapshot) => {
-      //     querySnapshot.forEach((doc) => {
-      //       this.applyUsers.push({
-      //         // displayName: doc.data().displayName,
-      //         // image: doc.data().image,
-      //         // id: doc.id,
-      //         applyButton: doc.data().applyButton
-      //       })
-      //     })
-      //   })
-      docRef
-        .onSnapshot((doc) => {
+    getEvent(docRef) {
+      docRef.get().then(doc => {
+        if (doc.exists) {
           console.log(doc.data());
-          this.applyUsers.push({
-            // displayName: doc.data().displayName,
-            // image: doc.data().image,
-            // id: doc.id,
-            // applyButton: doc.data().applyButton
-          })
+          this.posts = doc.data();
+          this.likeSum = this.posts.like_users.length;
+          // this.images = this.posts.displayImage;
+          // this.images.push({
+          //   displayImage: this.posts.displayImage
+          // })
+
+          this.images = [...this.posts.image_users];
+          this.nameUser = [...this.posts.name_users];
+          this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
+        } else {
+          console.log(doc.data());
+        }
+      })
+    },
+    applyEvent() {
+        const db = firebase.firestore();
+        const docRef = db.collection('posts').doc(this.personalEvent[0].id)
+        docRef.set({
+          displayImage: this.currentUser[0].image,
+          like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
+          image_users: firebase.firestore.FieldValue.arrayUnion(this.currentUser[0].image),
+          name_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.displayName),
+        }, { merge: true })
+        this.applyFlag = true;
+        this.getEvent(docRef);
+    },
+    cancelEvent() {
+        const db = firebase.firestore();
+        const docRef = db.collection('posts').doc(this.personalEvent[0].id)
+        // docRef.delete(
+        docRef.update({
+          // displayImage: null,
+          like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
+          image_users: firebase.firestore.FieldValue.arrayRemove(this.currentUser[0].image),
+          name_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.displayName),
         })
+        this.applyFlag = false;
+        this.getEvent(docRef);
     },
-    applyEvent(id) {
-      console.log(id);
-      // if (this.applyFlag = false) {
-        const db = firebase.firestore();
-        const docRef = db.collection('users').doc(id).collection('posts').doc('apply')
-          docRef.set({
-            // applyButton: 'キャンセル',
-          })
-          // .then((doc) => {
-            // this.applyUsers.push({
-            //   displayName: doc.data().displayName,
-            //   // image: doc.data().image,
-            //   id: doc.id,
-            // })
-            // this.applyFlag = true;
-            // this.applyButton = 'キャンセル'
-            this.getEvent(id);
-          // })
-      // }
-      // console.log(id);
-      // // if (this.applyFlag = false) {
-      //   const db = firebase.firestore();
-      //   db.collection('applyUsers')
-      //     .doc(id)
-      //     .get()
-      //     .then((doc) => {
-      //       this.applyapplyUsers.push({
-      //         displayName: doc.data().displayName,
-      //         // image: doc.data().image,
-      //         id: doc.id,
-      //       })
-      //       this.applyFlag = true;
-      //       this.applyButton = 'キャンセル'
-      //     })
-      // // }
-    },
-    cancelEvent(id) {
-      console.log(id);
-      // if (this.applyFlag = true) {
-        const db = firebase.firestore();
-        const docRef = db.collection('users').doc(id).collection('posts').doc('apply');
-          docRef.update({
-            // applyButton: '参加',
-            // applyFlag: false
-          })
-          // .then((doc) => {
-            // this.applyButton = '参加';
-            this.getEvent(id);
-          // })
-            // this.getEvent(id);
-      // }
-    },
-    // cancelEvent(id) {
-    //   console.log(id);
-    //   // if (this.applyFlag = true) {
-    //     const db = firebase.firestore();
-    //     db.collection('users')
-    //       .doc(id)
-    //       .get()
-    //       .then((doc) => {
-    //         this.applyUsers.pop();
-    //       })
-    //         this.applyFlag = false;
-    //         this.applyButton = '参加'
-    //         // this.getEvent(id);
-    //   // }
-    // },
     getProfile(id) {
       console.log(id);
     },
+    async sendMoneyToSomeone() {
+
+    }
   }
 }
 </script>

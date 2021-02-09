@@ -1,18 +1,29 @@
 <template>
-  <v-app class="mx-10">
-    <h2 class="cyan--text text--darken-1 my-5">サポート管理</h2>
-    <v-container max-width="600px">
-      <v-card class="pa-5">
-        <h3>銀行口座を登録する</h3>
-        <v-btn class="ma-2" @click="getSetLink">登録する</v-btn>
-      </v-card>
-    </v-container>
-  </v-app>
+  <div>
+      <main>
+        <h2>店舗オーナー用のメニュー</h2>
+        <div>
+          <v-btn @click="getSetLink">店舗の銀行口座を登録する</v-btn>
+        </div>
+        <div>
+          <div ref="card"></div>
+        </div>
+        <div>
+          <p>api response result : {{ response }}</p>
+        </div>
+        <h2>ユーザー用のメニュー</h2>
+        <div>
+          <v-btn @click="onboardToCustomer">クレジットカードを登録する</v-btn>
+        </div>
+        <div>
+        </div>
+      </main>
+  </div>
 </template>
 
 <script>
+
 export default {
-  layout: 'loggedIn',
   data() {
     return {
       error: '',
@@ -24,8 +35,17 @@ export default {
   mounted() {
     this.stripe = Stripe('pk_test_51Hp8W6GM8QHm52Sew543CT6L0qkt1A4K6eKS89CRiVKKrLCHdzSaAEsmseYVrYJdDx3x0MWjt3kIiShsjOlo73w800iAHOtu3v');
     let elements = this.stripe.elements();
-    // this.card = elements.create('card');
-    // this.card.mount(this.$refs.card);
+    this.card = elements.create('card');
+    this.card.mount(this.$refs.card);
+
+    this.$axios.$get('/api/hello')
+      .then(response => {
+        console.log(response);
+        this.response = response
+      })
+      .catch(error => {
+        console.log(err);
+      })
   },
   methods: {
     async getSetLink() {
@@ -35,6 +55,9 @@ export default {
       });
       console.log(result);
       await window.location.replace(result.url);
+    },
+    onboardToCustomer() {
+      this.$router.push('/customer');
     }
   }
 }

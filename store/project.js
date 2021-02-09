@@ -1,4 +1,9 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/firestore'
+import 'firebase/storage'
+// import firebase, { firestore, storage } from '~/plugins/firebase.js'
+
+
 
 export const state = () => ({
   name: '',
@@ -10,7 +15,7 @@ export const state = () => ({
   comment: '',
   deleteOverlay: false,
   editOverlay: false,
-  personalProjectId: []
+  personalProject: []
 })
 
 export const getters = {
@@ -19,7 +24,7 @@ export const getters = {
   deleteOverlay: state => state.deleteOverlay,
   articleId: state => state.articleId,
   editOverlay: state => state.editOverlay,
-  personalProjectId: state=> state.personalProjectId
+  personalProject: state=> state.personalProject
 }
 
 export const mutations = {
@@ -46,9 +51,9 @@ export const mutations = {
   closeModalForEdit: (state) => {
     state.editOverlay = false;
   },
-  setPersonalProjectId: (state, personalDetails) => {
-    state.personalProjectId = personalDetails
-    console.log(state.personalProjectId);
+  setPersonalProject: (state, personalDetails) => {
+    state.personalProject = personalDetails
+    console.log(state.personalProject);
   }
 }
 
@@ -76,15 +81,15 @@ export const actions = {
         commit('setImage', url);
       })
   },
-  getMessage({commit}) {
+  getMessage({commit}, payload) {
     const db = firebase.firestore();
     db.collection('projects')
       .orderBy('date', 'desc')
-      .get()
-      .then((querySnapshot) => {
+      .onSnapshot((querySnapshot) => {
         const articles = [];
         querySnapshot.forEach((doc) => {
           articles.push({
+            uid: doc.data().uid,
             displayName: doc.data().displayName,
             displayImage: doc.data().displayImage,
             name: doc.data().name,
@@ -98,13 +103,52 @@ export const actions = {
         commit('setArticles', articles);
     })
   },
+  getUserProfile(context, payload) {
+    console.log(payload);
+    const db = firebase.firestore();
+    const getUser = firebase.auth().currentUser;
+    console.log(getUser.uid);
+    // db.collection('projects')
+    //   .onSnapshot((querySnapshot) => {
+    //     const allProjects = [];
+    //     querySnapshot.forEach((doc) => {
+    //       allProjects.push({
+    //         displayName: doc.data().displayName,
+    //         uid: payload.uid
+    //       })
+    //     })
+    db.collection('projects')
+      .where('uid', '==', payload.uid)
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          console.log(doc.data());
+          const nameData = doc;
+          context.dispatch('changeNameArticle', {
+            nameData: doc,
+            changeName: payload})
+        })
+      })
+  },
+  changeNameArticle(context, payload) {
+    console.log(payload)
+    console.log(payload.nameData.id);
+    console.log(payload.changeName.displayName);
+    const db = firebase.firestore();
+    db.collection('projects')
+      .doc(payload.nameData.id)
+      .update({
+        displayName: payload.changeName.displayName,
+        displayImage: payload.changeName.image,
+      })
+  },
   addMessage(context, payload) {
     const db = firebase.firestore();
     db.collection('projects')
       .add(payload)
       .then(() => {
         console.log(payload);
-        context.commit('resetImage', null);
+        // context.commit('resetImage', null);
         context.dispatch('getMessage');
       })
   },
@@ -115,8 +159,13 @@ export const actions = {
       .delete()
       .then(() => {
         console.log('deleted!!');
+        this.$router.push('/list/project');
         context.dispatch('getMessage');
-      })
+        this.alertDelete = true;
+        setTimeout(() => {
+          this.alertDelete = false
+        }, 3000);
+        });
   },
   editArticles(context, payload) {
     const db = firebase.firestore();
@@ -134,7 +183,20 @@ export const actions = {
         context.dispatch('getMessage');
       })
   },
-  getPersonalProjectId({commit}, payload) {
+  updateProject(context, payload) {
+    const db = firebase.firestore();
+    db.collection('projects')
+      .doc(payload.id)
+      .set({
+        displayName: payload.displayName,
+        displayImage: payload.displayImage,
+      }, {merge: true})
+      .then(() => {
+        console.log('updatedProject!!');
+        context.dispatch('getMessage');
+      })
+  },
+  getPersonalProject({commit}, payload) {
     const db = firebase.firestore();
     const personalDetails = [];
     db.collection('projects')
@@ -153,7 +215,7 @@ export const actions = {
         })
           console.log(doc.data())
           this.$router.push('/personal/personalproject');
-          commit('setPersonalProjectId', personalDetails);
+          commit('setPersonalProject', personalDetails);
       })
   }
 }

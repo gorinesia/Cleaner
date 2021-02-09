@@ -1,5 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
 
+// const URL = 'http://localhost:3000'
+
+require('dotenv').config()
+
 export default {
   /*
   ** Nuxt rendering mode
@@ -18,6 +22,7 @@ export default {
   head: {
     // titleTemplate: '%s - ' + process.env.npm_package_name,
     title: process.env.npm_package_name || '',
+    // script: [{ src: 'https://js.stripe.com/v3' }],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -29,15 +34,16 @@ export default {
       // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src:'https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAzighvakmvCU9UN7_yfBgJvdojhzyuCc4' }
+      { type: 'text/javascript', src:'https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAzighvakmvCU9UN7_yfBgJvdojhzyuCc4', defer: true},
+      { src: 'https://js.stripe.com/v3' }
     ]
   },
   /*
   ** Global CSS
   */
- css: [
-   { src: '~/assets/scss/common.scss', lang: 'scss' },
- ],
+  css: [
+    { src: '~/assets/scss/common.scss', lang: 'scss' },
+  ],
 //  css: {
 //   loaderOptions: {
 //     scss: {
@@ -50,7 +56,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '@/plugins/firebase',
+    '~/plugins/firebase.js',
     {src: '~/plugins/vue2-google-maps.js', ssr: true}
   ],
   /*
@@ -62,15 +68,28 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    '@nuxtjs/dotenv',
     '@nuxtjs/vuetify'
   ],
   /*
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/dotenv',
     '@nuxtjs/style-resources',
+    '@nuxtjs/axios'
   ],
+  serverMiddleware: ['~/api/index.js'],
+  // serverMiddleware: [{ path: '/api', handler: '~/api/index.js' }],
+  // axios: {
+  //   proxy: true,
+  //   baseURL: URL
+  // },
+
+  // proxy: {
+  //   '/api': URL
+  // },
+  // axios: { proxy: true, prefix: '/api' },
+  // proxy: { '/api/': { target: 'http://localhost:8000' }},
   styleResources: {
     scss: [
       '~/assets/scss/common.scss'
@@ -103,5 +122,17 @@ export default {
   */
   build: {
     transpile: [/^vue2-google-maps($|\/)/]
+  },
+  // generate: {
+  //   dir: 'public'
+  // },
+  env: {
+    VUE_APP_FB_API_KEY: process.env.VUE_APP_FB_API_KEY,
+    VUE_APP_FB_AUTH_DOMAIN: process.env.VUE_APP_FB_AUTH_DOMAIN,
+    VUE_APP_FB_DATABASE_URL: process.env.VUE_APP_FB_DATABASE_URL,
+    VUE_APP_FB_PROJECT_ID: process.env.VUE_APP_FB_PROJECT_ID,
+    VUE_APP_FB_STORAGE_BUCKET: process.env.VUE_APP_FB_STORAGE_BUCKET,
+    VUE_APP_FB_MESSAGING_SENDER_ID: process.env.VUE_APP_FB_MESSAGING_SENDER_ID,
+    VUE_APP_FB_APP_ID: process.env.VUE_APP_FB_APP_ID
   }
 }

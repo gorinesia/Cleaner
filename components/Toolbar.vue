@@ -1,5 +1,5 @@
 <template>
-  <v-tabs color="#EF6C00" class="mb-10" centered>
+  <v-tabs color="#EF6C00" class="mb-3" centered>
     <v-tab  v-for="(menuItem, index) in menuItems" :key="index" :to="menuItem.to" router exact>
       <v-icon>{{ menuItem.icon }}</v-icon>
       {{ menuItem.name }}
@@ -14,6 +14,11 @@ export default {
     return {
       menuItems: [
         {
+          name: 'マイページ',
+          icon: 'mdi-account',
+          to: '/mypage'
+        },
+        {
           name: 'プロジェクト',
           icon: 'mdi-tooltip',
           to: '/list/project'
@@ -22,11 +27,6 @@ export default {
           name: 'イベント',
           icon: 'mdi-calendar',
           to: '/list/event'
-        },
-        {
-          name: 'マイページ',
-          icon: 'mdi-account',
-          to: '/mypage'
         },
       ]
     }

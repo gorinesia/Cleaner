@@ -5,10 +5,10 @@
     <v-main>
       <Toolbar v-if="loggedIn" />
       <v-row>
-        <v-col cols="3">
+        <v-col cols="12" md="3">
           <Sidebar />
         </v-col>
-        <v-col cols="9">
+        <v-col cols="12" md="9">
           <Nuxt />
         </v-col>
       </v-row>
@@ -19,14 +19,12 @@
 </template>
 
 <script>
-import LoggedInHeader from '@/components/LoggedInHeader.vue'
 import AppFooter from '../components/AppFooter.vue'
 import Sidebar from '../components/Sidebar.vue'
 import Toolbar from '@/components/Toolbar.vue'
 
 export default {
   components: {
-    LoggedInHeader,
     AppFooter,
     Sidebar,
     Toolbar,

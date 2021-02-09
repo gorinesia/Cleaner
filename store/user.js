@@ -1,17 +1,24 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/storage';
+// import firebase, { auth, firestore, storage } from '~/plugins/firebase.js'
 
 export const state = () => ({
   user: null,
   loggedIn: false,
+  uid: '',
   allUsers: [],
   currentUser: [],
   loginUsers: [],
   image: null,
-  personalDatas: []
+  personalDatas: [],
 })
 
 export const getters = {
-  allUsers: state => state.allUsers,
+  loggedIn: state => state.loggedIn,
+  uid: state => state.uid,
+  // allUsers: state => state.allUsers,
   currentUser: state => state.currentUser,
   loginUsers: state => state.loginUsers,
   image: state => state.image,
@@ -25,9 +32,12 @@ export const mutations = {
   setUser:(state, currentUser) => {
     state.user = currentUser
   },
-  setAllUsers: (state, allLoggedInUsers) => {
-    state.allUsers = allLoggedInUsers;
+  setUserUid:(state, uid) => {
+    state.uid = uid;
   },
+  // setAllUsers: (state, allLoggedInUsers) => {
+  //   state.allUsers = allLoggedInUsers;
+  // },
   setCurrentUser: (state, currentLoginUser) => {
     state.currentUser = currentLoginUser;
   },
@@ -40,7 +50,7 @@ export const mutations = {
   setPersonalDatas: (state, personalDetails) => {
     state.personalDatas = personalDetails
     console.log(state.personalDatas);
-  }
+  },
 }
 
 export const actions = {
@@ -69,69 +79,36 @@ export const actions = {
   logInAction({commit}, payload) {
     firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
       .then((result) => {
+        console.log(result.user.uid);
+        const uid = result.user.uid;
         console.log('loggedIn!!');
         commit('setLoggedIn', true);
+        commit('setUserUid', uid);
         this.$router.push('/mypage')
       })
       .catch((error) => {
         console.log(error.message);
       })
   },
-  openTheApplication({commit}) {
-    const db = firebase.firestore();
-    db.collection('users')
-      .onSnapshot((querySnapshot) => {
-        const allLogUsers = [];
-        querySnapshot.forEach((doc) => {
-          allLogUsers.push({
-            displayName: doc.data().displayName
-          })
-          console.log(doc.data().displayName)
-          const allLoggedInUsers = allLogUsers.filter(() => {
-            return  doc.data().displayName
-          })
-          commit('setAllUsers', allLoggedInUsers);
-        })
-      })
-  },
-  // signInAnonymously({commit}) {
-  //   firebase.auth().signInAnonymously()
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-
-  //   firebase.auth().onAuthStateChanged((user) => {
-  //     if(user) {
-  //       const uid = user.uid;
-  //       const currentLoginUser = [{displayName: 'ゲスト'}]
-  //       commit('setCurrentUser', currentLoginUser);
-  //       this.$router.push('/dashboard');
-  //     }
-  //   })
-  // },
-  logInUserDisplay(context) {
+  logInUserDisplay(context, payload) {
     // console.log(payload);
     const getUser = firebase.auth().currentUser;
-    console.log(getUser);
-    // if (!getUser.displayName) {
-    //   context.dispatch('signInAnonymously');
-    //   return;
-    // }
-    // context.commit('setUser', payload.displayName);
     const db = firebase.firestore();
     db.collection('users')
       .onSnapshot((querySnapshot) => {
         const allLoginUsers = [];
         querySnapshot.forEach((doc) => {
           allLoginUsers.push({
+            uid: payload.uid,
             displayName: doc.data().displayName,
             email: doc.data().email,
             comment: doc.data().comment,
             image: doc.data().image,
             id: doc.id
           })
-          console.log(doc.data().displayName);
-          console.log(doc.id);
+          // console.log(doc.data().displayName);
+          // console.log(doc.id);
+          // console.log(doc.data());
           const otherLoginUsers = allLoginUsers.filter((otherUsers) => {
             return otherUsers.email != getUser.email;
           })
@@ -195,19 +172,29 @@ export const actions = {
     })
   },
   updateProfile(context, payload) {
+    // const user = firebase.auth().currentUser;
+    // user.updateProfile({
+    //   uid: payload.uid,
+    //   displayName: payload.displayName,
+    //   displayImage: payload.image,
+    // })
     const db = firebase.firestore();
     db.collection('users')
       .doc(payload.id)
       .update({
-        displayName: payload.displayName,
-        place: payload.place,
-        comment: payload.comment,
         image: payload.image,
+        displayName: payload.displayName,
+        comment: payload.comment,
+        uid: payload.uid,
+        // email: payload.email
       })
       .then(() => {
-        console.log(payload);
-        // context.commit('resetImage', null);
-        context.dispatch('logInUserDisplay');
+        context.dispatch('project/getUserProfile', {
+          uid: payload.uid,
+          displayName: payload.displayName,
+          image: payload.image,
+        }, { root: true })
+        // context.dispatch('logInUserDisplay');
       })
   },
   getProfile({commit}, payload) {

@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": ";ACUA,QAAQ;AAOR,gBAAgB;AAOhB,YAAY",
+    "sources": [
+        "common.scss",
+        "_mixin.scss"
+    ],
+    "names": [],
+    "file": "common.css"
+}

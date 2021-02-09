@@ -71,8 +71,9 @@
 </template>
 
 <script>
-import firebase from '@/plugins/firebase';
-const db = firebase.firestore();
+import firebase from 'firebase/app';
+import 'firebase/firestore'
+// import firebase, { firestore } from '~/plugins/firebase.js'
 
 export default {
   layout: 'loggedIn',
