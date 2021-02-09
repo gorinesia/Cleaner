@@ -90,7 +90,7 @@
         <v-row>
           <v-col cols="12" md="9">
             <span class="mb-3">{{ personalEvent.displayName }}さんの行動に対してお金を送ってサポートすることができます。</span>
-            <v-btn color="#0D47A1" rounded x-large dark @click="sendMoneyToSomeone">サポートする</v-btn>
+            <v-btn color="#0D47A1" rounded x-large dark @click="sendMoneyToSomeone">ジュースをプレゼントすする</v-btn>
           </v-col>
           <v-col cols="12" md="3">
             <v-avatar tile size="100" color="cyan" class="mx-5">
@@ -189,7 +189,7 @@ export default {
       console.log(id);
     },
     async sendMoneyToSomeone() {
-      
+
     }
   }
 }

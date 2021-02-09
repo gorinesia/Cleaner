@@ -11,7 +11,7 @@
       <p>(以下、2019年分の日本のデータ)</p>
       </div>
       <v-row class="text-h6">
-        <v-col cols="12" md="3.5">
+        <v-col cols="12" md="4">
           <div>
             <v-icon color="blue">mdi-account</v-icon>
               ごみ排出量
@@ -19,7 +19,7 @@
         </div>
         </v-col>
         <v-divider vertical></v-divider>
-        <v-col cols="12" md="3.5">
+        <v-col cols="12" md="3">
           <div>
             <v-icon color="blue">mdi-account</v-icon>
             東京ドーム
@@ -27,7 +27,7 @@
           </div>
         </v-col>
         <v-divider vertical></v-divider>
-        <v-col cols="12" md="3.5">
+        <v-col cols="12" md="4">
           <div>
             <v-icon color="blue">mdi-account</v-icon>
             一人一日あたり

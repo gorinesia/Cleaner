@@ -56,6 +56,35 @@
               </ul>
             </nav>
             <nav v-else>
+              <v-card class="pa-2" height="200px" width="256" v-for="currentUser in currentUser" :key="currentUser.id">
+                <v-navigation-drawer permanent>
+                  <template v-slot:prepend>
+                    <v-list-item two-line>
+                      <v-list-item-avatar>
+                        <v-img :src="currentUser.image" width="30px" height="30px"></v-img>
+                      </v-list-item-avatar>
+
+                      <v-list-item-content>
+                        <nuxt-link class="cyan--text text--darken-1 font-weight-bold text-h5 text-decoration-none" to="/personal/profile" @click.native="getProfile(currentUser.id)">{{ currentUser.displayName }}</nuxt-link>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </template>
+
+                  <v-divider></v-divider>
+
+                  <v-list dense>
+                    <v-list-item v-for="item  in items" :key="item.title" :to="item.link">
+                      <v-list-item-icon>
+                        <v-icon>{{ item.icon }}</v-icon>
+                      </v-list-item-icon>
+
+                      <v-list-item-content>
+                        <v-list-item-title>{{ item.title }}</v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
+                </v-navigation-drawer>
+              </v-card>
               <v-btn rounded color="#00ACC1" class="font-weight-bold " dark @click="logOut">ログアウト</v-btn>
             </nav>
           </v-list-item>
@@ -73,6 +102,23 @@ export default {
       drawer: false,
       email: 'test@test.com',
       password: '123456',
+      items: [
+        {
+          title: 'ユーザー情報設定',
+          icon: 'mdi-folder',
+          link: '/edit/profile'
+        },
+        {
+          title: 'メッセージ管理',
+          icon: 'mdi-account-multiple',
+          link: '/edit/message'
+        },
+        {
+          title: 'サポート管理',
+          icon: 'mdi-upload',
+          link: '/edit/support'
+        },
+      ],
     }
   },
   computed : {

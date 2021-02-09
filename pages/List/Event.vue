@@ -66,7 +66,7 @@
                 <v-hover v-slot="{ hover }">
                   <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(event.id)">
                       <v-row :key="event.id" >
-                        <v-col cols="9">
+                        <v-col cols="12" md="9">
                           <v-col>
                             <v-avatar class="profile" color="grey" size="60">
                               <v-img :src="event.displayImage"></v-img>
@@ -77,7 +77,7 @@
                             <span class="grey--text float-right">場所： {{ event.place}}</span>
                           </v-col>
                         </v-col>
-                        <v-col cols="3">
+                        <v-col cols="12" md="3">
                           <v-avatar tile size="130">
                             <v-img :src="event.image"></v-img>
                           </v-avatar>
@@ -107,7 +107,6 @@ export default {
       image_src: require('@/assets/img/top-page.jpg'),
       imageOverlay: false,
       dialog: false,
-      // loggedIn: this.$store.state.user.loggedIn,
     }
   },
   computed: {
