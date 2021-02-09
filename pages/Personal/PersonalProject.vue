@@ -75,11 +75,11 @@
                             <v-text-field v-model="place" class="white" placeholder="例) 東京"></v-text-field>
                             <label>コメント</label>
                             <v-textarea v-model="comment" class="white" placeholder="例) 今日もたくさん拾いました。"></v-textarea>
-                            <v-btn @click="editArticles(articleId)" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
                           </v-container>
                         </v-card-text>
                         <v-card-actions>
                           <v-spacer></v-spacer>
+                          <v-btn @click="editArticles(articleId)" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
                           <v-btn
                             color="blue darken-1"
                             text

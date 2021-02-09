@@ -43,27 +43,21 @@
                 <label>コメント</label>
                 <v-textarea v-model="comment" class="white" placeholder="例) 今日もたくさん拾いました。"></v-textarea>
                 <!-- <section style="position:relative; z-index:1;"> -->
-                  <label>google maps</label>
-                  <input type="text" v-model="address" placeholder="例) Enter your address" id="autocomplete"><br>
+                  <!-- <label>google maps</label> -->
+                  <!-- <input type="text" v-model="address" placeholder="例) Enter your address" id="autocomplete"><br>
                   <v-btn @click="locatorButtonPressed">検索</v-btn>
-                  <div id="map"></div>
+                  <div id="map"></div> -->
               </v-container>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
+              <v-btn @click="editArticles(articleId)" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
               <v-btn
                 color="blue darken-1"
                 text
                 @click="dialog = false"
               >
                 Close
-              </v-btn>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="addMessage"
-              >
-                Save
               </v-btn>
             </v-card-actions>
           </v-card>
