@@ -3,12 +3,12 @@
     <v-container v-for="currentUser in currentUser" :key="currentUser.id">
       <v-card outlined class="mb-10">
         <v-row  class="fill-height">
-          <v-col align-self="start"  cols="2">
+          <v-col align-self="start"  cols="12" md="2">
             <v-avatar class="profile ml-3 mt-3" color="grey" size="80">
               <v-img :src="currentUser.image"></v-img>
             </v-avatar>
           </v-col>
-          <v-col>
+          <v-col cols="12" md="10">
             <v-list-item color="rgba(0, 0, 0, .4)">
               <v-list-item-content>
                 <v-list-item-title class="cyan--text text--darken-1 font-weight-bold title mb-2" dark>
