@@ -3,7 +3,7 @@
     <v-container v-for="personalProject in personalProject" :key="personalProject.id">
       <v-card outlined class="mb-10">
         <v-row  class="fill-height">
-          <v-col align-self="start"  cols="2">
+          <v-col align-self="start"  cols="12" md="2">
             <v-avatar class="profile ml-3 mt-3" color="grey" size="80">
               <v-img :src="personalProject.displayImage"></v-img>
             </v-avatar>
@@ -46,19 +46,19 @@
                 <v-hover v-slot="{ hover }">
                   <v-card :class="{ 'on-hover': hover }" @click="getPersonalProject(personalProject.id)">
                     <v-row>
-                      <v-col cols="3">
+                      <v-col cols="12" md="3">
                         <v-avatar tile size="100" class="ml-5">
                           <v-img :src="personalProject.image"></v-img>
                         </v-avatar>
                       </v-col>
-                      <v-col cols="4">
+                      <v-col cols="12" md="4">
                         <v-avatar class="profile" color="grey" size="60">
                           <v-img :src="personalProject.displayImage"></v-img>
                         </v-avatar>
                         <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ personalProject.displayName }}</span>
                         <p class="my-5 font-weight-bold">{{ personalProject.comment }}</p>
                       </v-col>
-                      <v-col cols="5">
+                      <v-col cols="12" md="5">
                         <span class="grey--text float-right">{{ personalProject.date}}</span>
                       </v-col>
                     </v-row>

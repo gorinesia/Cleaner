@@ -36,12 +36,14 @@
                 <label>イベント名</label>
                 <v-text-field v-model="name" class="white" placeholder="例）東京を綺麗にしよう大作戦"></v-text-field>
                 <label>日時</label>
-                <v-text-field v-model="date" class="white" placeholder="例）11月7日 9:00"></v-text-field>
+                <v-text-field v-model="date" class="white" placeholder="例）11月7日"></v-text-field>
+                <label class="mb-5">時間</label>
+                <input type="time" v-model="time" class="white" placeholder="例）9時"><br>
+                <hr class="mb-4">
                 <label>場所</label>
                 <v-text-field v-model="place" class="white" placeholder="例）東京"></v-text-field>
                 <label>イベント説明</label>
                 <v-textarea v-model="comment" class="white" placeholder="例）渋谷を綺麗にしましょう"></v-textarea>
-                <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
               </v-container>
             </v-card-text>
             <v-card-actions>
@@ -53,6 +55,7 @@
               >
                 Close
               </v-btn>
+              <v-btn @click="addEvent" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -132,7 +135,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch('event/getMessage');
+    this.$store.dispatch('event/getEvent');
   },
   methods: {
     showImage() {
@@ -146,23 +149,25 @@ export default {
         ev
       });
     },
-    getMessage() {
-      this.$store.dispatch('event/getMessage');
+    getEvent() {
+      this.$store.dispatch('event/getEvent');
     },
-    addMessage() {
-      this.$store.dispatch('event/addMessage', {
+    addEvent() {
+      this.$store.dispatch('event/addEvent', {
         displayName: this.currentUser[0].displayName,
         displayImage: this.currentUser[0].image,
         name: this.name,
         place: this.place,
         comment: this.comment,
         image: this.image,
-        date: this.date
+        date: this.date,
+        time: this.time
       });
       this.name = '';
       this.place = '';
       this.comment = '';
       this.date = '';
+      this.time = '';
     },
     openModalForDelete(id) {
       this.$store.commit('event/openModalForDelete', {

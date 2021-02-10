@@ -3,14 +3,14 @@
     <v-container v-for="personalEvent in personalEvent" :key="personalEvent.id">
       <v-card align="center" class="mb-5 pa-5">
         <v-row>
-          <v-col cols="12" md="2" class="mb-n5">
-            <p>{{ personalEvent.date}}</p>
-          </v-col>
           <v-col class="font-weight-bold text-h5 my-n4" cols="12" md="6">
             <p>{{ personalEvent.name }}</p>
           </v-col>
           <v-col cols="12" md="2" class="my-n4">
             <p>日時：{{ personalEvent.date }}</p>
+          <v-col cols="12" md="2" class="mb-n5">
+            <p>時間：{{ personalEvent.time }}</p>
+          </v-col>
           </v-col>
           <v-col cols="12" md="2" class="my-n4">
             <p>場所：{{ personalEvent.place }}</p>
@@ -40,6 +40,7 @@
           <v-dialog v-model="dialog" width="500">
             <template v-slot:activator="{ on, attrs}">
               <v-btn v-if="!applyFlag" class="mb-10 white--text" v-bind="attrs " v-on="on" rounded color="orange" x-large>参加</v-btn>
+              <v-btn v-if="applyFlag" class="mb-10 white--text" v-bind="attrs " v-on="on" rounded color="orange" x-large>キャンセル</v-btn>
             </template>
             <v-card>
               <v-card-title>Need to Login</v-card-title>
@@ -193,9 +194,6 @@ export default {
     getProfile(id) {
       console.log(id);
     },
-    openStripeCardform() {
-
-    }
   }
 }
 </script>

@@ -131,7 +131,7 @@ export default {
       uid: this.uid,
       // displayName: this.currentUser[0].displayName,
     });
-    this.$store.dispatch('event/getMessage');
+    this.$store.dispatch('event/getEvent');
   },
   methods: {
     getPersonalProjectId(id) {

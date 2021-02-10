@@ -51,7 +51,6 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn @click="editArticles(articleId)" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
               <v-btn
                 color="blue darken-1"
                 text
@@ -59,6 +58,7 @@
               >
                 Close
               </v-btn>
+              <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>

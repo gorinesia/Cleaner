@@ -4,26 +4,26 @@
     <v-alert dense text type="error" :value="alertDelete" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を削除しました</v-alert>
     <v-container v-for="personalProject in personalProject" :key="personalProject.id">
       <v-card outlined class="mb-5">
-        <v-row cols="2">
+        <v-row cols="12" md="2">
           <v-col align-self="start"  cols="2">
-            <v-avatar class="profile ml-5" color="grey" size="80">
+            <v-avatar class="profile ml-3 pa-3" color="grey" size="80">
               <v-img :src="personalProject.displayImage"></v-img>
             </v-avatar>
           </v-col>
-          <v-col cols="5">
+          <v-col cols="12" md="5">
             <v-list-item color="rgba(0, 0, 0, .4)">
               <v-list-item-content>
-                <nuxt-link class="cyan--text text--darken-1 font-weight-bold title text-h4 text-decoration-none" to="/personal/profile" dark>
+                <nuxt-link class="cyan--text text--darken-1 font-weight-bold title text-h6 text-decoration-none" to="/personal/profile" dark>
                   {{ personalProject.displayName }}
                 </nuxt-link>
                 <p class="mt-3">{{ personalProject.comment }}</p>
               </v-list-item-content>
             </v-list-item>
           </v-col>
-          <v-col cols="4">
+          <v-col cols="12" md="4">
             <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ personalProject.name }}・{{ personalProject.date}}</span>
           </v-col>
-          <v-col cols="1" v-if="loggedIn">
+          <v-col cols="12" md="1" v-if="loggedIn">
 
             <v-menu
               v-if="currentUser[0].displayName === personalProject.displayName"
@@ -79,7 +79,6 @@
                         </v-card-text>
                         <v-card-actions>
                           <v-spacer></v-spacer>
-                          <v-btn @click="editArticles(articleId)" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
                           <v-btn
                             color="blue darken-1"
                             text
@@ -87,6 +86,7 @@
                           >
                             Close
                           </v-btn>
+                          <v-btn @click="editArticles(articleId)" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
                         </v-card-actions>
                       </v-card>
                     </v-dialog>
@@ -183,11 +183,23 @@
         <h2 class="mx-10">クリーナーを応援しよう</h2>
         <v-row>
           <v-col cols="12" md="9">
-            <v-avatar class="profile mx-10" color="grey" size="50">
-              <v-img :src="personalProject.displayImage"></v-img>
-            </v-avatar>
-            <p class="mb-3 mx-10">{{ personalProject.displayName }}さんの行動に対してお金を送ってサポートすることが出来ます。</p>
-            <v-btn color="#0D47A1" class="mx-10" rounded x-large dark>サポートする</v-btn>
+            <span class="mb-3"><span class="cyan--text text--darken-1">{{ personalProject.displayName }}</span>さんの行動に対してジュースを渡す(100円)感覚でサポートすることができます。</span>
+            <v-dialog v-model="payDialog" persistent max-width="290">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn color="#0D47A1" rounded x-large dark v-bind="attrs" v-on="on">ジュースをプレゼントする</v-btn>
+              </template>
+              <v-card>
+                <v-card-title class="headline">
+                  ジュース代(100円)をプレゼントする
+                </v-card-title>
+                <v-card-text><span class="cyan--text text--darken-1">{{ personalProject.displayName }}</span>さんへ<br>「お疲れさま」の気持ちを込めて、ジュース代をプレゼントします。</v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn class="ma-3" color="cyan" dark>支払う</v-btn>
+                  <v-btn class="ma-3" @click="payDialog = false">閉じる</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-col>
           <v-col cols="12" md="3">
             <v-avatar tile size="150" color="cyan" class="mr-5">
@@ -235,7 +247,9 @@ export default {
       name_users: [],
       error: '',
       stripe: null,
-      card: null
+      card: null,
+      dialog: false,
+      payDialog: false,
     }
   },
   computed: {
