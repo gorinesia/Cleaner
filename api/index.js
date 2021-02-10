@@ -6,11 +6,6 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 module.exports = { path: '/api', handler: app };
 
-// app.use(session({
-//   secret: 'Set this to a random string taht is kept secure',
-//   resave: false,
-//   saveUninitialized: true,
-// }))
 
 app.get('/hello', (req, res) => {
   console.log('hello nuxt in text');
@@ -44,10 +39,8 @@ function generateAccountLink(accountID, origin) {
   return stripe.accountLinks.create({
     type: 'account_onboarding',
     account: accountID,
-    refresh_url: `${origin}/owner`,
-    return_url: `${origin}/owner`
-    // refresh_url: `${origin}/onboard-user/refresh`,
-    // return_url: `${origin}/success`
+    refresh_url: `${origin}/mypage`,
+    return_url: `${origin}/mypage`
   }).then((link) => link.url)
   .catch((err) => console.log(err.message))
 }

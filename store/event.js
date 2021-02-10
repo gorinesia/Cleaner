@@ -81,7 +81,7 @@ export const actions = {
         commit('setImage', url);
       })
   },
-  getMessage({commit}) {
+  getEvent({commit}) {
     const db = firebase.firestore();
     db.collection('events')
       .orderBy('date', 'desc')
@@ -103,14 +103,14 @@ export const actions = {
         commit('setEvents', events);
     })
   },
-  addMessage(context, payload) {
+  addEvent(context, payload) {
     const db = firebase.firestore();
     db.collection('events')
       .add(payload)
       .then(() => {
         console.log(payload);
         context.commit('resetImage', null);
-        context.dispatch('getMessage');
+        context.dispatch('getEvent');
       })
   },
   deleteArticles(context, payload) {
@@ -120,7 +120,7 @@ export const actions = {
       .delete()
       .then(() => {
         console.log('deleted!!');
-        context.dispatch('getMessage');
+        context.dispatch('getEvent');
       })
   },
   editArticles(context, payload) {
@@ -136,7 +136,7 @@ export const actions = {
       .then(() => {
         console.log('updated!!');
         context.commit('resetImage', null);
-        context.dispatch('getMessage');
+        context.dispatch('getEvent');
       })
   },
   getPersonalEvent({commit}, payload) {
