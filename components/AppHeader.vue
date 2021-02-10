@@ -1,6 +1,6 @@
 <template>
-  <header>
-    <v-container my-n3>
+  <header width="100%">
+    <v-container my-n3 mx-0 px-0 fluid fill-height>
       <v-row>
         <v-app-bar color="white" style="color: #00ACC1" class="font-weight-bold">
             <v-toolbar-title>
@@ -161,5 +161,9 @@ export default {
   @include display_pc {
     display: block !important
   }
+}
+
+div.row {
+  width: 100%;
 }
 </style>
