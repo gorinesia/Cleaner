@@ -81,7 +81,7 @@
                       <v-avatar class="profile" color="grey" size="60">
                         <v-img :src="article.displayImage"></v-img>
                       </v-avatar>
-                      <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ article.displayName }}</span>
+                      <span class="user--name headline mb-3 font-weight-bold">{{ article.displayName }}</span>
                       <p class="my-2 grey--text text--darken-1">{{ article.place}}</p>
                       <p class="my-2 font-weight-bold">{{ article.comment }}</p>
                       <div v-for="post in posts" :key="post.id">
@@ -328,3 +328,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.user--name {
+  font-size: 24px;
+  color: #00ACC1;
+}
+</style>

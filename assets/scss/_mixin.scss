@@ -28,3 +28,15 @@ $pc-min: $sm + px;
     @content;
   }
 }
+
+// @mixin fz($size: 16) {
+//   font-size: ($size / 10) + rem;
+// }
+
+// html {
+//   font-size: 62.5%;
+// }
+
+// p {
+//   @include fz(8);
+// }
