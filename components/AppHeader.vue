@@ -1,6 +1,6 @@
 <template>
-  <header width="100%">
-    <v-container my-n3 mx-0 px-0 fluid fill-height>
+  <header>
+    <v-container my-n3 fluid>
       <v-row>
         <v-app-bar color="white" style="color: #00ACC1" class="font-weight-bold">
             <v-toolbar-title>
@@ -18,7 +18,8 @@
             <nav class="mt-2">
               <v-tabs>
                 <nav v-if="!loggedIn">
-                  <v-btn rounded color="#1A237E" dark class="font-weight-bold orange--text text--darken-1" @click="guestLogin">ゲストログイン</v-btn>
+                  <!-- <v-btn rounded color="#1A237E" dark class="font-weight-bold orange--text text--darken-1" @click="guestLogin">ゲストログイン</v-btn> -->
+                  <button class="btn--guest btn--guest--radius" @click="guestLogin">ゲストログイン</button>
                   <v-btn rounded outlined color="#00ACC1" class="font-weight-bold" dark to="/auth/login">ログイン</v-btn>
                   <v-btn rounded color="#00ACC1" class="font-weight-bold" dark to="/auth/signup">新規登録</v-btn>
                 </nav>
@@ -163,7 +164,19 @@ export default {
   }
 }
 
-div.row {
-  width: 100%;
+.btn--guest {
+  color: #fff;
+  background-color: #00897B;
+  opacity: 0.8;
+}
+
+.btn--guest:hover {
+  opacity: 1;
+}
+
+.btn--guest--radius {
+  padding: 8px;
+  border-radius: 100vh;
+  outline: none;
 }
 </style>
