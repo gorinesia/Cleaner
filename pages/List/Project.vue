@@ -72,17 +72,19 @@
               <v-hover v-slot ="{ hover }">
                 <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(article.id)">
                   <v-row>
-                    <v-col cols="12" md="3">
+                    <v-col cols="12" md="2">
                       <v-avatar tile size="100" class="ml-5">
                         <v-img :src="article.image"></v-img>
                       </v-avatar>
                     </v-col>
-                    <v-col cols="12" md="4">
+                    <v-col cols="12" md="1">
                       <v-avatar class="profile" color="grey" size="60">
                         <v-img :src="article.displayImage"></v-img>
                       </v-avatar>
-                      <span class="user--name headline mb-3 font-weight-bold">{{ article.displayName }}</span>
-                      <p class="my-2 grey--text text--darken-1">{{ article.place}}</p>
+                    </v-col>
+                    <v-col cols="12" md="5">
+                      <p class="user--name">{{ article.displayName }}</p>
+                      <span class="user--place">{{ article.place}}</span>
                       <p class="my-2 font-weight-bold">{{ article.comment }}</p>
                       <div v-for="post in posts" :key="post.id">
                         <div v-if="!applyFlag">
@@ -94,9 +96,9 @@
                           <span>{{ post.likeSum }}</span>
                         </div>
                       </div>
-
                     </v-col>
-                    <v-col cols="12" md="5">
+
+                    <v-col cols="12" md="4">
                       <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ article.name }}・{{ article.date}}</span>
                     </v-col>
                   </v-row>
@@ -330,8 +332,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .user--name {
-  font-size: 24px;
+  font-size: 1.1rem;
+  font-weight: bold;
   color: #00ACC1;
+  margin-bottom: 3px;
+}
+
+.user--place {
+  margin: 2px 0px;
+  color: #757575;
+  display: inline-block
 }
 </style>
