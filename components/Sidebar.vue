@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-card height="200px" width="256" v-for="currentUser in currentUser" :key="currentUser.id">
+    <v-card class="sidebar" height="250px" width="256" v-for="currentUser in currentUser" :key="currentUser.id">
       <v-navigation-drawer permanent>
         <template v-slot:prepend>
           <v-list-item two-line>
@@ -86,5 +86,9 @@ export default {
   @include display_pc {
     display: block !important;
   }
+}
+
+.sidebar {
+  margin: 20px;
 }
 </style>

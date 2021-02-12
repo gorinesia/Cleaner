@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <v-container>
-      <h2 style="text-align: center; color: #00ACC1;" class="my-5">プロジェクトをみる</h2>
-      <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
-      あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
+      <h2 style="color: #00ACC1;" class="my-5">プロジェクト</h2>
+      <!-- <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
+      あなたも日々のプロジェクトを気軽に投稿してみませんか？</p> -->
       <v-alert dense text type="success" :value="alertPost" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を投稿しました</v-alert>
 
       <v-row justify="center" v-if="loggedIn">
@@ -120,6 +120,7 @@ import 'firebase/firestore';
 
 export default {
   name: 'project',
+  layout: 'loggedIn',
   data() {
     return {
       user: this.$store.state.user.user,
@@ -334,7 +335,7 @@ export default {
 <style lang="scss" scoped>
 
 .article {
-  // padding: 6px;
+  margin: 6px;
 }
 
 .user--name {
