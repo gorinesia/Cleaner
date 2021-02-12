@@ -43,10 +43,10 @@
                 <label>コメント</label>
                 <v-textarea v-model="comment" class="white" placeholder="例) 今日もたくさん拾いました。"></v-textarea>
                 <!-- <section style="position:relative; z-index:1;"> -->
-                  <label>google maps</label>
-                  <input type="text" v-model="address" placeholder="例) Enter your address" id="autocomplete"><br>
+                  <!-- <label>google maps</label> -->
+                  <!-- <input type="text" v-model="address" placeholder="例) Enter your address" id="autocomplete"><br>
                   <v-btn @click="locatorButtonPressed">検索</v-btn>
-                  <div id="map"></div>
+                  <div id="map"></div> -->
               </v-container>
             </v-card-text>
             <v-card-actions>
@@ -58,19 +58,13 @@
               >
                 Close
               </v-btn>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="addMessage"
-              >
-                Save
-              </v-btn>
+              <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
       </v-row>
 
-      <v-row>
+      <v-row class="article">
         <v-col>
           <v-card v-for="article in articles" :key="article.id">
             <template >
@@ -78,17 +72,19 @@
               <v-hover v-slot ="{ hover }">
                 <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(article.id)">
                   <v-row>
-                    <v-col cols="12" md="3">
+                    <v-col cols="12" md="2">
                       <v-avatar tile size="100" class="ml-5">
                         <v-img :src="article.image"></v-img>
                       </v-avatar>
                     </v-col>
-                    <v-col cols="12" md="4">
+                    <v-col cols="12" md="1">
                       <v-avatar class="profile" color="grey" size="60">
                         <v-img :src="article.displayImage"></v-img>
                       </v-avatar>
-                      <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ article.displayName }}</span>
-                      <p class="my-2 grey--text text--darken-1">{{ article.place}}</p>
+                    </v-col>
+                    <v-col cols="12" md="5">
+                      <span class="user--name">{{ article.displayName }}</span>
+                      <span class="user--place">{{ article.place}}</span>
                       <p class="my-2 font-weight-bold">{{ article.comment }}</p>
                       <div v-for="post in posts" :key="post.id">
                         <div v-if="!applyFlag">
@@ -100,9 +96,9 @@
                           <span>{{ post.likeSum }}</span>
                         </div>
                       </div>
-
                     </v-col>
-                    <v-col cols="12" md="5">
+
+                    <v-col cols="12" md="4">
                       <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ article.name }}・{{ article.date}}</span>
                     </v-col>
                   </v-row>
@@ -334,3 +330,24 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+.article {
+  // padding: 6px;
+}
+
+.user--name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00ACC1;
+  margin-bottom: 3px;
+}
+
+.user--place {
+  margin: 2px 0px;
+  margin-left: 5px;
+  color: #757575;
+  // display: inline-block
+}
+</style>

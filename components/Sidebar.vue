@@ -9,7 +9,8 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <nuxt-link class="cyan--text text--darken-1 font-weight-bold text-h5 text-decoration-none" to="/personal/profile" @click.native="getProfile(currentUser.id)">{{ currentUser.displayName }}</nuxt-link>
+              <div class="cyan--text text--darken-1 font-weight-bold text-h5 text-decoration-none">{{ currentUser.displayName }}</div>
+              <!-- <nuxt-link class="cyan--text text--darken-1 font-weight-bold text-h5 text-decoration-none" to="/personal/profile" @click.native="getProfile(currentUser.id)">{{ currentUser.displayName }}</nuxt-link> -->
             </v-list-item-content>
           </v-list-item>
         </template>
@@ -77,3 +78,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.v-card {
+  display: none;
+
+  @include display_pc {
+    display: block !important;
+  }
+}
+</style>

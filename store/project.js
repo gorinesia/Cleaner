@@ -166,6 +166,7 @@ export const actions = {
           this.alertDelete = false
         }, 3000);
         });
+        context.commit('closeModalForDelete');
   },
   editArticles(context, payload) {
     const db = firebase.firestore();

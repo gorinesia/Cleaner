@@ -51,14 +51,14 @@
                           <v-img :src="currentUser.image"></v-img>
                         </v-avatar>
                       </v-col>
-                      <v-col cols="4">
+                      <v-col cols="12" md="4">
                         <v-avatar class="profile" color="grey" size="60">
                           <v-img :src="currentUser.displayImage"></v-img>
                         </v-avatar>
                         <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ currentUser.displayName }}</span>
                         <p class="my-5 font-weight-bold">{{ currentUser.comment }}</p>
                       </v-col>
-                      <v-col cols="5">
+                      <v-col cols="12" md="5">
                         <span class="grey--text float-right">{{ currentUser.date }}</span>
                       </v-col>
                     </v-row>
@@ -131,7 +131,7 @@ export default {
       uid: this.uid,
       // displayName: this.currentUser[0].displayName,
     });
-    this.$store.dispatch('event/getMessage');
+    this.$store.dispatch('event/getEvent');
   },
   methods: {
     getPersonalProjectId(id) {
