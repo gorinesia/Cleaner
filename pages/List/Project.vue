@@ -64,7 +64,7 @@
         </v-dialog>
       </v-row>
 
-      <v-row>
+      <v-row class="article">
         <v-col>
           <v-card v-for="article in articles" :key="article.id">
             <template >
@@ -83,7 +83,7 @@
                       </v-avatar>
                     </v-col>
                     <v-col cols="12" md="5">
-                      <p class="user--name">{{ article.displayName }}</p>
+                      <span class="user--name">{{ article.displayName }}</span>
                       <span class="user--place">{{ article.place}}</span>
                       <p class="my-2 font-weight-bold">{{ article.comment }}</p>
                       <div v-for="post in posts" :key="post.id">
@@ -333,8 +333,12 @@ export default {
 
 <style lang="scss" scoped>
 
+.article {
+  // padding: 6px;
+}
+
 .user--name {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: #00ACC1;
   margin-bottom: 3px;
@@ -342,7 +346,8 @@ export default {
 
 .user--place {
   margin: 2px 0px;
+  margin-left: 5px;
   color: #757575;
-  display: inline-block
+  // display: inline-block
 }
 </style>

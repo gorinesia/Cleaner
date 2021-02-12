@@ -48,14 +48,14 @@
         <v-tabs-items v-model="tab">
           <v-tab-item>
             <v-card flat align="center" justify="center" class="tab--item">
-              <p class="my-5"><span class="font-weight-bold">プロジェクト</span>とは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。
+              <p class="my-3"><span class="font-weight-bold">プロジェクト</span>とは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。
               あなたも日々のプロジェクトを気軽に投稿してみませんか？</p>
               <v-btn color="cyan darken-1" align="center" justify="center" rounded  large dark to="/list/project">プロジェクトをみる</v-btn>
             </v-card>
           </v-tab-item>
           <v-tab-item>
             <v-card flat align="center" justify="center" class="tab--item">
-              <p class="my-5"><span class="font-weight-bold">イベント</span>とは、みんなでゴミ拾いをするための企画のことです。
+              <p class="my-3"><span class="font-weight-bold">イベント</span>とは、みんなでゴミ拾いをするための企画のことです。
               イベントを立ち上げて、みんなでゴミ拾いをしてみませんか？</p>
               <v-btn color="cyan darken-1"  rounded  large dark to="/list/event">イベントをみる</v-btn>
             </v-card>
@@ -115,6 +115,6 @@ p {
 }
 
 .tab--item {
-  padding: 5px;
+  padding: 10px;
 }
 </style>
