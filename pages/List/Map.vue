@@ -37,6 +37,7 @@ export default {
     }
   },
   mounted() {
+    console.log(process.env.GOOGLE_MAPS_KEY);
     let autocomplete = new google.maps.places.Autocomplete(
       document.getElementById('autocomplete'),
       {
@@ -80,11 +81,11 @@ export default {
       }
     },
     getAddressFrom(lat, long) {
-      axios.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='
-      + lat
-      + ','
-      + long
-      + '&key=AIzaSyAhPfGDpJFP1tJF6teByYHF160tVqCbK7c')
+      axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=
+      + ${lat}
+      + ,
+      + ${long}
+      + &key=${process.env.GOOGLE_MAPS_KEY}`)
         .then(response => {
           if (response.data.error_message) {
             this.error = response.data.error_message;
