@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-card height="200px" width="256" v-for="currentUser in currentUser" :key="currentUser.id">
+    <v-card class="sidebar" height="250px" width="256" v-for="currentUser in currentUser" :key="currentUser.id">
       <v-navigation-drawer permanent>
         <template v-slot:prepend>
           <v-list-item two-line>
@@ -39,21 +39,38 @@ export default {
     return {
       items: [
         {
-          title: 'ユーザー情報設定',
+          title: 'マップ',
           icon: 'mdi-folder',
-          link: '/edit/profile'
+          link: '/profile'
         },
         {
-          title: 'メッセージ管理',
+          title: 'プロジェクト',
           icon: 'mdi-account-multiple',
-          link: '/edit/message'
+          link: '/list/project'
         },
         {
-          title: 'サポート管理',
+          title: 'イベント',
           icon: 'mdi-upload',
-          link: '/edit/support'
+          link: '/list/event'
         },
       ],
+      // items: [
+      //   {
+      //     title: 'ユーザー情報設定',
+      //     icon: 'mdi-folder',
+      //     link: '/edit/profile'
+      //   },
+      //   {
+      //     title: 'メッセージ管理',
+      //     icon: 'mdi-account-multiple',
+      //     link: '/edit/message'
+      //   },
+      //   {
+      //     title: 'サポート管理',
+      //     icon: 'mdi-upload',
+      //     link: '/edit/support'
+      //   },
+      // ],
     }
   },
   computed: {
@@ -86,5 +103,9 @@ export default {
   @include display_pc {
     display: block !important;
   }
+}
+
+.sidebar {
+  margin: 20px;
 }
 </style>

@@ -15,7 +15,7 @@
               </nuxt-link>
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <nav class="mt-2">
+            <nav class="mt-3">
               <v-tabs>
                 <nav v-if="!loggedIn">
                   <!-- <v-btn rounded color="#1A237E" dark class="font-weight-bold orange--text text--darken-1" @click="guestLogin">ゲストログイン</v-btn> -->
@@ -24,7 +24,35 @@
                   <v-btn rounded color="#00ACC1" class="font-weight-bold" dark to="/auth/signup">新規登録</v-btn>
                 </nav>
                 <nav v-else>
-                  <v-btn rounded color="#00ACC1" class="font-weight-bold " dark @click="logOut">ログアウト</v-btn>
+                  <template>
+                    <div v-for="currentUser in
+                    currentUser" :key="currentUser.id">
+                      <v-menu offset-y>
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-img
+                              :src="currentUser.image"
+                              v-bind="attrs"
+                              v-on="on"
+                              width="10%"
+                              height="10%"
+                              style="border-radius: 50%; cursor: pointer; float: right"
+                            ></v-img>
+                        </template>
+                        <v-list>
+                          <v-list-item
+                            v-for="item in items"
+                            :key="item.title" :to="item.link"
+                          >
+                          <v-list-item-icon>
+                            <v-icon>{{ item.icon }}</v-icon>
+                          </v-list-item-icon>
+                            <v-list-item-title>{{ item.title }}</v-list-item-title>
+                          </v-list-item>
+                          <v-btn rounded block color="#00ACC1" class="font-weight-bold mt-5" dark @click="logOut">ログアウト</v-btn>
+                        </v-list>
+                      </v-menu>
+                    </div>
+                  </template>
                 </nav>
               </v-tabs>
             </nav>
@@ -119,7 +147,13 @@ export default {
           icon: 'mdi-upload',
           link: '/edit/support'
         },
+        // {
+        //   title: 'ログアウト',
+        //   icon: 'mdi-account-arrow-right',
+        //   link: '/auth/logout'
+        // },
       ],
+      isOpen: false
     }
   },
   computed : {
@@ -139,6 +173,10 @@ export default {
     },
     logOut() {
       this.$store.dispatch('user/logOutAction');
+    },
+    open() {
+      console.log('right')
+      this.isOpen = !this.isOpen
     }
   }
 }
@@ -178,5 +216,106 @@ export default {
   padding: 8px;
   border-radius: 100vh;
   outline: none;
+}
+
+.header--right--icon {
+  display: inline;
+}
+
+.current-user-image {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  // padding: 1px;
+  // margin: 3px;
+}
+
+.btn--logout {
+  font-weight: bold;
+  color: #fff;
+  background-color: #00ACC1;
+  padding: 8px;
+  margin-bottom: -20px;
+}
+
+.btn--logout--radius {
+  border-radius: 100vh;
+  outline: none;
+}
+
+#nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+#nav h1 {
+    margin: 0 0 0 20px;
+    color: #fff;
+}
+
+#nav > ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#nav > ul > li {
+    margin: 0 20px 0 0;
+}
+
+#nav > ul > li > a {
+    display: block;
+    height: auto;
+    padding: 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+#nav > ul > li > span {
+    position: relative;
+    display: block;
+    height: auto;
+    padding: 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+#nav > ul > li > span:after {
+    content: '▼';
+    display: inline-block;
+    transform: rotate(90deg);
+
+}
+
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    padding: 0;
+    list-style-type: none;
+    background-color: #007db9;
+}
+
+.dropdown li {
+    width: 250px;
+    border-bottom: 1px solid #fff;
+}
+
+.dropdown li a {
+    display: block;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.isOpen {
+  display: block;
 }
 </style>
