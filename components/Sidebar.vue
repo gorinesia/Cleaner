@@ -39,21 +39,38 @@ export default {
     return {
       items: [
         {
-          title: 'ユーザー情報設定',
+          title: 'マップ',
           icon: 'mdi-folder',
-          link: '/edit/profile'
+          link: '/profile'
         },
         {
-          title: 'メッセージ管理',
+          title: 'プロジェクト',
           icon: 'mdi-account-multiple',
-          link: '/edit/message'
+          link: '/list/project'
         },
         {
-          title: 'サポート管理',
+          title: 'イベント',
           icon: 'mdi-upload',
-          link: '/edit/support'
+          link: '/list/event'
         },
       ],
+      // items: [
+      //   {
+      //     title: 'ユーザー情報設定',
+      //     icon: 'mdi-folder',
+      //     link: '/edit/profile'
+      //   },
+      //   {
+      //     title: 'メッセージ管理',
+      //     icon: 'mdi-account-multiple',
+      //     link: '/edit/message'
+      //   },
+      //   {
+      //     title: 'サポート管理',
+      //     icon: 'mdi-upload',
+      //     link: '/edit/support'
+      //   },
+      // ],
     }
   },
   computed: {

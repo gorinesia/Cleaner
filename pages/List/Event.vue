@@ -1,10 +1,7 @@
 <template>
   <v-app>
     <v-container>
-      <h2 style="text-align: center; color: #00ACC1;" class="my-5">イベントをみる</h2>
-      <p style="text-align: center;">イベントとは、みんなでゴミ拾いをするための企画のことです。<br>
-      イベントを立ち上げて、みんなでゴミ拾いをしてみませんか？</p>
-
+      <h2 style="color: #00ACC1;" class="my-5">イベント</h2>
       <v-row justify="center" v-if="loggedIn">
         <v-dialog
           v-model="dialog"
@@ -48,6 +45,7 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
+              <v-btn @click="addEvent" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
               <v-btn
                 color="blue darken-1"
                 text
@@ -55,7 +53,6 @@
               >
                 Close
               </v-btn>
-              <v-btn @click="addEvent" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -64,31 +61,31 @@
       <v-row>
         <v-col>
           <v-card v-for="event in events" :key="event.id">
-            <template>
-                <v-divider />
-                <v-hover v-slot="{ hover }">
-                  <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(event.id)">
-                      <v-row :key="event.id" >
-                        <v-col cols="12" md="9">
-                          <v-col>
-                            <v-avatar class="profile" color="grey" size="60">
+            <v-hover>
+              <!-- <template> -->
+                  <!-- <v-divider /> -->
+                    <v-card @click="getPersonalId(event.id)">
+                        <v-row :key="event.id" >
+                          <v-col cols="12" md="2">
+                            <v-avatar class="profile ml-5" color="grey" size="60">
                               <v-img :src="event.displayImage"></v-img>
                             </v-avatar>
-                            <span class="headline mb-3 font-weight-bold" style="color: #00ACC1;">{{ event.name }}</span>
-                            <p class="my-5 font-weight-bold">{{ event.comment }}</p>
-                            <span class="grey--text">日時： {{ event.date }}</span>
-                            <span class="grey--text float-right">場所： {{ event.place}}</span>
                           </v-col>
-                        </v-col>
-                        <v-col cols="12" md="3">
-                          <v-avatar tile size="130">
-                            <v-img :src="event.image"></v-img>
-                          </v-avatar>
-                        </v-col>
-                      </v-row>
-                  </v-card>
-                </v-hover>
-            </template>
+                          <v-col cols="12" md="7">
+                            <span class="headline mb-3 font-weight-bold" style="color: #00ACC1; display: inline-block">{{ event.name }}</span>
+                            <!-- <p class="my-5 font-weight-bold">{{ event.comment }}</p> -->
+                            <span class="grey--text" style="display: block">日時： {{ event.date }}</span>
+                            <p class="grey--text">場所： {{ event.place}}</p>
+                          </v-col>
+                          <v-col cols="12" md="3">
+                            <v-avatar tile size="110">
+                              <v-img :src="event.image"></v-img>
+                            </v-avatar>
+                          </v-col>
+                        </v-row>
+                    </v-card>
+              <!-- </template> -->
+            </v-hover>
           </v-card>
         </v-col>
       </v-row>
@@ -99,6 +96,7 @@
 
 <script>
 export default {
+  layout: 'loggedIn',
   name: 'event',
   data() {
     return {
