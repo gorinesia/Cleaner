@@ -23,31 +23,36 @@
                   <v-btn rounded outlined color="#00ACC1" class="font-weight-bold" dark to="/auth/login">ログイン</v-btn>
                   <v-btn rounded color="#00ACC1" class="font-weight-bold" dark to="/auth/signup">新規登録</v-btn>
                 </nav>
-                <nav id="nav" v-else>
-                  <ul>
-                    <li v-for="currentUser in currentUser" :key="currentUser.id">
-                      <span @click="open">
-                        {{ currentUser.displayName }}
-                        <!-- <img :src="currentUser.image" class="current-user-image" > -->
-                      <!-- <ul>
-                        <li v-for="item in items" :key="item.id">
-                          <nuxt-link :to="item.link">{{item.title}}</nuxt-link>
-                        </li>
-                      </ul> -->
-                      <!-- <div class="header--right--icon" > -->
-                        <!-- <img :src="currentUser.image" class="current-user-image" @click="open"> -->
-                        <ul class="dropdown" :class="{ isOpen }">
-                          <li v-for="item in items" :key="item.id">
-                            <nuxt-link :to="item.link">{{item.title}}</nuxt-link>}
-                          </li>
-                        </ul>
-                      </span>
-                    </li>
-                  </ul>
-                  <!-- </div> -->
-                  <!-- <div class="header--right--icon"> -->
-                    <!-- <button class="btn--logout btn--logout--radius" dark @click="logOut">ログアウト</button> -->
-                  <!-- </div> -->
+                <nav v-else>
+                  <template>
+                    <div v-for="currentUser in
+                    currentUser" :key="currentUser.id">
+                      <v-menu offset-y>
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-img
+                              :src="currentUser.image"
+                              v-bind="attrs"
+                              v-on="on"
+                              width="10%"
+                              height="10%"
+                              style="border-radius: 50%; cursor: pointer; float: right"
+                            ></v-img>
+                        </template>
+                        <v-list>
+                          <v-list-item
+                            v-for="item in items"
+                            :key="item.title" :to="item.link"
+                          >
+                          <v-list-item-icon>
+                            <v-icon>{{ item.icon }}</v-icon>
+                          </v-list-item-icon>
+                            <v-list-item-title>{{ item.title }}</v-list-item-title>
+                          </v-list-item>
+                          <v-btn rounded block color="#00ACC1" class="font-weight-bold mt-5" dark @click="logOut">ログアウト</v-btn>
+                        </v-list>
+                      </v-menu>
+                    </div>
+                  </template>
                 </nav>
               </v-tabs>
             </nav>
@@ -142,11 +147,11 @@ export default {
           icon: 'mdi-upload',
           link: '/edit/support'
         },
-        {
-          title: 'ログアウト',
-          icon: 'mdi-upload',
-          link: '/auth/logout'
-        },
+        // {
+        //   title: 'ログアウト',
+        //   icon: 'mdi-account-arrow-right',
+        //   link: '/auth/logout'
+        // },
       ],
       isOpen: false
     }
