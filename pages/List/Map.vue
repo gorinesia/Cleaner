@@ -1,28 +1,25 @@
 <template>
-  <div>
-    <section class="ui two column centered grid" style="position: relative; z-index: 1;">
-      <div class="column">
-        <form class="ui segment large form">
-          <div class="ui message red" v-show="error">{{ error }}</div>
-          <div class="ui segment">
-            <div class="field">
-              <div class="ui right icon input large" :class="{loading: spinner}">
-                <input type="text" placeholder="Enter your address" v-model="address" id="autocomplete" />
-                <i class="dot circle link icon" @click="locatorButtonPressed"></i>
+  <v-app>
+    <div>
+      <section class="ui two column centered grid" style="position: relative; z-index: 1;">
+        <div class="column">
+          <form class="ui segment large form">
+            <div class="ui message red" v-show="error">{{ error }}</div>
+            <div class="ui segment">
+              <div class="field">
+                <div class="ui right icon input large" :class="{loading: spinner}">
+                  <input type="text" placeholder="Enter your address" v-model="address" id="autocomplete" />
+                  <i class="dot circle link icon" @click="locatorButtonPressed"></i>
+                </div>
               </div>
+              <button class="ui button">Go</button>
             </div>
-            <button class="ui button">Go</button>
-          </div>
-        </form>
-      </div>
-    <!-- <section style="position:relative; z-index:1;"> -->
-      <!-- <label>google maps</label>
-        <input type="text" v-model="address" placeholder="例) Enter your address" id="autocomplete"><br>
-          <v-btn @click="locatorButtonPressed">検索</v-btn>
-          <div id="map"></div> -->
-    </section>
-    <section id="map"></section>
-  </div>
+          </form>
+        </div>
+      </section>
+      <section id="map"></section>
+    </div>
+  </v-app>
 </template>
 
 <script>
@@ -107,7 +104,7 @@ export default {
     showUserLocationOnTheMap(latitude, longitude) {
       // Create a Map object
       let map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 15,
+        zoom: 10,
         center: new google.maps.LatLng(latitude, longitude),
         mapTypeId: google.maps.MapTypeId.ROADMAP
       });
@@ -149,10 +146,12 @@ export default {
 
 #map {
   position: absolute;
-  top: 0;
+  top: 200px;
   right: 0;
   bottom: 0;
   left: 0;
   background-color: red;
+  width: 75%;
+  margin: 0 auto;
 }
 </style>

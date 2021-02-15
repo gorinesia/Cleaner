@@ -41,7 +41,7 @@ export default {
         {
           title: 'マップ',
           icon: 'mdi-folder',
-          link: '/profile'
+          link: '/list/map'
         },
         {
           title: 'プロジェクト',

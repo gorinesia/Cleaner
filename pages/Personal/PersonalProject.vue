@@ -128,7 +128,7 @@
 
       <v-container>
         <div>
-          <span>{{ nameUser }}</span>
+          <!-- <span>{{ nameUser }}</span> -->
         </div>
         <div>いいね</div>
         <div>
@@ -243,7 +243,7 @@ export default {
       likeSum: 0,
       images: [],
       image_users: [],
-      nameUser: [],
+      // nameUser: [],
       name_users: [],
       error: '',
       stripe: null,
