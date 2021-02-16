@@ -66,7 +66,7 @@
 
       <v-row class="article">
         <v-col>
-          <v-card v-for="article in articles" :key="article.id">
+          <v-card v-for="(article, index) in articles" :key="index" :id="article.id">
             <template >
               <v-divider />
               <v-hover v-slot ="{ hover }">
@@ -86,14 +86,48 @@
                       <span class="user--name">{{ article.displayName }}</span>
                       <span class="user--place">{{ article.place}}</span>
                       <p class="my-2 font-weight-bold">{{ article.comment }}</p>
-                      <div v-for="post in posts" :key="post.id">
-                        <div v-if="!applyFlag">
-                          <v-icon color="orange" @click.stop="applyEvent(articles[0].id)" outlined>mdi-thumb-up-outline</v-icon>
-                          <span>{{ post.likeSum }}</span>
+                      <div v-if="loggedIn">
+                        <!-- <div v-for="post in posts" :key="post.id"> -->
+                          <div v-if="!beLiked">
+                            <v-icon color="orange" @click.stop="like" outlined>mdi-thumb-up-outline</v-icon>
+                            <!-- <span>{{ post.likeSum }}</span> -->
+                          </div>
+                          <div v-else>
+                            <v-icon  color="orange" @click.stop="unlike">mdi-thumb-up</v-icon>
+                            <!-- <span>{{ post.likeSum }}</span> -->
+                          </div>
+                        <!-- </div> -->
+                      </div>
+                      <!-- <div v-if="loggedIn">
+                        <div v-for="post in posts" :key="post.id"> -->
+                          <!-- <div v-if="!applyFlag">
+                            <v-icon color="orange" @click.stop="applyEvent(articles[0].id)" outlined>mdi-thumb-up-outline</v-icon> -->
+                            <!-- <span>{{ post.likeSum }}</span> -->
+                          <!-- </div>
+                          <div v-if="applyFlag">
+                            <v-icon  color="orange" @click.stop="cancelEvent(articles[0].id)">mdi-thumb-up</v-icon> -->
+                            <!-- <span>{{ post.likeSum }}</span> -->
+                          <!-- </div>
                         </div>
-                        <div v-if="applyFlag">
-                          <v-icon  color="orange" @click.stop="cancelEvent(articles[0].id)">mdi-thumb-up</v-icon>
-                          <span>{{ post.likeSum }}</span>
+                      </div> -->
+                      <div v-else>
+                        <div>
+                          <v-dialog v-model="dialog" width="500">
+                            <template v-slot:activator="{ on, attrs}">
+                              <v-icon color="orange" v-if="!applyFlag" class="white--text" v-bind="attrs " v-on="on" medium outlined>mdi-thumb-up-outline</v-icon>
+                              <!-- <span>{{ post.likeSum }}</span> -->
+                            </template>
+                            <v-card>
+                              <v-card-title>Need to Login</v-card-title>
+                              <v-card-text>ログインしてCleanerを楽しみませんか？</v-card-text>
+                              <v-divider></v-divider>
+                              <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="cyan" outlined rounded to="/auth/login">ログイン</v-btn>
+                                <v-btn color="orange" outlined rounded @click="dialog = false">閉じる</v-btn>
+                              </v-card-actions>
+                            </v-card>
+                          </v-dialog>
                         </div>
                       </div>
                     </v-col>
@@ -135,9 +169,11 @@ export default {
       map: '',
       applyFlag: false,
       loginUser: null,
-      likeSum: 0,
+      // likeSum: 0,
       alertPost: false,
-      posts: []
+      article: '',
+      beLiked: false,
+      // posts: []
     }
   },
   computed: {
@@ -166,6 +202,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.dispatch('project/getMessage');
     // this.$store.dispatch('project/getMessage', {
     // //   displayName: this.currentUser[0].displayName,
     // });
@@ -175,9 +212,11 @@ export default {
     //   }
     // })
     // const db = firebase.firestore();
-    // // const docRef = db.collection('posts').doc(this.articles[0].id);
-    // this.getEvent()
-    // // this.getEvent(docRef)
+    // const likeRef = db.collection('projects').doc()
+    // this.checkLikeStatus(id);
+    // const docRef = db.collection('posts').doc(this.articles[0].id);
+    // // this.getEvent()
+    // this.getEvent(docRef)
 
     // let autocomplete = new google.maps.places.Autocomplete(
     //   document.getElementById('autocomplete'),
@@ -195,10 +234,26 @@ export default {
     //     place.geometry.location.lng())
     // });
 
-    this.$store.dispatch('project/getMessage');
 
   },
   methods: {
+    async like() {
+      const likeRef = firebase.firestore().collection('projects').doc(this.article.id)
+        console.log(likeRef);
+      // // .collection('likes');
+      // await likeRef.doc(this.currentUser[0].uid).set({
+      //   uid: this.currentUser[0].uid
+      // });
+      // this.beLiked = true;
+      // const likeRef = db.collection('projects').doc(this.project.id).collection('likes');
+      // await likeRef.doc(this.currentUser.uid).set({
+      //   uid: this.currentUser.uid
+      // });
+      // this.beLiked = true;
+    },
+    unLike() {
+
+    },
     showImage() {
       this.imageOverlay = true;
     },
@@ -299,8 +354,8 @@ export default {
         map: map
       })
     },
-    getEvent(docRef) {
-      docRef.get().then(doc => {
+    async getEvent(docRef) {
+      await docRef.get().then(doc => {
         if (doc.exists) {
           console.log(doc.data());
           this.posts = doc.data();
@@ -312,21 +367,21 @@ export default {
         }
       });
     },
-    applyEvent(id) {
+    async applyEvent(id) {
       const db = firebase.firestore();
-      const docRef = db.collection('posts').doc(id);
+      const docRef = await db.collection('posts').doc(id);
       docRef.set({
         like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
       }, { merge: true })
-      this.getEvent(docRef);
+      await this.getEvent(docRef);
     },
-    cancelEvent(id) {
+    async cancelEvent(id) {
       const db = firebase.firestore();
-      const docRef = db.collection('posts').doc(id);
+      const docRef = await db.collection('posts').doc(id);
       docRef.update({
         like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
       })
-      this.getEvent(docRef);
+      await this.getEvent(docRef);
     }
   }
 }
