@@ -406,28 +406,28 @@ export default {
         }
       })
     },
-    applyEvent() {
+    async applyEvent() {
         const db = firebase.firestore();
-        const docRef = db.collection('posts').doc(this.personalProject[0].id)
+        const docRef = await db.collection('posts').doc(this.personalProject[0].id)
         docRef.set({
           displayImage: this.currentUser[0].image,
           like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
           image_users: firebase.firestore.FieldValue.arrayUnion(this.currentUser[0].image),
           name_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.displayName),
         }, { merge: true })
+        await this.getEvent(docRef);
         this.applyFlag = true;
-        this.getEvent(docRef);
     },
-    cancelEvent() {
+    async cancelEvent() {
         const db = firebase.firestore();
-        const docRef = db.collection('posts').doc(this.personalProject[0].id)
+        const docRef = await db.collection('posts').doc(this.personalProject[0].id)
         docRef.update({
           like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
           image_users: firebase.firestore.FieldValue.arrayRemove(this.currentUser[0].image),
           name_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.displayName),
         })
+        await this.getEvent(docRef);
         this.applyFlag = false;
-        this.getEvent(docRef);
     },
   }
 }

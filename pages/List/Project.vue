@@ -66,7 +66,7 @@
 
       <v-row class="article">
         <v-col>
-          <v-card v-for="(article, index) in articles" :key="index" :id="article.id">
+          <v-card v-for="(article, index) in articles" :key="index" :id="article.id" :article="article">
             <template >
               <v-divider />
               <v-hover v-slot ="{ hover }">
@@ -86,30 +86,30 @@
                       <span class="user--name">{{ article.displayName }}</span>
                       <span class="user--place">{{ article.place}}</span>
                       <p class="my-2 font-weight-bold">{{ article.comment }}</p>
-                      <div v-if="loggedIn">
-                        <!-- <div v-for="post in posts" :key="post.id"> -->
-                          <div v-if="!beLiked">
-                            <v-icon color="orange" @click.stop="like" outlined>mdi-thumb-up-outline</v-icon>
-                            <!-- <span>{{ post.likeSum }}</span> -->
-                          </div>
-                          <div v-else>
-                            <v-icon  color="orange" @click.stop="unlike">mdi-thumb-up</v-icon>
-                            <!-- <span>{{ post.likeSum }}</span> -->
-                          </div>
-                        <!-- </div> -->
-                      </div>
                       <!-- <div v-if="loggedIn">
-                        <div v-for="post in posts" :key="post.id"> -->
-                          <!-- <div v-if="!applyFlag">
-                            <v-icon color="orange" @click.stop="applyEvent(articles[0].id)" outlined>mdi-thumb-up-outline</v-icon> -->
+                          <div v-if="!beLiked">
+                            <div v-for="post in posts" :key="post.id"> -->
+                              <!-- <v-icon color="orange" @click.stop="like(article.id)" outlined>mdi-thumb-up-outline</v-icon> -->
                             <!-- <span>{{ post.likeSum }}</span> -->
-                          <!-- </div>
-                          <div v-if="applyFlag">
-                            <v-icon  color="orange" @click.stop="cancelEvent(articles[0].id)">mdi-thumb-up</v-icon> -->
+                            <!-- </div> -->
+                          <!-- </div> -->
+                          <!-- <div v-else>
+                            <v-icon  color="orange" @click.stop="unlike">mdi-thumb-up</v-icon> -->
                             <!-- <span>{{ post.likeSum }}</span> -->
-                          <!-- </div>
+                          <!-- </div> -->
+                      <!-- </div> -->
+                      <div v-if="loggedIn">
+                        <div v-for="post in posts" :key="post.id">
+                          <!-- <div > -->
+                            <v-icon v-if="!applyFlag" color="orange" @click.stop="applyEvent(article.id)" outlined>mdi-thumb-up-outline</v-icon>
+                            <!-- <span>{{ post.likeSum }}</span> -->
+                          <!-- </div> -->
+                          <!-- <div> -->
+                            <v-icon v-else color="orange" @click.stop="cancelEvent(article.id)">mdi-thumb-up</v-icon>
+                            <span>{{ post.likeSum }}</span>
+                          <!-- </div> -->
                         </div>
-                      </div> -->
+                      </div>
                       <div v-else>
                         <div>
                           <v-dialog v-model="dialog" width="500">
@@ -173,7 +173,7 @@ export default {
       alertPost: false,
       article: '',
       beLiked: false,
-      // posts: []
+      posts: []
     }
   },
   computed: {
@@ -214,8 +214,8 @@ export default {
     // const db = firebase.firestore();
     // const likeRef = db.collection('projects').doc()
     // this.checkLikeStatus(id);
-    // const docRef = db.collection('posts').doc(this.articles[0].id);
-    // // this.getEvent()
+    // const docRef = db.collection('posts').doc(this.uid);
+    // this.getEvent(this.article.id)
     // this.getEvent(docRef)
 
     // let autocomplete = new google.maps.places.Autocomplete(
@@ -237,9 +237,11 @@ export default {
 
   },
   methods: {
-    async like() {
-      const likeRef = firebase.firestore().collection('projects').doc(this.article.id)
-        console.log(likeRef);
+    async like(id) {
+      // const likeRef = firebase.firestore().collection('projects').doc(this.article.id)
+      //   console.log(likeRef);
+      const likeRef = firebase.firestore().collection('posts').doc(id);
+      console.log(likeRef)
       // // .collection('likes');
       // await likeRef.doc(this.currentUser[0].uid).set({
       //   uid: this.currentUser[0].uid
@@ -371,17 +373,21 @@ export default {
       const db = firebase.firestore();
       const docRef = await db.collection('posts').doc(id);
       docRef.set({
-        like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
+        uid: currentUser.uid
+        // like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
       }, { merge: true })
       await this.getEvent(docRef);
+      this.applyEvent = true;
     },
     async cancelEvent(id) {
       const db = firebase.firestore();
       const docRef = await db.collection('posts').doc(id);
-      docRef.update({
-        like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
-      })
+      docRef.delete()
+      // docRef.update({
+      //   like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
+      // })
       await this.getEvent(docRef);
+      this.applyEvent = false;
     }
   }
 }
