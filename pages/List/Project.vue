@@ -106,10 +106,10 @@
                           <!-- </div> -->
                           <!-- <div> -->
                             <v-icon v-else color="orange" @click.stop="cancelEvent(article.id)">mdi-thumb-up</v-icon>
-                            <span>{{ post.likeSum }}</span>
-                          <!-- </div> -->
+                            <span>{{ likeSum }}</span>
+                          </div>
                         </div>
-                      </div>
+                      <!-- </div> -->
                       <div v-else>
                         <div>
                           <v-dialog v-model="dialog" width="500">
@@ -211,10 +211,10 @@ export default {
     //     this.loginUser = user;
     //   }
     // })
-    // const db = firebase.firestore();
+    const db = firebase.firestore();
     // const likeRef = db.collection('projects').doc()
     // this.checkLikeStatus(id);
-    // const docRef = db.collection('posts').doc(this.uid);
+    const docRef = db.collection('posts').where('id', '==', true);
     // this.getEvent(this.article.id)
     // this.getEvent(docRef)
 
@@ -362,8 +362,8 @@ export default {
           console.log(doc.data());
           this.posts = doc.data();
           const posts = this.posts;
-          this.likeSum = this.posts.like_users.length;
-          this.applyFlag = this.posts.like_users.includes(this.loginUser.uid);
+          this.likeSum = this.posts.uid.length;
+          this.applyFlag = this.posts.uid.includes(this.loginUser.uid);
         } else {
           console.log(doc.data());
         }
@@ -373,7 +373,7 @@ export default {
       const db = firebase.firestore();
       const docRef = await db.collection('posts').doc(id);
       docRef.set({
-        uid: currentUser.uid
+        uid: this.currentUser[0].uid
         // like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
       }, { merge: true })
       await this.getEvent(docRef);
