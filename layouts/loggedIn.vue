@@ -21,13 +21,13 @@
 <script>
 import AppFooter from '../components/AppFooter.vue'
 import Sidebar from '../components/Sidebar.vue'
-import Toolbar from '@/components/Toolbar.vue'
+// import Toolbar from '@/components/Toolbar.vue'
 
 export default {
   components: {
     AppFooter,
     Sidebar,
-    Toolbar,
+    // Toolbar,
   },
   data() {
     return {
