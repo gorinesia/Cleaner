@@ -99,16 +99,18 @@
                           <!-- </div> -->
                       <!-- </div> -->
                       <div v-if="loggedIn">
-                        <div v-for="post in posts" :key="post.id">
+                        <!-- <div v-for="post in posts" :key="post.id"> -->
                           <!-- <div > -->
-                            <v-icon v-if="!applyFlag" color="orange" @click.stop="applyEvent(article.id)" outlined>mdi-thumb-up-outline</v-icon>
+                            <v-icon v-if="!applyFlag" color="orange" @click.stop="like(article.id)" outlined>mdi-thumb-up-outline</v-icon>
+                            <!-- <v-icon v-if="!applyFlag" color="orange" @click.stop="applyEvent(article.id)" outlined>mdi-thumb-up-outline</v-icon> -->
                             <!-- <span>{{ post.likeSum }}</span> -->
                           <!-- </div> -->
                           <!-- <div> -->
-                            <v-icon v-else color="orange" @click.stop="cancelEvent(article.id)">mdi-thumb-up</v-icon>
-                            <span>{{ likeSum }}</span>
+                            <v-icon v-else color="orange" @click.stop="unlike(article.id)">mdi-thumb-up</v-icon>
+                            <!-- <v-icon v-else color="orange" @click.stop="cancelEvent(article.id)">mdi-thumb-up</v-icon> -->
+                            <!-- <span>{{ likeSum }}</span> -->
                           </div>
-                        </div>
+                        <!-- </div> -->
                       <!-- </div> -->
                       <div v-else>
                         <div>
@@ -238,10 +240,12 @@ export default {
   },
   methods: {
     async like(id) {
+      console.log(id);
+      this.applyFlag = true;
       // const likeRef = firebase.firestore().collection('projects').doc(this.article.id)
       //   console.log(likeRef);
-      const likeRef = firebase.firestore().collection('posts').doc(id);
-      console.log(likeRef)
+      // const likeRef = firebase.firestore().collection('posts').doc(id);
+      // console.log(likeRef)
       // // .collection('likes');
       // await likeRef.doc(this.currentUser[0].uid).set({
       //   uid: this.currentUser[0].uid
@@ -253,8 +257,9 @@ export default {
       // });
       // this.beLiked = true;
     },
-    unLike() {
-
+    async unlike(id) {
+      console.log(id);
+      this.applyFlag = false;
     },
     showImage() {
       this.imageOverlay = true;
