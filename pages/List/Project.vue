@@ -101,12 +101,12 @@
                       <div v-if="loggedIn">
                         <!-- <div v-for="post in posts" :key="post.id"> -->
                           <!-- <div > -->
-                            <v-icon v-if="!applyFlag" color="orange" @click.stop="like(article.id)" outlined>mdi-thumb-up-outline</v-icon>
+                            <v-icon v-model="applyFlag" color="orange" @click.stop="like(article.id)" outlined>mdi-thumb-up-outline</v-icon>
                             <!-- <v-icon v-if="!applyFlag" color="orange" @click.stop="applyEvent(article.id)" outlined>mdi-thumb-up-outline</v-icon> -->
                             <!-- <span>{{ post.likeSum }}</span> -->
                           <!-- </div> -->
                           <!-- <div> -->
-                            <v-icon v-else color="orange" @click.stop="unlike(article.id)">mdi-thumb-up</v-icon>
+                            <v-icon color="orange" @click.stop="unlike(article.id)">mdi-thumb-up</v-icon>
                             <!-- <v-icon v-else color="orange" @click.stop="cancelEvent(article.id)">mdi-thumb-up</v-icon> -->
                             <!-- <span>{{ likeSum }}</span> -->
                           </div>
@@ -175,7 +175,7 @@ export default {
       alertPost: false,
       article: '',
       beLiked: false,
-      posts: []
+      posts: [],
     }
   },
   computed: {
@@ -240,8 +240,11 @@ export default {
   },
   methods: {
     async like(id) {
-      console.log(id);
-      this.applyFlag = true;
+      if (this.loggedIn) {
+        this.id = id;
+        console.log(id);
+        this.id.applyFlag = true;
+      }
       // const likeRef = firebase.firestore().collection('projects').doc(this.article.id)
       //   console.log(likeRef);
       // const likeRef = firebase.firestore().collection('posts').doc(id);
@@ -258,8 +261,11 @@ export default {
       // this.beLiked = true;
     },
     async unlike(id) {
-      console.log(id);
-      this.applyFlag = false;
+      if (this.loggedIn) {
+        console.log(id);
+        this.id = id;
+        this.applyFlag = false;
+      }
     },
     showImage() {
       this.imageOverlay = true;
