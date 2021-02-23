@@ -101,12 +101,12 @@
                       <div v-if="loggedIn">
                         <!-- <div v-for="post in posts" :key="post.id"> -->
                           <!-- <div > -->
-                            <v-icon v-model="applyFlag" color="orange" @click.stop="like(article.id)" outlined>mdi-thumb-up-outline</v-icon>
+                            <v-icon v-if="beLiked" color="orange" :id="article.id" @click.stop="unlike(article.id)">mdi-thumb-up</v-icon>
+                            <v-icon v-else color="orange" @click.stop="like(article.id)" outlined>mdi-thumb-up-outline</v-icon>
                             <!-- <v-icon v-if="!applyFlag" color="orange" @click.stop="applyEvent(article.id)" outlined>mdi-thumb-up-outline</v-icon> -->
                             <!-- <span>{{ post.likeSum }}</span> -->
                           <!-- </div> -->
                           <!-- <div> -->
-                            <v-icon color="orange" @click.stop="unlike(article.id)">mdi-thumb-up</v-icon>
                             <!-- <v-icon v-else color="orange" @click.stop="cancelEvent(article.id)">mdi-thumb-up</v-icon> -->
                             <!-- <span>{{ likeSum }}</span> -->
                           </div>
@@ -240,32 +240,25 @@ export default {
   },
   methods: {
     async like(id) {
-      if (this.loggedIn) {
-        this.id = id;
         console.log(id);
-        this.id.applyFlag = true;
-      }
+        // this.applyFlag = true;
       // const likeRef = firebase.firestore().collection('projects').doc(this.article.id)
       //   console.log(likeRef);
-      // const likeRef = firebase.firestore().collection('posts').doc(id);
-      // console.log(likeRef)
-      // // .collection('likes');
-      // await likeRef.doc(this.currentUser[0].uid).set({
-      //   uid: this.currentUser[0].uid
-      // });
-      // this.beLiked = true;
-      // const likeRef = db.collection('projects').doc(this.project.id).collection('likes');
-      // await likeRef.doc(this.currentUser.uid).set({
-      //   uid: this.currentUser.uid
-      // });
-      // this.beLiked = true;
+      const likeRef = firebase.firestore().collection('posts').doc(id).collection('likes');
+      console.log(likeRef)
+      await likeRef.doc(this.currentUser[0].uid).set({
+        uid: this.currentUser[0].uid
+      });
+      if (id === ) {
+        this.beLiked = true;
+      }
     },
     async unlike(id) {
-      if (this.loggedIn) {
+      // if (this.loggedIn) {
         console.log(id);
-        this.id = id;
+        // this.id = id;
         this.applyFlag = false;
-      }
+      // }
     },
     showImage() {
       this.imageOverlay = true;
