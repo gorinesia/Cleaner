@@ -255,7 +255,7 @@ export default {
     },
     async unlike(id) {
       // if (this.loggedIn) {
-        console.log(id);
+        // console.log(id);
         // this.id = id;
         this.applyFlag = false;
       // }
