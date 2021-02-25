@@ -249,13 +249,13 @@ export default {
       await likeRef.doc(this.currentUser[0].uid).set({
         uid: this.currentUser[0].uid
       });
-      if (id === ) {
+      // if (id === ) {
         this.beLiked = true;
-      }
+      // }
     },
     async unlike(id) {
       // if (this.loggedIn) {
-        // console.log(id);
+        console.log(id);
         // this.id = id;
         this.applyFlag = false;
       // }
