@@ -254,11 +254,11 @@ export default {
       // }
     },
     async unlike(id) {
-      // if (this.loggedIn) {
+      if (this.loggedIn) {
         console.log(id);
         // this.id = id;
-        this.applyFlag = false;
-      // }
+        this.beLiked = false;
+      }
     },
     showImage() {
       this.imageOverlay = true;
