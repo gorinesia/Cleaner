@@ -2,8 +2,6 @@
   <v-app>
     <v-container>
       <h2 style="color: #00ACC1;" class="my-5">プロジェクト</h2>
-      <!-- <p style="text-align: center;">プロジェクトとは、ゴミ拾いを意味するクリーナーが起こす日々の行動のことです。<br>
-      あなたも日々のプロジェクトを気軽に投稿してみませんか？</p> -->
       <v-alert dense text type="success" :value="alertPost" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を投稿しました</v-alert>
 
       <v-row justify="center" v-if="loggedIn">
@@ -99,19 +97,9 @@
                           <!-- </div> -->
                       <!-- </div> -->
                       <div v-if="loggedIn">
-                        <!-- <div v-for="post in posts" :key="post.id"> -->
-                          <!-- <div > -->
-                            <v-icon v-if="beLiked" color="orange" :id="article.id" @click.stop="unlike(article.id)">mdi-thumb-up</v-icon>
-                            <v-icon v-else color="orange" @click.stop="like(article.id)" outlined>mdi-thumb-up-outline</v-icon>
-                            <!-- <v-icon v-if="!applyFlag" color="orange" @click.stop="applyEvent(article.id)" outlined>mdi-thumb-up-outline</v-icon> -->
-                            <!-- <span>{{ post.likeSum }}</span> -->
-                          <!-- </div> -->
-                          <!-- <div> -->
-                            <!-- <v-icon v-else color="orange" @click.stop="cancelEvent(article.id)">mdi-thumb-up</v-icon> -->
-                            <!-- <span>{{ likeSum }}</span> -->
-                          </div>
-                        <!-- </div> -->
-                      <!-- </div> -->
+                        <v-icon v-if="beLiked" color="orange" :id="article.id" @click.stop="unlike(article.id)">mdi-thumb-up</v-icon>
+                        <v-icon v-else color="orange" @click.stop="like(article.id)" outlined>mdi-thumb-up-outline</v-icon>
+                      </div>
                       <div v-else>
                         <div>
                           <v-dialog v-model="dialog" width="500">
@@ -241,17 +229,12 @@ export default {
   methods: {
     async like(id) {
         console.log(id);
-        // this.applyFlag = true;
-      // const likeRef = firebase.firestore().collection('projects').doc(this.article.id)
-      //   console.log(likeRef);
       const likeRef = firebase.firestore().collection('posts').doc(id).collection('likes');
       console.log(likeRef)
       await likeRef.doc(this.currentUser[0].uid).set({
         uid: this.currentUser[0].uid
       });
-      // if (id === ) {
         this.beLiked = true;
-      // }
     },
     async unlike(id) {
       if (this.loggedIn) {
