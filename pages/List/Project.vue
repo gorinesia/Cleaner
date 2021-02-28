@@ -97,7 +97,7 @@
                           <!-- </div> -->
                       <!-- </div> -->
                       <div v-if="loggedIn">
-                        <v-icon v-if="beLiked" color="orange" :id="article.id" @click.stop="unlike(article.id)">mdi-thumb-up</v-icon>
+                        <v-icon v-if="article.beLiked" color="orange" :id="article.id" @click.stop="unlike(article.id)">mdi-thumb-up</v-icon>
                         <v-icon v-else color="orange" @click.stop="like(article.id)" outlined>mdi-thumb-up-outline</v-icon>
                       </div>
                       <div v-else>
@@ -161,8 +161,9 @@ export default {
       loginUser: null,
       // likeSum: 0,
       alertPost: false,
-      article: '',
-      beLiked: false,
+      article: {
+        beLiked: false,
+      },
       posts: [],
     }
   },
@@ -234,14 +235,25 @@ export default {
       await likeRef.doc(this.currentUser[0].uid).set({
         uid: this.currentUser[0].uid
       });
-        this.beLiked = true;
+      this.beLiked(id);
+    },
+    async beLiked(id) {
+      const likeRef = firebase.firestore().collection('projects');
+      await likeRef.doc(id).update({
+        beLiked: true
+      })
     },
     async unlike(id) {
-      if (this.loggedIn) {
-        console.log(id);
-        // this.id = id;
-        this.beLiked = false;
-      }
+      const likeRef = firebase.firestore().collection('posts').doc(id).collection('likes');
+      console.log(likeRef)
+      await likeRef.doc(this.currentUser[0].uid).delete();
+      this.deleteBeLiked(id);
+    },
+    async deleteBeLiked(id) {
+      const likeRef = firebase.firestore().collection('projects');
+      await likeRef.doc(id).update({
+        beLiked: false
+      })
     },
     showImage() {
       this.imageOverlay = true;
@@ -268,7 +280,8 @@ export default {
         place: this.place,
         comment: this.comment,
         image: this.image,
-        date: this.date
+        date: this.date,
+        beliked: false
       });
       this.alertPost = true;
       setTimeout(() => {
