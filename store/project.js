@@ -98,6 +98,7 @@ export const actions = {
             image: doc.data().image,
             id: doc.id,
             date: doc.data().date,
+            beLiked: doc.data().beLiked
           })
         })
         commit('setArticles', articles);
