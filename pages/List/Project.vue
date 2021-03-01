@@ -84,18 +84,6 @@
                       <span class="user--name">{{ article.displayName }}</span>
                       <span class="user--place">{{ article.place}}</span>
                       <p class="my-2 font-weight-bold">{{ article.comment }}</p>
-                      <!-- <div v-if="loggedIn">
-                          <div v-if="!beLiked">
-                            <div v-for="post in posts" :key="post.id"> -->
-                              <!-- <v-icon color="orange" @click.stop="like(article.id)" outlined>mdi-thumb-up-outline</v-icon> -->
-                            <!-- <span>{{ post.likeSum }}</span> -->
-                            <!-- </div> -->
-                          <!-- </div> -->
-                          <!-- <div v-else>
-                            <v-icon  color="orange" @click.stop="unlike">mdi-thumb-up</v-icon> -->
-                            <!-- <span>{{ post.likeSum }}</span> -->
-                          <!-- </div> -->
-                      <!-- </div> -->
                       <div v-if="loggedIn">
                         <v-icon v-if="article.beLiked" color="orange" :id="article.id" @click.stop="unlike(article.id)">mdi-thumb-up</v-icon>
                         <v-icon v-else color="orange" @click.stop="like(article.id)" outlined>mdi-thumb-up-outline</v-icon>
