@@ -182,17 +182,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('project/getMessage');
-    // this.$store.dispatch('project/getMessage', {
-    // //   displayName: this.currentUser[0].displayName,
-    // });
-    // firebase.auth().onAuthStateChanged((user) => {
-    //   if (user) {
-    //     this.loginUser = user;
-    //   }
-    // })
     const db = firebase.firestore();
-    // const likeRef = db.collection('projects').doc()
-    // this.checkLikeStatus(id);
     const docRef = db.collection('posts').where('id', '==', true);
     // this.getEvent(this.article.id)
     // this.getEvent(docRef)
@@ -283,7 +273,6 @@ export default {
     },
     getPersonalId(id) {
       console.log(id);
-      // console.log(this.currentUser[0].email);
       this.$store.dispatch('project/getPersonalProject', {
         id
       })
