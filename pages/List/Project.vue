@@ -109,7 +109,6 @@
                         </div>
                       </div>
                     </v-col>
-
                     <v-col cols="12" md="4">
                       <span class="grey--text float-right mr-5"><v-icon>mdi-scale</v-icon>{{ article.name }}・{{ article.date}}</span>
                     </v-col>
@@ -120,7 +119,6 @@
           </v-card>
         </v-col>
       </v-row>
-
     </v-container>
   </v-app>
 </template>
@@ -202,8 +200,6 @@ export default {
     //     place.geometry.location.lat(),
     //     place.geometry.location.lng())
     // });
-
-
   },
   methods: {
     async like(id) {
