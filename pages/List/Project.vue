@@ -205,10 +205,12 @@ export default {
     async like(id) {
         console.log(id);
       const likeRef = firebase.firestore().collection('posts').doc(id).collection('likes');
-      console.log(likeRef)
       await likeRef.doc(this.currentUser[0].uid).set({
-        uid: this.currentUser[0].uid
-      });
+        like_users: firebase.firestore.FieldValue.arrayUnion(this.currentUser[0].uid),
+      }, { merge: true })
+      // await likeRef.doc(this.currentUser[0].uid).set({
+      //   uid: this.currentUser[0].uid
+      // });
       this.beLiked(id);
     },
     async beLiked(id) {
@@ -220,7 +222,10 @@ export default {
     async unlike(id) {
       const likeRef = firebase.firestore().collection('posts').doc(id).collection('likes');
       console.log(likeRef)
-      await likeRef.doc(this.currentUser[0].uid).delete();
+      // await likeRef.doc(this.currentUser[0].uid).delete();
+      await likeRef.doc(this.currentUser[0].uid).update({
+        like_users: firebase.firestore.FieldValue.arrayRemove(this.currentUser[0].uid),
+      })
       this.deleteBeLiked(id);
     },
     async deleteBeLiked(id) {
