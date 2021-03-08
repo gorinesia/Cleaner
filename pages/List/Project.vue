@@ -64,7 +64,7 @@
 
       <v-row class="article">
         <v-col>
-          <v-card v-for="(article, index) in articles" :key="index" :id="article.id" :article="article" />
+          <ProjectArticle v-for="(article, index) in articles" :key="index" :id="article.id" :article="article" />
         </v-col>
       </v-row>
     </v-container>
@@ -99,9 +99,9 @@ export default {
       loginUser: null,
       // likeSum: 0,
       alertPost: false,
-      article: {
-        beLiked: false,
-      },
+      // article: {
+      //   beLiked: false,
+      // },
       posts: [],
     }
   },
@@ -154,34 +154,34 @@ export default {
     // });
   },
   methods: {
-    async like(id) {
-        console.log(id);
-      const likeRef = firebase.firestore().collection('posts').doc(id).collection('likes');
-      await likeRef.doc(this.currentUser[0].uid).set({
-        like_users: firebase.firestore.FieldValue.arrayUnion(this.currentUser[0].uid),
-      }, { merge: true })
-      this.beLiked(id);
-    },
-    async beLiked(id) {
-      const likeRef = firebase.firestore().collection('projects');
-      await likeRef.doc(id).update({
-        beLiked: true
-      })
-    },
-    async unlike(id) {
-      const likeRef = firebase.firestore().collection('posts').doc(id).collection('likes');
-      console.log(likeRef)
-      await likeRef.doc(this.currentUser[0].uid).update({
-        like_users: firebase.firestore.FieldValue.arrayRemove(this.currentUser[0].uid),
-      })
-      this.deleteBeLiked(id);
-    },
-    async deleteBeLiked(id) {
-      const likeRef = firebase.firestore().collection('projects');
-      await likeRef.doc(id).update({
-        beLiked: false
-      })
-    },
+    // async like(id) {
+    //     console.log(id);
+    //   const likeRef = firebase.firestore().collection('posts').doc(id).collection('likes');
+    //   await likeRef.doc(this.currentUser[0].uid).set({
+    //     like_users: firebase.firestore.FieldValue.arrayUnion(this.currentUser[0].uid),
+    //   }, { merge: true })
+    //   this.beLiked(id);
+    // },
+    // async beLiked(id) {
+    //   const likeRef = firebase.firestore().collection('projects');
+    //   await likeRef.doc(id).update({
+    //     beLiked: true
+    //   })
+    // },
+    // async unlike(id) {
+    //   const likeRef = firebase.firestore().collection('posts').doc(id).collection('likes');
+    //   console.log(likeRef)
+    //   await likeRef.doc(this.currentUser[0].uid).update({
+    //     like_users: firebase.firestore.FieldValue.arrayRemove(this.currentUser[0].uid),
+    //   })
+    //   this.deleteBeLiked(id);
+    // },
+    // async deleteBeLiked(id) {
+    //   const likeRef = firebase.firestore().collection('projects');
+    //   await likeRef.doc(id).update({
+    //     beLiked: false
+    //   })
+    // },
     showImage() {
       this.imageOverlay = true;
     },
