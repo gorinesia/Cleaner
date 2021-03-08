@@ -54,7 +54,11 @@
 
 <script>
 export default {
-
+  computed: {
+    articles() {
+      return this.$store.getters['project/articles']
+    },
+  }
 }
 </script>
 
