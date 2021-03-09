@@ -20,16 +20,14 @@
             <p class="my-2 font-weight-bold">{{ article.comment }}</p>
             <div v-if="loggedIn">
               <v-icon v-if="beLiked" color="orange" :id="article.id" @click.stop="unlike">mdi-thumb-up</v-icon>
-              <!-- <v-icon v-if="article.beLiked" color="orange" :id="article.id" @click.stop="unlike(article.id)">mdi-thumb-up</v-icon> -->
               <v-icon v-else color="orange" @click.stop="like" outlined>mdi-thumb-up-outline</v-icon>
-              <p>{{ likeCount }}</p>
+              <span>{{ likeCount }}</span>
             </div>
             <div v-else>
               <div>
                 <v-dialog v-model="dialog" width="500">
                   <template v-slot:activator="{ on, attrs}">
                     <v-icon color="orange" v-if="!applyFlag" class="white--text" v-bind="attrs " v-on="on" medium outlined>mdi-thumb-up-outline</v-icon>
-                    <!-- <span>{{ post.likeSum }}</span> -->
                   </template>
                   <v-card>
                     <v-card-title>Need to Login</v-card-title>
@@ -74,8 +72,6 @@ export default {
     this.likeRef = db.collection('posts').doc(this.article.id).collection('likes');
     this.checkLikeStatus();
 
-    // this.fetchUser();
-
     this.likeRef.onSnapshot((snap) => {
       this.likeCount = snap.size
     })
@@ -101,45 +97,46 @@ export default {
   },
   methods: {
     async like() {
-      // const likeRef = firebase.firestore().collection('posts').doc(article.id).collection('likes');
       await this.likeRef.doc(this.currentUser[0].uid).set({
         uid: this.currentUser[0].uid
-        // like_users: firebase.firestore.FieldValue.arrayUnion(this.currentUser[0].uid),
-      // }, { merge: true })
       });
       this.beLiked = true;
-      // this.beLiked(id);
     },
-    // async beLiked(id) {
-    //   const likeRef = firebase.firestore().collection('projects');
-    //   await likeRef.doc(id).update({
-    //     beLiked: true
-    //   })
-    // },
     async unlike() {
-      // const likeRef = firebase.firestore().collection('posts').doc(article.id).collection('likes');
-      // console.log(likeRef)
       await this.likeRef.doc(this.currentUser[0].uid).delete(
-      //   like_users: firebase.firestore.FieldValue.arrayRemove(this.currentUser[0].uid),
-      // })
       );
       this.beLiked = false;
-      // this.deleteBeLiked(id);
     },
-    // async deleteBeLiked(id) {
-    //   const likeRef = firebase.firestore().collection('projects');
-    //   await likeRef.doc(id).update({
-    //     beLiked: false
-    //   })
-    // },
     async checkLikeStatus() {
       const doc = await this.likeRef.doc(this.currentUser[0].uid).get();
       this.beLiked = doc.exists;
+    },
+    getPersonalId(id) {
+      console.log(id);
+      this.$store.dispatch('project/getPersonalProject', {
+        id
+      })
     },
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
+.article {
+  margin: 6px;
+}
+
+.user--name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00ACC1;
+  margin-bottom: 3px;
+}
+
+.user--place {
+  margin: 2px 0px;
+  margin-left: 5px;
+  color: #757575;
+}
 </style>
