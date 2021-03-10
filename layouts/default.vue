@@ -4,7 +4,7 @@
       <AppHeader app />
       <v-main>
         <Toolbar v-if="loggedIn" />
-        <Nuxt class="blue-grey lighten-5" />
+        <Nuxt />
       </v-main>
     </v-app>
   </div>
@@ -29,3 +29,10 @@ export default {
   }
 }
 </script>
+
+<style>
+body {
+  background-color: #B0BEC5;
+  margin: auto;
+}
+</style>

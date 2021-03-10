@@ -122,7 +122,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .article {
   margin: 6px;
 }
