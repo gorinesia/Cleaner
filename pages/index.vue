@@ -1,5 +1,5 @@
 <template>
-  <v-app class="blue-grey lighten-5">
+  <v-app class="app">
     <v-system-bar height="35" color="#00ACC1" dark class="white--text font-weight-bold justify-center pa-5"><nuxt-link class="white--text text-decoration-none" to="auth/signup">綺麗な世界は自分たちの手で創り上げていこう！</nuxt-link></v-system-bar>
     <v-container>
       <v-row>
@@ -63,7 +63,6 @@
         </v-tabs-items>
       </v-card>
     </v-container>
-
   </v-app>
 </template>
 
@@ -72,6 +71,7 @@ import Information from '@/components/Information.vue'
 
 export default {
   name: 'home',
+  scrollToTop: true,
   components: {
     Information
   },
@@ -94,6 +94,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.app {
+  max-width: 100%;
+}
+
 img {
   width: 100px;
   height: 100px;

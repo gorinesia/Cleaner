@@ -3,20 +3,20 @@
     <v-alert dense text type="info" :value="alertEdit" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を編集しました</v-alert>
     <v-alert dense text type="error" :value="alertDelete" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を削除しました</v-alert>
     <v-container v-for="personalProject in personalProject" :key="personalProject.id">
-      <v-card outlined class="mb-5">
+      <v-card outlined>
         <v-row cols="12" md="2">
           <v-col align-self="start"  cols="2">
-            <v-avatar class="profile ml-3 pa-3" color="grey" size="80">
+            <v-avatar class="profile" color="grey" size="80">
               <v-img :src="personalProject.displayImage"></v-img>
             </v-avatar>
           </v-col>
           <v-col cols="12" md="5">
             <v-list-item color="rgba(0, 0, 0, .4)">
               <v-list-item-content>
-                <nuxt-link class="cyan--text text--darken-1 font-weight-bold title text-h6 text-decoration-none" to="/personal/profile" dark>
+                <nuxt-link class="display-name font-weight-bold title text-h6 text-decoration-none" to="/personal/profile" dark>
                   {{ personalProject.displayName }}
                 </nuxt-link>
-                <p class="mt-3">{{ personalProject.comment }}</p>
+                <p class="comment">{{ personalProject.comment }}</p>
               </v-list-item-content>
             </v-list-item>
           </v-col>
@@ -128,7 +128,6 @@
 
       <v-container>
         <div>
-          <!-- <span>{{ nameUser }}</span> -->
         </div>
         <div>いいね</div>
         <div>
@@ -218,6 +217,7 @@ import 'firebase/firestore'
 
 export default {
   name: 'personalProject',
+  layout: 'loggedIn',
   data() {
     return {
       messages: [],
@@ -432,3 +432,16 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.profile {
+  margin-left: 20px;
+}
+
+.display-name {
+  color: #00ACC1;
+}
+.comment {
+  margin: 3px auto 0;
+}
+</style>

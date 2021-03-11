@@ -1,5 +1,5 @@
 <template>
-  <v-app class="mx-10">
+  <v-app>
     <v-container v-for="currentUser in currentUser" :key="currentUser.id">
       <v-card outlined class="mb-10">
         <v-row  class="fill-height">

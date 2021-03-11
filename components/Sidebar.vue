@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-card class="sidebar" height="250px" width="256" v-for="currentUser in currentUser" :key="currentUser.id">
+    <v-card class="sidebar" height="250px" v-for="currentUser in currentUser" :key="currentUser.id">
       <v-navigation-drawer permanent>
         <template v-slot:prepend>
           <v-list-item two-line>
@@ -54,23 +54,6 @@ export default {
           link: '/list/event'
         },
       ],
-      // items: [
-      //   {
-      //     title: 'ユーザー情報設定',
-      //     icon: 'mdi-folder',
-      //     link: '/edit/profile'
-      //   },
-      //   {
-      //     title: 'メッセージ管理',
-      //     icon: 'mdi-account-multiple',
-      //     link: '/edit/message'
-      //   },
-      //   {
-      //     title: 'サポート管理',
-      //     icon: 'mdi-upload',
-      //     link: '/edit/support'
-      //   },
-      // ],
     }
   },
   computed: {
@@ -106,6 +89,10 @@ export default {
 }
 
 .sidebar {
-  margin: 20px;
+  margin-top: 13px;
+}
+
+.sidebar .v-navigation-drawer {
+  width: 100% !important;
 }
 </style>
