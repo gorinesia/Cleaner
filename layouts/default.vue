@@ -31,8 +31,26 @@ export default {
 </script>
 
 <style>
-body {
-  background-color: #B0BEC5;
-  margin: auto;
+/* .v-main {
+  background: #CFD8DC;
+  padding: 100px;
+} */
+
+.v-main__wrap {
+  background: #CFD8DC;
+  margin: 0 100px 0;
 }
+
+.v-application--wrap {
+  background: #CFD8DC;
+}
+
+.v-main__wrap .v-application {
+  margin: auto;
+  max-width: 1200px;
+}
+
+/* .v-application {
+  background: #CFD8DC;
+} */
 </style>

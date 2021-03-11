@@ -138,4 +138,14 @@ export default {
   margin-left: 5px;
   color: #757575;
 }
+
+.v-sheet.v-card:hover {
+  // background: rgba(0, 172, 193, 0.1);
+  transition: 0.3s;
+  opacity: 0.8;
+}
+
+.sidebar {
+  background: red;
+}
 </style>

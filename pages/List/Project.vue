@@ -80,6 +80,7 @@ import ProjectArticle from '~/components/ProjectArticle.vue';
 export default {
   name: 'project',
   layout: 'loggedIn',
+  scrollToTop: true,
   components: {
     ProjectArticle
   },
@@ -284,3 +285,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.v-sheet.v-card:hover {
+  background:#000;
+}
+
+.sidebar {
+  background: red;
+}
+</style>

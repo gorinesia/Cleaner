@@ -71,6 +71,7 @@ import Information from '@/components/Information.vue'
 
 export default {
   name: 'home',
+  scrollToTop: true,
   components: {
     Information
   },
@@ -94,7 +95,7 @@ export default {
 
 <style lang="scss" scoped>
 .app {
-
+  max-width: 100%;
 }
 
 img {
