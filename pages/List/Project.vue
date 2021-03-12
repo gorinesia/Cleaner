@@ -132,6 +132,8 @@ export default {
     }
   },
   mounted() {
+    console.log('window');
+    window.scrollTo(0, 1000);
     this.$store.dispatch('project/getMessage');
     const db = firebase.firestore();
     const docRef = db.collection('posts').where('id', '==', true);
