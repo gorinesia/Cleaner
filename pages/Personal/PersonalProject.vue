@@ -112,10 +112,8 @@
         </v-row>
       </v-card>
       <v-card align="center" class="mb-10 pa-5">
-        <v-row >
-          <v-col cols="2">
-          </v-col>
-          <v-col class="font-weight-bold text-h5" cols="6">
+        <v-row>
+          <v-col class="place font-weight-bold text-h5" cols="3">
             <p>{{ personalProject.place }}</p>
           </v-col>
         </v-row>
@@ -443,5 +441,9 @@ export default {
 }
 .comment {
   margin: 3px auto 0;
+}
+
+.place {
+
 }
 </style>

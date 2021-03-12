@@ -19,6 +19,10 @@ export default {
     AppHeader,
     Toolbar,
   },
+  mounted() {
+    console.log('window')
+    window.scrollTo(0, 1000)
+  },
   computed: {
     loggedIn() {
         return this.$store.getters['user/loggedIn']
