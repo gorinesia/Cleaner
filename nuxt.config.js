@@ -137,6 +137,7 @@ export default {
   },
   router: {
     scrollBehavior(to, from, savedPosition) {
+      console.log('this is a pen!!')
       if (savedPosition) {
         return savedPosition
       } else {
