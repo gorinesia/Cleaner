@@ -2,7 +2,7 @@
   <v-app>
     <v-alert dense text type="info" :value="alertEdit" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を編集しました</v-alert>
     <v-alert dense text type="error" :value="alertDelete" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を削除しました</v-alert>
-    <ProjectArticle :id="article.id" :article="article" />
+    <ProjectArticle :key="index" :id="article.id" :article="article" />
     <v-container v-for="personalProject in personalProject" :key="personalProject.id">
       <v-card outlined>
 
