@@ -98,11 +98,7 @@ export default {
       map: '',
       applyFlag: false,
       loginUser: null,
-      // likeSum: 0,
       alertPost: false,
-      // article: {
-      //   beLiked: false,
-      // },
       posts: [],
     }
   },

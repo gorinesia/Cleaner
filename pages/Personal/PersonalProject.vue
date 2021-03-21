@@ -2,11 +2,11 @@
   <v-app>
     <v-alert dense text type="info" :value="alertEdit" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を編集しました</v-alert>
     <v-alert dense text type="error" :value="alertDelete" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を削除しました</v-alert>
-    <ProjectArticle :key="index" :id="article.id" :article="article" />
+
+    <ProjectArticle :key="article.id" :id="article.id" :article="article" />
+
     <v-container v-for="personalProject in personalProject" :key="personalProject.id">
       <v-card outlined>
-
-
         <v-row cols="12" md="2">
           <v-col align-self="start"  cols="2">
             <v-avatar class="profile" color="grey" size="80">
@@ -248,7 +248,6 @@ export default {
       likeSum: 0,
       images: [],
       image_users: [],
-      // nameUser: [],
       name_users: [],
       error: '',
       stripe: null,
@@ -290,10 +289,6 @@ export default {
   },
   mounted() {
     // this.getComment(this.currentUser[0].id);
-    // console.log(this.currentUser[0].displayName);
-    // console.log(this.currentUser[0].id);
-    // console.log(this.personalProject[0].displayName);
-    // console.log(this.personalProject[0].id);
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.loginUser = user;
