@@ -64,7 +64,7 @@
 
       <v-row class="article">
         <v-col>
-          <ProjectArticle v-for="(article, index) in articles" :key="index" :id="article.id" :article="article" />
+          <ProjectArticle v-for="article in articles" :key="article.id" :id="article.id" :article="article" />
         </v-col>
       </v-row>
     </v-container>
