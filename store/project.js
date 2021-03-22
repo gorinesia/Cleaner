@@ -216,8 +216,8 @@ export const actions = {
           date: doc.data().date,
         })
           console.log(doc.data())
-          this.$router.push('/personal/personalproject');
           commit('setPersonalProject', personalDetails);
+          this.$router.push('/personal/personalproject');
       })
   }
 }
