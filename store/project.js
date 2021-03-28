@@ -199,12 +199,15 @@ export const actions = {
       })
   },
   getPersonalProject({commit}, payload) {
+    console.log(payload);
     const db = firebase.firestore();
     const personalDetails = [];
     db.collection('projects')
       .doc(payload.id)
       .get()
       .then((doc) => {
+        console.log(payload.id);
+        console.log(doc.data());
         personalDetails.push({
           displayName: doc.data().displayName,
           displayImage: doc.data().displayImage,

@@ -42,7 +42,7 @@ export default {
 
 .v-main__wrap {
   background: #CFD8DC;
-  margin: 0 100px 0;
+  /* margin: 0 100px 0; */
 }
 
 .v-application--wrap {
