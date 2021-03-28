@@ -114,9 +114,9 @@ export default {
       const doc = await this.likeRef.doc(this.currentUser[0].uid).get();
       this.beLiked = doc.exists;
     },
-    getPersonalId(id) {
+    async getPersonalId(id) {
       console.log(id);
-      this.$store.dispatch('project/getPersonalProject', {
+      await this.$store.dispatch('project/getPersonalProject', {
         id
       })
     },
