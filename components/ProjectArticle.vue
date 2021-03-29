@@ -116,6 +116,8 @@ export default {
     },
     async getPersonalId(id) {
       console.log(id);
+      const db = firebase.firestore();
+      const project = db.collection('projects').doc(id);
       await this.$store.dispatch('project/getPersonalProject', {
         id
       })

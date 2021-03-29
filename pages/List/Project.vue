@@ -279,7 +279,13 @@ export default {
       // })
       await this.getEvent(docRef);
       this.applyEvent = false;
-    }
+    },
+    async getPersonalId(id) {
+      console.log(id);
+      await this.$store.dispatch('project/getPersonalProject', {
+        id
+      })
+    },
   }
 }
 </script>
