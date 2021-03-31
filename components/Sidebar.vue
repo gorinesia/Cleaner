@@ -46,7 +46,7 @@ export default {
         {
           title: 'プロジェクト',
           icon: 'mdi-account-multiple',
-          link: '/list/project'
+          link: '/list'
         },
         {
           title: 'イベント',
