@@ -2,7 +2,7 @@
   <div>
     <v-divider />
     <v-hover v-slot ="{ hover }">
-      <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(article.id)">
+      <v-card :class="{ 'on-hover': hover }">
         <v-row>
           <v-col cols="12" md="2">
             <v-avatar tile size="100" class="ml-5">
