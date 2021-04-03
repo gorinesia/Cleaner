@@ -2,7 +2,7 @@
   <div>
     <v-divider />
     <v-hover v-slot ="{ hover }">
-      <v-card :class="{ 'on-hover': hover }">
+      <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(article.id)">
         <v-row>
           <v-col cols="12" md="2">
             <v-avatar tile size="100" class="ml-5">
@@ -72,6 +72,7 @@ export default {
   },
   async mounted() {
     const db = firebase.firestore();
+    console.log('hoge');
     this.likeRef = db.collection('posts').doc(this.article.id).collection('likes');
     this.checkLikeStatus();
 
@@ -116,8 +117,6 @@ export default {
     },
     async getPersonalId(id) {
       console.log(id);
-      const db = firebase.firestore();
-      const project = db.collection('projects').doc(id);
       await this.$store.dispatch('project/getPersonalProject', {
         id
       })
