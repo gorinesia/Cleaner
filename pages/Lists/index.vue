@@ -84,18 +84,19 @@
 
       <v-row class="article">
         <v-col>
-          <ProjectArticle
+          <ProjectArticleCopy
             v-for="article in articles"
             :key="article.id"
             :id="article.id"
             :article="article"
+            :articles="articles"
             v-model="id"
-            
+            @click="getComponentsId(article.id)"
           >
             <nuxt-link :to="lists / +article.id">
               <h2>{{ article.displayName }}</h2>
             </nuxt-link>
-          </ProjectArticle>
+          </ProjectArticleCopy>
         </v-col>
       </v-row>
     </v-container>
@@ -106,14 +107,14 @@
 import axios from "axios";
 import firebase from "firebase/app";
 import "firebase/firestore";
-import ProjectArticle from "~/components/ProjectArticle.vue";
+import ProjectArticleCopy from "~/components/ProjectArticleCopy.vue";
 
 export default {
   name: "project",
   layout: "loggedIn",
   scrollToTop: true,
   components: {
-    ProjectArticle,
+    ProjectArticleCopy,
   },
   data() {
     return {
@@ -131,7 +132,8 @@ export default {
       loginUser: null,
       alertPost: false,
       posts: [],
-      id: ''
+      id: "",
+      lists: "",
     };
   },
   computed: {
@@ -237,9 +239,9 @@ export default {
       await this.getEvent(docRef);
       this.applyEvent = false;
     },
-    async getPersonalId(id) {
+    async getcomponentsId(id) {
       console.log(id);
-      await this.$store.dispatch("project/getPersonalProject", {
+      await this.$store.dispatch("project/getComponentsProject", {
         id,
       });
     },

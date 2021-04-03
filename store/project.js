@@ -222,5 +222,30 @@ export const actions = {
           commit('setPersonalProject', personalDetails);
           this.$router.push('/personal/personalproject');
       })
+  },
+  getComponentsProject({commit}, payload) {
+    console.log(payload);
+    // const db = firebase.firestore();
+    // const personalDetails = [];
+    // db.collection('projects')
+    //   .doc(payload.id)
+    //   .get()
+    //   .then((doc) => {
+    //     console.log(payload.id);
+    //     console.log(doc.data());
+    //     personalDetails.push({
+    //       displayName: doc.data().displayName,
+    //       displayImage: doc.data().displayImage,
+    //       name: doc.data().name,
+    //       place: doc.data().place,
+    //       comment: doc.data().comment,
+    //       image: doc.data().image,
+    //       id: doc.id,
+    //       date: doc.data().date,
+    //     })
+    //       console.log(doc.data())
+    //       commit('setPersonalProject', personalDetails);
+          this.$router.push('/personal/trying');
+      // })
   }
 }
