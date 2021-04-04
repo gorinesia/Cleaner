@@ -2,7 +2,10 @@
   <div>
     <v-divider />
     <v-hover v-slot="{ hover }">
-      <v-card :class="{ 'on-hover': hover }" @click="getComponentsId(article.id)">
+      <v-card
+        :class="{ 'on-hover': hover }"
+        
+      >
         <v-row>
           <v-col cols="12" md="2">
             <v-avatar tile size="100" class="ml-5">
@@ -90,7 +93,7 @@ import "firebase/firestore";
 import { db } from "~/plugins/firebase";
 
 export default {
-  props: ["article", "articles"],
+  props: ["article", "articles", "id"],
   data() {
     return {
       dialog: false,
@@ -120,9 +123,9 @@ export default {
     currentUser() {
       return this.$store.getters["user/currentUser"];
     },
-    articles() {
-      return this.$store.getters["project/articles"];
-    },
+    // articles() {
+    //   return this.$store.getters["project/articles"];
+    // },
     image: {
       get() {
         return this.$store.getters["project/image"];
