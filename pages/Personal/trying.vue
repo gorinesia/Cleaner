@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <ProjectArticleCopy :id="article.id" :article="article" />
+    <ProjectArticleCopy :id="articles[0].id" :article="article">
     <!-- <ProjectArticleCopy
       v-for="article in articles"
       :key="article.id"
@@ -8,10 +8,10 @@
       :article="article"
       v-model="id"
     >
-      <!-- <nuxt-link :to="lists / +article.id">
+      <nuxt-link :to="lists / +article.id">
         <h2>{{ article.displayName }}</h2>
       </nuxt-link> -->
-    </ProjectArticleCopy> -->
+    </ProjectArticleCopy>
   </v-app>
 </template>
 
@@ -55,7 +55,8 @@ export default {
       dialog: false,
       payDialog: false,
       posts: '',
-      id: ''
+      id: '',
+      article: ''
     }
   },
   computed: {

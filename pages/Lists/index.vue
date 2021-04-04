@@ -90,12 +90,11 @@
             :id="article.id"
             :article="article"
             :articles="articles"
-            v-model="id"
             @click="getComponentsId(article.id)"
           >
-            <nuxt-link :to="lists / +article.id">
+            <!-- <nuxt-link :to="lists / +article.id">
               <h2>{{ article.displayName }}</h2>
-            </nuxt-link>
+            </nuxt-link> -->
           </ProjectArticleCopy>
         </v-col>
       </v-row>
