@@ -4,7 +4,6 @@
     <v-hover v-slot="{ hover }">
       <v-card
         :class="{ 'on-hover': hover }"
-        
       >
         <v-row>
           <v-col cols="12" md="2">
