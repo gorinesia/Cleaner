@@ -92,9 +92,6 @@
             :articles="articles"
             @click="getComponentsId(article.id)"
           >
-            <!-- <nuxt-link :to="lists / +article.id">
-              <h2>{{ article.displayName }}</h2>
-            </nuxt-link> -->
           </ProjectArticleCopy>
         </v-col>
       </v-row>
@@ -133,6 +130,7 @@ export default {
       posts: [],
       id: "",
       lists: "",
+      article: "",
     };
   },
   computed: {
@@ -238,7 +236,7 @@ export default {
       await this.getEvent(docRef);
       this.applyEvent = false;
     },
-    async getcomponentsId(id) {
+    async getComponentsId(id) {
       console.log(id);
       await this.$store.dispatch("project/getComponentsProject", {
         id,
