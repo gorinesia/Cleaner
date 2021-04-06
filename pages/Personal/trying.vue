@@ -1,40 +1,46 @@
 <template>
   <v-app>
-    <ProjectArticleCopy :id="articles[0].id" :article="article">
-    <!-- <ProjectArticleCopy
-      v-for="article in articles"
-      :key="article.id"
-      :id="article.id"
-      :article="article"
-      v-model="id"
-    >
-      <nuxt-link :to="lists / +article.id">
-        <h2>{{ article.displayName }}</h2>
-      </nuxt-link> -->
-    </ProjectArticleCopy>
+    <div>
+      <ProjectArticleCopy
+        :id="article.id"
+        :article="article"
+        :articles="articles"
+      >
+        <!-- <ProjectArticleCopy
+        v-for="article in articles"
+        :key="article.id"
+        :id="article.id"
+        :article="article"
+        v-model="id"
+      >
+        <nuxt-link :to="lists / +article.id">
+          <h2>{{ article.displayName }}</h2>
+        </nuxt-link> -->
+      </ProjectArticleCopy>
+    </div>
   </v-app>
 </template>
 
 <script>
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import ProjectArticleCopy from '~/components/ProjectArticleCopy.vue';
+import firebase from "firebase/app";
+import "firebase/firestore";
+import ProjectArticleCopy from "~/components/ProjectArticleCopy.vue";
 
 export default {
-  name: 'personalProject',
-  layout: 'loggedIn',
+  name: "personalProject",
+  layout: "loggedIn",
   components: {
-    ProjectArticleCopy
+    ProjectArticleCopy,
   },
   data() {
     return {
       messages: [],
-      messageComment: '',
+      messageComment: "",
       comments: [],
-      comment: '',
+      comment: "",
       items: [
-        { title: '投稿を編集', icon: 'mdi-pencil-plus' },
-        { title: '投稿を削除', icon: 'mdi-trash-can' },
+        { title: "投稿を編集", icon: "mdi-pencil-plus" },
+        { title: "投稿を削除", icon: "mdi-trash-can" },
       ],
       name: this.$store.state.project.name,
       place: this.$store.state.project.place,
@@ -49,45 +55,45 @@ export default {
       images: [],
       image_users: [],
       name_users: [],
-      error: '',
+      error: "",
       stripe: null,
       card: null,
       dialog: false,
       payDialog: false,
-      posts: '',
-      id: '',
-      article: ''
-    }
+      posts: "",
+      id: "",
+      article: "",
+    };
   },
   computed: {
     loggedIn() {
-      return this.$store.getters['user/loggedIn']
+      return this.$store.getters["user/loggedIn"];
     },
     articles() {
-      return this.$store.getters['project/articles']
+      return this.$store.getters["project/articles"];
     },
     currentUser() {
-      return this.$store.getters['user/currentUser']
+      return this.$store.getters["user/currentUser"];
     },
     image: {
       get() {
-        return this.$store.getters['project/image']
+        return this.$store.getters["project/image"];
       },
       set(value) {
-        this.$store.commit('project/setImage', value)
-      }
+        this.$store.commit("project/setImage", value);
+      },
     },
     personalProject() {
-      return this.$store.getters['project/personalProject']
+      return this.$store.getters["project/personalProject"];
     },
     deleteOverlay() {
-      return this.$store.getters['project/deleteOverlay']
+      return this.$store.getters["project/deleteOverlay"];
     },
     articleId() {
-      return this.$store.getters['project/articleId']
+      return this.$store.getters["project/articleId"];
     },
     editOverlay() {
-      return this.$store.getters['project/editOverlay']
+      return this.$store.getters["project/editOverlay"];
     },
   },
   mounted() {
@@ -95,14 +101,16 @@ export default {
   },
   methods: {
     btnUploadChange(ev) {
-      this.$store.dispatch('project/btnUploadChange', {
-        ev
+      this.$store.dispatch("project/btnUploadChange", {
+        ev,
       });
     },
     getComment(id) {
       const db = firebase.firestore();
-      db.collection('posts').doc(id).collection('comments')
-        .orderBy('date', 'asc')
+      db.collection("posts")
+        .doc(id)
+        .collection("comments")
+        .orderBy("date", "asc")
         .onSnapshot((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             this.comments.push({
@@ -110,68 +118,76 @@ export default {
               comment: doc.data().comment,
               image: doc.data().image,
               date: doc.data().date,
-            })
+            });
             console.log(doc.data());
             console.log(doc.id);
-          })
-      })
+          });
+        });
     },
     addComment(id) {
       const db = firebase.firestore();
-      db.collection('posts').doc(id).collection('comments').add({
+      db.collection("posts")
+        .doc(id)
+        .collection("comments")
+        .add({
+          displayName: this.currentUser[0].displayName,
+          comment: this.comment,
+          image: this.currentUser[0].image,
+          date: new Date().toLocaleString(),
+        })
+        .then(() => {
+          console.log(this.comment);
+          this.displayName = "";
+          this.comment = "";
+          this.image = "";
+          this.date = "";
+          this.getComment(id);
+        });
+    },
+    getMessage() {
+      this.$store.dispatch("project/getMessage", {
         displayName: this.currentUser[0].displayName,
-        comment: this.comment,
-        image: this.currentUser[0].image,
-        date: new Date().toLocaleString()
-      })
-      .then(() => {
-        console.log(this.comment);
-        this.displayName = ''
-        this.comment = ''
-        this.image = ''
-        this.date = ''
-        this.getComment(id);
-      })
+      });
     },
     addMessage() {
-      this.$store.dispatch('project/addMessage', {
+      this.$store.dispatch("project/addMessage", {
         displayName: this.currentUser[0].displayName,
         displayImage: this.currentUser[0].image,
         name: this.name,
         place: this.place,
         comment: this.comment,
         image: this.image,
-        date: new Date().toLocaleString()
+        date: new Date().toLocaleString(),
       });
-      this.name = '';
-      this.place = '';
-      this.comment = '';
-      this.date = '';
+      this.name = "";
+      this.place = "";
+      this.comment = "";
+      this.date = "";
     },
     openModalForDelete(id) {
-      this.$store.commit('project/openModalForDelete', {
-        id
+      this.$store.commit("project/openModalForDelete", {
+        id,
       });
     },
     closeModalForDelete() {
-      this.$store.commit('project/closeModalForDelete');
+      this.$store.commit("project/closeModalForDelete");
     },
     deleteArticles(id) {
       console.log(id);
-      this.$store.dispatch('project/deleteArticles', {
-        id
+      this.$store.dispatch("project/deleteArticles", {
+        id,
       });
     },
     openModalForEdit(id) {
-      this.$store.commit('project/openModalForEdit', {
-        id
+      this.$store.commit("project/openModalForEdit", {
+        id,
       });
     },
     closeModalForEdit() {
-      this.$store.commit('project/closeModalForEdit');
+      this.$store.commit("project/closeModalForEdit");
     },
     editArticles(id) {
-      this.$store.dispatch('project/editArticles', {
+      this.$store.dispatch("project/editArticles", {
         id,
         name: this.name,
         place: this.place,
@@ -180,15 +196,15 @@ export default {
       });
       this.alertEdit = true;
       setTimeout(() => {
-        this.alertEdit = false
+        this.alertEdit = false;
       }, 3000);
-      this.name = ''
-      this.place = ''
-      this.comment = ''
-      this.image = ''
+      this.name = "";
+      this.place = "";
+      this.comment = "";
+      this.image = "";
     },
     getEvent(docRef) {
-      docRef.get().then(doc => {
+      docRef.get().then((doc) => {
         if (doc.exists) {
           console.log(doc.data());
           this.posts = doc.data();
@@ -199,33 +215,52 @@ export default {
         } else {
           console.log(doc.data());
         }
-      })
+      });
     },
     async applyEvent() {
-        const db = firebase.firestore();
-        const docRef = await db.collection('posts').doc(this.personalProject[0].id)
-        docRef.set({
+      const db = firebase.firestore();
+      const docRef = await db
+        .collection("posts")
+        .doc(this.personalProject[0].id);
+      docRef.set(
+        {
           displayImage: this.currentUser[0].image,
-          like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
-          image_users: firebase.firestore.FieldValue.arrayUnion(this.currentUser[0].image),
-          name_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.displayName),
-        }, { merge: true })
-        await this.getEvent(docRef);
-        this.applyFlag = true;
+          like_users: firebase.firestore.FieldValue.arrayUnion(
+            this.loginUser.uid
+          ),
+          image_users: firebase.firestore.FieldValue.arrayUnion(
+            this.currentUser[0].image
+          ),
+          name_users: firebase.firestore.FieldValue.arrayUnion(
+            this.loginUser.displayName
+          ),
+        },
+        { merge: true }
+      );
+      await this.getEvent(docRef);
+      this.applyFlag = true;
     },
     async cancelEvent() {
-        const db = firebase.firestore();
-        const docRef = await db.collection('posts').doc(this.personalProject[0].id)
-        docRef.update({
-          like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
-          image_users: firebase.firestore.FieldValue.arrayRemove(this.currentUser[0].image),
-          name_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.displayName),
-        })
-        await this.getEvent(docRef);
-        this.applyFlag = false;
+      const db = firebase.firestore();
+      const docRef = await db
+        .collection("posts")
+        .doc(this.personalProject[0].id);
+      docRef.update({
+        like_users: firebase.firestore.FieldValue.arrayRemove(
+          this.loginUser.uid
+        ),
+        image_users: firebase.firestore.FieldValue.arrayRemove(
+          this.currentUser[0].image
+        ),
+        name_users: firebase.firestore.FieldValue.arrayRemove(
+          this.loginUser.displayName
+        ),
+      });
+      await this.getEvent(docRef);
+      this.applyFlag = false;
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -234,7 +269,7 @@ export default {
 }
 
 .display-name {
-  color: #00ACC1;
+  color: #00acc1;
 }
 .comment {
   margin: 3px auto 0;

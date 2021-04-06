@@ -245,7 +245,7 @@ export const actions = {
     //     })
     //       console.log(doc.data())
     //       commit('setPersonalProject', personalDetails);
-          this.$router.push('/personal/trying');
+          // this.$router.push('/personal/trying');
       // })
   }
 }
