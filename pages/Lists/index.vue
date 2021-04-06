@@ -84,7 +84,19 @@
 
       <v-row class="article">
         <v-col>
-          <ProjectArticleCopy
+          <div
+            v-for="article in articles"
+            :key="article.id"
+            @click="getComponentsId(article.id)"
+          >
+            <ProjectArticleCopy
+              :id="article.id"
+              :article="article"
+              :articles="articles"
+            >
+            </ProjectArticleCopy>
+          </div>
+          <!-- <ProjectArticleCopy
             v-for="article in articles"
             :key="article.id"
             :id="article.id"
@@ -92,7 +104,7 @@
             :articles="articles"
             @click="getComponentsId(article.id)"
           >
-          </ProjectArticleCopy>
+          </ProjectArticleCopy> -->
         </v-col>
       </v-row>
     </v-container>
