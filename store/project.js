@@ -15,7 +15,8 @@ export const state = () => ({
   comment: '',
   deleteOverlay: false,
   editOverlay: false,
-  personalProject: []
+  personalProject: [],
+  personalComponent: []
 })
 
 export const getters = {
@@ -24,7 +25,8 @@ export const getters = {
   deleteOverlay: state => state.deleteOverlay,
   articleId: state => state.articleId,
   editOverlay: state => state.editOverlay,
-  personalProject: state=> state.personalProject
+  personalProject: state => state.personalProject,
+  personalComponent: state => state.personalComponent
 }
 
 export const mutations = {
@@ -54,7 +56,11 @@ export const mutations = {
   setPersonalProject: (state, personalDetails) => {
     state.personalProject = personalDetails
     console.log(state.personalProject);
-  }
+  },
+  setPersonalComponent: (state, personalComponent) => {
+    state.personalComponent = personalComponent
+    console.log(state.personalComponent);
+  },
 }
 
 export const actions = {
@@ -71,7 +77,7 @@ export const actions = {
         console.log(error);
       })
   },
-  getUrl({commit}, payload) {
+  getUrl({ commit }, payload) {
     const file = payload.ev.target.files[0];
     const storage = firebase.storage();
     const storageRef = storage.ref('images');
@@ -81,7 +87,7 @@ export const actions = {
         commit('setImage', url);
       })
   },
-  getMessage({commit}, payload) {
+  getMessage({ commit }, payload) {
     const db = firebase.firestore();
     db.collection('projects')
       .orderBy('date', 'desc')
@@ -102,7 +108,7 @@ export const actions = {
           })
         })
         commit('setArticles', articles);
-    })
+      })
   },
   getUserProfile(context, payload) {
     console.log(payload);
@@ -127,7 +133,8 @@ export const actions = {
           const nameData = doc;
           context.dispatch('changeNameArticle', {
             nameData: doc,
-            changeName: payload})
+            changeName: payload
+          })
         })
       })
   },
@@ -166,8 +173,8 @@ export const actions = {
         setTimeout(() => {
           this.alertDelete = false
         }, 3000);
-        });
-        context.commit('closeModalForDelete');
+      });
+    context.commit('closeModalForDelete');
   },
   editArticles(context, payload) {
     const db = firebase.firestore();
@@ -192,13 +199,13 @@ export const actions = {
       .set({
         displayName: payload.displayName,
         displayImage: payload.displayImage,
-      }, {merge: true})
+      }, { merge: true })
       .then(() => {
         console.log('updatedProject!!');
         context.dispatch('getMessage');
       })
   },
-  getPersonalProject({commit}, payload) {
+  getPersonalProject({ commit }, payload) {
     console.log(payload);
     const db = firebase.firestore();
     const personalDetails = [];
@@ -218,34 +225,34 @@ export const actions = {
           id: doc.id,
           date: doc.data().date,
         })
-          console.log(doc.data())
-          commit('setPersonalProject', personalDetails);
-          this.$router.push('/personal/personalproject');
+        console.log(doc.data())
+        commit('setPersonalProject', personalDetails);
+        this.$router.push('/personal/personalproject');
       })
   },
-  getComponentsProject({commit}, payload) {
+  getComponentsProject({ commit }, payload) {
     console.log(payload);
-    // const db = firebase.firestore();
-    // const personalDetails = [];
-    // db.collection('projects')
-    //   .doc(payload.id)
-    //   .get()
-    //   .then((doc) => {
-    //     console.log(payload.id);
-    //     console.log(doc.data());
-    //     personalDetails.push({
-    //       displayName: doc.data().displayName,
-    //       displayImage: doc.data().displayImage,
-    //       name: doc.data().name,
-    //       place: doc.data().place,
-    //       comment: doc.data().comment,
-    //       image: doc.data().image,
-    //       id: doc.id,
-    //       date: doc.data().date,
-    //     })
-    //       console.log(doc.data())
-    //       commit('setPersonalProject', personalDetails);
-          // this.$router.push('/personal/trying');
-      // })
+    const db = firebase.firestore();
+    const personalComponent = [];
+    db.collection('projects')
+      .doc(payload.id)
+      .get()
+      .then((doc) => {
+        console.log(payload.id);
+        console.log(doc.data());
+        personalComponent.push({
+          displayName: doc.data().displayName,
+          displayImage: doc.data().displayImage,
+          name: doc.data().name,
+          place: doc.data().place,
+          comment: doc.data().comment,
+          image: doc.data().image,
+          id: doc.id,
+          date: doc.data().date,
+        })
+        console.log(doc.data())
+        commit('setPersonalComponent', personalComponent);
+        this.$router.push('/personal/trying');
+      })
   }
 }
