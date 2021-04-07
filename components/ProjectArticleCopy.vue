@@ -2,9 +2,7 @@
   <div>
     <v-divider />
     <v-hover v-slot="{ hover }">
-      <v-card
-        :class="{ 'on-hover': hover }"
-      >
+      <v-card :class="{ 'on-hover': hover }">
         <v-row>
           <v-col cols="12" md="2">
             <v-avatar tile size="100" class="ml-5">
@@ -125,14 +123,14 @@ export default {
     // articles() {
     //   return this.$store.getters["project/articles"];
     // },
-    image: {
-      get() {
-        return this.$store.getters["project/image"];
-      },
-      set(value) {
-        this.$store.commit("project/setImage", value);
-      },
-    },
+    // image: {
+    //   get() {
+    //     return this.$store.getters["project/image"];
+    //   },
+    //   set(value) {
+    //     this.$store.commit("project/setImage", value);
+    //   },
+    // },
   },
   methods: {
     async like() {

@@ -1,19 +1,16 @@
 <template>
   <v-app>
     <div>
-      <ProjectArticleCopy
-        :id="article.id"
-        :article="article"
-        :articles="articles"
-      >
+      helloooo
+      <ProjectArticleCopy :article="personalComponent[0]">
         <!-- <ProjectArticleCopy
         v-for="article in articles"
         :key="article.id"
         :id="article.id"
         :article="article"
         v-model="id"
-      >
-        <nuxt-link :to="lists / +article.id">
+      > -->
+        <!-- <nuxt-link :to="lists / +article.id">
           <h2>{{ article.displayName }}</h2>
         </nuxt-link> -->
       </ProjectArticleCopy>
@@ -31,6 +28,9 @@ export default {
   layout: "loggedIn",
   components: {
     ProjectArticleCopy,
+  },
+  scrollBehavior(to, from, savedPosition) {
+    return { x: 0, y: 0 };
   },
   data() {
     return {
@@ -85,6 +85,9 @@ export default {
     },
     personalProject() {
       return this.$store.getters["project/personalProject"];
+    },
+    personalComponent() {
+      return this.$store.getters["project/personalComponent"];
     },
     deleteOverlay() {
       return this.$store.getters["project/deleteOverlay"];
