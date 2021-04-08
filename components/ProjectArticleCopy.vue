@@ -101,7 +101,6 @@ export default {
   },
   async mounted() {
     const db = firebase.firestore();
-    console.log("hoge");
     console.log(this.article.id);
     this.likeRef = db
       .collection("posts")

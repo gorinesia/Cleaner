@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <div>
-      helloooo
       <ProjectArticleCopy :article="personalComponent[0]">
         <!-- <ProjectArticleCopy
         v-for="article in articles"
@@ -29,9 +28,9 @@ export default {
   components: {
     ProjectArticleCopy,
   },
-  scrollBehavior(to, from, savedPosition) {
-    return { x: 0, y: 0 };
-  },
+  // scrollBehavior(to, from, savedPosition) {
+  //   return { x: 0, y: 0 };
+  // },
   data() {
     return {
       messages: [],
