@@ -250,7 +250,6 @@ export const actions = {
           id: doc.id,
           date: doc.data().date,
         })
-        console.log(doc.data())
         commit('setPersonalComponent', personalComponent);
         this.$router.push('/personal/trying');
       })

@@ -34,7 +34,7 @@ export default {
       // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { type: 'text/javascript', src:'https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAzighvakmvCU9UN7_yfBgJvdojhzyuCc4', defer: true},
+      { type: 'text/javascript', src: 'https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAzighvakmvCU9UN7_yfBgJvdojhzyuCc4', defer: true },
       { src: 'https://js.stripe.com/v3' }
     ]
   },
@@ -44,20 +44,20 @@ export default {
   css: [
     { src: '~/assets/scss/common.scss', lang: 'scss' },
   ],
-//  css: {
-//   loaderOptions: {
-//     scss: {
-//       prependData: '@import "./assets/sass/common.scss";'
-//     }
-//   }
-//  },
+  //  css: {
+  //   loaderOptions: {
+  //     scss: {
+  //       prependData: '@import "./assets/sass/common.scss";'
+  //     }
+  //   }
+  //  },
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
     '~/plugins/firebase.js',
-    {src: '~/plugins/vue2-google-maps.js', ssr: true}
+    { src: '~/plugins/vue2-google-maps.js', ssr: true }
   ],
   /*
   ** Auto import components
@@ -135,23 +135,28 @@ export default {
     VUE_APP_FB_MESSAGING_SENDER_ID: process.env.VUE_APP_FB_MESSAGING_SENDER_ID,
     VUE_APP_FB_APP_ID: process.env.VUE_APP_FB_APP_ID
   },
-  // router: {
-  //   scrollBehavior(to, from, savedPosition) {
-  //     console.log('scrolling to top.')
-  //     if (savedPosition) {
-  //       return savedPosition
-  //     } else {
-  //       let position = {};
-  //       if (to.matched.length < 2) {
-  //         position = { x: 0, y: 0 }
-  //       } else if (to.matched.some(r => r.components.default.options.scrollToTop)) {
-  //         position = { x: 0, y: 0 }
-  //       }
-  //       if (to.hash) {
-  //         position = { selector: to.hash }
-  //       }
-  //       return position;
-  //     }
-  //   },
-  // },
+  router: {
+    // scrollBehavior(to, from, savedPosition) {
+    //   console.log('hoge');
+    //   return { x: 0, y: 0 }
+    // }
+    scrollBehavior(to, from, savedPosition) {
+      console.log('scrolling to top.');
+      return { x: 0, y: 0 }
+      // if (savedPosition) {
+      //   return savedPosition
+      // } else {
+      //   let position = {};
+      //   if (to.matched.length < 2) {
+      //     position = { x: 0, y: 0 }
+      //   } else if (to.matched.some(r => r.components.default.options.scrollToTop)) {
+      //     position = { x: 0, y: 0 }
+      //   }
+      //   if (to.hash) {
+      //     position = { selector: to.hash }
+      //   }
+      //   return position;
+      // }
+    },
+  },
 }
