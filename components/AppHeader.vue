@@ -146,11 +146,6 @@ export default {
           icon: 'mdi-upload',
           link: '/edit/support'
         },
-        // {
-        //   title: 'ログアウト',
-        //   icon: 'mdi-account-arrow-right',
-        //   link: '/auth/logout'
-        // },
       ],
       isOpen: false
     }

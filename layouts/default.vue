@@ -19,10 +19,6 @@ export default {
     AppHeader,
     Toolbar,
   },
-  mounted() {
-    console.log('window')
-    window.scrollTo(0, 1000)
-  },
   computed: {
     loggedIn() {
         return this.$store.getters['user/loggedIn']
@@ -38,17 +34,27 @@ export default {
 body {
   height: auto;
 }
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  display: block;
+  z-index: 100;
+}
+.v-toolbar__content {
+  height: 64px;
+},
 .v-main {
-  background: #CFD8DC;
+  background: #ECEFF1;
 }
 
 .v-main__wrap {
-  background: #CFD8DC;
-  padding: 80px;
+  background: #ECEFF1;
+  padding: 80px 80px 50px;
 }
 
 .v-application--wrap {
-  background: #CFD8DC;
+  background: #ECEFF1;
 }
 
 .v-main__wrap .v-application {

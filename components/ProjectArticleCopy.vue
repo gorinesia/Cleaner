@@ -119,17 +119,6 @@ export default {
     currentUser() {
       return this.$store.getters["user/currentUser"];
     },
-    // articles() {
-    //   return this.$store.getters["project/articles"];
-    // },
-    // image: {
-    //   get() {
-    //     return this.$store.getters["project/image"];
-    //   },
-    //   set(value) {
-    //     this.$store.commit("project/setImage", value);
-    //   },
-    // },
   },
   methods: {
     async like() {
