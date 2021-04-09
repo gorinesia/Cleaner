@@ -26,6 +26,7 @@
 import axios from 'axios';
 
 export default {
+  layout: 'loggedIn',
   data() {
     return {
       address: '',
@@ -122,7 +123,7 @@ export default {
 <style>
 .ui.button,
 .dot.circle.icon {
-  background-color: #ff5a5f;
+  background-color: #00ACC1;
   color: white;
 }
 
@@ -150,8 +151,9 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: red;
-  width: 75%;
+  background-color: #00ACC1;
+  width: 500px;
+  height: auto;
   margin: 0 auto;
 }
 </style>

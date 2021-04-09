@@ -3,7 +3,6 @@
   <v-app>
     <AppHeader />
     <v-main>
-      <!-- <Toolbar v-if="loggedIn" /> -->
       <v-row>
         <v-col cols="12" md="3">
           <Sidebar />
