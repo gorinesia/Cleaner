@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import AppHeader from '../components/AppHeader.vue'
-import Toolbar from '@/components/Toolbar.vue'
+import AppHeader from "../components/AppHeader.vue";
+import Toolbar from "@/components/Toolbar.vue";
 
 export default {
   components: {
@@ -21,13 +21,13 @@ export default {
   },
   computed: {
     loggedIn() {
-        return this.$store.getters['user/loggedIn']
-      },
+      return this.$store.getters["user/loggedIn"];
+    },
     currentUser() {
-      return this.$store.getters['user/currentUser']
-    }
-  }
-}
+      return this.$store.getters["user/currentUser"];
+    },
+  },
+};
 </script>
 
 <style>
@@ -43,22 +43,24 @@ header {
 }
 .v-toolbar__content {
   height: 64px;
-},
-.v-main {
-  background: #ECEFF1;
 }
-
+.v-main {
+  background: #eceff1;
+}
 .v-main__wrap {
-  background: #ECEFF1;
+  background: #eceff1;
   padding: 80px 80px 50px;
 }
 
 .v-application--wrap {
-  background: #ECEFF1;
+  background: #eceff1;
 }
 
 .v-main__wrap .v-application {
   margin: auto;
   max-width: 1200px;
+}
+.v-application--wrap .v-system-bar {
+  margin: -15px -80px 0;
 }
 </style>
