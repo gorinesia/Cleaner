@@ -5,11 +5,11 @@
         <v-app-bar color="white" style="color: #00ACC1" class="font-weight-bold">
             <v-toolbar-title>
               <span><v-icon>fas fa-lock</v-icon></span>
-              <nuxt-link v-if="!loggedIn" class="font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/">
+              <nuxt-link v-if="!loggedIn" class="app-title font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/">
                 <v-icon large color="cyan darken-1">mdi-earth</v-icon>
                 Cleaner
               </nuxt-link>
-              <nuxt-link  v-else class="font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/mypage">
+              <nuxt-link  v-else class="app-title font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none" to="/mypage">
                 <v-icon large color="cyan darken-1">mdi-earth</v-icon>
                 Cleaner
               </nuxt-link>
@@ -177,17 +177,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.app-title {
+  margin-left: 50px;
+}
 .v-toolbar__title {
   overflow: visible !important;
   margin-right: 10px !important;
 }
-
 .v-app-bar__nav-icon {
   @include display_pc {
     display: none !important;
   }
 }
-
 .v-tabs {
   display: none;
 
@@ -195,7 +196,6 @@ export default {
     display: block !important
   }
 }
-
 .btn--guest {
   color: #fff;
   background-color: #00897B;
@@ -229,12 +229,16 @@ export default {
   padding: 8px;
   margin-bottom: -20px;
 }
-
 .btn--logout--radius {
   border-radius: 100vh;
   outline: none;
 }
-
+nav {
+  margin-right: 50px;
+}
+nav .v-btn {
+  margin-left: 20px;
+}
 #nav {
     display: flex;
     align-items: center;
