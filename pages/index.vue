@@ -157,9 +157,6 @@ img {
   border-radius: 20%;
   justify-items: center;
 }
-// p {
-//   white-space: pre-wrap;
-// }
 .title-content {
   color: navy;
   font-weight: bold;
@@ -171,9 +168,6 @@ img {
   font-size: 1rem;
   line-height: 1.8em;
 }
-// .v-btn:not(.v-btn--round).v-size--x-large {
-//   padding: 0;
-// }
 .start-button {
   padding: 30px 60px;
 }
@@ -182,11 +176,18 @@ img {
 }
 .v-item-group {
   padding: 30px;
-  // margin: 30px;
 }
 .tab-text {
   font-size: 1rem;
   margin-bottom: 20px;
   line-height: 1.6em;
+}
+@media screen and (max-width: 650px) {
+  .title-content {
+    font-size: 1rem;
+  }
+  .title-text {
+    font-size: 0.6rem;
+  }
 }
 </style>
