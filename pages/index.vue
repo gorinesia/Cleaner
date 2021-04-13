@@ -189,5 +189,8 @@ img {
   .title-text {
     font-size: 0.6rem;
   }
+  .v-btn__content {
+    justify-content: auto;
+  }
 }
 </style>
