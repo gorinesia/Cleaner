@@ -273,6 +273,11 @@ export default {
 .app-title {
   margin-left: 50px;
 }
+@media screen and (max-width: 650px) {
+  .app-title {
+    margin-left: 20px;
+  }
+}
 .v-toolbar__title {
   overflow: visible !important;
   margin-right: 10px !important;
@@ -404,5 +409,10 @@ nav .v-btn {
 
 .isOpen {
   display: block;
+}
+@media screen and (max-width: 650px) {
+  .v-btn__content {
+    justify-content: end;
+  }
 }
 </style>
