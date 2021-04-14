@@ -184,13 +184,19 @@ img {
 }
 @media screen and (max-width: 650px) {
   .title-content {
-    font-size: 1rem;
+    font-size: 22px;
   }
   .title-text {
-    font-size: 0.6rem;
+    font-size: 14px;
   }
   .v-btn__content {
     justify-content: auto;
+  }
+  .v-application--wrap .v-system-bar {
+    margin: -25px -80px 0;
+  }
+  .v-btn {
+    padding: 0;
   }
 }
 </style>
