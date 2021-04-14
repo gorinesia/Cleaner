@@ -63,4 +63,9 @@ header {
 .v-application--wrap .v-system-bar {
   margin: -15px -80px 0;
 }
+@media screen and (max-width: 650px) {
+  .v-main__wrap {
+    padding: 80px 10px 50px;
+  }
+}
 </style>

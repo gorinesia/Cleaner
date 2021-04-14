@@ -275,7 +275,7 @@ export default {
 }
 @media screen and (max-width: 650px) {
   .app-title {
-    margin-left: 20px;
+    margin-left: 0;
   }
 }
 .v-toolbar__title {
