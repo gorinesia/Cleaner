@@ -1,15 +1,18 @@
 <template>
   <v-app>
     <v-container>
-      <h2 style="color: #00ACC1;" class="my-5">プロジェクト</h2>
-      <v-alert dense text type="success" :value="alertPost" style="position: fixed; z-index: 1; right: 200px; bottom: 100px">プロジェクトの様子を投稿しました</v-alert>
+      <h2 style="color: #00acc1" class="my-5">プロジェクト</h2>
+      <v-alert
+        dense
+        text
+        type="success"
+        :value="alertPost"
+        style="position: fixed; z-index: 1; right: 200px; bottom: 100px"
+        >プロジェクトの様子を投稿しました</v-alert
+      >
 
       <v-row justify="center" v-if="loggedIn">
-        <v-dialog
-          v-model="dialog"
-          persistent
-          max-width="600px"
-        >
+        <v-dialog v-model="dialog" persistent max-width="600px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               style="position: fixed; z-index: 1; right: 20%; bottom: 5%"
@@ -30,33 +33,55 @@
             <v-card-text>
               <v-container>
                 <label class="postImage-appendBtn"></label>
-                <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
+                <input
+                  type="file"
+                  id="btnUpload"
+                  @change="btnUploadChange"
+                  value="アップロード"
+                  data-label="画像の添付"
+                /><br />
                 <v-img :src="image" width="100" height="100"></v-img>
                 <label>ゴミの量</label>
-                <v-text-field v-model="name" class="white" placeholder="例) 5kg"></v-text-field>
+                <v-text-field
+                  v-model="name"
+                  class="white"
+                  placeholder="例) 5kg"
+                ></v-text-field>
                 <label>日時</label>
-                <v-text-field v-model="date" class="white" placeholder="">{{ date }}</v-text-field>
+                <v-text-field v-model="date" class="white" placeholder="">{{
+                  date
+                }}</v-text-field>
                 <label>場所</label>
-                <v-text-field v-model="place" class="white" placeholder="例) 東京"></v-text-field>
+                <v-text-field
+                  v-model="place"
+                  class="white"
+                  placeholder="例) 東京"
+                ></v-text-field>
                 <label>コメント</label>
-                <v-textarea v-model="comment" class="white" placeholder="例) 今日もたくさん拾いました。"></v-textarea>
+                <v-textarea
+                  v-model="comment"
+                  class="white"
+                  placeholder="例) 今日もたくさん拾いました。"
+                ></v-textarea>
                 <!-- <section style="position:relative; z-index:1;"> -->
-                  <!-- <label>google maps</label> -->
-                  <!-- <input type="text" v-model="address" placeholder="例) Enter your address" id="autocomplete"><br>
+                <!-- <label>google maps</label> -->
+                <!-- <input type="text" v-model="address" placeholder="例) Enter your address" id="autocomplete"><br>
                   <v-btn @click="locatorButtonPressed">検索</v-btn>
                   <div id="map"></div> -->
               </v-container>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="dialog = false"
-              >
+              <v-btn color="blue darken-1" text @click="dialog = false">
                 Close
               </v-btn>
-              <v-btn @click="addMessage" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
+              <v-btn
+                @click="addMessage"
+                class="ma-3 float-right font-weight-bold"
+                color="cyan"
+                dark
+                >投稿</v-btn
+              >
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -64,7 +89,12 @@
 
       <v-row class="article">
         <v-col>
-          <ProjectArticle v-for="article in articles" :key="article.id" :id="article.id" :article="article" />
+          <ProjectArticle
+            v-for="article in articles"
+            :key="article.id"
+            :id="article.id"
+            :article="article"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -72,17 +102,17 @@
 </template>
 
 <script>
-import axios from 'axios';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import ProjectArticle from '~/components/ProjectArticle.vue';
+import axios from "axios";
+import firebase from "firebase/app";
+import "firebase/firestore";
+import ProjectArticle from "~/components/ProjectArticle.vue";
 
 export default {
-  name: 'project',
-  layout: 'loggedIn',
+  name: "project",
+  layout: "loggedIn",
   scrollToTop: true,
   components: {
-    ProjectArticle
+    ProjectArticle,
   },
   data() {
     return {
@@ -94,44 +124,44 @@ export default {
       comment: this.$store.state.project.comment,
       imageOverlay: false,
       dialog: false,
-      address: '',
-      map: '',
+      address: "",
+      map: "",
       applyFlag: false,
       loginUser: null,
       alertPost: false,
       posts: [],
-    }
+    };
   },
   computed: {
     loggedIn() {
-      return this.$store.getters['user/loggedIn']
+      return this.$store.getters["user/loggedIn"];
     },
     uid() {
-      return this.$store.getters['user/uid']
+      return this.$store.getters["user/uid"];
     },
     currentUser() {
-      return this.$store.getters['user/currentUser']
+      return this.$store.getters["user/currentUser"];
     },
     articles() {
-      return this.$store.getters['project/articles']
+      return this.$store.getters["project/articles"];
     },
     image: {
       get() {
-        return this.$store.getters['project/image']
+        return this.$store.getters["project/image"];
       },
       set(value) {
-        this.$store.commit('project/setImage', value)
-      }
+        this.$store.commit("project/setImage", value);
+      },
     },
     personalProject() {
-      return this.$store.getters['project/personalProject']
-    }
+      return this.$store.getters["project/personalProject"];
+    },
   },
   mounted() {
     window.scrollTo(0, 1000);
-    this.$store.dispatch('project/getMessage');
+    this.$store.dispatch("project/getMessage");
     const db = firebase.firestore();
-    const docRef = db.collection('posts').where('id', '==', true);
+    const docRef = db.collection("posts").where("id", "==", true);
     // this.getEvent(this.article.id)
     // this.getEvent(docRef)
 
@@ -159,17 +189,17 @@ export default {
       this.imageOverlay = false;
     },
     btnUploadChange(ev) {
-      this.$store.dispatch('project/btnUploadChange', {
-        ev
+      this.$store.dispatch("project/btnUploadChange", {
+        ev,
       });
     },
     getMessage() {
-      this.$store.dispatch('project/getMessage', {
+      this.$store.dispatch("project/getMessage", {
         displayName: this.currentUser[0].displayName,
-      })
+      });
     },
     addMessage() {
-      this.$store.dispatch('project/addMessage', {
+      this.$store.dispatch("project/addMessage", {
         uid: this.currentUser[0].uid,
         displayName: this.currentUser[0].displayName,
         displayImage: this.currentUser[0].image,
@@ -178,16 +208,16 @@ export default {
         comment: this.comment,
         image: this.image,
         date: this.date,
-        beliked: false
+        beliked: false,
       });
       this.alertPost = true;
       setTimeout(() => {
-        this.alertPost = false
+        this.alertPost = false;
       }, 3000);
-      this.name = '';
-      this.place = '';
-      this.comment = '';
-      this.date = '';
+      this.name = "";
+      this.place = "";
+      this.comment = "";
+      this.date = "";
       this.dialog = false;
     },
     locatorButtonPressed() {
@@ -206,48 +236,49 @@ export default {
           },
           (error) => {
             this.error =
-              'Locator is unable to find your address. Please type your address manually.';
+              "Locator is unable to find your address. Please type your address manually.";
           }
         );
       } else {
         this.error = error.message;
-        console.log('Your browser does not support geolocation API');
+        console.log("Your browser does not support geolocation API");
       }
     },
     getAddressFrom(lat, long) {
-      axios.get(
-        'https://maps.googleapis.com/maps/api/geocode/json?latlng=' +
-          lat +
-          ',' +
-          long +
-          '&key=AIzaSyAzighvakmvCU9UN7_yfBgJvdojhzyuCc4'
-      )
-      .then((response) => {
-        if (response.data.error_message) {
-          this.error = response.data.error_message;
-          console.log(response.data.error_message);
-        } else {
-          this.address = response.data.results[0].formatted_address;
-        }
-      })
-      .catch((error) => {
-        this.error = error.message;
-        console.log(error.message);
-      })
+      axios
+        .get(
+          "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+            lat +
+            "," +
+            long +
+            "&key=AIzaSyAzighvakmvCU9UN7_yfBgJvdojhzyuCc4"
+        )
+        .then((response) => {
+          if (response.data.error_message) {
+            this.error = response.data.error_message;
+            console.log(response.data.error_message);
+          } else {
+            this.address = response.data.results[0].formatted_address;
+          }
+        })
+        .catch((error) => {
+          this.error = error.message;
+          console.log(error.message);
+        });
     },
     showLocationOnTheMap(latitude, longitude) {
-      let map = new google.maps.Map(document.getElementById('map'), {
+      let map = new google.maps.Map(document.getElementById("map"), {
         zoom: 15,
         center: new google.maps.LatLng(latitude, longitude),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
       });
       new google.maps.Marker({
         position: new google.maps.LatLng(latitude, longitude),
-        map: map
-      })
+        map: map,
+      });
     },
     async getEvent(docRef) {
-      await docRef.get().then(doc => {
+      await docRef.get().then((doc) => {
         if (doc.exists) {
           console.log(doc.data());
           this.posts = doc.data();
@@ -261,18 +292,21 @@ export default {
     },
     async applyEvent(id) {
       const db = firebase.firestore();
-      const docRef = await db.collection('posts').doc(id);
-      docRef.set({
-        uid: this.currentUser[0].uid
-        // like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
-      }, { merge: true })
+      const docRef = await db.collection("posts").doc(id);
+      docRef.set(
+        {
+          uid: this.currentUser[0].uid,
+          // like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
+        },
+        { merge: true }
+      );
       await this.getEvent(docRef);
       this.applyEvent = true;
     },
     async cancelEvent(id) {
       const db = firebase.firestore();
-      const docRef = await db.collection('posts').doc(id);
-      docRef.delete()
+      const docRef = await db.collection("posts").doc(id);
+      docRef.delete();
       // docRef.update({
       //   like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
       // })
@@ -281,20 +315,24 @@ export default {
     },
     async getPersonalId(id) {
       console.log(id);
-      await this.$store.dispatch('project/getPersonalProject', {
-        id
-      })
+      await this.$store.dispatch("project/getPersonalProject", {
+        id,
+      });
     },
-  }
-}
+  },
+};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .v-sheet.v-card:hover {
-  background:#000;
+  background: #000;
 }
-
 .sidebar {
   background: red;
+}
+@media screen and (max-width: 650px) {
+  .v-application--wrap {
+    min-height: 0vh;
+  }
 }
 </style>
