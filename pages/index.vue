@@ -46,7 +46,7 @@
     </v-container>
     <div
       style="color: #0d47a1"
-      class="text-h4 font-weight-bold"
+      class="content_title text-h4 font-weight-bold"
       align="center"
       justify="center"
     >
@@ -148,6 +148,9 @@ img {
   height: 100px;
   border-radius: 50%;
 }
+.v-application--wrap .v-system-bar {
+  margin: -15px -80px 0;
+}
 .home-hero__content {
   background: url("../assets/img/top-page.jpg");
   background-size: cover;
@@ -197,6 +200,12 @@ img {
   }
   .v-btn {
     padding: 0;
+  }
+  .content_title {
+    font-size: 22px !important;
+  }
+  .tab-text {
+    font-size: 14px;
   }
 }
 </style>

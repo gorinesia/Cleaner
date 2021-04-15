@@ -45,4 +45,13 @@ img {
 .text {
   line-height: 1.6em;
 }
+@media screen and (max-width: 650px) {
+  .border-box {
+    border-right: none;
+  }
+  .row {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
 </style>

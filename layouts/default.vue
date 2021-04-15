@@ -30,7 +30,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 body {
   height: auto;
 }
@@ -51,21 +51,19 @@ header {
   background: #eceff1;
   padding: 80px 80px 50px;
 }
-
 .v-application--wrap {
   background: #eceff1;
 }
-
 .v-main__wrap .v-application {
   margin: auto;
   max-width: 1200px;
 }
-.v-application--wrap .v-system-bar {
-  margin: -15px -80px 0;
-}
 @media screen and (max-width: 650px) {
   .v-main__wrap {
     padding: 80px 10px 50px;
+  }
+  .v-application--wrap {
+    min-height: 50vh;
   }
 }
 </style>
