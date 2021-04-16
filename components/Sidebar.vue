@@ -97,20 +97,27 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.v-card {
-  display: none;
+<style scoped>
+/* .v-card { */
+  /* display: none; */
 
-  @include display_pc {
+  /* @include display_pc {
     display: block !important;
-  }
-}
-
+  } */
+/* } */
 .sidebar {
   margin-top: 13px;
 }
 
 .sidebar .v-navigation-drawer {
   width: 100% !important;
+}
+@media screen and (max-width: 650px) {
+  .v-application--wrap {
+    min-height: 0;
+  }
+  .v-card {
+    display: none;
+  }
 }
 </style>
