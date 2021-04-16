@@ -323,7 +323,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.v-main {
+  padding: 0 80px;
+}
 .v-sheet.v-card:hover {
   background: #000;
 }
@@ -331,8 +334,11 @@ export default {
   background: red;
 }
 @media screen and (max-width: 650px) {
-  .v-application--wrap {
-    min-height: 0vh;
+  .v-application .v-application--wrap {
+    min-height: 0;
+  }
+  .v-main__wrap {
+    padding: 10px;
   }
 }
 </style>

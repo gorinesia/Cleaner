@@ -46,8 +46,9 @@ header {
 }
 .v-main {
   background: #eceff1;
+  padding: 0 100px;
 }
-.v-main__wrap {
+/* .v-main__wrap {
   background: #eceff1;
   padding: 80px 80px 50px;
 }
@@ -57,13 +58,10 @@ header {
 .v-main__wrap .v-application {
   margin: auto;
   max-width: 1200px;
-}
+} */
 @media screen and (max-width: 650px) {
   .v-main__wrap {
     padding: 80px 10px 50px;
-  }
-  .v-application--wrap {
-    min-height: 50vh;
   }
 }
 </style>

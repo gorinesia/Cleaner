@@ -121,6 +121,9 @@ export default {
   components: {
     Information,
   },
+  mounted() {
+    console.log(this.$vuetify.breakpoint)
+  },
   data() {
     return {
       menuItems: [
@@ -140,16 +143,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app {
+/* .app {
   max-width: 100%;
-}
+} */
 img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
 }
 .v-application--wrap .v-system-bar {
-  margin: -15px -80px 0;
+  margin: 65px -80px 0;
 }
 .home-hero__content {
   background: url("../assets/img/top-page.jpg");
@@ -196,7 +199,7 @@ img {
     justify-content: auto;
   }
   .v-application--wrap .v-system-bar {
-    margin: -25px -80px 0;
+    margin: 55px -80px 0;
   }
   .v-btn {
     padding: 0;
