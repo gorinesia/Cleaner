@@ -334,9 +334,12 @@ export default {
   background: red;
 }
 @media screen and (max-width: 650px) {
-  .v-application .v-application--wrap {
-    min-height: 0;
+  .v-application {
+    .v-application--wrap {
+      min-height: 0;
+    }
   }
+
   .v-main__wrap {
     padding: 10px;
   }
