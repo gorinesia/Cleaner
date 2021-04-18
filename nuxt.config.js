@@ -91,7 +91,7 @@ export default {
   // axios: { proxy: true, prefix: '/api' },
   // proxy: { '/api/': { target: 'http://localhost:8000' }},
   styleResources: {
-    scss: [
+    sass: [
       '~/assets/scss/common.scss'
     ]
   },

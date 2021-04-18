@@ -47,6 +47,10 @@ header {
 .v-main {
   background: #eceff1;
   padding: 0 100px;
+
+  .v-main__wrap {
+    padding: 0 100px;
+  }
 }
 /* .v-main__wrap {
   background: #eceff1;

@@ -282,17 +282,17 @@ export default {
   overflow: visible !important;
   margin-right: 10px !important;
 }
-.v-app-bar__nav-icon {
-  @include display_pc {
-    display: none !important;
-  }
-}
+// .v-app-bar__nav-icon {
+//   @include display_pc {
+//     display: none !important;
+//   }
+// }
 .v-tabs {
   display: none;
 
-  @include display_pc {
-    display: block !important;
-  }
+  // @include display_pc {
+  //   display: block !important;
+  // }
 }
 .btn--guest {
   color: #fff;
