@@ -282,17 +282,8 @@ export default {
   overflow: visible !important;
   margin-right: 10px !important;
 }
-// .v-app-bar__nav-icon {
-//   @include display_pc {
-//     display: none !important;
-//   }
-// }
-.v-tabs {
+.v-app-bar__nav-icon {
   display: none;
-
-  // @include display_pc {
-  //   display: block !important;
-  // }
 }
 .btn--guest {
   color: #fff;
@@ -413,6 +404,12 @@ nav .v-btn {
 @media screen and (max-width: 650px) {
   .v-btn__content {
     justify-content: end;
+  }
+  .v-app-bar__nav-icon {
+    display: block;
+  }
+  .v-tabs {
+    display: none;
   }
 }
 </style>
