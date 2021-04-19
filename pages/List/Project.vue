@@ -323,7 +323,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .v-main {
   padding: 0 80px;
 }
