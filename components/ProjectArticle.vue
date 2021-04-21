@@ -148,8 +148,4 @@ export default {
   transition: 0.3s;
   opacity: 0.8;
 }
-
-.sidebar {
-  background: red;
-}
 </style>

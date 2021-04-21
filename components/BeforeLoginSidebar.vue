@@ -1,35 +1,7 @@
 <template>
-  <v-app>
-    <v-card
-      class="sidebar"
-      height="250px"
-      v-for="currentUser in currentUser"
-      :key="currentUser.id"
-    >
+  <v-app class="app_wrap">
+    <v-card class="sidebar">
       <v-navigation-drawer permanent>
-        <template v-slot:prepend>
-          <v-list-item two-line>
-            <v-list-item-avatar>
-              <v-img
-                :src="currentUser.image"
-                width="30px"
-                height="30px"
-              ></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <div
-                class="cyan--text text--darken-1 font-weight-bold text-h5 text-decoration-none"
-              >
-                {{ currentUser.displayName }}
-              </div>
-              <!-- <nuxt-link class="cyan--text text--darken-1 font-weight-bold text-h5 text-decoration-none" to="/personal/profile" @click.native="getProfile(currentUser.id)">{{ currentUser.displayName }}</nuxt-link> -->
-            </v-list-item-content>
-          </v-list-item>
-        </template>
-
-        <v-divider></v-divider>
-
         <v-list dense>
           <v-list-item v-for="item in items" :key="item.title" :to="item.link">
             <v-list-item-icon>
@@ -100,13 +72,9 @@ export default {
 <style lang="scss" scoped>
 .v-card {
   display: block;
-  // display: none;
-
-  /* @include display_pc {
-    display: block !important;
-  } */
 }
 .sidebar {
+  height: 250px;
   margin-top: 13px;
 }
 
@@ -114,11 +82,10 @@ export default {
   width: 100% !important;
 }
 @media screen and (max-width: 650px) {
-  .v-application--wrap {
-    min-height: none;
-  }
-  .v-card {
-    display: none;
+  .app_wrap {
+    .v-application--wrap {
+      min-height: none;
+    }
   }
 }
 </style>
