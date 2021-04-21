@@ -3,10 +3,10 @@
   <v-app>
     <AppHeader />
     <v-main>
-      <Toolbar />
+      <!-- <Toolbar /> -->
       <v-row>
         <v-col cols="12" md="3">
-          <Sidebar />
+          <BeforeLoginSidebar />
         </v-col>
         <v-col cols="12" md="9">
           <Nuxt />
@@ -19,15 +19,17 @@
 </template>
 
 <script>
-import AppFooter from '../components/AppFooter.vue'
-import Sidebar from '../components/Sidebar.vue'
-import Toolbar from '@/components/Toolbar.vue'
+import AppFooter from '../components/AppFooter.vue';
+import BeforeLoginSidebar from '../components/BeforeLoginSidebar.vue';
+// import Sidebar from '../components/Sidebar.vue'
+// import Toolbar from '@/components/Toolbar.vue'
 
 export default {
   components: {
     AppFooter,
-    Sidebar,
-    Toolbar,
+    BeforeLoginSidebar
+    // Sidebar,
+    // Toolbar,
   },
   data() {
     return {

@@ -1,7 +1,7 @@
 <template>
-  <v-app>
+  <v-app class="app_wrap">
     <v-container>
-      <h2 style="color: #00acc1" class="my-5">プロジェクト</h2>
+      <h2 style="color: #00acc1" class="my-5 title">プロジェクト</h2>
       <v-alert
         dense
         text
@@ -109,7 +109,7 @@ import ProjectArticle from "~/components/ProjectArticle.vue";
 
 export default {
   name: "project",
-  layout: "loggedIn",
+  layout: "beforeLogin",
   scrollToTop: true,
   components: {
     ProjectArticle,
@@ -324,6 +324,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.app_wrap {
+  .sidebar {
+    background: yellow;
+    @include display_sp {
+      background: #000;
+    }
+  }
+  .title {
+    background: green;
+    @include display_sp {
+      background: blue;
+    }
+  }
+}
 .v-main {
   padding: 0 80px;
 }
@@ -334,9 +348,12 @@ export default {
   background: red;
 }
 @media screen and (max-width: 650px) {
-  .v-application {
+  .app_wrap {
     .v-application--wrap {
-      min-height: 0;
+      min-height: none;
+    }
+    .sidebar {
+      background: #000;
     }
   }
 

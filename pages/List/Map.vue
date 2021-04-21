@@ -26,7 +26,7 @@
 import axios from 'axios';
 
 export default {
-  layout: 'loggedIn',
+  layout: 'beforeLogin',
   data() {
     return {
       address: '',
