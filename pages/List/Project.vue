@@ -325,6 +325,8 @@ export default {
 
 <style lang="scss" scoped>
 .app_wrap {
+  background: #333;
+  padding: 10px 40px 10px 20px;
   .sidebar {
     background: yellow;
     @include display_sp {
@@ -333,10 +335,19 @@ export default {
   }
   .title {
     background: green;
+    font-size: 30px;
     @include display_sp {
       background: blue;
+      font-size: 20px;
     }
   }
+  ::v-deep .v-application--wrap {
+    background: orange;
+  }
+}
+.app_wrap[data-v-1d2bff26] {
+  // background: red;
+
 }
 .v-main {
   padding: 0 80px;
