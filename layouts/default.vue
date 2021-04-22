@@ -3,7 +3,6 @@
     <v-app>
       <AppHeader app />
       <v-main>
-        <Toolbar v-if="loggedIn" />
         <Nuxt />
       </v-main>
     </v-app>
@@ -12,12 +11,12 @@
 
 <script>
 import AppHeader from "../components/AppHeader.vue";
-import Toolbar from "@/components/Toolbar.vue";
+// import Toolbar from "@/components/Toolbar.vue";
 
 export default {
   components: {
     AppHeader,
-    Toolbar,
+    // Toolbar,
   },
   computed: {
     loggedIn() {

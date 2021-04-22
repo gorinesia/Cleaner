@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="side_wrap">
     <v-card
       class="sidebar"
       height="250px"
@@ -100,11 +100,9 @@ export default {
 <style lang="scss" scoped>
 .v-card {
   display: block;
-  // display: none;
-
-  /* @include display_pc {
-    display: block !important;
-  } */
+}
+.side_wrap {
+  background: yellowgreen;
 }
 .sidebar {
   margin-top: 13px;

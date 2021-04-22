@@ -1,25 +1,25 @@
 <template>
   <div>
-  <v-app>
-    <AppHeader />
-    <v-main>
-      <v-row>
-        <v-col cols="12" md="3">
-          <Sidebar />
-        </v-col>
-        <v-col cols="12" md="9">
-          <Nuxt />
-        </v-col>
-      </v-row>
-    </v-main>
-    <AppFooter />
-  </v-app>
+    <v-app>
+      <AppHeader />
+      <v-main>
+        <v-row>
+          <v-col cols="12" md="3">
+            <Sidebar class="side_side_bar" />
+          </v-col>
+          <v-col cols="12" md="9">
+            <Nuxt />
+          </v-col>
+        </v-row>
+      </v-main>
+      <AppFooter />
+    </v-app>
   </div>
 </template>
 
 <script>
-import AppFooter from '../components/AppFooter.vue'
-import Sidebar from '../components/Sidebar.vue'
+import AppFooter from "../components/AppFooter.vue";
+import Sidebar from "../components/Sidebar.vue";
 
 export default {
   components: {
@@ -28,8 +28,14 @@ export default {
   },
   data() {
     return {
-      loggedIn: this.$store.state.user.loggedIn
-    }
-  }
-}
+      loggedIn: this.$store.state.user.loggedIn,
+    };
+  },
+};
 </script>
+
+<style lang="scss" scoped>
+.side_side_bar {
+  background: yellow;
+}
+</style>
