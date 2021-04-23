@@ -1,19 +1,17 @@
 <template>
   <div>
-    <v-app>
-      <AppHeader />
-      <v-main>
-        <v-row>
-          <v-col cols="12" md="3">
-            <Sidebar class="side_side_bar" />
-          </v-col>
-          <v-col cols="12" md="9">
-            <Nuxt />
-          </v-col>
-        </v-row>
-      </v-main>
-      <AppFooter />
-    </v-app>
+    <AppHeader />
+    <v-main>
+      <v-row>
+        <v-col cols="12" md="3">
+          <Sidebar />
+        </v-col>
+        <v-col cols="12" md="9">
+          <Nuxt />
+        </v-col>
+      </v-row>
+    </v-main>
+    <AppFooter />
   </div>
 </template>
 
@@ -35,7 +33,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.side_side_bar {
-  background: yellow;
-}
 </style>

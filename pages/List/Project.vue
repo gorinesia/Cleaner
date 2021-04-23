@@ -1,5 +1,5 @@
 <template>
-  <v-app class="app_wrap">
+  <v-app>
     <v-container>
       <h2 style="color: #00acc1" class="my-5 title">プロジェクト</h2>
       <v-alert
@@ -324,6 +324,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  .title {
+    background: green;
+    font-size: 30px;
+    @include display_sp {
+      background: blue;
+      font-size: 20px;
+    }
+  }
+}
 .app_wrap {
   background: #333;
   padding: 10px 40px 10px 20px;
@@ -345,9 +355,13 @@ export default {
     background: orange;
   }
 }
-.app_wrap[data-v-1d2bff26] {
-  // background: red;
-
+.v-application[data-v-19c827a1] {
+  ::v-deep .v-application--wrap {
+    background: red;
+  }
+}
+.theme--light.v-application[data-v-1d2bff26] {
+  background: greenyellow;
 }
 .v-main {
   padding: 0 80px;
