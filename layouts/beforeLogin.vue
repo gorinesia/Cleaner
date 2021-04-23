@@ -1,9 +1,7 @@
 <template>
   <div>
-  <v-app>
     <AppHeader />
     <v-main>
-      <!-- <Toolbar /> -->
       <v-row>
         <v-col cols="12" md="3">
           <BeforeLoginSidebar />
@@ -14,7 +12,6 @@
       </v-row>
     </v-main>
     <AppFooter />
-  </v-app>
   </div>
 </template>
 

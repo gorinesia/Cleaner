@@ -1,5 +1,5 @@
 <template>
-  <v-app class="side_wrap">
+  <v-app>
     <v-card
       class="sidebar"
       height="250px"
