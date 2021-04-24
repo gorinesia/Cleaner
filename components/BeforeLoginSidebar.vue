@@ -77,15 +77,19 @@ export default {
   height: 250px;
   margin-top: 13px;
 }
+.app_wrap[data-v-1d2bff26] {
+  background: purple;
+}
 
 .sidebar .v-navigation-drawer {
   width: 100% !important;
 }
 @media screen and (max-width: 650px) {
-  .app_wrap {
-    .v-application--wrap {
-      min-height: none;
+  .app_wrap[data-v-1d2bff26] {
+    background: teal;
+    ::v-deep .v-application--wrap {
+      min-height: 0vh;
     }
-  }
+}
 }
 </style>

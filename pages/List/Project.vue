@@ -360,7 +360,7 @@ export default {
     background: red;
   }
 }
-.theme--light.v-application[data-v-1d2bff26] {
+.app_wrap[data-v-1d2bff26] {
   background: greenyellow;
 }
 .v-main {

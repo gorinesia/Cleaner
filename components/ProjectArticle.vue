@@ -1,5 +1,4 @@
 <template>
-  <!-- <v-app> -->
     <div>
       <v-divider />
       <v-hover v-slot ="{ hover }">
@@ -51,7 +50,6 @@
         </v-card>
       </v-hover>
     </div>
-  <!-- </v-app> -->
 </template>
 
 <script>
