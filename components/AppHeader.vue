@@ -402,6 +402,12 @@ nav .v-btn {
   display: block;
 }
 @media screen and (max-width: 650px) {
+  header {
+    box-shadow: none;
+  }
+  .v-sheet.v-toolbar:not(.v-sheet--outlined) {
+    box-shadow: none;
+  }
   .v-btn__content {
     justify-content: end;
   }
