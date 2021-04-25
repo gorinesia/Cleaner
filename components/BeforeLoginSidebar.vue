@@ -74,7 +74,7 @@ export default {
   display: block;
 }
 .sidebar {
-  height: 250px;
+  // height: 250px;
   margin-top: 13px;
 }
 .app_wrap[data-v-1d2bff26] {
@@ -90,6 +90,6 @@ export default {
     ::v-deep .v-application--wrap {
       min-height: 0vh;
     }
-}
+  }
 }
 </style>
