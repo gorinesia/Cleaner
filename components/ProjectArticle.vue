@@ -4,17 +4,17 @@
     <v-hover v-slot="{ hover }">
       <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(article.id)">
         <v-row>
-          <v-col cols="12" md="2">
+          <v-col cols="2">
             <v-avatar tile size="100" class="ml-5 avatar">
               <v-img :src="article.image"></v-img>
             </v-avatar>
           </v-col>
-          <v-col cols="12" md="1">
+          <v-col cols="1">
             <v-avatar class="profile" color="grey" size="60">
               <v-img :src="article.displayImage"></v-img>
             </v-avatar>
           </v-col>
-          <v-col cols="12" md="5">
+          <v-col cols="5">
             <span class="user--name">{{ article.displayName }}</span>
             <span class="user--place">{{ article.place }}</span>
             <p class="my-2 font-weight-bold">{{ article.comment }}</p>
@@ -70,7 +70,7 @@
               </div>
             </div>
           </v-col>
-          <v-col cols="12" md="4">
+          <v-col cols="4">
             <span class="grey--text float-right mr-5"
               ><v-icon>mdi-scale</v-icon>{{ article.name }}・{{
                 article.date
@@ -179,6 +179,9 @@ export default {
   opacity: 0.8;
 }
 @media (max-width: 650px) {
+  .v-main {
+    padding: 10px !important;
+  }
   .v-application .ml-5 {
     margin-left: 5px !important;
   }
@@ -186,7 +189,6 @@ export default {
     ::v-deep .v-image__image--cover {
       background-size: contain;
     }
-
   }
   .avatar {
     width: 80%;

@@ -357,7 +357,7 @@ export default {
 }
 .v-application[data-v-19c827a1] {
   ::v-deep .v-application--wrap {
-    background: red;
+    background: navy;
   }
 }
 .app_wrap[data-v-1d2bff26] {
