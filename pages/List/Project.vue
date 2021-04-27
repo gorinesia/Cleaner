@@ -334,37 +334,14 @@ export default {
     }
   }
 }
-.app_wrap {
-  background: #333;
-  padding: 10px 40px 10px 20px;
-  .sidebar {
-    background: yellow;
-    @include display_sp {
-      background: #000;
-    }
-  }
-  .title {
-    background: green;
-    font-size: 30px;
-    @include display_sp {
-      background: blue;
-      font-size: 20px;
-    }
-  }
-  ::v-deep .v-application--wrap {
-    background: orange;
-  }
-}
 .v-application[data-v-19c827a1] {
   ::v-deep .v-application--wrap {
     background: navy;
   }
 }
-.app_wrap[data-v-1d2bff26] {
-  background: greenyellow;
-}
 .v-main {
   padding: 0 80px;
+  margin: 0 auto;
 }
 .v-sheet.v-card:hover {
   background: #000;
@@ -381,7 +358,6 @@ export default {
       background: #000;
     }
   }
-
   .v-main__wrap {
     padding: 10px;
   }

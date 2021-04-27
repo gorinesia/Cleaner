@@ -74,11 +74,11 @@ export default {
   display: block;
 }
 .sidebar {
-  // height: 250px;
   margin-top: 13px;
 }
 .app_wrap[data-v-1d2bff26] {
   background: purple;
+  padding: 20px;
 }
 
 .sidebar .v-navigation-drawer {

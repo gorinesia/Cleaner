@@ -33,4 +33,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.v-main {
+  margin: 0 auto;
+}
 </style>
