@@ -16,22 +16,28 @@
 </template>
 
 <script>
-import AppFooter from '../components/AppFooter.vue';
-import BeforeLoginSidebar from '../components/BeforeLoginSidebar.vue';
+import AppFooter from "../components/AppFooter.vue";
+import BeforeLoginSidebar from "../components/BeforeLoginSidebar.vue";
 // import Sidebar from '../components/Sidebar.vue'
 // import Toolbar from '@/components/Toolbar.vue'
 
 export default {
   components: {
     AppFooter,
-    BeforeLoginSidebar
+    BeforeLoginSidebar,
     // Sidebar,
     // Toolbar,
   },
   data() {
     return {
-      loggedIn: this.$store.state.user.loggedIn
-    }
-  }
-}
+      loggedIn: this.$store.state.user.loggedIn,
+    };
+  },
+};
 </script>
+
+<style lang="scss" scoped>
+main {
+  margin: 0 75px;
+}
+</style>
