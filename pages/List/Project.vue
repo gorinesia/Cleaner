@@ -106,6 +106,8 @@ import axios from "axios";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import ProjectArticle from "~/components/ProjectArticle.vue";
+import moment from "moment-timezone";
+import "moment/locale/ja";
 
 export default {
   name: "project",
@@ -120,7 +122,7 @@ export default {
       name: this.$store.state.project.name,
       place: this.$store.state.project.place,
       time: this.$store.state.project.time,
-      date: new Date().toLocaleString(),
+      // date: new Date().toLocaleString(),
       comment: this.$store.state.project.comment,
       imageOverlay: false,
       dialog: false,
@@ -158,6 +160,14 @@ export default {
     },
   },
   mounted() {
+    moment.locale("ja");
+    let date = moment(new Date().toLocaleString());
+    let date2 = moment("2021-04-28 14:30");
+    let time = date2.fromNow();
+    console.log(date);
+    console.log(date.format("LLLL"));
+    console.log(time);
+
     window.scrollTo(0, 1000);
     this.$store.dispatch("project/getMessage");
     const db = firebase.firestore();
