@@ -40,4 +40,9 @@ export default {
 main {
   margin: 0 75px;
 }
+@media (max-width: 650px) {
+  main {
+    margin: 0 0;
+  }
+}
 </style>

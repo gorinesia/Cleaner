@@ -18,6 +18,8 @@
     "express-session": "^1.17.1",
     "firebase": "^8.3.2",
     "ig": "0.0.5",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
     "npm": "^7.10.0",
     "nuxt": "^2.14.0",
     "stripe": "^8.130.0",
