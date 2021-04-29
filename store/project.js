@@ -1,6 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore'
-import 'firebase/storage'
+import 'firebase/storage';
+import moment from 'moment-timezone';
+import "moment/locale/ja";
 // import firebase, { firestore, storage } from '~/plugins/firebase.js'
 
 
@@ -16,7 +18,8 @@ export const state = () => ({
   deleteOverlay: false,
   editOverlay: false,
   personalProject: [],
-  personalComponent: []
+  personalComponent: [],
+  newDate: ''
 })
 
 export const getters = {
@@ -26,7 +29,8 @@ export const getters = {
   articleId: state => state.articleId,
   editOverlay: state => state.editOverlay,
   personalProject: state => state.personalProject,
-  personalComponent: state => state.personalComponent
+  personalComponent: state => state.personalComponent,
+  newDate: state => state.newDate
 }
 
 export const mutations = {
@@ -35,6 +39,9 @@ export const mutations = {
   },
   setImage: (state, url) => {
     state.image = url;
+  },
+  setNewDate: (state, date) => {
+    state.newDate = date;
   },
   resetImage: (state) => {
     state.image = null;
@@ -86,6 +93,22 @@ export const actions = {
       .then((url) => {
         commit('setImage', url);
       })
+  },
+  checkTimestamp({ commit }, payload) {
+    moment.locale("ja");
+    const db = firebase.firestore();
+    const date = db
+      .collection("projects")
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          console.log(doc.data().date);
+          const day = moment(doc.data().date);
+          const date = day.from();
+          console.log(date);
+          commit('setNewDate', date)
+        });
+      });
   },
   getMessage({ commit }, payload) {
     const db = firebase.firestore();
