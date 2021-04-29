@@ -110,21 +110,21 @@ export default {
       .collection("likes");
     this.checkLikeStatus();
 
-    // this.checkTimestamp();
+    this.checkTimestamp();
 
-    moment.locale("ja");
-    this.countRef = db
-      .collection("projects")
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          console.log(doc.data().date);
-          const day = moment(doc.data().date);
-          const date = day.from();
-          console.log(date);
-          this.newDate = date;
-        });
-      });
+    // moment.locale("ja");
+    // this.countRef = db
+    //   .collection("projects")
+    //   .get()
+    //   .then((snapshot) => {
+    //     snapshot.forEach((doc) => {
+    //       console.log(doc.data().date);
+    //       const day = moment(doc.data().date);
+    //       const date = day.from();
+    //       console.log(date);
+    //       this.newDate = date;
+    //     });
+    //   });
 
     this.likeRef.onSnapshot((snap) => {
       console.log(snap);
@@ -149,8 +149,14 @@ export default {
         this.$store.commit("project/setImage", value);
       },
     },
-    newDate() {
-      return this.newDate;
+    newDate: {
+      get() {
+        return this.$store.getters["project/newDate"];
+      },
+      set(value) {
+        this.$store.commit("project/setNewDate", value);
+        this.article.date = newDate;
+      },
     },
   },
   methods: {
@@ -173,6 +179,9 @@ export default {
       await this.$store.dispatch("project/getPersonalProject", {
         id,
       });
+    },
+    checkTimestamp() {
+      this.$store.dispatch("project/checkTimestamp");
     },
     // async checkTimestamp() {
     //   moment.locale("ja");
