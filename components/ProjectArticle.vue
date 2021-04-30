@@ -18,7 +18,9 @@
             <span class="user--name">{{ article.displayName }}</span>
             <span class="user--place">{{ article.place }}</span>
             <span class="grey--text float-right user--date"
-              ><v-icon>mdi-scale</v-icon>{{ article.name }}・{{ newDate }}</span
+              ><v-icon>mdi-scale</v-icon>{{ article.amount }}・{{
+                checkTimestamp()
+              }}</span
             >
           </div>
           <div class="item--d">
@@ -103,31 +105,15 @@ export default {
   },
   async mounted() {
     const db = firebase.firestore();
-    console.log("hoge");
     this.likeRef = db
       .collection("posts")
       .doc(this.article.id)
       .collection("likes");
     this.checkLikeStatus();
 
-    this.checkTimestamp();
-
-    // moment.locale("ja");
-    // this.countRef = db
-    //   .collection("projects")
-    //   .get()
-    //   .then((snapshot) => {
-    //     snapshot.forEach((doc) => {
-    //       console.log(doc.data().date);
-    //       const day = moment(doc.data().date);
-    //       const date = day.from();
-    //       console.log(date);
-    //       this.newDate = date;
-    //     });
-    //   });
+    // this.checkTimestamp();
 
     this.likeRef.onSnapshot((snap) => {
-      console.log(snap);
       this.likeCount = snap.size;
     });
   },
@@ -155,7 +141,6 @@ export default {
       },
       set(value) {
         this.$store.commit("project/setNewDate", value);
-        this.article.date = newDate;
       },
     },
   },
@@ -183,21 +168,6 @@ export default {
     checkTimestamp() {
       this.$store.dispatch("project/checkTimestamp");
     },
-    // async checkTimestamp() {
-    //   moment.locale("ja");
-    //   const db = await firebase.firestore();
-    //   const date = await db
-    //     .collection("projects")
-    //     .get()
-    //     .then((snapshot) => {
-    //       snapshot.forEach((doc) => {
-    //         console.log(doc.data().date);
-    //         const day = moment(doc.data().date);
-    //         const date = day.from();
-    //         console.log(date);
-    //       });
-    //     });
-    // },
   },
 };
 </script>

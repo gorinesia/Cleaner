@@ -97,15 +97,16 @@ export const actions = {
   checkTimestamp({ commit }, payload) {
     moment.locale("ja");
     const db = firebase.firestore();
-    const date = db
+    db
       .collection("projects")
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
-          console.log(doc.data().date);
+          // console.log(doc.data().date);
+          // console.log(doc.data().displayName);
           const day = moment(doc.data().date);
           const date = day.from();
-          console.log(date);
+          // console.log(date);
           commit('setNewDate', date)
         });
       });
@@ -121,7 +122,7 @@ export const actions = {
             uid: doc.data().uid,
             displayName: doc.data().displayName,
             displayImage: doc.data().displayImage,
-            name: doc.data().name,
+            amount: doc.data().amount,
             place: doc.data().place,
             comment: doc.data().comment,
             image: doc.data().image,
@@ -236,12 +237,13 @@ export const actions = {
       .doc(payload.id)
       .get()
       .then((doc) => {
+        s
         console.log(payload.id);
         console.log(doc.data());
         personalDetails.push({
           displayName: doc.data().displayName,
           displayImage: doc.data().displayImage,
-          name: doc.data().name,
+          amount: doc.data().amount,
           place: doc.data().place,
           comment: doc.data().comment,
           image: doc.data().image,
@@ -266,7 +268,7 @@ export const actions = {
         personalComponent.push({
           displayName: doc.data().displayName,
           displayImage: doc.data().displayImage,
-          name: doc.data().name,
+          amount: doc.data().amount,
           place: doc.data().place,
           comment: doc.data().comment,
           image: doc.data().image,
