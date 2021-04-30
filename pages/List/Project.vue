@@ -43,7 +43,7 @@
                 <v-img :src="image" width="100" height="100"></v-img>
                 <label>ゴミの量</label>
                 <v-text-field
-                  v-model="name"
+                  v-model="amount"
                   class="white"
                   placeholder="例) 5kg"
                 ></v-text-field>
@@ -119,7 +119,7 @@ export default {
   data() {
     return {
       user: this.$store.state.user.user,
-      name: this.$store.state.project.name,
+      name: this.$store.state.project.amount,
       place: this.$store.state.project.place,
       time: this.$store.state.project.time,
       // date: new Date().toLocaleString(),
@@ -213,7 +213,7 @@ export default {
         uid: this.currentUser[0].uid,
         displayName: this.currentUser[0].displayName,
         displayImage: this.currentUser[0].image,
-        name: this.name,
+        amount: this.amount,
         place: this.place,
         comment: this.comment,
         image: this.image,
@@ -224,7 +224,7 @@ export default {
       setTimeout(() => {
         this.alertPost = false;
       }, 3000);
-      this.name = "";
+      this.amount = "";
       this.place = "";
       this.comment = "";
       this.date = "";
