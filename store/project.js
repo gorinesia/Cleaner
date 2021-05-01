@@ -102,11 +102,8 @@ export const actions = {
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
-          // console.log(doc.data().date);
-          // console.log(doc.data().displayName);
           const day = moment(doc.data().date);
           const date = day.from();
-          // console.log(date);
           commit('setNewDate', date)
         });
       });
@@ -139,15 +136,6 @@ export const actions = {
     const db = firebase.firestore();
     const getUser = firebase.auth().currentUser;
     console.log(getUser.uid);
-    // db.collection('projects')
-    //   .onSnapshot((querySnapshot) => {
-    //     const allProjects = [];
-    //     querySnapshot.forEach((doc) => {
-    //       allProjects.push({
-    //         displayName: doc.data().displayName,
-    //         uid: payload.uid
-    //       })
-    //     })
     db.collection('projects')
       .where('uid', '==', payload.uid)
       .get()
