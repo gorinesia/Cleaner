@@ -258,33 +258,23 @@ export default {
   .item--a {
     background: purple;
     grid-area: item--a;
-    // grid-row: 1 / 2;
-    // grid-column: 1 / 2;
   }
   .item--b {
     background: rgb(185, 185, 152);
     grid-area: item--b;
-    // grid-row: 1 / 2 ;
-    // grid-column: 2 / 3;
   }
   .item--c {
     background: turquoise;
     grid-area: item--c;
-    // grid-row: 1 / 2;
-    // grid-column: 3 / 4;
   }
   .item--d {
     background: skyblue;
     grid-area: item--d;
-    // grid-row: 2 / 3;
-    // grid-column: 3 / 4;
   }
   .item--e {
     background: #333;
     display: inline;
     grid-area: item--e;
-    // grid-row: 2 / 3;
-    // grid-column: 2 / 3;
   }
   .main--image {
     margin-left: 0;
