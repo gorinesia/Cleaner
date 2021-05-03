@@ -203,8 +203,6 @@ export default {
 .item--d {
   background: skyblue;
   grid-area: item--d;
-  // grid-row: 2 / 3;
-  // grid-column: 3 / 4;
 }
 .item--e {
   background: #333;
