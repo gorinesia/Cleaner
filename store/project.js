@@ -104,7 +104,8 @@ export const actions = {
         snapshot.forEach((doc) => {
           const day = moment(doc.data().date);
           const date = day.from();
-          commit('setNewDate', date)
+          return date;
+          // commit('setNewDate', date);
         });
       });
   },
