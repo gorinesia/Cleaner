@@ -110,8 +110,6 @@ export default {
       .collection("likes");
     this.checkLikeStatus();
 
-    // this.checkTimestamp();
-
     this.likeRef.onSnapshot((snap) => {
       this.likeCount = snap.size;
     });
