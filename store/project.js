@@ -226,7 +226,6 @@ export const actions = {
       .doc(payload.id)
       .get()
       .then((doc) => {
-        s
         console.log(payload.id);
         console.log(doc.data());
         personalDetails.push({
