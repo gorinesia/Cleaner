@@ -162,8 +162,8 @@ export default {
         id,
       });
     },
-    checkTimestamp() {
-      this.$store.dispatch("project/checkTimestamp");
+    async checkTimestamp() {
+      await this.$store.dispatch("project/checkTimestamp");
     },
   },
 };
