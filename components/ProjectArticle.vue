@@ -18,9 +18,7 @@
             <span class="user--name">{{ article.displayName }}</span>
             <span class="user--place">{{ article.place }}</span>
             <span class="grey--text float-right user--date"
-              ><v-icon>mdi-scale</v-icon>{{ article.amount }}・{{
-                checkTimestamp()
-              }}</span
+              ><v-icon>mdi-scale</v-icon>{{ article.amount }}・{{ date }}</span
             >
           </div>
           <div class="item--d">
@@ -100,6 +98,7 @@ export default {
       applyFlag: false,
       beLiked: false,
       likeCount: 0,
+      date: "",
     };
   },
   async mounted() {
@@ -163,7 +162,8 @@ export default {
       });
     },
     async checkTimestamp() {
-      await this.$store.dispatch("project/checkTimestamp");
+      const date = await this.$store.dispatch("project/checkTimestamp");
+      this.date = date;
     },
   },
 };
