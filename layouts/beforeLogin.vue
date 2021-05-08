@@ -18,15 +18,11 @@
 <script>
 import AppFooter from "../components/AppFooter.vue";
 import BeforeLoginSidebar from "../components/BeforeLoginSidebar.vue";
-// import Sidebar from '../components/Sidebar.vue'
-// import Toolbar from '@/components/Toolbar.vue'
 
 export default {
   components: {
     AppFooter,
     BeforeLoginSidebar,
-    // Sidebar,
-    // Toolbar,
   },
   data() {
     return {
