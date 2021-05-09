@@ -3,7 +3,6 @@ import 'firebase/firestore'
 import 'firebase/storage';
 import moment from 'moment-timezone';
 import "moment/locale/ja";
-// import firebase, { firestore, storage } from '~/plugins/firebase.js'
 
 
 
