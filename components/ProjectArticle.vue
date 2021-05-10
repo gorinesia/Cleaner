@@ -5,14 +5,10 @@
       <v-card :class="{ 'on-hover': hover }" @click="getPersonalId(article.id)">
         <div class="grid--container">
           <div class="item--a">
-            <!-- <v-avatar class="avatar"> -->
             <div class="main--image"><img :src="article.image" /></div>
-            <!-- </v-avatar> -->
           </div>
           <div class="item--b">
-            <!-- <v-avatar class="profile" color="grey" size="60"> -->
             <div class="user--avatar"><img :src="article.displayImage" /></div>
-            <!-- </v-avatar> -->
           </div>
           <div class="item--c">
             <span class="user--name">{{ article.displayName }}</span>
@@ -156,7 +152,6 @@ export default {
       this.beLiked = doc.exists;
     },
     async getPersonalId(id) {
-      console.log(id);
       await this.$store.dispatch("project/getPersonalProject", {
         id,
       });
