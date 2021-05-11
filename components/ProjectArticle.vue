@@ -182,23 +182,23 @@ export default {
     "item--a item--e item--e";
 }
 .item--a {
-  background: purple;
+  // background: purple;
   grid-area: item--a;
 }
 .item--b {
-  background: rgb(185, 185, 152);
+  // background: rgb(185, 185, 152);
   grid-area: item--b;
 }
 .item--c {
-  background: turquoise;
+  // background: turquoise;
   grid-area: item--c;
 }
 .item--d {
-  background: skyblue;
+  // background: skyblue;
   grid-area: item--d;
 }
 .item--e {
-  background: #333;
+  // background: #333;
   display: inline;
   grid-area: item--e;
 }
@@ -247,23 +247,23 @@ export default {
       "item--a item--e item--e";
   }
   .item--a {
-    background: purple;
+    // background: purple;
     grid-area: item--a;
   }
   .item--b {
-    background: rgb(185, 185, 152);
+    // background: rgb(185, 185, 152);
     grid-area: item--b;
   }
   .item--c {
-    background: turquoise;
+    // background: turquoise;
     grid-area: item--c;
   }
   .item--d {
-    background: skyblue;
+    // background: skyblue;
     grid-area: item--d;
   }
   .item--e {
-    background: #333;
+    // background: #333;
     display: inline;
     grid-area: item--e;
   }
