@@ -188,6 +188,9 @@ export default {
 .item--b {
   // background: rgb(185, 185, 152);
   grid-area: item--b;
+  .user--avatar {
+    margin-left: 10px;
+  }
 }
 .item--c {
   // background: turquoise;
