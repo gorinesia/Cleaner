@@ -306,7 +306,6 @@ export default {
       docRef.set(
         {
           uid: this.currentUser[0].uid,
-          // like_users: firebase.firestore.FieldValue.arrayUnion(this.loginUser.uid),
         },
         { merge: true }
       );
@@ -317,9 +316,6 @@ export default {
       const db = firebase.firestore();
       const docRef = await db.collection("posts").doc(id);
       docRef.delete();
-      // docRef.update({
-      //   like_users: firebase.firestore.FieldValue.arrayRemove(this.loginUser.uid),
-      // })
       await this.getEvent(docRef);
       this.applyEvent = false;
     },
@@ -356,9 +352,9 @@ export default {
 .v-sheet.v-card:hover {
   background: #000;
 }
-.sidebar {
-  background: red;
-}
+// .sidebar {
+//   background: red;
+// }
 @media screen and (max-width: 650px) {
   .app_wrap {
     .v-application--wrap {
