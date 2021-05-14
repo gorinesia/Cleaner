@@ -350,7 +350,7 @@ export default {
   margin: 0 auto;
 }
 .v-sheet.v-card:hover {
-  background: #000;
+  // background: #000;
 }
 // .sidebar {
 //   background: red;
