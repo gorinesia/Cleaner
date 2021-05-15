@@ -332,10 +332,11 @@ export default {
 <style lang="scss" scoped>
 .container {
   .title {
-    background: green;
+    // background: green;
     font-size: 30px;
+    font-weight: bold;
     @include display_sp {
-      background: blue;
+      // background: blue;
       font-size: 20px;
     }
   }
