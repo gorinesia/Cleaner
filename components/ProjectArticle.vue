@@ -174,8 +174,9 @@ export default {
 }
 .grid--container {
   display: grid;
-  grid-template-columns: 100px 50px 1fr;
+  grid-template-columns: 100px 80px 1fr;
   grid-template-rows: 30px 50px 1fr;
+  grid-column-gap: 10px;
   grid-template-areas:
     "item--a item--b item--c"
     "item--a item--b item--d"
