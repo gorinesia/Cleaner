@@ -172,6 +172,11 @@ export default {
 .col-2 {
   padding-right: -12px;
 }
+.container {
+  .title {
+    font-size: 28px;
+  }
+}
 .grid--container {
   display: grid;
   grid-template-columns: 100px 80px 1fr;

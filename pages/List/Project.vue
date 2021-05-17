@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-container>
-      <h2 style="color: #00acc1" class="my-5 title">プロジェクト</h2>
+      <h2 style="color: #00acc1" class="my-5 h2_title">プロジェクト</h2>
       <v-alert
         dense
         text
@@ -331,7 +331,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  .title {
+  .h2_title {
     // background: green;
     font-size: 30px;
     font-weight: bold;
