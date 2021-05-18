@@ -173,7 +173,7 @@ export default {
   padding-right: -12px;
 }
 .container {
-  .title {
+  .h2_title {
     font-size: 28px;
   }
 }
@@ -195,6 +195,7 @@ export default {
   // background: rgb(185, 185, 152);
   grid-area: item--b;
   .user--avatar {
+    margin-top: 5px;
     margin-left: 10px;
   }
 }
