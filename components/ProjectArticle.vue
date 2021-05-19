@@ -213,7 +213,7 @@ export default {
   grid-area: item--e;
 }
 .main--image {
-  margin-left: 10px;
+  margin: 5px;
 }
 .main--image img {
   width: 100px;
