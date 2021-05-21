@@ -199,6 +199,7 @@ export default {
 }
 .item--c {
   grid-area: item--c;
+  padding-top: 5px;
 }
 .item--d {
   grid-area: item--d;
