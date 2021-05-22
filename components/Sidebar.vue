@@ -102,7 +102,7 @@ export default {
   display: block;
 }
 .side_wrap {
-  background: yellowgreen;
+  // background: yellowgreen;
 }
 .sidebar {
   margin-top: 13px;

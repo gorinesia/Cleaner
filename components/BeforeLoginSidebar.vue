@@ -77,7 +77,7 @@ export default {
   margin-top: 13px;
 }
 .app_wrap[data-v-1d2bff26] {
-  background: yellowgreen;
+  // background: yellowgreen;
   padding: 20px;
 }
 
