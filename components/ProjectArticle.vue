@@ -207,6 +207,7 @@ export default {
 .item--e {
   display: inline;
   grid-area: item--e;
+  padding-left: 5px;
 }
 .main--image {
   margin: 5px;
