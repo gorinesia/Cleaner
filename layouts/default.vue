@@ -11,12 +11,10 @@
 
 <script>
 import AppHeader from "../components/AppHeader.vue";
-// import Toolbar from "@/components/Toolbar.vue";
 
 export default {
   components: {
     AppHeader,
-    // Toolbar,
   },
   computed: {
     loggedIn() {
