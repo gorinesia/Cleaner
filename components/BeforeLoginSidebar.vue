@@ -77,7 +77,6 @@ export default {
   margin-top: 13px;
 }
 .app_wrap[data-v-1d2bff26] {
-  // background: yellowgreen;
   padding: 20px;
 }
 
@@ -86,7 +85,6 @@ export default {
 }
 @media screen and (max-width: 650px) {
   .app_wrap[data-v-1d2bff26] {
-    // background: teal;
     ::v-deep .v-application--wrap {
       min-height: 0vh;
     }
