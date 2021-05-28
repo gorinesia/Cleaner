@@ -101,9 +101,6 @@ export default {
 .v-card {
   display: block;
 }
-.side_wrap {
-  // background: yellowgreen;
-}
 .sidebar {
   margin-top: 13px;
 }
