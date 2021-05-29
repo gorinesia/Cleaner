@@ -23,7 +23,6 @@
               >
                 {{ currentUser.displayName }}
               </div>
-              <!-- <nuxt-link class="cyan--text text--darken-1 font-weight-bold text-h5 text-decoration-none" to="/personal/profile" @click.native="getProfile(currentUser.id)">{{ currentUser.displayName }}</nuxt-link> -->
             </v-list-item-content>
           </v-list-item>
         </template>
