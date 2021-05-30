@@ -122,7 +122,7 @@ export default {
     Information,
   },
   mounted() {
-    console.log(this.$vuetify.breakpoint)
+    console.log(this.$vuetify.breakpoint);
   },
   data() {
     return {
@@ -143,9 +143,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/* .app {
-  max-width: 100%;
-} */
 img {
   width: 100px;
   height: 100px;
