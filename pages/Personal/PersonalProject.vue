@@ -565,4 +565,7 @@ export default {
 .comment {
   margin: 3px auto 0;
 }
+.v-card[data-v-1aad7963] {
+  padding: 10px;
+}
 </style>
