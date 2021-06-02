@@ -568,4 +568,10 @@ export default {
 .v-card[data-v-1aad7963] {
   padding: 10px;
 }
+.v-image__image--cover {
+  background-size: contain;
+}
+.v-image__image--cover {
+  background-size: cover;
+}
 </style>
