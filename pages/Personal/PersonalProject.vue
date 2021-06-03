@@ -558,7 +558,6 @@ export default {
 .profile {
   margin-left: 20px;
 }
-
 .display-name {
   color: #00acc1;
 }
