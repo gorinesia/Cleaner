@@ -1,13 +1,9 @@
 <template>
   <v-app>
     <v-container>
-      <h2 style="color: #00ACC1;" class="my-5">イベント</h2>
+      <h2 style="color: #00acc1" class="my-5">イベント</h2>
       <v-row justify="center" v-if="loggedIn">
-        <v-dialog
-          v-model="dialog"
-          persistent
-          max-width="600px"
-        >
+        <v-dialog v-model="dialog" persistent max-width="600px">
           <template v-slot:activator="{ on, attrs }" style="position: relative">
             <v-btn
               style="position: fixed; z-index: 1; right: 20%; bottom: 5%"
@@ -28,29 +24,58 @@
             <v-card-text>
               <v-container>
                 <label class="postImage-appendBtn"></label>
-                <input type="file" id="btnUpload" @change="btnUploadChange" value="アップロード" data-label="画像の添付"><br>
+                <input
+                  type="file"
+                  id="btnUpload"
+                  @change="btnUploadChange"
+                  value="アップロード"
+                  data-label="画像の添付"
+                /><br />
                 <v-img :src="image" width="100" height="100"></v-img>
                 <label>イベント名</label>
-                <v-text-field v-model="name" class="white" placeholder="例）東京を綺麗にしよう大作戦"></v-text-field>
+                <v-text-field
+                  v-model="name"
+                  class="white"
+                  placeholder="例）東京を綺麗にしよう大作戦"
+                ></v-text-field>
                 <label>日時</label>
-                <v-text-field v-model="date" class="white" placeholder="例）11月7日"></v-text-field>
+                <v-text-field
+                  v-model="date"
+                  class="white"
+                  placeholder="例）11月7日"
+                ></v-text-field>
                 <label class="mb-5">時間</label>
-                <input type="time" v-model="time" class="white" placeholder="例）9時"><br>
-                <hr class="mb-4">
+                <input
+                  type="time"
+                  v-model="time"
+                  class="white"
+                  placeholder="例）9時"
+                /><br />
+                <hr class="mb-4" />
                 <label>場所</label>
-                <v-text-field v-model="place" class="white" placeholder="例）東京"></v-text-field>
+                <v-text-field
+                  v-model="place"
+                  class="white"
+                  placeholder="例）東京"
+                ></v-text-field>
                 <label>イベント説明</label>
-                <v-textarea v-model="comment" class="white" placeholder="例）渋谷を綺麗にしましょう"></v-textarea>
+                <v-textarea
+                  v-model="comment"
+                  class="white"
+                  placeholder="例）渋谷を綺麗にしましょう"
+                ></v-textarea>
               </v-container>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn @click="addEvent" class=" ma-3 float-right font-weight-bold" color="cyan" dark>投稿</v-btn>
               <v-btn
-                color="blue darken-1"
-                text
-                @click="dialog = false"
+                @click="addEvent"
+                class="ma-3 float-right font-weight-bold"
+                color="cyan"
+                dark
+                >投稿</v-btn
               >
+              <v-btn color="blue darken-1" text @click="dialog = false">
                 Close
               </v-btn>
             </v-card-actions>
@@ -63,41 +88,45 @@
           <v-card v-for="event in events" :key="event.id">
             <v-hover>
               <!-- <template> -->
-                  <!-- <v-divider /> -->
-                    <v-card @click="getPersonalId(event.id)">
-                        <v-row :key="event.id" >
-                          <v-col cols="12" md="2">
-                            <v-avatar class="profile ml-5" color="grey" size="60">
-                              <v-img :src="event.displayImage"></v-img>
-                            </v-avatar>
-                          </v-col>
-                          <v-col cols="12" md="7">
-                            <span class="headline mb-3 font-weight-bold" style="color: #00ACC1; display: inline-block">{{ event.name }}</span>
-                            <!-- <p class="my-5 font-weight-bold">{{ event.comment }}</p> -->
-                            <span class="grey--text" style="display: block">日時： {{ event.date }}</span>
-                            <p class="grey--text">場所： {{ event.place}}</p>
-                          </v-col>
-                          <v-col cols="12" md="3">
-                            <v-avatar tile size="110">
-                              <v-img :src="event.image"></v-img>
-                            </v-avatar>
-                          </v-col>
-                        </v-row>
-                    </v-card>
+              <!-- <v-divider /> -->
+              <v-card @click="getPersonalId(event.id)">
+                <v-row :key="event.id">
+                  <v-col cols="12" md="2">
+                    <v-avatar class="profile ml-5" color="grey" size="60">
+                      <v-img :src="event.displayImage"></v-img>
+                    </v-avatar>
+                  </v-col>
+                  <v-col cols="12" md="7">
+                    <span
+                      class="headline mb-3 font-weight-bold"
+                      style="color: #00acc1; display: inline-block"
+                      >{{ event.name }}</span
+                    >
+                    <span class="grey--text" style="display: block"
+                      >日時： {{ event.date }}</span
+                    >
+                    <p class="grey--text">場所： {{ event.place }}</p>
+                  </v-col>
+                  <v-col cols="12" md="3">
+                    <v-avatar tile size="110">
+                      <v-img :src="event.image"></v-img>
+                    </v-avatar>
+                  </v-col>
+                </v-row>
+              </v-card>
               <!-- </template> -->
             </v-hover>
           </v-card>
         </v-col>
       </v-row>
-
     </v-container>
   </v-app>
 </template>
 
 <script>
 export default {
-  layout: 'loggedIn',
-  name: 'event',
+  layout: "loggedIn",
+  name: "event",
   data() {
     return {
       name: this.$store.state.event.name,
@@ -105,35 +134,35 @@ export default {
       place: this.$store.state.event.place,
       date: new Date().toLocaleDateString(),
       comment: this.$store.state.event.comment,
-      image_src: require('@/assets/img/top-page.jpg'),
+      image_src: require("@/assets/img/top-page.jpg"),
       imageOverlay: false,
       dialog: false,
-    }
+    };
   },
   computed: {
     loggedIn() {
-      return this.$store.getters['user/loggedIn']
+      return this.$store.getters["user/loggedIn"];
     },
     currentUser() {
-      return this.$store.getters['user/currentUser']
+      return this.$store.getters["user/currentUser"];
     },
     events() {
-      return this.$store.getters['event/events']
+      return this.$store.getters["event/events"];
     },
     image: {
       get() {
-        return this.$store.getters['event/image']
+        return this.$store.getters["event/image"];
       },
       set(value) {
-        this.$store.commit('event/setImage', value)
-      }
+        this.$store.commit("event/setImage", value);
+      },
     },
     deleteOverlay() {
-      return this.$store.getters['event/deleteOverlay']
+      return this.$store.getters["event/deleteOverlay"];
     },
   },
   mounted() {
-    this.$store.dispatch('event/getEvent');
+    this.$store.dispatch("event/getEvent");
   },
   methods: {
     showImage() {
@@ -143,15 +172,15 @@ export default {
       this.imageOverlay = false;
     },
     btnUploadChange(ev) {
-      this.$store.dispatch('event/btnUploadChange', {
-        ev
+      this.$store.dispatch("event/btnUploadChange", {
+        ev,
       });
     },
     getEvent() {
-      this.$store.dispatch('event/getEvent');
+      this.$store.dispatch("event/getEvent");
     },
     addEvent() {
-      this.$store.dispatch('event/addEvent', {
+      this.$store.dispatch("event/addEvent", {
         displayName: this.currentUser[0].displayName,
         displayImage: this.currentUser[0].image,
         name: this.name,
@@ -159,58 +188,57 @@ export default {
         comment: this.comment,
         image: this.image,
         date: this.date,
-        time: this.time
+        time: this.time,
       });
-      this.name = '';
-      this.place = '';
-      this.comment = '';
-      this.date = '';
-      this.time = '';
+      this.name = "";
+      this.place = "";
+      this.comment = "";
+      this.date = "";
+      this.time = "";
     },
     openModalForDelete(id) {
-      this.$store.commit('event/openModalForDelete', {
-        id
+      this.$store.commit("event/openModalForDelete", {
+        id,
       });
     },
     closeModalForDelete() {
-      this.$store.commit('event/closeModalForDelete');
+      this.$store.commit("event/closeModalForDelete");
     },
     deleteArticles(id) {
       console.log(id);
-      this.$store.dispatch('event/deleteArticles', {
-        id
+      this.$store.dispatch("event/deleteArticles", {
+        id,
       });
     },
     openModalForEdit(id) {
-      this.$store.commit('event/openModalForEdit', {
-        id
+      this.$store.commit("event/openModalForEdit", {
+        id,
       });
     },
     closeModalForEdit() {
-      this.$store.commit('event/closeModalForEdit');
+      this.$store.commit("event/closeModalForEdit");
     },
     editArticles(id) {
-      this.$store.dispatch('event/editArticles', {
+      this.$store.dispatch("event/editArticles", {
         id,
         name: this.name,
         place: this.place,
         comment: this.messageComment,
         image: this.image,
       });
-      this.name = ''
-      this.place = ''
-      this.messageComment = ''
-      this.image = ''
+      this.name = "";
+      this.place = "";
+      this.messageComment = "";
+      this.image = "";
     },
     getPersonalId(id) {
-      this.$store.dispatch('event/getPersonalEvent', {
-        id
-      })
+      this.$store.dispatch("event/getPersonalEvent", {
+        id,
+      });
     },
   },
-}
+};
 </script>
 
 <style>
-
 </style>
