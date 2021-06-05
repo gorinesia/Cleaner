@@ -165,5 +165,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+main {
+  margin: 0 100px;
+}
 </style>
