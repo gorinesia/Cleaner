@@ -41,6 +41,9 @@ header {
 .v-toolbar__content {
   height: 64px;
 }
+main .v-main {
+  margin: 0 100px;
+}
 .v-main {
   background: #eceff1;
   padding: 0 100px;
