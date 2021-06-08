@@ -165,8 +165,10 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 main {
-  margin: 0 100px;
+  .v-main {
+    margin: 0 100px;
+  }
 }
 </style>
