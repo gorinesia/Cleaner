@@ -103,7 +103,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import ProjectArticleCopy from "~/components/ProjectArticleCopy.vue";
@@ -111,7 +111,6 @@ import ProjectArticleCopy from "~/components/ProjectArticleCopy.vue";
 export default {
   name: "project",
   layout: "loggedIn",
-  // scrollToTop: true,
   components: {
     ProjectArticleCopy,
   },
