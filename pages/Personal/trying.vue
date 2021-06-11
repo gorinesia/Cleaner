@@ -9,9 +9,6 @@
         :article="article"
         v-model="id"
       > -->
-        <!-- <nuxt-link :to="lists / +article.id">
-          <h2>{{ article.displayName }}</h2>
-        </nuxt-link> -->
       </ProjectArticleCopy>
     </div>
   </v-app>
@@ -28,9 +25,6 @@ export default {
   components: {
     ProjectArticleCopy,
   },
-  // scrollBehavior(to, from, savedPosition) {
-  //   return { x: 0, y: 0 };
-  // },
   data() {
     return {
       messages: [],
