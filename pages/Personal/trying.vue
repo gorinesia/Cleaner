@@ -1,15 +1,7 @@
 <template>
   <v-app>
     <div>
-      <ProjectArticleCopy :article="personalComponent[0]">
-        <!-- <ProjectArticleCopy
-        v-for="article in articles"
-        :key="article.id"
-        :id="article.id"
-        :article="article"
-        v-model="id"
-      > -->
-      </ProjectArticleCopy>
+      <ProjectArticleCopy :article="personalComponent[0]"> </ProjectArticleCopy>
     </div>
   </v-app>
 </template>
