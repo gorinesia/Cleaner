@@ -34,6 +34,6 @@ export default {
 
 <style lang="scss" scoped>
 .v-main {
-  margin: 0 auto;
+  margin: 0 80px;
 }
 </style>
