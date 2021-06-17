@@ -264,5 +264,6 @@ export default {
 }
 .main_article {
   margin-top: 50px;
+  cursor: pointer;
 }
 </style>
