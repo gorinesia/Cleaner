@@ -93,6 +93,7 @@
               :id="article.id"
               :article="article"
               :articles="articles"
+              class="personal_article"
             >
             </ProjectArticleCopy>
           </div>
@@ -252,8 +253,10 @@ export default {
 .v-sheet.v-card:hover {
   background: #000;
 }
-
 .sidebar {
   background: red;
+}
+.personal_article {
+  cursor: pointer;
 }
 </style>
