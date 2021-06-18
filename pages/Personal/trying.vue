@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="main_wrap">
     <div class="main_article">
       <ProjectArticleCopy :article="personalComponent[0]"> </ProjectArticleCopy>
     </div>
@@ -261,6 +261,9 @@ export default {
 }
 .comment {
   margin: 3px auto 0;
+}
+.main_wrap {
+  margin: 80px;
 }
 .main_article {
   margin-top: 50px;
