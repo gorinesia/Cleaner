@@ -63,6 +63,41 @@
                   class="white"
                   placeholder="例) 今日もたくさん拾いました。"
                 ></v-textarea>
+                <div>
+                  <section
+                    class="ui two column centered grid"
+                    style="position: relative; z-index: 1"
+                  >
+                    <div class="column">
+                      <form class="ui segment large form">
+                        <div class="ui message red" v-show="error">
+                          {{ error }}
+                        </div>
+                        <div class="ui segment">
+                          <div class="field">
+                            <div
+                              class="ui right icon input large"
+                              :class="{ loading: spinner }"
+                            >
+                              <input
+                                type="text"
+                                placeholder="Enter your address"
+                                v-model="address"
+                                id="autocomplete"
+                              />
+                              <i
+                                class="dot circle link icon"
+                                @click="locatorButtonPressed"
+                              ></i>
+                            </div>
+                          </div>
+                          <button class="ui button">Go</button>
+                        </div>
+                      </form>
+                    </div>
+                  </section>
+                  <section id="map"></section>
+                </div>
               </v-container>
             </v-card-text>
             <v-card-actions>
