@@ -3,7 +3,7 @@
     <div class="main_article">
       <ProjectArticleCopy :article="personalComponent[0]"> </ProjectArticleCopy>
     </div>
-    <div>
+    <div class="map_wrap">
       <section
         class="ui two column centered grid"
         style="position: relative; z-index: 1"
@@ -301,5 +301,8 @@ export default {
 .main_article {
   margin-top: 50px;
   cursor: pointer;
+}
+.map_wrap {
+  margin-top: 50px;
 }
 </style>
