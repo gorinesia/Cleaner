@@ -63,7 +63,7 @@
                   class="white"
                   placeholder="例) 今日もたくさん拾いました。"
                 ></v-textarea>
-                <div>
+                <div class="map_section">
                   <section
                     class="ui two column centered grid"
                     style="position: relative; z-index: 1"
@@ -293,5 +293,8 @@ export default {
 }
 .personal_article {
   cursor: pointer;
+}
+.map_section {
+  margin-top: 20px;
 }
 </style>
