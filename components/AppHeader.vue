@@ -11,7 +11,13 @@
             <span><v-icon>fas fa-lock</v-icon></span>
             <nuxt-link
               v-if="!loggedIn"
-              class="app-title font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none"
+              class="
+                app-title
+                font-weight-bold
+                text-h4
+                cyan--text
+                text--darken-1 text-decoration-none
+              "
               to="/"
             >
               <v-icon large color="cyan darken-1">mdi-earth</v-icon>
@@ -19,7 +25,13 @@
             </nuxt-link>
             <nuxt-link
               v-else
-              class="app-title font-weight-bold text-h4 cyan--text text--darken-1 text-decoration-none"
+              class="
+                app-title
+                font-weight-bold
+                text-h4
+                cyan--text
+                text--darken-1 text-decoration-none
+              "
               to="/mypage"
             >
               <v-icon large color="cyan darken-1">mdi-earth</v-icon>
@@ -30,6 +42,12 @@
           <nav>
             <v-tabs>
               <nav v-if="!loggedIn" class="mt-1">
+                <button
+                  class="btn--guest btn--guest--radius"
+                  @click="testLogin"
+                >
+                  テストログイン
+                </button>
                 <button
                   class="btn--guest btn--guest--radius"
                   @click="guestLogin"
@@ -170,7 +188,12 @@
 
                       <v-list-item-content>
                         <nuxt-link
-                          class="cyan--text text--darken-1 font-weight-bold text-h5 text-decoration-none"
+                          class="
+                            cyan--text
+                            text--darken-1
+                            font-weight-bold
+                            text-h5 text-decoration-none
+                          "
                           to="/personal/profile"
                           @click.native="getProfile(currentUser.id)"
                           >{{ currentUser.displayName }}</nuxt-link
@@ -253,6 +276,12 @@ export default {
   },
   methods: {
     guestLogin() {
+      this.$store.dispatch("user/logInAction", {
+        email: this.email,
+        password: this.password,
+      });
+    },
+    testLogin() {
       this.$store.dispatch("user/logInAction", {
         email: this.email,
         password: this.password,
