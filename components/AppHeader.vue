@@ -248,6 +248,11 @@ export default {
       password: "123456",
       items: [
         {
+          title: "プロフィール",
+          icon: "mdi-folder",
+          link: "/edit/profile",
+        },
+        {
           title: "ユーザー情報設定",
           icon: "mdi-folder",
           link: "/edit/profile",
