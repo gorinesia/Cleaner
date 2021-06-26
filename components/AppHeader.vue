@@ -250,7 +250,7 @@ export default {
         {
           title: "プロフィール",
           icon: "mdi-folder",
-          link: "/edit/profile",
+          link: "/edit/ProfileCopy",
         },
         {
           title: "ユーザー情報設定",
