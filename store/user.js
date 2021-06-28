@@ -26,13 +26,13 @@ export const getters = {
 }
 
 export const mutations = {
-  setLoggedIn:(state, payload) => {
+  setLoggedIn: (state, payload) => {
     state.loggedIn = payload;
   },
-  setUser:(state, currentUser) => {
+  setUser: (state, currentUser) => {
     state.user = currentUser
   },
-  setUserUid:(state, uid) => {
+  setUserUid: (state, uid) => {
     state.uid = uid;
   },
   // setAllUsers: (state, allLoggedInUsers) => {
@@ -54,7 +54,7 @@ export const mutations = {
 }
 
 export const actions = {
-  signUpAction({commit}, payload) {
+  signUpAction({ commit }, payload) {
     const db = firebase.firestore();
     db.collection('users')
       .add(payload)
@@ -76,7 +76,21 @@ export const actions = {
         console.log(error);
       })
   },
-  logInAction({commit}, payload) {
+  testLogInAction({ commit }, payload) {
+    firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+      .then((result) => {
+        console.log(result.user.uid);
+        const uid = result.user.uid;
+        console.log('loggedIn!!');
+        commit('setLoggedIn', true);
+        commit('setUserUid', uid);
+        this.$router.push('/NewMypage')
+      })
+      .catch((error) => {
+        console.log(error.message);
+      })
+  },
+  logInAction({ commit }, payload) {
     firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
       .then((result) => {
         console.log(result.user.uid);
@@ -120,7 +134,7 @@ export const actions = {
         })
       })
   },
-  logOutAction({commit}) {
+  logOutAction({ commit }) {
     firebase.auth().signOut()
       .then(() => {
         console.log('logout!!');
@@ -142,7 +156,7 @@ export const actions = {
         console.log(error);
       })
   },
-  getUrl({commit}, payload) {
+  getUrl({ commit }, payload) {
     const file = payload.ev.target.files[0];
     const storage = firebase.storage();
     const storageRef = storage.ref('profileImages');
@@ -152,7 +166,7 @@ export const actions = {
         commit('setImage', url);
       })
   },
-  getProfile({dispatch}) {
+  getProfile({ dispatch }) {
     const db = firebase.firestore();
     db.collection('user')
       .get()
@@ -169,7 +183,7 @@ export const actions = {
           })
         })
         dispatch('logInUserDisplay');
-    })
+      })
   },
   updateProfile(context, payload) {
     // const user = firebase.auth().currentUser;
@@ -197,7 +211,7 @@ export const actions = {
         // context.dispatch('logInUserDisplay');
       })
   },
-  getProfile({commit}, payload) {
+  getProfile({ commit }, payload) {
     const db = firebase.firestore();
     const personalDetails = [];
     db.collection('users')
@@ -211,8 +225,8 @@ export const actions = {
           image: doc.data().image,
           id: doc.id,
         })
-          console.log(doc.data())
-          commit('setPersonalDatas', personalDetails);
+        console.log(doc.data())
+        commit('setPersonalDatas', personalDetails);
       })
   }
 }
