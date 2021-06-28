@@ -287,7 +287,7 @@ export default {
       });
     },
     testLogin() {
-      this.$store.dispatch("user/logInAction", {
+      this.$store.dispatch("user/testLogInAction", {
         email: this.email,
         password: this.password,
       });
