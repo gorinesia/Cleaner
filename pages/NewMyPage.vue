@@ -21,36 +21,9 @@
               <template>
                 <v-divider />
                 <v-hover v-slot="{ hover }">
-                  <v-card
-                    :class="{ 'on-hover': hover }"
-                    @click="getPersonalProjectId(article.id)"
-                  >
-                    <v-row>
-                      <v-col cols="3">
-                        <v-avatar tile size="100" class="ml-5">
-                          <v-img :src="currentUser.image"></v-img>
-                        </v-avatar>
-                      </v-col>
-                      <v-col cols="12" md="4">
-                        <v-avatar class="profile" color="grey" size="60">
-                          <v-img :src="currentUser.displayImage"></v-img>
-                        </v-avatar>
-                        <span
-                          class="headline mb-3 font-weight-bold"
-                          style="color: #00acc1"
-                          >{{ currentUser.displayName }}</span
-                        >
-                        <p class="my-5 font-weight-bold">
-                          {{ currentUser.comment }}
-                        </p>
-                      </v-col>
-                      <v-col cols="12" md="5">
-                        <span class="grey--text float-right">{{
-                          currentUser.date
-                        }}</span>
-                      </v-col>
-                    </v-row>
-                  </v-card>
+                  <div class="main_article">
+                    <ProjectArticleCopy :article="personalComponent[0]"> </ProjectArticleCopy>
+                  </div>
                 </v-hover>
               </template>
             </v-card>
@@ -115,6 +88,9 @@ export default {
     },
     personalProjectId() {
       return this.$store.getters["project/personalProjectId"];
+    },
+    personalComponent() {
+      return this.$store.getters["project/personalComponent"];
     },
   },
   mounted() {
