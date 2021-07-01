@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <v-container v-for="currentUser in currentUser" :key="currentUser.id">
-
       <v-card>
         <v-tabs
           v-model="tabs"
@@ -22,7 +21,8 @@
                 <v-divider />
                 <v-hover v-slot="{ hover }">
                   <div class="main_article">
-                    <ProjectArticleCopy :article="personalComponent[0]"> </ProjectArticleCopy>
+                    <ProjectArticleCopy :article="personalComponent[0]">
+                    </ProjectArticleCopy>
                   </div>
                 </v-hover>
               </template>
@@ -85,6 +85,14 @@ export default {
     uid() {
       return this.$store.getters["user/uid"];
     },
+    image: {
+      get() {
+        return this.$store.getters["project/image"];
+      },
+      set(value) {
+        this.$store.commit("project/setImage", value);
+      },
+    },
     personalDatas() {
       return this.$store.getters["user/personalDatas"];
     },
@@ -106,7 +114,7 @@ export default {
     this.$store.dispatch("project/getMessage", {
       uid: this.uid,
     });
-    this.$store.dispatch("event/getEvent");
+    // this.$store.dispatch("event/getEvent");
   },
   methods: {
     getPersonalProjectId(id) {
