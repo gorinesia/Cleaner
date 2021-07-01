@@ -62,10 +62,15 @@
 </template>
 
 <script>
+import ProjectArticleCopy from "~/components/ProjectArticleCopy.vue";
+
 export default {
   name: "profile",
   layout: "loggedIn",
   middleware: "authenticated",
+  components: {
+    ProjectArticleCopy,
+  },
   data() {
     return {
       tabs: null,
