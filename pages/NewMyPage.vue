@@ -113,6 +113,7 @@ export default {
     console.log(this.currentUser);
     this.$store.dispatch("project/getMessage", {
       uid: this.uid,
+      image: this.image,
     });
     // this.$store.dispatch("event/getEvent");
   },
