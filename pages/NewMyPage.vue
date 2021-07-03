@@ -14,16 +14,21 @@
           </v-tab>
         </v-tabs>
 
+        <div class="main_article">
+          <ProjectArticleCopy :article="personalComponent[0]">
+          </ProjectArticleCopy>
+        </div>
+
         <v-tabs-items v-model="tabs">
           <v-tab-item>
             <v-card>
               <template>
                 <v-divider />
                 <v-hover v-slot="{ hover }">
-                  <div class="main_article">
+                  <!-- <div class="main_article">
                     <ProjectArticleCopy :article="personalComponent[0]">
                     </ProjectArticleCopy>
-                  </div>
+                  </div> -->
                 </v-hover>
               </template>
             </v-card>
