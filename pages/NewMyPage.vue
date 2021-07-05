@@ -114,6 +114,7 @@ export default {
   mounted() {
     this.$store.dispatch("user/logInUserDisplay", {
       uid: this.uid,
+      image: this.image,
     });
     console.log(this.currentUser);
     this.$store.dispatch("project/getMessage", {
