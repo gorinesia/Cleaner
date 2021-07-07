@@ -81,6 +81,7 @@ export default {
       tabs: null,
       items: ["プロジェクト", "イベント"],
       image_src: require("@/assets/img/everyone.jpg"),
+      id: "",
     };
   },
   computed: {
