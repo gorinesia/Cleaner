@@ -291,9 +291,7 @@ export default {
         email: this.email,
         password: this.password,
       });
-      this.$store.dispatch("project/getComponentsProject", {
-        id,
-      });
+      this.$store.dispatch("project/getCurrentUserComponentsProject", {});
     },
     logOut() {
       this.$store.dispatch("user/logOutAction");
