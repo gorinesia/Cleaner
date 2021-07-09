@@ -67,6 +67,10 @@ export const mutations = {
     state.personalComponent = personalComponent
     console.log(state.personalComponent);
   },
+  setCurrentUserComponent: (state, currentUserComponent) => {
+    state.currentUserComponent = currentUserComponent
+    console.log(state.currentUserComponent);
+  },
 }
 
 export const actions = {
@@ -264,6 +268,29 @@ export const actions = {
         })
         commit('setPersonalComponent', personalComponent);
         this.$router.push('/personal/trying');
+      })
+  },
+  getCurrentUserComponentsProject({ commit }, payload) {
+    console.log(payload);
+    const db = firebase.firestore();
+    const currentUserComponent = [];
+    db.collection('projects')
+      .doc(payload.id)
+      .get()
+      .then((doc) => {
+        console.log(payload.id);
+        console.log(doc.data());
+        currentUserComponent.push({
+          displayName: doc.data().displayName,
+          displayImage: doc.data().displayImage,
+          amount: doc.data().amount,
+          place: doc.data().place,
+          comment: doc.data().comment,
+          image: doc.data().image,
+          id: doc.id,
+          date: doc.data().date,
+        })
+        commit('setCurrentUserComponent', currentUserComponent);
       })
   }
 }

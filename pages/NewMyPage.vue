@@ -15,7 +15,7 @@
         </v-tabs>
 
         <div class="main_article">
-          <ProjectArticleCopy :article="personalComponent[0]">
+          <ProjectArticleCopy :article="currentUserComponent[0]">
           </ProjectArticleCopy>
         </div>
 
@@ -81,7 +81,7 @@ export default {
       tabs: null,
       items: ["プロジェクト", "イベント"],
       image_src: require("@/assets/img/everyone.jpg"),
-      id: "",
+      // id: "",
     };
   },
   computed: {
@@ -110,6 +110,9 @@ export default {
     },
     personalComponent() {
       return this.$store.getters["project/personalComponent"];
+    },
+    currentUserComponent() {
+      return this.$store.getters["project/currentUserComponent"];
     },
   },
   mounted() {
