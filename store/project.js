@@ -18,6 +18,7 @@ export const state = () => ({
   editOverlay: false,
   personalProject: [],
   personalComponent: [],
+  currentUserComponent: [],
   newDate: ''
 })
 
@@ -29,6 +30,7 @@ export const getters = {
   editOverlay: state => state.editOverlay,
   personalProject: state => state.personalProject,
   personalComponent: state => state.personalComponent,
+  currentUserComponent: state => state.currentUserComponent,
   newDate: state => state.newDate
 }
 
@@ -281,14 +283,17 @@ export const actions = {
         console.log(payload.id);
         console.log(doc.data());
         currentUserComponent.push({
-          displayName: doc.data().displayName,
-          displayImage: doc.data().displayImage,
-          amount: doc.data().amount,
-          place: doc.data().place,
-          comment: doc.data().comment,
+          displayName: payload.displayName,
+          // displayName: doc.data().displayName,
+          // displayImage: doc.data().displayImage,
+          // amount: doc.data().amount,
+          // place: doc.data().place,
+          comment: payload.comment,
+          // comment: doc.data().comment,
           image: doc.data().image,
-          id: doc.id,
-          date: doc.data().date,
+          id: payload.id,
+          // id: doc.id,
+          // date: doc.data().date,
         })
         commit('setCurrentUserComponent', currentUserComponent);
       })
