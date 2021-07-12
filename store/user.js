@@ -80,6 +80,7 @@ export const actions = {
     firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
       .then((result) => {
         console.log(result.user.uid);
+        console.log(result.user.displayName);
         const uid = result.user.uid;
         console.log('loggedIn!!');
         commit('setLoggedIn', true);

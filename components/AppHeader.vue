@@ -292,7 +292,8 @@ export default {
         password: this.password,
       });
       this.$store.dispatch("project/getCurrentUserComponentsProject", {
-        displayName: this.currentUser[0].displayName,
+        userInfo: this.currentUser[0],
+        // displayName: this.currentUser[0].displayName,
       });
     },
     logOut() {
