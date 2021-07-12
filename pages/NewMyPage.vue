@@ -125,7 +125,7 @@ export default {
       uid: this.uid,
       image: this.image,
     });
-    const docRef = db.collection("posts").where("id", "==", true);
+    // const docRef = db.collection("posts").where("id", "==", true);
     // this.$store.dispatch("event/getEvent");
   },
   methods: {
