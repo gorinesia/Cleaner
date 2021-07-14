@@ -293,7 +293,9 @@ export default {
       });
       this.$store.dispatch(
         "project/getCurrentUserComponentsProject",
-        this.currentUser[0]
+        {
+          currentUser: this.currentUser[0],
+        }
         // displayName: this.currentUser[0].displayName,
       );
     },
