@@ -286,12 +286,12 @@ export default {
         password: this.password,
       });
     },
-    testLogin() {
-      this.$store.dispatch("user/testLogInAction", {
+    async testLogin() {
+      await this.$store.dispatch("user/testLogInAction", {
         email: this.email,
         password: this.password,
       });
-      this.$store.dispatch(
+      await this.$store.dispatch(
         "project/getCurrentUserComponentsProject",
         {
           currentUser: this.currentUser[0],
