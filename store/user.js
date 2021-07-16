@@ -85,7 +85,10 @@ export const actions = {
         console.log('loggedIn!!');
         commit('setLoggedIn', true);
         commit('setUserUid', uid);
-        this.$router.push('/NewMypage')
+        this.$router.push('/NewMypage');
+        this.$dispatch('project/getCurrentUserComponentsProject', {
+          currentUser: result.user
+        })
       })
       .catch((error) => {
         console.log(error.message);
