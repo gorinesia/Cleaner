@@ -280,7 +280,7 @@ export const actions = {
       .doc(payload.id)
       .get()
       .then((doc) => {
-        console.log(payload.id);
+        console.log(payload.currentUser.id);
         console.log(doc.data());
         currentUserComponent.push({
           displayName: payload.displayName,

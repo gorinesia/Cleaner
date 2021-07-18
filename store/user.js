@@ -88,7 +88,10 @@ export const actions = {
         this.$router.push('/NewMypage');
         context.dispatch('project/getCurrentUserComponentsProject', {
           currentUser: result.user
-        })
+        },
+          {
+            root: true
+          })
       })
       .catch((error) => {
         console.log(error.message);
