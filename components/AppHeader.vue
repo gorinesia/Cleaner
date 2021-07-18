@@ -291,13 +291,13 @@ export default {
         email: this.email,
         password: this.password,
       });
-      await this.$store.dispatch(
-        "project/getCurrentUserComponentsProject",
-        {
-          currentUser: this.currentUser[0],
-        }
-        // displayName: this.currentUser[0].displayName,
-      );
+      // this.$store.dispatch(
+      //   "project/getCurrentUserComponentsProject",
+      //   {
+      //     currentUser: this.currentUser[0],
+      //   }
+      //   // displayName: this.currentUser[0].displayName,
+      // );
     },
     logOut() {
       this.$store.dispatch("user/logOutAction");
