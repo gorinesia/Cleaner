@@ -81,13 +81,14 @@ export const actions = {
       .then((result) => {
         console.log(result.user.uid);
         console.log(result.user.displayName);
+        console.log(result.user);
         const uid = result.user.uid;
         console.log('loggedIn!!');
         context.commit('setLoggedIn', true);
         context.commit('setUserUid', uid);
         this.$router.push('/NewMypage');
         context.dispatch('project/getCurrentUserComponentsProject', {
-          currentUser: result.user
+          currentUserName: result.user.uid
         },
           {
             root: true
