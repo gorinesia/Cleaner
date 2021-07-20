@@ -277,10 +277,12 @@ export const actions = {
     const db = firebase.firestore();
     const currentUserComponent = [];
     db.collection('projects')
-      .doc(payload.id)
+      // .doc(payload.id)
+      .where("uid", "==", payload.currentUserName)
       .get()
       .then((doc) => {
         console.log(payload.currentUser.id);
+        console.log(payload.currentUserName);
         console.log(doc.data());
         currentUserComponent.push({
           displayName: payload.displayName,
