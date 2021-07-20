@@ -116,17 +116,15 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch("user/logInUserDisplay", {
-      uid: this.uid,
-      image: this.image,
-    });
+    // this.$store.dispatch("user/logInUserDisplay", {
+    //   uid: this.uid,
+    //   image: this.image,
+    // });
     console.log(this.currentUser);
     this.$store.dispatch("project/getMessage", {
       uid: this.uid,
       image: this.image,
     });
-    // const docRef = db.collection("posts").where("id", "==", true);
-    // this.$store.dispatch("event/getEvent");
   },
   methods: {
     getPersonalProjectId(id) {
