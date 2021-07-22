@@ -281,7 +281,6 @@ export const actions = {
       .where("uid", "==", payload.currentUserName)
       .get()
       .then((doc) => {
-        console.log(payload.currentUser.id);
         console.log(payload.currentUserName);
         console.log(doc.data());
         currentUserComponent.push({
@@ -293,7 +292,7 @@ export const actions = {
           comment: payload.comment,
           // comment: doc.data().comment,
           image: doc.data().image,
-          id: payload.id,
+          id: payload,
           // id: doc.id,
           // date: doc.data().date,
         })
