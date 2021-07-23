@@ -120,7 +120,7 @@ export default {
     //   uid: this.uid,
     //   image: this.image,
     // });
-    console.log(this.currentUser);
+    console.log(this.currentUser[0]);
     this.$store.dispatch("project/getMessage", {
       // uid: this.uid,
       // image: this.image,

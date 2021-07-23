@@ -278,11 +278,11 @@ export const actions = {
     const currentUserComponent = [];
     db.collection('projects')
       // .doc(payload.id)
-      .where("uid", "==", payload.currentUserName)
+      .where("uid", "==", payload)
       .get()
       .then((doc) => {
         console.log(payload.currentUserName);
-        // console.log(doc.data());
+        console.log(doc.data());
         currentUserComponent.push({
           // displayName: payload.displayName,
           // displayName: doc.data().displayName,
