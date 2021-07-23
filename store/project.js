@@ -282,16 +282,16 @@ export const actions = {
       .get()
       .then((doc) => {
         console.log(payload.currentUserName);
-        console.log(doc.data());
+        // console.log(doc.data());
         currentUserComponent.push({
-          displayName: payload.displayName,
+          // displayName: payload.displayName,
           // displayName: doc.data().displayName,
           // displayImage: doc.data().displayImage,
           // amount: doc.data().amount,
           // place: doc.data().place,
-          comment: payload.comment,
+          // comment: payload.comment,
           // comment: doc.data().comment,
-          image: doc.data().image,
+          // image: doc.data().image,
           id: payload,
           // id: doc.id,
           // date: doc.data().date,
