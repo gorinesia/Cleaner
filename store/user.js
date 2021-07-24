@@ -87,12 +87,12 @@ export const actions = {
         context.commit('setLoggedIn', true);
         context.commit('setUserUid', uid);
         this.$router.push('/NewMypage');
-        context.dispatch('project/getCurrentUserComponentsProject', {
-          currentUserName: result.user.uid
-        },
-          {
-            root: true
-          })
+        // context.dispatch('project/getCurrentUserComponentsProject', {
+        //   currentUserName: result.user.uid
+        // },
+        //   {
+        //     root: true
+        //   })
       })
       .catch((error) => {
         console.log(error.message);

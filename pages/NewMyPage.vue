@@ -1,67 +1,23 @@
 <template>
   <v-app>
     <v-container v-for="currentUser in currentUser" :key="currentUser.id">
-      <v-card>
-        <v-tabs
-          v-model="tabs"
-          background-color="cyan darken-1"
-          centered
-          dark
-          icons-and-text
-        >
-          <v-tab v-for="n in items" :key="n">
-            {{ n }}
-          </v-tab>
-        </v-tabs>
-
-        <div class="main_article">
-          <ProjectArticleCopy :article="currentUserComponent[0]">
-          </ProjectArticleCopy>
-        </div>
-
-        <v-tabs-items v-model="tabs">
-          <v-tab-item>
-            <v-card>
-              <template>
-                <v-divider />
-                <v-hover v-slot="{ hover }">
-                  <!-- <div class="main_article">
-                    <ProjectArticleCopy :article="personalComponent[0]">
-                    </ProjectArticleCopy>
-                  </div> -->
-                </v-hover>
-              </template>
-            </v-card>
-          </v-tab-item>
-          <v-tab-item>
-            <v-card flat>
-              <v-list-item three-line>
-                <v-list-item-content>
-                  <div class="overline mb-1">1030日</div>
-                  <div class="headline mb-3 font-weight-bold">
-                    渋谷の路上でゴミを拾います。
-                  </div>
-                  <p class="mb-5">
-                    僕たちにできることを。人もゴミも多く、やりがいのある場所をみんなで綺麗にしませんか？
-                  </p>
-                  <p class="font-weight-bold">日時： 10月3日 9:00~12:00</p>
-                  <p class="font-weight-bold">場所： 東京都渋谷区</p>
-                </v-list-item-content>
-
-                <v-avatar
-                  tile
-                  size="200"
-                  color="cyan"
-                  :src="image_src"
-                  class="ml-5"
-                >
-                  <img :src="image_src" alt="" />
-                </v-avatar>
-              </v-list-item>
-            </v-card>
-          </v-tab-item>
-        </v-tabs-items>
-      </v-card>
+      <v-row class="article">
+        <v-col>
+          <div
+            v-for="article in articles"
+            :key="article.id"
+            @click="getComponentsId(article.id)"
+          >
+            <ProjectArticleCopy
+              :id="article.id"
+              :article="article"
+              :articles="articles"
+              class="personal_article"
+            >
+            </ProjectArticleCopy>
+          </div>
+        </v-col>
+      </v-row>
     </v-container>
   </v-app>
 </template>
