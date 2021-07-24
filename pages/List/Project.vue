@@ -332,7 +332,6 @@ export default {
 <style lang="scss" scoped>
 .container {
   .h2_title {
-    // background: green;
     font-size: 30px;
     font-weight: bold;
     @include display_sp {
