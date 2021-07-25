@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-container v-for="currentUser in currentUser" :key="currentUser.id">
+    <v-container>
       <v-row class="article">
         <v-col>
           <div
@@ -76,7 +76,7 @@ export default {
     //   uid: this.uid,
     //   image: this.image,
     // });
-    console.log(this.currentUser[0]);
+    // console.log(this.currentUser[0]);
     this.$store.dispatch("project/getMessage", {
       // uid: this.uid,
       // image: this.image,
