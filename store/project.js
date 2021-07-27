@@ -137,6 +137,31 @@ export const actions = {
         commit('setArticles', articles);
       })
   },
+  getCurrentUserMessage({ commit }, payload) {
+    console.log(payload);
+    const db = firebase.firestore();
+    db.collection('projects')
+      // .orderBy('date', 'desc')
+      .where('uid', '==', payload.uid)
+      .onSnapshot((querySnapshot) => {
+        const articles = [];
+        querySnapshot.forEach((doc) => {
+          articles.push({
+            uid: doc.data().uid,
+            displayName: doc.data().displayName,
+            displayImage: doc.data().displayImage,
+            amount: doc.data().amount,
+            place: doc.data().place,
+            comment: doc.data().comment,
+            image: doc.data().image,
+            id: doc.id,
+            date: doc.data().date,
+            beLiked: doc.data().beLiked
+          })
+        })
+        commit('setArticles', articles);
+      })
+  },
   getUserProfile(context, payload) {
     console.log(payload);
     const db = firebase.firestore();
