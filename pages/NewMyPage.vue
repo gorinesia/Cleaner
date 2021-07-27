@@ -72,14 +72,8 @@ export default {
     },
   },
   mounted() {
-    // this.$store.dispatch("user/logInUserDisplay", {
-    //   uid: this.uid,
-    //   image: this.image,
-    // });
-    // console.log(this.currentUser[0]);
-    this.$store.dispatch("project/getMessage", {
-      // uid: this.uid,
-      // image: this.image,
+    this.$store.dispatch("project/getCurrentUserMessage", {
+      uid: this.uid,
     });
   },
   methods: {
