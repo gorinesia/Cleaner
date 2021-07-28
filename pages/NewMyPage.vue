@@ -41,6 +41,9 @@ export default {
     };
   },
   computed: {
+    loggedIn() {
+      return this.$store.getters["user/loggedIn"];
+    },
     currentUser() {
       return this.$store.getters["user/currentUser"];
     },
