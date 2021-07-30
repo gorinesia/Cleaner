@@ -161,6 +161,8 @@ export default {
       imageOverlay: false,
       dialog: false,
       address: "",
+      error: "",
+      spinner: false,
       map: "",
       applyFlag: false,
       loginUser: null,
