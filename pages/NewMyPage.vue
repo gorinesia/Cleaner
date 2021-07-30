@@ -12,6 +12,7 @@
               :id="article.id"
               :article="article"
               :articles="articles"
+              :uid="uid"
               class="personal_article"
             >
             </ProjectArticleCopy>
@@ -37,7 +38,6 @@ export default {
       tabs: null,
       items: ["プロジェクト", "イベント"],
       image_src: require("@/assets/img/everyone.jpg"),
-      // id: "",
     };
   },
   computed: {

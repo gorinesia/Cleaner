@@ -286,18 +286,11 @@ export default {
         password: this.password,
       });
     },
-    async testLogin() {
-      await this.$store.dispatch("user/testLogInAction", {
+    testLogin() {
+      this.$store.dispatch("user/testLogInAction", {
         email: this.email,
         password: this.password,
       });
-      // this.$store.dispatch(
-      //   "project/getCurrentUserComponentsProject",
-      //   {
-      //     currentUser: this.currentUser[0],
-      //   }
-      //   // displayName: this.currentUser[0].displayName,
-      // );
     },
     logOut() {
       this.$store.dispatch("user/logOutAction");
