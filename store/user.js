@@ -76,7 +76,7 @@ export const actions = {
         console.log(error);
       })
   },
-  testLogInAction(context, payload) {
+  testLogInAction({ commit }, payload) {
     firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
       .then((result) => {
         console.log(result.user.uid);
@@ -84,15 +84,9 @@ export const actions = {
         console.log(result.user);
         const uid = result.user.uid;
         console.log('loggedIn!!');
-        context.commit('setLoggedIn', true);
-        context.commit('setUserUid', uid);
+        commit('setLoggedIn', true);
+        commit('setUserUid', uid);
         this.$router.push('/NewMypage');
-        // context.dispatch('project/getCurrentUserComponentsProject', {
-        //   currentUserName: result.user.uid
-        // },
-        //   {
-        //     root: true
-        //   })
       })
       .catch((error) => {
         console.log(error.message);

@@ -116,6 +116,9 @@ export default {
     loggedIn() {
       return this.$store.getters["user/loggedIn"];
     },
+    uid() {
+      return this.$store.getters["user/uid"];
+    },
     currentUser() {
       return this.$store.getters["user/currentUser"];
     },
