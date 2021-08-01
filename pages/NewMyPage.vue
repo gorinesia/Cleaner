@@ -75,6 +75,9 @@ export default {
     },
   },
   mounted() {
+    this.$store.dispatch("user/logInUserDisplay", {
+      uid: this.uid,
+    });
     this.$store.dispatch("project/getCurrentUserMessage", {
       uid: this.uid,
     });
