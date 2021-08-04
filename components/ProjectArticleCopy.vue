@@ -158,6 +158,7 @@ export default {
   font-weight: bold;
   color: #00acc1;
   margin-bottom: 3px;
+  cursor: pointer;
 }
 
 .user--place {
