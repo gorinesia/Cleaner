@@ -45,6 +45,7 @@
                       outlined
                       >mdi-thumb-up-outline</v-icon
                     >
+                    <span>{{ likeCount }}</span>
                   </template>
                   <v-card>
                     <v-card-title>Need to Login</v-card-title>
@@ -135,7 +136,8 @@ export default {
       this.beLiked = false;
     },
     async checkLikeStatus() {
-      const doc = await this.likeRef.doc(this.currentUser[0].uid).get();
+      // const doc = await this.likeRef.doc(this.currentUser[0].uid).get();
+      const doc = await this.likeRef;
       this.beLiked = doc.exists;
     },
     async getComponentsId(id) {

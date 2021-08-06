@@ -103,7 +103,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="blue darken-1" text @click="dialog = false">
-                Close
+                閉じる
               </v-btn>
               <v-btn
                 @click="addMessage"
@@ -282,13 +282,39 @@ export default {
         id,
       });
     },
+    locatorButtonPressed() {
+      this.spinner = true;
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            this.getAddressFrom(
+              position.coords.latitude,
+              position.coords.longitude
+            );
+
+            this.showUserLocationOnTheMap(
+              position.coords.latitude,
+              position.coords.longitude
+            );
+          },
+          (error) => {
+            this.error = error.message;
+            this.spinner = false;
+            // console.log(error.message);
+          }
+        );
+      } else {
+        this.error = error.message;
+        console.log("Your browser does not support geolocation API");
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
 .v-sheet.v-card:hover {
-  background: #000;
+  /* background: #000; */
 }
 .sidebar {
   background: red;
