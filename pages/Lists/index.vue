@@ -139,7 +139,7 @@
 </template>
 
 <script>
-// import axios from "axios";
+import axios from "axios";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import ProjectArticleCopy from "~/components/ProjectArticleCopy.vue";
@@ -204,6 +204,25 @@ export default {
     this.$store.dispatch("project/getMessage");
     const db = firebase.firestore();
     const docRef = db.collection("posts").where("id", "==", true);
+
+    console.log(process.env.GOOGLE_MAPS_KEY);
+    let autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById("autocomplete"),
+      {
+        bounds: new google.maps.LatLngBounds(
+          new google.maps.LatLng(45.4215296, -75.6971931)
+        ),
+      }
+    );
+
+    autocomplete.addListener("place_changed", () => {
+      let place = autocomplete.getPlace();
+      console.log(place);
+      this.showUserLocationOnTheMap(
+        place.geometry.location.lat(),
+        place.geometry.location.lng()
+      );
+    });
   },
   methods: {
     showImage() {
@@ -244,44 +263,44 @@ export default {
       this.date = "";
       this.dialog = false;
     },
-    async getEvent(docRef) {
-      await docRef.get().then((doc) => {
-        if (doc.exists) {
-          console.log(doc.data());
-          this.posts = doc.data();
-          const posts = this.posts;
-          this.likeSum = this.posts.uid.length;
-          this.applyFlag = this.posts.uid.includes(this.loginUser.uid);
-        } else {
-          console.log(doc.data());
-        }
-      });
-    },
-    async applyEvent(id) {
-      const db = firebase.firestore();
-      const docRef = await db.collection("posts").doc(id);
-      docRef.set(
-        {
-          uid: this.currentUser[0].uid,
-        },
-        { merge: true }
-      );
-      await this.getEvent(docRef);
-      this.applyEvent = true;
-    },
-    async cancelEvent(id) {
-      const db = firebase.firestore();
-      const docRef = await db.collection("posts").doc(id);
-      docRef.delete();
-      await this.getEvent(docRef);
-      this.applyEvent = false;
-    },
-    async getComponentsId(id) {
-      console.log(id);
-      await this.$store.dispatch("project/getComponentsProject", {
-        id,
-      });
-    },
+    // async getEvent(docRef) {
+    //   await docRef.get().then((doc) => {
+    //     if (doc.exists) {
+    //       console.log(doc.data());
+    //       this.posts = doc.data();
+    //       const posts = this.posts;
+    //       this.likeSum = this.posts.uid.length;
+    //       this.applyFlag = this.posts.uid.includes(this.loginUser.uid);
+    //     } else {
+    //       console.log(doc.data());
+    //     }
+    //   });
+    // },
+    // async applyEvent(id) {
+    //   const db = firebase.firestore();
+    //   const docRef = await db.collection("posts").doc(id);
+    //   docRef.set(
+    //     {
+    //       uid: this.currentUser[0].uid,
+    //     },
+    //     { merge: true }
+    //   );
+    //   await this.getEvent(docRef);
+    //   this.applyEvent = true;
+    // },
+    // async cancelEvent(id) {
+    //   const db = firebase.firestore();
+    //   const docRef = await db.collection("posts").doc(id);
+    //   docRef.delete();
+    //   await this.getEvent(docRef);
+    //   this.applyEvent = false;
+    // },
+    // async getComponentsId(id) {
+    //   console.log(id);
+    //   await this.$store.dispatch("project/getComponentsProject", {
+    //     id,
+    //   });
+    // },
     locatorButtonPressed() {
       this.spinner = true;
       if (navigator.geolocation) {
@@ -307,6 +326,46 @@ export default {
         this.error = error.message;
         console.log("Your browser does not support geolocation API");
       }
+    },
+    getAddressFrom(lat, long) {
+      axios
+        .get(
+          `https://maps.googleapis.com/maps/api/geocode/json?latlng=
+      + ${lat}
+      + ,
+      + ${long}
+      + &key=${process.env.GOOGLE_MAPS_KEY}`
+        )
+        .then((response) => {
+          if (response.data.error_message) {
+            this.error = response.data.error_message;
+            console.log(response.data.error_message);
+          } else {
+            this.address = response.data.results[0].formatted_address;
+            this.spinner = false;
+            console.log(response.data.results[0].formatted_address);
+          }
+          this.spinner = false;
+        })
+        .catch((error) => {
+          this.error = error.message;
+          this.spinner = false;
+          console.log(error.message);
+        });
+    },
+    showUserLocationOnTheMap(latitude, longitude) {
+      // Create a Map object
+      let map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 10,
+        center: new google.maps.LatLng(latitude, longitude),
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+      });
+
+      // Add a marker
+      new google.maps.Marker({
+        position: new google.maps.LatLng(latitude, longitude),
+        map: map,
+      });
     },
   },
 };
