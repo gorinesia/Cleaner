@@ -372,9 +372,6 @@ export default {
 </script>
 
 <style scoped>
-.v-sheet.v-card:hover {
-  /* background: #000; */
-}
 .sidebar {
   background: red;
 }
@@ -383,5 +380,16 @@ export default {
 }
 .map_section {
   margin-top: 20px;
+}
+#map {
+  position: absolute;
+  top: 700px;
+  right: 0;
+  bottom: 65px;
+  left: 0;
+  background-color: #00acc1;
+  width: 500px;
+  height: auto;
+  margin: 0 auto;
 }
 </style>
