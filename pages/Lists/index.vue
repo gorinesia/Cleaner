@@ -372,9 +372,9 @@ export default {
 </script>
 
 <style scoped>
-.sidebar {
+/* .sidebar {
   background: red;
-}
+} */
 .personal_article {
   cursor: pointer;
 }
