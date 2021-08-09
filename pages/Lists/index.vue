@@ -392,4 +392,9 @@ export default {
   height: auto;
   margin: 0 auto;
 }
+
+.ui[class*="two column"].grid > .column:not(.row),
+.ui[class*="two column"].grid > .row > .column {
+  width: 100%;
+}
 </style>
