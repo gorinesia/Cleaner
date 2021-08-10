@@ -382,15 +382,10 @@ export default {
   margin-top: 20px;
 }
 #map {
-  position: absolute;
-  top: 700px;
-  right: 0;
-  bottom: 65px;
-  left: 0;
   background-color: #00acc1;
   width: 500px;
-  height: auto;
-  margin: 0 auto;
+  height: 500px;
+  margin: 30px 0 auto;
 }
 
 .ui[class*="two column"].grid > .column:not(.row),
