@@ -248,6 +248,7 @@ export default {
         displayImage: this.currentUser[0].image,
         name: this.name,
         place: this.place,
+        address: this.address,
         comment: this.comment,
         image: this.image,
         date: this.date,
@@ -263,44 +264,6 @@ export default {
       this.date = "";
       this.dialog = false;
     },
-    // async getEvent(docRef) {
-    //   await docRef.get().then((doc) => {
-    //     if (doc.exists) {
-    //       console.log(doc.data());
-    //       this.posts = doc.data();
-    //       const posts = this.posts;
-    //       this.likeSum = this.posts.uid.length;
-    //       this.applyFlag = this.posts.uid.includes(this.loginUser.uid);
-    //     } else {
-    //       console.log(doc.data());
-    //     }
-    //   });
-    // },
-    // async applyEvent(id) {
-    //   const db = firebase.firestore();
-    //   const docRef = await db.collection("posts").doc(id);
-    //   docRef.set(
-    //     {
-    //       uid: this.currentUser[0].uid,
-    //     },
-    //     { merge: true }
-    //   );
-    //   await this.getEvent(docRef);
-    //   this.applyEvent = true;
-    // },
-    // async cancelEvent(id) {
-    //   const db = firebase.firestore();
-    //   const docRef = await db.collection("posts").doc(id);
-    //   docRef.delete();
-    //   await this.getEvent(docRef);
-    //   this.applyEvent = false;
-    // },
-    // async getComponentsId(id) {
-    //   console.log(id);
-    //   await this.$store.dispatch("project/getComponentsProject", {
-    //     id,
-    //   });
-    // },
     locatorButtonPressed() {
       this.spinner = true;
       if (navigator.geolocation) {
