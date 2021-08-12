@@ -262,7 +262,7 @@ export default {
       this.place = "";
       this.comment = "";
       this.date = "";
-      this.dialog = false;
+      (this.address = ""), (this.dialog = false);
     },
     locatorButtonPressed() {
       this.spinner = true;
