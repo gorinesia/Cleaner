@@ -126,7 +126,6 @@ export const actions = {
             displayName: doc.data().displayName,
             displayImage: doc.data().displayImage,
             amount: doc.data().amount,
-            place: doc.data().place,
             comment: doc.data().comment,
             image: doc.data().image,
             id: doc.id,

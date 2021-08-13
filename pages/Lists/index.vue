@@ -51,18 +51,13 @@
                 <v-text-field v-model="date" class="white" placeholder="">{{
                   date
                 }}</v-text-field>
-                <label>場所</label>
-                <v-text-field
-                  v-model="place"
-                  class="white"
-                  placeholder="例) 東京"
-                ></v-text-field>
                 <label>コメント</label>
                 <v-textarea
                   v-model="comment"
                   class="white"
                   placeholder="例) 今日もたくさん拾いました。"
                 ></v-textarea>
+                <label>場所</label>
                 <div class="map_section">
                   <section
                     class="ui two column centered grid"
@@ -91,7 +86,7 @@
                               ></i>
                             </div>
                           </div>
-                          <button class="ui button">Go</button>
+                          <!-- <button class="ui button">Go</button> -->
                         </div>
                       </form>
                     </div>
@@ -154,7 +149,6 @@ export default {
     return {
       user: this.$store.state.user.user,
       name: this.$store.state.project.name,
-      place: this.$store.state.project.place,
       time: this.$store.state.project.time,
       date: new Date().toLocaleString(),
       comment: this.$store.state.project.comment,
@@ -247,7 +241,6 @@ export default {
         displayName: this.currentUser[0].displayName,
         displayImage: this.currentUser[0].image,
         name: this.name,
-        place: this.place,
         address: this.address,
         comment: this.comment,
         image: this.image,
