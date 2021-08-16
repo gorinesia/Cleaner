@@ -340,7 +340,7 @@ export default {
 #map {
   background-color: #00acc1;
   width: 500px;
-  height: 500px;
+  height: 350px;
   margin: 30px 0 auto;
 }
 
