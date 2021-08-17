@@ -323,6 +323,12 @@ export default {
         map: map,
       });
     },
+    async getComponentsId(id) {
+      console.log(id);
+      await this.$store.dispatch("project/getComponentsProject", {
+        id,
+      });
+    },
   },
 };
 </script>
