@@ -295,9 +295,6 @@ export default {
 .comment {
   margin: 3px auto 0;
 }
-.main_wrap {
-  margin: 80px;
-}
 .main_article {
   margin-top: 50px;
   cursor: pointer;
