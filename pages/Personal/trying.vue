@@ -4,11 +4,11 @@
       <ProjectArticleCopy :article="personalComponent[0]"> </ProjectArticleCopy>
     </div>
     <div class="map_wrap">
-      <section
+      <!-- <section
         class="ui two column centered grid"
         style="position: relative; z-index: 1"
-      >
-        <div class="column">
+      > -->
+      <!-- <div class="column">
           <form class="ui segment large form">
             <div class="ui message red" v-show="error">{{ error }}</div>
             <div class="ui segment">
@@ -32,8 +32,8 @@
               <button class="ui button">Go</button>
             </div>
           </form>
-        </div>
-      </section>
+        </div> -->
+      <!-- </section> -->
       <section id="map"></section>
     </div>
   </v-app>
@@ -285,6 +285,13 @@ export default {
 </script>
 
 <style scoped>
+#map {
+  background-color: #00acc1;
+  width: 500px;
+  height: 350px;
+  margin: 30px 0 auto;
+}
+
 .profile {
   margin-left: 20px;
 }
