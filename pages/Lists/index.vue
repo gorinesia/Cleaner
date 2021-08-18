@@ -334,9 +334,6 @@ export default {
 </script>
 
 <style scoped>
-/* .sidebar {
-  background: red;
-} */
 .personal_article {
   cursor: pointer;
 }
@@ -347,7 +344,7 @@ export default {
   background-color: #00acc1;
   width: 500px;
   height: 350px;
-  margin: 30px 0 auto;
+  margin: 0 auto;
 }
 
 .ui[class*="two column"].grid > .column:not(.row),
