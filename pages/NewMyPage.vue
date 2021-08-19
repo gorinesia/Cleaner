@@ -6,12 +6,13 @@
           <div
             v-for="article in articles"
             :key="article.id"
-            @click="getComponentsId(article.id)"
+            @click="getComponentsId(article.id, article.address)"
           >
             <ProjectArticleCopy
               :id="article.id"
               :article="article"
               :articles="articles"
+              :address="article.address"
               :uid="uid"
               class="personal_article"
             >
@@ -93,8 +94,8 @@ export default {
         id,
       });
     },
-    async getComponentsId(id) {
-      console.log(id);
+    async getComponentsId(id, address) {
+      console.log(id, address);
       await this.$store.dispatch("project/getComponentsProject", {
         id,
       });
