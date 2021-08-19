@@ -117,12 +117,13 @@
           <div
             v-for="article in articles"
             :key="article.id"
-            @click="getComponentsId(article.id)"
+            @click="getComponentsId(article.id, article.address)"
           >
             <ProjectArticleCopy
               :id="article.id"
               :article="article"
               :articles="articles"
+              :address="article.address"
               class="personal_article"
             >
             </ProjectArticleCopy>
@@ -323,8 +324,8 @@ export default {
         map: map,
       });
     },
-    async getComponentsId(id) {
-      console.log(id);
+    async getComponentsId(id, address) {
+      console.log(id, address);
       await this.$store.dispatch("project/getComponentsProject", {
         id,
       });
