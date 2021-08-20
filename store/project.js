@@ -7,7 +7,7 @@ import "moment/locale/ja";
 
 
 export const state = () => ({
-  name: '',
+  amount: '',
   place: '',
   image: null,
   date: '',
@@ -130,7 +130,8 @@ export const actions = {
             image: doc.data().image,
             id: doc.id,
             date: doc.data().date,
-            beLiked: doc.data().beLiked
+            beLiked: doc.data().beLiked,
+            address: doc.data().address
           })
         })
         commit('setArticles', articles);
@@ -291,6 +292,7 @@ export const actions = {
           image: doc.data().image,
           id: doc.id,
           date: doc.data().date,
+          address: doc.data().address
         })
         commit('setPersonalComponent', personalComponent);
         this.$router.push('/personal/trying');
