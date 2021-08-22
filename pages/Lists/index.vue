@@ -43,7 +43,7 @@
                 <v-img :src="image" width="100" height="100"></v-img>
                 <label>ゴミの量</label>
                 <v-text-field
-                  v-model="name"
+                  v-model="amount"
                   class="white"
                   placeholder="例) 5kg"
                 ></v-text-field>
@@ -117,7 +117,7 @@
           <div
             v-for="article in articles"
             :key="article.id"
-            @click="getComponentsId(article)"
+            @click="getComponentsId(article.id, article.address)"
           >
             <ProjectArticleCopy
               :id="article.id"
@@ -149,7 +149,7 @@ export default {
   data() {
     return {
       user: this.$store.state.user.user,
-      name: this.$store.state.project.name,
+      amount: this.$store.state.project.amount,
       time: this.$store.state.project.time,
       date: new Date().toLocaleString(),
       comment: this.$store.state.project.comment,
@@ -324,8 +324,8 @@ export default {
         map: map,
       });
     },
-    async getComponentsId(article) {
-      console.log(article);
+    async getComponentsId(id, address) {
+      console.log(id, address);
       await this.$store.dispatch("project/getComponentsProject", {
         id,
         address,
