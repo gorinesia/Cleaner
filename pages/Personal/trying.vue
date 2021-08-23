@@ -119,6 +119,25 @@ export default {
   },
   mounted() {
     this.$store.dispatch("project/getMessage");
+
+    console.log(process.env.GOOGLE_MAPS_KEY);
+    let autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById("autocomplete"),
+      {
+        bounds: new google.maps.LatLngBounds(
+          new google.maps.LatLng(45.4215296, -75.6971931)
+        ),
+      }
+    );
+
+    autocomplete.addListener("place_changed", () => {
+      let place = autocomplete.getPlace();
+      console.log(place);
+      this.showUserLocationOnTheMap(
+        place.geometry.location.lat(),
+        place.geometry.location.lng()
+      );
+    });
   },
   methods: {
     btnUploadChange(ev) {
@@ -237,48 +256,6 @@ export default {
           console.log(doc.data());
         }
       });
-    },
-    async applyEvent() {
-      const db = firebase.firestore();
-      const docRef = await db
-        .collection("posts")
-        .doc(this.personalProject[0].id);
-      docRef.set(
-        {
-          displayImage: this.currentUser[0].image,
-          like_users: firebase.firestore.FieldValue.arrayUnion(
-            this.loginUser.uid
-          ),
-          image_users: firebase.firestore.FieldValue.arrayUnion(
-            this.currentUser[0].image
-          ),
-          name_users: firebase.firestore.FieldValue.arrayUnion(
-            this.loginUser.displayName
-          ),
-        },
-        { merge: true }
-      );
-      await this.getEvent(docRef);
-      this.applyFlag = true;
-    },
-    async cancelEvent() {
-      const db = firebase.firestore();
-      const docRef = await db
-        .collection("posts")
-        .doc(this.personalProject[0].id);
-      docRef.update({
-        like_users: firebase.firestore.FieldValue.arrayRemove(
-          this.loginUser.uid
-        ),
-        image_users: firebase.firestore.FieldValue.arrayRemove(
-          this.currentUser[0].image
-        ),
-        name_users: firebase.firestore.FieldValue.arrayRemove(
-          this.loginUser.displayName
-        ),
-      });
-      await this.getEvent(docRef);
-      this.applyFlag = false;
     },
   },
 };
