@@ -123,24 +123,10 @@ export default {
   mounted() {
     this.$store.dispatch("project/getMessage");
 
-    console.log(process.env.GOOGLE_MAPS_KEY);
-    let autocomplete = new google.maps.places.Autocomplete(
-      document.getElementById("autocomplete"),
-      {
-        bounds: new google.maps.LatLngBounds(
-          new google.maps.LatLng(45.4215296, -75.6971931)
-        ),
-      }
+    this.showUserLocationOnTheMap(
+      position.coords.latitude,
+      position.coords.longitude
     );
-
-    autocomplete.addListener("place_changed", () => {
-      let place = autocomplete.getPlace();
-      console.log(place);
-      this.showUserLocationOnTheMap(
-        place.geometry.location.lat(),
-        place.geometry.location.lng()
-      );
-    });
   },
   methods: {
     btnUploadChange(ev) {
