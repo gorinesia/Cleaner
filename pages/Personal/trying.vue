@@ -4,6 +4,9 @@
       <ProjectArticleCopy :article="personalComponent[0]"> </ProjectArticleCopy>
     </div>
     <div class="map_wrap">
+      <div>
+        <h2>{{ personalComponent[0].address }}</h2>
+      </div>
       <!-- <section
         class="ui two column centered grid"
         style="position: relative; z-index: 1"
