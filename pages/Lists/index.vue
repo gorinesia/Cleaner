@@ -323,6 +323,12 @@ export default {
         position: new google.maps.LatLng(latitude, longitude),
         map: map,
       });
+
+      this.getLatitudeLongtude(latitude, longitude);
+    },
+    getLatitudeLongtude(latitude, longitude) {
+      console.log(latitude, longitude);
+      return latitude, longitude;
     },
     async getComponentsId(id, address) {
       console.log(id, address);
