@@ -166,6 +166,8 @@ export default {
       id: "",
       lists: "",
       article: "",
+      latitude: 0,
+      longitude: 0,
     };
   },
   computed: {
@@ -247,6 +249,8 @@ export default {
         image: this.image,
         date: this.date,
         beliked: false,
+        latitude: this.latitude,
+        longitude: this.longitude,
       });
       this.alertPost = true;
       setTimeout(() => {
@@ -269,6 +273,13 @@ export default {
             );
 
             this.showUserLocationOnTheMap(
+              position.coords.latitude,
+              position.coords.longitude
+            );
+
+            console.log(position.coords.latitude, position.coords.longitude);
+
+            this.changeLatiLongi(
               position.coords.latitude,
               position.coords.longitude
             );
@@ -325,6 +336,10 @@ export default {
       });
 
       this.getLatitudeLongtude(latitude, longitude);
+    },
+    changeLatiLongi(latitude, longitude) {
+      this.latitude = latitude;
+      this.longitude = longitude;
     },
     getLatitudeLongtude(latitude, longitude) {
       console.log(latitude, longitude);
