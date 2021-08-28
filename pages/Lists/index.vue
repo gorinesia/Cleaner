@@ -279,7 +279,7 @@ export default {
 
             console.log(position.coords.latitude, position.coords.longitude);
 
-            this.changeLatiLongi(
+            this.getLatitudeLongitude(
               position.coords.latitude,
               position.coords.longitude
             );
@@ -334,16 +334,13 @@ export default {
         position: new google.maps.LatLng(latitude, longitude),
         map: map,
       });
-
-      this.getLatitudeLongtude(latitude, longitude);
     },
-    changeLatiLongi(latitude, longitude) {
+    getLatitudeLongitude(latitude, longitude) {
+      console.log(latitude, longitude);
       this.latitude = latitude;
       this.longitude = longitude;
-    },
-    getLatitudeLongtude(latitude, longitude) {
-      console.log(latitude, longitude);
-      return latitude, longitude;
+      // return getLatitudeLongitude(latitude, longitude);
+      return this.latitude, this.longitude;
     },
     async getComponentsId(id, address) {
       console.log(id, address);
