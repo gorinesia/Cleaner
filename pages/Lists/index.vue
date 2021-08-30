@@ -279,10 +279,13 @@ export default {
 
             console.log(position.coords.latitude, position.coords.longitude);
 
-            this.getLatitudeLongitude(
-              position.coords.latitude,
-              position.coords.longitude
-            );
+            let latiValue = position.coords.latitude;
+            let longiValue = position.coords.longitude;
+
+            // let p = 3.14159265;
+            // let n = NSNumber(float: Float(p));
+
+            this.getLatitudeLongitude(latiValue, longiValue);
           },
           (error) => {
             this.error = error.message;
