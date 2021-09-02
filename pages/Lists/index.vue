@@ -342,7 +342,6 @@ export default {
       console.log(latitude, longitude);
       this.latitude = latitude;
       this.longitude = longitude;
-      // return getLatitudeLongitude(latitude, longitude);
       return this.latitude, this.longitude;
     },
     async getComponentsId(id, address) {
