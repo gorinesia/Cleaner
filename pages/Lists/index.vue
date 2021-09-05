@@ -42,11 +42,16 @@
                 /><br />
                 <v-img :src="image" width="100" height="100"></v-img>
                 <label>ゴミの量</label>
-                <v-text-field
+                <select name="" id="" v-model="amount">
+                  <option value="">1</option>
+                  <option value="">2</option>
+                  <option value="">3</option></select
+                >kg
+                <!-- <v-text-field
                   v-model="amount"
                   class="white"
                   placeholder="例) 5kg"
-                ></v-text-field>
+                ></v-text-field> -->
                 <label>日時</label>
                 <v-text-field v-model="date" class="white" placeholder="">{{
                   date
