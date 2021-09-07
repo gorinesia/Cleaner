@@ -42,11 +42,7 @@
                 /><br />
                 <v-img :src="image" width="100" height="100"></v-img>
                 <label>ゴミの量</label>
-                <select name="" id="" v-model="amount">
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option></select
-                >kg
+                <v-select :items="items" label="ゴミの重さ" solo></v-select>kg
                 <!-- <v-text-field
                   v-model="amount"
                   class="white"
@@ -173,6 +169,7 @@ export default {
       article: "",
       latitude: 0,
       longitude: 0,
+      items: [1, 2, 3, 4, 5],
     };
   },
   computed: {
