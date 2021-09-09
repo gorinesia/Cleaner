@@ -42,7 +42,11 @@
                 /><br />
                 <v-img :src="image" width="100" height="100"></v-img>
                 <label>ゴミの量</label>
-                <v-select :items="items" label="ゴミの重さ" solo></v-select>kg
+                <v-col cols="6">
+                  <v-select :items="items" label="ゴミの重さ" solo></v-select>
+                </v-col>
+                <v-col cols="6"> kg </v-col>
+
                 <!-- <v-text-field
                   v-model="amount"
                   class="white"
