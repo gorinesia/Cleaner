@@ -42,10 +42,9 @@
                 /><br />
                 <v-img :src="image" width="100" height="100"></v-img>
                 <label>ゴミの量</label>
-                <v-col cols="6">
-                  <v-select :items="items" label="ゴミの重さ" solo></v-select>
+                <v-col cols="3">
+                  <v-select :items="items" label="ゴミの重さ" solo>kg</v-select>
                 </v-col>
-                <v-col cols="6"> kg </v-col>
 
                 <!-- <v-text-field
                   v-model="amount"
@@ -173,7 +172,7 @@ export default {
       article: "",
       latitude: 0,
       longitude: 0,
-      items: [1, 2, 3, 4, 5],
+      items: ["1kg", "2kg", "3kg", "4kg", "5kg"],
     };
   },
   computed: {
