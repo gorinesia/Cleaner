@@ -43,7 +43,7 @@
                 <v-img :src="image" width="100" height="100"></v-img>
                 <label>ゴミの量</label>
                 <v-col cols="3">
-                  <v-select :items="items" label="ゴミの重さ" solo>kg</v-select>
+                  <v-select :items="items" label="kg" solo>kg</v-select>
                 </v-col>
 
                 <!-- <v-text-field
@@ -57,6 +57,7 @@
                 }}</v-text-field>
                 <label>コメント</label>
                 <v-textarea
+                  solo
                   v-model="comment"
                   class="white"
                   placeholder="例) 今日もたくさん拾いました。"
