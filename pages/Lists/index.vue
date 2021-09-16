@@ -288,8 +288,8 @@ export default {
             let latiValue = position.coords.latitude;
             let longiValue = position.coords.longitude;
 
-            let latiValue1 = parseFloat("position.coords.latitude");
-            let longiValue2 = parseFloat("position.coords.longitude");
+            let latiValue1 = parseFloat(latiValue);
+            let longiValue2 = parseFloat(longiValue);
 
             console.log(latiValue1, longiValue2);
             // let p = 3.14159265;
