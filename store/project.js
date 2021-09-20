@@ -194,6 +194,7 @@ export const actions = {
       })
   },
   addMessage(context, payload) {
+    console.log(payload);
     const db = firebase.firestore();
     db.collection('projects')
       .add(payload)
@@ -292,8 +293,11 @@ export const actions = {
           image: doc.data().image,
           id: doc.id,
           date: doc.data().date,
-          address: doc.data().address
+          address: doc.data().address,
+          latitude: doc.data().latitude,
+          longitude: doc.data().longitude,
         })
+        console.log(doc.data());
         commit('setPersonalComponent', personalComponent);
         this.$router.push('/personal/trying');
       })
