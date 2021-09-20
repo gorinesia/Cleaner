@@ -171,8 +171,8 @@ export default {
       id: "",
       lists: "",
       article: "",
-      latitude: 0,
-      longitude: 0,
+      latitude: "",
+      longitude: "",
       items: ["1kg", "2kg", "3kg", "4kg", "5kg"],
     };
   },
@@ -249,7 +249,7 @@ export default {
         uid: this.currentUser[0].uid,
         displayName: this.currentUser[0].displayName,
         displayImage: this.currentUser[0].image,
-        name: this.name,
+        // name: this.name,
         address: this.address,
         comment: this.comment,
         image: this.image,
@@ -290,12 +290,15 @@ export default {
 
             let latiValue1 = parseFloat(latiValue);
             let longiValue2 = parseFloat(longiValue);
+            let latiValue3 = latiValue.toFixed(7);
+            let longiValue4 = longiValue.toFixed(7);
 
             console.log(latiValue1, longiValue2);
+            console.log(latiValue3, longiValue4);
             // let p = 3.14159265;
             // let n = NSNumber(float: Float(p));
 
-            this.getLatitudeLongitude(latiValue, longiValue);
+            this.getLatitudeLongitude(latiValue3, longiValue4);
           },
           (error) => {
             this.error = error.message;
@@ -324,7 +327,11 @@ export default {
           } else {
             this.address = response.data.results[0].formatted_address;
             this.spinner = false;
+            this.latitude = lat.toFixed(7);
+            this.longitude = long.toFixed(7);
             console.log(response.data.results[0].formatted_address);
+            console.log(this.latitude);
+            console.log(this.longitude);
           }
           this.spinner = false;
         })
@@ -352,13 +359,14 @@ export default {
       console.log(latitude, longitude);
       this.latitude = latitude;
       this.longitude = longitude;
-      return this.latitude, this.longitude;
     },
-    async getComponentsId(id, address) {
+    getComponentsId(id, address) {
       console.log(id, address);
-      await this.$store.dispatch("project/getComponentsProject", {
+      this.$store.dispatch("project/getComponentsProject", {
         id,
         address,
+        // latitude,
+        // longitude,
       });
     },
   },

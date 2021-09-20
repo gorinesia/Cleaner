@@ -124,8 +124,10 @@ export default {
     this.$store.dispatch("project/getMessage");
 
     this.showUserLocationOnTheMap(
-      position.coords.latitude,
-      position.coords.longitude
+      this.personalComponent[0].latitude,
+      this.personalComponent[0].longitude
+      // position.coords.latitude,
+      // position.coords.longitude
     );
   },
   methods: {
@@ -244,6 +246,20 @@ export default {
         } else {
           console.log(doc.data());
         }
+      });
+    },
+    showUserLocationOnTheMap(latitude, longitude) {
+      // Create a Map object
+      let map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 10,
+        center: new google.maps.LatLng(latitude, longitude),
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+      });
+
+      // Add a marker
+      new google.maps.Marker({
+        position: new google.maps.LatLng(latitude, longitude),
+        map: map,
       });
     },
   },
