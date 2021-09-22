@@ -7,37 +7,13 @@
       <div>
         <h2>{{ personalComponent[0].address }}</h2>
       </div>
-      <!-- <section
-        class="ui two column centered grid"
-        style="position: relative; z-index: 1"
-      > -->
-      <!-- <div class="column">
-          <form class="ui segment large form">
-            <div class="ui message red" v-show="error">{{ error }}</div>
-            <div class="ui segment">
-              <div class="field">
-                <div
-                  class="ui right icon input large"
-                  :class="{ loading: spinner }"
-                >
-                  <input
-                    type="text"
-                    placeholder="Enter your address"
-                    v-model="address"
-                    id="autocomplete"
-                  />
-                  <i
-                    class="dot circle link icon"
-                    @click="locatorButtonPressed"
-                  ></i>
-                </div>
-              </div>
-              <button class="ui button">Go</button>
-            </div>
-          </form>
-        </div> -->
-      <!-- </section> -->
       <section id="map"></section>
+    </div>
+    <div>
+      <div class="pt-20">
+        <h2>コメント</h2>
+        <p>素敵ですね！</p>
+      </div>
     </div>
   </v-app>
 </template>
@@ -126,8 +102,6 @@ export default {
     this.showUserLocationOnTheMap(
       this.personalComponent[0].latitude,
       this.personalComponent[0].longitude
-      // position.coords.latitude,
-      // position.coords.longitude
     );
   },
   methods: {
