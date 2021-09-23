@@ -7,37 +7,56 @@
       <div>
         <h2>{{ personalComponent[0].address }}</h2>
       </div>
-      <!-- <section
-        class="ui two column centered grid"
-        style="position: relative; z-index: 1"
-      > -->
-      <!-- <div class="column">
-          <form class="ui segment large form">
-            <div class="ui message red" v-show="error">{{ error }}</div>
-            <div class="ui segment">
-              <div class="field">
-                <div
-                  class="ui right icon input large"
-                  :class="{ loading: spinner }"
-                >
-                  <input
-                    type="text"
-                    placeholder="Enter your address"
-                    v-model="address"
-                    id="autocomplete"
-                  />
-                  <i
-                    class="dot circle link icon"
-                    @click="locatorButtonPressed"
-                  ></i>
-                </div>
-              </div>
-              <button class="ui button">Go</button>
-            </div>
-          </form>
-        </div> -->
-      <!-- </section> -->
       <section id="map"></section>
+    </div>
+    <div>
+      <div class="pt-20">
+        <h2>コメント</h2>
+        <v-row justify="center" v-if="loggedIn">
+          <v-dialog v-model="dialog" persistent max-width="600px">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                style="position: fixed; z-index: 1; right: 20%; bottom: 5%"
+                fab
+                large
+                color="cyan darken-1"
+                dark
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon dark>mdi-pencil</v-icon>
+              </v-btn>
+            </template>
+            <v-card>
+              <v-card-text>
+                <v-container>
+                  <label>コメント</label>
+                  <v-textarea
+                    solo
+                    v-model="comment"
+                    class="white"
+                    placeholder="例) コメントを入力。"
+                  ></v-textarea>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="dialog = false">
+                  閉じる
+                </v-btn>
+                <v-btn
+                  @click="addMessage"
+                  class="ma-3 float-right font-weight-bold"
+                  color="cyan"
+                  dark
+                  >投稿</v-btn
+                >
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-row>
+        <p>素敵ですね！</p>
+      </div>
     </div>
   </v-app>
 </template>
@@ -126,8 +145,6 @@ export default {
     this.showUserLocationOnTheMap(
       this.personalComponent[0].latitude,
       this.personalComponent[0].longitude
-      // position.coords.latitude,
-      // position.coords.longitude
     );
   },
   methods: {
