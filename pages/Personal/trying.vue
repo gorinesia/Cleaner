@@ -12,6 +12,49 @@
     <div>
       <div class="pt-20">
         <h2>コメント</h2>
+        <v-row justify="center" v-if="loggedIn">
+          <v-dialog v-model="dialog" persistent max-width="600px">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                style="position: fixed; z-index: 1; right: 20%; bottom: 5%"
+                fab
+                large
+                color="cyan darken-1"
+                dark
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon dark>mdi-pencil</v-icon>
+              </v-btn>
+            </template>
+            <v-card>
+              <v-card-text>
+                <v-container>
+                  <label>コメント</label>
+                  <v-textarea
+                    solo
+                    v-model="comment"
+                    class="white"
+                    placeholder="例) コメントを入力。"
+                  ></v-textarea>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="dialog = false">
+                  閉じる
+                </v-btn>
+                <v-btn
+                  @click="addMessage"
+                  class="ma-3 float-right font-weight-bold"
+                  color="cyan"
+                  dark
+                  >投稿</v-btn
+                >
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-row>
         <p>素敵ですね！</p>
       </div>
     </div>
