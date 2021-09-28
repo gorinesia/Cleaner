@@ -140,12 +140,6 @@ export default {
       const doc = await this.likeRef;
       this.beLiked = doc.exists;
     },
-    async getComponentsId(id) {
-      console.log(id);
-      await this.$store.dispatch("project/getComponentsProject", {
-        id,
-      });
-    },
   },
 };
 </script>

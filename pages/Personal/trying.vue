@@ -13,23 +13,7 @@
       <div class="pt-20">
         <h2>コメント</h2>
         <v-row justify="center" v-if="loggedIn">
-          <!-- <v-dialog v-model="dialog" persistent max-width="600px"> -->
-          <!-- <template v-slot:activator="{ on, attrs }"> -->
-          <!-- <v-btn
-                style="position: fixed; z-index: 1; right: 20%; bottom: 5%"
-                fab
-                large
-                color="cyan darken-1"
-                dark
-                v-bind="attrs"
-                v-on="on"
-              > -->
-          <!-- <v-icon dark>mdi-pencil</v-icon> -->
-          <v-text-field
-            label="コメントを入力"
-            :rules="rules"
-            hide-details="auto"
-          ></v-text-field>
+          <Comment />
         </v-row>
         <p>素敵ですね！</p>
       </div>
@@ -41,12 +25,14 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import ProjectArticleCopy from "~/components/ProjectArticleCopy.vue";
+import Comment from "~/components/Comment.vue";
 
 export default {
   name: "personalProject",
   layout: "loggedIn",
   components: {
     ProjectArticleCopy,
+    Comment,
   },
   data() {
     return {
