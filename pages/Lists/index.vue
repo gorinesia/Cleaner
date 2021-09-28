@@ -45,12 +45,6 @@
                 <v-col cols="3">
                   <v-select :items="items" label="kg" solo>kg</v-select>
                 </v-col>
-
-                <!-- <v-text-field
-                  v-model="amount"
-                  class="white"
-                  placeholder="例) 5kg"
-                ></v-text-field> -->
                 <label>日時</label>
                 <v-text-field v-model="date" class="white" placeholder="">{{
                   date

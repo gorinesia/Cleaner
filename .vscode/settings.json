@@ -1,0 +1,9 @@
+{
+  "diffEditor.wordWrap": "off",
+  "editor.accessibilitySupport": "off",
+  "[markdown]": {
+
+    "editor.wordWrap": "off",
+    "editor.quickSuggestions": false
+  }
+}
