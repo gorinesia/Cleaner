@@ -359,8 +359,6 @@ export default {
       this.$store.dispatch("project/getComponentsProject", {
         id,
         address,
-        // latitude,
-        // longitude,
       });
     },
   },
