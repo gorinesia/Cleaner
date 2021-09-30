@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="loggedIn">
-      <!-- <v-icon
+    <!-- <div v-if="loggedIn"> -->
+    <!-- <v-icon
         v-if="beLiked"
         :id="article.id"
         @click.stop="unlike"
@@ -10,16 +10,20 @@
       <v-icon v-else color="orange" @click.stop="like" outlined
         >mdi-thumb-up-outline</v-icon
       > -->
-      <v-text-field
-        label="コメントを入力"
-        :rules="rules"
-        hide-details="auto"
-      ></v-text-field>
-      <!-- <v-col cols="12" md="5">
+    <v-text-field
+      label="コメントを入力"
+      hide-details="auto"
+      v-model="reply"
+    ></v-text-field>
+    <v-btn @click.stop="addComment">コメントを送信</v-btn>
+    <!-- <v-col cols="12" md="5">
             <span class="user--name">{{ article.displayName }}</span>
             <span class="user--place">{{ article.place }}</span>
             <p class="my-2 font-weight-bold">{{ article.comment }}</p>
           </v-col> -->
+    <!-- </div> -->
+    <div v-for="replyComment in replyComments" :key="replyComment.id">
+      <p>{{ replyComment }}</p>
     </div>
   </div>
 </template>
@@ -34,16 +38,31 @@ export default {
   data() {
     return {
       dialog: false,
-      applyFlag: false,
-      beLiked: false,
       likeCount: 0,
-      rules: [
-        (value) => !!value || "Required.",
-        (value) => (value && value.length >= 3) || "Min 3 characters",
-      ],
+      alertPost: false,
+      reply: "",
+      replyComments: [],
+      // personalComments: this.$store.state.project.personalComments,
+      // rules: [
+      //   (value) => !!value || "Required.",
+      //   (value) => (value && value.length >= 3) || "Min 3 characters",
+      // ],
     };
   },
-  mounted() {},
+  async mounted() {
+    const db = firebase.firestore();
+    console.log(this.article.id);
+    // console.log(this.personalComponent[0].id);
+    this.commentRef = db
+      .collection("posts")
+      .doc(this.article.id)
+      // .doc(this.personalComponent[0].id)
+      .collection("comments");
+    // this.checkLikeStatus();
+    // this.likeRef.onSnapshot((snap) => {
+    //   this.likeCount = snap.size;
+    // });
+  },
   computed: {
     loggedIn() {
       return this.$store.getters["user/loggedIn"];
@@ -54,23 +73,40 @@ export default {
     currentUser() {
       return this.$store.getters["user/currentUser"];
     },
+    personalComponent() {
+      return this.$store.getters["project/personalComponent"];
+    },
   },
   methods: {
-    async like() {
-      await this.likeRef.doc(this.currentUser[0].uid).set({
-        uid: this.currentUser[0].uid,
+    async addComment() {
+      await this.commentRef.add({
+        comment: this.reply,
       });
-      this.beLiked = true;
+      console.log(this.reply);
+      this.replyComments.push({
+        commnet: this.reply,
+      });
+      this.alertPost = true;
+      setTimeout(() => {
+        this.alertPost = false;
+      }, 3000);
+      // this.replyComment = this.reply;
+      this.reply = "";
     },
-    async unlike() {
-      await this.likeRef.doc(this.currentUser[0].uid).delete();
-      this.beLiked = false;
-    },
-    async checkLikeStatus() {
-      // const doc = await this.likeRef.doc(this.currentUser[0].uid).get();
-      const doc = await this.likeRef;
-      this.beLiked = doc.exists;
-    },
+    // addComments() {
+    //   this.$store.dispatch("project/addComments", {
+    //     // await this.commentRef.doc(this.currentUser[0].uid).set({
+    //     // uid: this.currentUser[0].uid,
+    //     comment: this.reply,
+    //     id: this.commentRef
+    //   });
+    //   console.log(comment);
+    //   this.alertPost = true;
+    //   setTimeout(() => {
+    //     this.alertPost = false;
+    //   }, 3000);
+    //   this.personalComment = "";
+    // },
   },
 };
 </script>

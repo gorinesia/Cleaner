@@ -19,7 +19,9 @@ export const state = () => ({
   personalProject: [],
   personalComponent: [],
   currentUserComponent: [],
-  newDate: ''
+  newDate: '',
+  reply: '',
+  personalComments: []
 })
 
 export const getters = {
@@ -31,7 +33,8 @@ export const getters = {
   personalProject: state => state.personalProject,
   personalComponent: state => state.personalComponent,
   currentUserComponent: state => state.currentUserComponent,
-  newDate: state => state.newDate
+  newDate: state => state.newDate,
+  personalComments: state => state.personalComments,
 }
 
 export const mutations = {
@@ -73,6 +76,10 @@ export const mutations = {
     state.currentUserComponent = currentUserComponent
     console.log(state.currentUserComponent);
   },
+  setPersonalComments: (state, personalComments) => {
+    state.personalComments = personalComments
+    console.log(state.personalComments);
+  }
 }
 
 export const actions = {
@@ -328,5 +335,34 @@ export const actions = {
         })
         commit('setCurrentUserComponent', currentUserComponent);
       })
-  }
+  },
+  addComments(context, payload) {
+    console.log(payload);
+    const db = firebase.firestore();
+    db.collection("posts")
+      .doc(this.article.id)
+      .collection("comments")
+      .add(payload)
+      .then(() => {
+        console.log(payload);
+        context.dispatch('getComments');
+      })
+  },
+  getComments({ commit }, payload) {
+    const db = firebase.firestore();
+    db.collection('posts')
+      .doc(this.article.id)
+      .collection("comments")
+      .orderBy('date', 'desc')
+      .onSnapshot((querySnapshot) => {
+        const personalComments = [];
+        querySnapshot.forEach((doc) => {
+          const personalComments = [];
+          personalComments.push({
+            comment: doc.data().comment,
+          })
+        })
+        commit('setPersonalComments', personalComments);
+      })
+  },
 }

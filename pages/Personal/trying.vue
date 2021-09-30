@@ -12,9 +12,9 @@
     <div>
       <div class="pt-20">
         <h2>コメント</h2>
-        <v-row justify="center" v-if="loggedIn">
-          <Comment />
-        </v-row>
+        <!-- <v-row> -->
+        <Comment v-if="loggedIn" :article="personalComponent[0]" />
+        <!-- </v-row> -->
         <p>素敵ですね！</p>
       </div>
     </div>
@@ -104,6 +104,9 @@ export default {
     editOverlay() {
       return this.$store.getters["project/editOverlay"];
     },
+    personalComments() {
+      return this.$store.getters["project/personalComments"];
+    },
   },
   mounted() {
     this.$store.dispatch("project/getMessage");
@@ -112,6 +115,8 @@ export default {
       this.personalComponent[0].latitude,
       this.personalComponent[0].longitude
     );
+
+    // this.$store.dispatch("project/getComments");
   },
   methods: {
     btnUploadChange(ev) {
