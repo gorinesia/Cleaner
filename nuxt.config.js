@@ -136,6 +136,7 @@ export default {
     VUE_APP_FB_APP_ID: process.env.VUE_APP_FB_APP_ID
   },
   router: {
+    // middleware: ['authenticated'],
     // scrollBehavior(to, from, savedPosition) {
     //   console.log('hoge');
     //   return { x: 0, y: 0 }
