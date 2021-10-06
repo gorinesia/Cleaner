@@ -15,7 +15,7 @@
       hide-details="auto"
       v-model="reply"
     ></v-text-field>
-    <v-btn @click.stop="addComment">コメントを送信</v-btn>
+    <v-btn class="ma-4" @click.stop="addComment">コメントを送信</v-btn>
     <!-- <v-col cols="12" md="5">
             <span class="user--name">{{ article.displayName }}</span>
             <span class="user--place">{{ article.place }}</span>
