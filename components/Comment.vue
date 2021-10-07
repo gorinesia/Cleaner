@@ -1,27 +1,11 @@
 <template>
   <div>
-    <!-- <div v-if="loggedIn"> -->
-    <!-- <v-icon
-        v-if="beLiked"
-        :id="article.id"
-        @click.stop="unlike"
-        >mdi-thumb-up</v-icon
-      >
-      <v-icon v-else color="orange" @click.stop="like" outlined
-        >mdi-thumb-up-outline</v-icon
-      > -->
     <v-text-field
       label="コメントを入力"
       hide-details="auto"
       v-model="reply"
     ></v-text-field>
     <v-btn class="ma-4" @click.stop="addComment">コメントを送信</v-btn>
-    <!-- <v-col cols="12" md="5">
-            <span class="user--name">{{ article.displayName }}</span>
-            <span class="user--place">{{ article.place }}</span>
-            <p class="my-2 font-weight-bold">{{ article.comment }}</p>
-          </v-col> -->
-    <!-- </div> -->
     <div v-for="replyComment in replyComments" :key="replyComment.id">
       <p>{{ replyComment }}</p>
     </div>
@@ -42,26 +26,17 @@ export default {
       alertPost: false,
       reply: "",
       replyComments: [],
-      // personalComments: this.$store.state.project.personalComments,
-      // rules: [
-      //   (value) => !!value || "Required.",
-      //   (value) => (value && value.length >= 3) || "Min 3 characters",
-      // ],
     };
   },
   async mounted() {
     const db = firebase.firestore();
     console.log(this.article.id);
-    // console.log(this.personalComponent[0].id);
     this.commentRef = db
       .collection("posts")
       .doc(this.article.id)
-      // .doc(this.personalComponent[0].id)
       .collection("comments");
-    // this.checkLikeStatus();
-    // this.likeRef.onSnapshot((snap) => {
-    //   this.likeCount = snap.size;
-    // });
+
+    this.getComment();
   },
   computed: {
     loggedIn() {
@@ -83,6 +58,8 @@ export default {
         comment: this.reply,
       });
       console.log(this.reply);
+      console.log(this.commentRef.doc(this.$route.params.uid));
+      console.log(this.commentRef.doc());
       this.replyComments.push({
         commnet: this.reply,
       });
@@ -90,23 +67,13 @@ export default {
       setTimeout(() => {
         this.alertPost = false;
       }, 3000);
-      // this.replyComment = this.reply;
       this.reply = "";
     },
-    // addComments() {
-    //   this.$store.dispatch("project/addComments", {
-    //     // await this.commentRef.doc(this.currentUser[0].uid).set({
-    //     // uid: this.currentUser[0].uid,
-    //     comment: this.reply,
-    //     id: this.commentRef
-    //   });
-    //   console.log(comment);
-    //   this.alertPost = true;
-    //   setTimeout(() => {
-    //     this.alertPost = false;
-    //   }, 3000);
-    //   this.personalComment = "";
-    // },
+    getComment() {
+      this.$store.dispatch("project/getComment", {
+        displayName: this.currentUser[0].displayName,
+      });
+    },
   },
 };
 </script>
