@@ -81,23 +81,24 @@ export default {
       //firebaseお決まりのメソッドでコレクションからデータを取ってきます
       //ここでのポイントは「doc()がいらないこと」です
       console.log("aa");
-      this.commentRef
-        .get()
+      this.commentRef.onSnapshot((querySnapshot) => {
         //getしたデータに対し、
-        .then((snapshot) => {
-          //docsプロパティ(※)を指定しforEachで各データを取り出します。
-          snapshot.docs.forEach((doc) => {
-            console.log(doc.data());
-            const data = doc.data();
-            //準備しておいた配列に取り出したデータをpushします
-            posts.push({
-              id: doc.id,
-              comment: doc.data().comment,
-            });
-            console.log(posts);
+        // .then((snapshot) => {
+        //docsプロパティ(※)を指定しforEachで各データを取り出します。
+        querySnapshot.forEach((doc) => {
+          console.log(doc.data());
+          const data = doc.data();
+          //準備しておいた配列に取り出したデータをpushします
+          posts.push({
+            id: doc.id,
+            comment: doc.data().comment,
           });
+          console.log(posts);
+          return (this.replyComments = posts);
         });
-      // };
+
+        // });
+      });
     },
   },
 };
