@@ -60,7 +60,7 @@ export default {
       console.log(this.reply);
       console.log(this.commentRef.doc(this.$route.params.uid));
       console.log(this.commentRef.doc());
-      this.replyComments.push({
+      this.replyComments.unshift({
         commnet: this.reply,
       });
       this.alertPost = true;
