@@ -14,8 +14,6 @@
         <h2>コメント</h2>
         <!-- <v-row> -->
         <Comment v-if="loggedIn" :article="personalComponent[0]" />
-        <!-- </v-row> -->
-        <p>素敵ですね！</p>
       </div>
     </div>
   </v-app>
