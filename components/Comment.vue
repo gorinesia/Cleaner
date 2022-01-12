@@ -94,7 +94,8 @@ export default {
             comment: doc.data().comment,
           });
           console.log(posts);
-          return (this.replyComments = posts);
+          this.replyComments = posts;
+          // return (this.replyComments = posts);
         });
 
         // });
