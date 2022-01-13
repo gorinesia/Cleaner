@@ -77,11 +77,12 @@ export default {
     getComment() {
       // const getPosts = () => {
       //空の配列postsを準備します
-      let posts = [];
+      // let posts = [];
       //firebaseお決まりのメソッドでコレクションからデータを取ってきます
       //ここでのポイントは「doc()がいらないこと」です
       console.log("aa");
       this.commentRef.onSnapshot((querySnapshot) => {
+        let posts = [];
         //getしたデータに対し、
         // .then((snapshot) => {
         //docsプロパティ(※)を指定しforEachで各データを取り出します。
